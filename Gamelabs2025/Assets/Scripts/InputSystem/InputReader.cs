@@ -7,15 +7,30 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(menuName = "InputReader")]
 public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap.IUIActions
 {
+    //making it into a singleton accessible in all classes
+    public static InputReader Instance { get; private set; }
+    
     private InputMap inputMap;
     
     //Events
     public event Action<Vector2> OnMoveEvent;
     public event Action OnGrabEvent;
-    public event Action OnLookEvent;
+    public event Action<Vector2> OnLookEvent;
 
     private void OnEnable()
     {
+        //singleton initialization
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Debug.LogWarning("Multiple InputReaders found! Using the first instance.");
+            return;
+        }
+        
+        //initialize the input map
         if (inputMap == null)
         {
             inputMap = new InputMap();
@@ -46,6 +61,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        //Debug.Log(context.ReadValue<Vector2>());
         OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
@@ -59,5 +75,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public void OnLook(InputAction.CallbackContext context)
     {
+        //Debug.Log(context.ReadValue<Vector2>());
+        OnLookEvent?.Invoke(context.ReadValue<Vector2>());
     }
 }
