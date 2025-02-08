@@ -5,6 +5,9 @@
 [Bb]uilds/
 Assets/AssetStoreTools*
 
+# Parallel Sync clones
+*_clone_*/
+
 # Visual Studio cache directory
 .vs/
 
