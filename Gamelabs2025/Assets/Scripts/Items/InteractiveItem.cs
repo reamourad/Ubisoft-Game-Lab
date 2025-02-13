@@ -1,8 +1,10 @@
+using FishNet.Demo.AdditiveScenes;
 using UnityEngine;
 
 public abstract class InteractiveItem : Item
 {
     private InputSphereCollider inputSphere;
+    private GameObject player;
 
     private void Awake()
     {
@@ -13,15 +15,17 @@ public abstract class InteractiveItem : Item
         inputSphere.onPlayerExit.AddListener(OnSphereExited);
     }
 
-    private void OnSphereEntered()
+    private void OnSphereEntered(GameObject player)
     {
         Debug.Log("Player entered interaction area.");
+        this.player = player;
         InputReader.Instance.OnGrabEvent += HandleGrab;  
     }
 
     private void OnSphereExited() 
     {
         Debug.Log("Player exited interaction area.");
+        this.player = null;
         InputReader.Instance.OnGrabEvent -= HandleGrab;  
     }
 
@@ -40,7 +44,16 @@ public abstract class InteractiveItem : Item
     //@Skye 
     private void HandleGrab()
     {
-        Debug.Log("The object is grabbed.");
-        // Implement grab logic here
+        if (PlayerController.grabbedObject == null)
+        {
+            this.transform.position = player.GetComponent<PlayerController>().grabPlacement.position;
+            this.transform.SetParent(player.GetComponent<PlayerController>().grabPlacement);
+            GetComponentInChildren<InputSphereCollider>().gameObject.SetActive(false);
+        }
+        else
+        {
+            //make them switch later on
+            Debug.Log("The object are switched");
+        }
     }
 }

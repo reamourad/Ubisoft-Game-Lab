@@ -16,6 +16,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<Vector2> OnMoveEvent;
     public event Action OnGrabEvent;
     public event Action<Vector2> OnLookEvent;
+    public event Action OnPlacementModeEvent;
 
     private void OnEnable()
     {
@@ -76,6 +77,14 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         if (context.phase == InputActionPhase.Performed)
         {
             OnGrabEvent?.Invoke();
+        }
+    }
+    
+    public void OnPlacementMode(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnPlacementModeEvent?.Invoke();
         }
     }
 

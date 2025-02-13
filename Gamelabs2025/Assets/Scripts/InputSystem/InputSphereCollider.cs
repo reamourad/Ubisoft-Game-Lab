@@ -11,7 +11,7 @@ public class InputSphereCollider : MonoBehaviour
     [SerializeField] private string afterString = "";
     [SerializeField] private Canvas textCanvas;
     
-    public UnityEvent onPlayerEnter;
+    public UnityEvent<GameObject> onPlayerEnter;
     public UnityEvent onPlayerExit;
     
 
@@ -25,19 +25,24 @@ public class InputSphereCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Hider"))
         {
             textCanvas.gameObject.SetActive(true);
-            onPlayerEnter.Invoke();
+            onPlayerEnter.Invoke(other.gameObject);
         }
     }
     
     private void OnTriggerExit(Collider other) 
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Hider"))
         {
             textCanvas.gameObject.SetActive(false);
             onPlayerExit.Invoke();
         }
+    }
+
+    private void OnDisable()
+    {
+        onPlayerExit.Invoke();
     }
 }
