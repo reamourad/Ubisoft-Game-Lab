@@ -42,7 +42,13 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
             SetToGameplayInputs();
         }
     }
-    
+
+    public void OnDisable()
+    {
+        inputMap.Gameplay.Disable();
+        inputMap.UI.Disable();
+    }
+
     //Enable gameplay inputs only
     public void SetToGameplayInputs()
     {
@@ -78,4 +84,17 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         //Debug.Log(context.ReadValue<Vector2>());
         OnLookEvent?.Invoke(context.ReadValue<Vector2>());
     }
+    
+    public static string GetCurrentBindingText(InputAction action)
+    {
+        if (Gamepad.current != null)
+        {
+            return action.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontIncludeInteractions);
+        }
+        else // Defaults to keyboard
+        {
+            return action.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
+        }
+    }
+    
 }
