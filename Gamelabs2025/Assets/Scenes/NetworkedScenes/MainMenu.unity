@@ -1918,6 +1918,25 @@ MonoBehaviour:
   _port: 7770
   _maximumClients: 2
   _clientAddress: localhost
+--- !u!114 &2728164744529660941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350481022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdaae44044276a49a52229c1597e33b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _updateOrder: 0
+  _timingType: 0
+  _allowTickDropping: 0
+  _maximumFrameTicks: 3
+  _tickRate: 128
+  _pingInterval: 1
+  _physicsMode: 1
 --- !u!1 &2805455418581866445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,6 +2573,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3156642662725309647, guid: df5fe118af050dc4499a238ed6aaf0dc, type: 3}
+      propertyPath: minPlayers
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3506281454475502585, guid: df5fe118af050dc4499a238ed6aaf0dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3074,6 +3097,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2728164744529660936}
+    - targetCorrespondingSourceObject: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2728164744529660941}
   m_SourcePrefab: {fileID: 100100000, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
 --- !u!4 &8624973729832365937
 Transform:

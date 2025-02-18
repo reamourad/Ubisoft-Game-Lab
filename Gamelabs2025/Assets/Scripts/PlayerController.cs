@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private int speed; 
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private InputReader inputReader;
     
     private Rigidbody rb;
     private Vector2 moveInput;
@@ -14,15 +15,15 @@ public class PlayerController : MonoBehaviour
     //set up the input reader 
     private void OnEnable()
     {
-        InputReader.Instance.OnMoveEvent += HandleMove;
-        InputReader.Instance.OnLookEvent += HandleLook;
+        inputReader.OnMoveEvent += HandleMove;
+        inputReader.OnLookEvent += HandleLook;
     }
 
 
     private void OnDisable()
     {
-        InputReader.Instance.OnMoveEvent -= HandleMove;
-        InputReader.Instance.OnLookEvent -= HandleLook;
+        inputReader.OnMoveEvent -= HandleMove;
+        inputReader.OnLookEvent -= HandleLook;
     }
 
     private void Start()
