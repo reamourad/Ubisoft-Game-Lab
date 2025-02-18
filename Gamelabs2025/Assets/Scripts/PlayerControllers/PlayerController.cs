@@ -9,12 +9,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int speed; 
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private CinemachinePanTilt panTilt;
+    [SerializeField] public Camera playerCamera;
     
     private Rigidbody rb;
     private Vector2 moveInput;
-
-    public Transform grabPlacement; 
-    public static InteractiveItem grabbedObject = null;
 
     private void Start()
     {
@@ -27,14 +25,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Missing Camera Transform in Player Controller");
         }
-
-        if (grabPlacement == null)
-        {
-            Debug.Log("Missing Grabbed Placement in Player Controller");
-        }
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         Vector3 move = cameraTransform.forward * moveInput.y + cameraTransform.right * moveInput.x;
         move.y = 0f;
@@ -58,4 +51,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(moveVector);
         moveInput = moveVector; 
     }
+    
+    //to be overridden in hider controller
+    public virtual void OnGrab(){}
 }

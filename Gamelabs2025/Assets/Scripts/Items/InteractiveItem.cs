@@ -19,14 +19,14 @@ public abstract class InteractiveItem : Item
     {
         Debug.Log("Player entered interaction area.");
         this.player = player;
-        InputReader.Instance.OnGrabEvent += HandleGrab;  
+        //InputReader.Instance.OnGrabEvent += HandleGrab;  
     }
 
     private void OnSphereExited() 
     {
         Debug.Log("Player exited interaction area.");
         this.player = null;
-        InputReader.Instance.OnGrabEvent -= HandleGrab;  
+        //InputReader.Instance.OnGrabEvent -= HandleGrab;  
     }
 
     private void OnDestroy()
@@ -36,18 +36,19 @@ public abstract class InteractiveItem : Item
             inputSphere.onPlayerEnter.RemoveListener(OnSphereEntered);
             inputSphere.onPlayerExit.RemoveListener(OnSphereExited);
         }
-        InputReader.Instance.OnGrabEvent -= HandleGrab; 
+        //InputReader.Instance.OnGrabEvent -= HandleGrab; 
     }
 
     //grab behaviour (x to grab): can only pick up one item at a time, it goes on the side of your screen, if you go 
     //into placement mode you can see where you can place the object (is placement mode needed to place the object, let's say yes for now) 
     //@Skye 
-    private void HandleGrab()
+    //TODO: move to the player 
+    /*private void HandleGrab()
     {
         if (PlayerController.grabbedObject == null)
         {
-            this.transform.position = player.GetComponent<PlayerController>().grabPlacement.position;
             this.transform.SetParent(player.GetComponent<PlayerController>().grabPlacement);
+            this.transform.localPosition = Vector3.zero;
             GetComponentInChildren<InputSphereCollider>().gameObject.SetActive(false);
         }
         else
@@ -55,5 +56,5 @@ public abstract class InteractiveItem : Item
             //make them switch later on
             Debug.Log("The object are switched");
         }
-    }
+    }*/
 }

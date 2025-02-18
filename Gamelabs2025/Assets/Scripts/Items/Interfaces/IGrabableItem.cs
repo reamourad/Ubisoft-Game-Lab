@@ -5,4 +5,6 @@ public interface IGrabableItem
     void OnGrab(PlayerController grabber);
     void OnDrop();
     void OnThrow();
+    
+    GameObject gameObject { get; }
 }

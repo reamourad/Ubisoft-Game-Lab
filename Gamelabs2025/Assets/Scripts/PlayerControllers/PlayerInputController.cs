@@ -14,6 +14,7 @@ public class PlayerInputController : MonoBehaviour
     {
         InputReader.Instance.OnMoveEvent += HandleMove;
         InputReader.Instance.OnLookEvent += HandleLook;
+        InputReader.Instance.OnGrabEvent += HandleGrab; 
     }
 
 
@@ -21,6 +22,7 @@ public class PlayerInputController : MonoBehaviour
     {
         InputReader.Instance.OnMoveEvent -= HandleMove;
         InputReader.Instance.OnLookEvent -= HandleLook;
+        InputReader.Instance.OnGrabEvent -= HandleGrab;
     }
     
     private void HandleLook(Vector2 obj)
@@ -30,5 +32,10 @@ public class PlayerInputController : MonoBehaviour
     private void HandleMove(Vector2 moveVector)
     {
         playerController.Move(moveVector);
+    }
+
+    private void HandleGrab()
+    {
+        playerController.OnGrab();
     }
 }
