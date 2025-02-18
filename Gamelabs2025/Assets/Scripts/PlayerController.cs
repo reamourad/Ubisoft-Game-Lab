@@ -15,20 +15,6 @@ public class PlayerController : MonoBehaviour
 
     public Transform grabPlacement; 
     public static InteractiveItem grabbedObject = null;
-    
-    //set up the input reader 
-    private void OnEnable()
-    {
-        InputReader.Instance.OnMoveEvent += HandleMove;
-        InputReader.Instance.OnLookEvent += HandleLook;
-    }
-
-
-    private void OnDisable()
-    {
-        InputReader.Instance.OnMoveEvent -= HandleMove;
-        InputReader.Instance.OnLookEvent -= HandleLook;
-    }
 
     private void Start()
     {
@@ -63,11 +49,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleLook(Vector2 obj)
+    public void Look(Vector2 obj)
     {
     }
 
-    private void HandleMove(Vector2 moveVector)
+    public void Move(Vector2 moveVector)
     {
         //Debug.Log(moveVector);
         moveInput = moveVector; 
