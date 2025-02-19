@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FishNet.Component.Transforming;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Items.Interfaces;
@@ -9,7 +10,7 @@ namespace Items
 {
     public class Vacuum : NetworkBehaviour, IUsableItem
     {
-        [SerializeField] private Collider triggerVolume;
+        [SerializeField] private SphereCollider triggerVolume;
         [SerializeField] private Transform suctionPoint;
         [SerializeField] private float suctionCompleteDetectionRadius=0.25f;
         
@@ -17,7 +18,6 @@ namespace Items
         [SerializeField] private float vacuumSuctionForce = 10;
         
         [SerializeField] private ParticleSystem particles;
-        List<Rigidbody> serverRigidBodiesInRange = new List<Rigidbody>();
         
         private bool localUsingFlag = false;
         private readonly SyncVar<bool> VacuumActive = new SyncVar<bool>();
@@ -27,36 +27,60 @@ namespace Items
             if(!IsServerStarted)
                 triggerVolume.gameObject.SetActive(false);
         }
+        
+        public override void OnStartClient()
+        {
+            base.OnStartNetwork();
+            var parentNo = GetComponent<NetworkTransform>();
+            if(!parentNo)
+                return;
+            
+            //if already attached to an owner
+            if(parentNo.IsOwner)
+                GiveOwnership(parentNo.Owner);
+        }
 
         public void UseItem(bool isUsing)
         {
+            Debug.Log($"Vacuum {isUsing} (IsOwner = {IsOwner})");
             //don't use if not owner
             if(!IsOwner)
                 return;
             
             if(localUsingFlag == isUsing) return;
             localUsingFlag = isUsing;
-            RPC_SendActivationRequestAtServer(isUsing);
+            RPC_SendActivationRequestToServer(isUsing);
+            //ClientVacuumActivation(isUsing);
+            Debug.Log($"Vacuum Activation Request Sent!!");
         }
 
-        [ObserversRpc(ExcludeOwner = false)]
-        void RPC_SendActivationRequestAtServer(bool use)
+        [ServerRpc]
+        void RPC_SendActivationRequestToServer(bool isUsing)
         {
             if (IsServerStarted)
-                ServerVacummActivation(use);
-            else
-                ClientVacuumActivation(use);
+            {
+                ServerVacuumActivation(isUsing);
+            }
         }
-
-        void ServerVacummActivation(bool use)
+        
+        void ServerVacuumActivation(bool use)
         {
+            Debug.Log($"Vacuum [Server] ACTIVATED {use}");
             VacuumActive.Value = use;
             triggerVolume.gameObject.SetActive(use);
+            RPC_BroadcastActivationToClients(use);
         }
 
+        [ObserversRpc]
+        void RPC_BroadcastActivationToClients(bool use)
+        {
+            ClientVacuumActivation(use);
+        }
+        
         void ClientVacuumActivation(bool use)
         {
             //Animate Visuals only here.
+            Debug.Log($"Vacuum [Client] ACTIVATED {use}");
             if(use)
                 particles.Play();
             else
@@ -69,33 +93,49 @@ namespace Items
         {
             if(!IsServerStarted)
                 return;
-            var copyRbs = new List<Rigidbody>(serverRigidBodiesInRange);
-            foreach (var rb in copyRbs)
+            
+            if(!VacuumActive.Value)
+                return;
+            
+            var colliders = Physics.OverlapSphere(triggerVolume.transform.position, triggerVolume.radius, layerMask);
+            Debug.Log($"Vacuum [FixedUpdate] SUCKABLE: {colliders.Length}");
+            foreach (var col in colliders)
             {
+                var rb = col.GetComponentInParent<Rigidbody>();
                 var dir = (suctionPoint.position - rb.position).normalized;
-                rb.AddForce(dir * vacuumSuctionForce, ForceMode.Impulse);
+                rb.AddForce(dir * vacuumSuctionForce, ForceMode.Force);
 
                 if (Vector3.Distance(rb.position, suctionPoint.position) <= suctionCompleteDetectionRadius)
                 {
                     ServerVacuumedItem(rb);
                 }
             }
-            copyRbs.Clear();
         }
 
         private void ServerVacuumedItem(Rigidbody rb)
         {
             Debug.Log("Item Vacuumed " + rb.name);
+            if (rb.TryGetComponent<NetworkObject>(out var nob))
+            {
+                nob.Despawn();
+            }
         }
         
-        private void OnTriggerEnter(Collider other)
-        {
+        /*private void OnTriggerEnter(Collider other)
+        { 
+            Debug.Log("TRIGGER ENTER");
             if(!IsServerStarted)
                 return;
             
-            //only add valid colliders
-            if(other.gameObject.layer != layerMask)
+            if(!VacuumActive.Value)
                 return;
+            
+            //only add valid colliders
+            if (other.gameObject.layer != layerMask)
+            {
+                Debug.Log("Invalid Layer mask");
+                return;
+            }
 
             //check if physics capable
             if (other.TryGetComponent<Rigidbody>(out var rb))
@@ -110,12 +150,15 @@ namespace Items
             if(!IsServerStarted)
                 return;
 
+            if(!VacuumActive.Value)
+                return;
+            
             if (other.TryGetComponent<Rigidbody>(out var rb))
             {
                 if(serverRigidBodiesInRange.Contains(rb))
                     serverRigidBodiesInRange.Remove(rb);
             }
-        }
+        }*/
 
         private void OnDrawGizmos()
         {

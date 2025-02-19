@@ -6,21 +6,25 @@ using FishNet.Object.Synchronizing;
 using Networking;
 using UnityEngine;
 
-public class TestPlayerController : NetworkBehaviour
+public class TestPlayerInputController : NetworkBehaviour
 {
     [SerializeField] private InputReader inputReader;
     [SerializeField] private GameObject playerVisuals;
     [SerializeField] private Transform playerItemHolderRight;
     
+    [SerializeField] private float pitchSensitivity=1;
+    [SerializeField] private float yawSensitivity=1;
+    
     private Vector2 moveInput;
-    private NetworkPlayerMotor.PlayerMoveData moveData = default;
-    private NetworkPlayerMotor playerMotor;
+    private NetworkPlayerController.PlayerInputData inputData = default;
+    private NetworkPlayerController playerController;
     
     private void OnDestroy()
     {
         if(!IsOwner)
             return;
-        
+
+        inputReader.OnUseEvent -= ClientHandleItemUsage;
         inputReader.OnMoveEvent -= ClientHandleMove;
         inputReader.OnLookEvent -= ClientHandleLook;
     }
@@ -33,10 +37,11 @@ public class TestPlayerController : NetworkBehaviour
             return;
         }
         
+        inputReader.OnUseEvent += ClientHandleItemUsage;
         inputReader.OnMoveEvent += ClientHandleMove;
         inputReader.OnLookEvent += ClientHandleLook;
         
-        playerMotor = GetComponent<NetworkPlayerMotor>();
+        playerController = GetComponent<NetworkPlayerController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerVisuals.SetActive(false);
@@ -47,17 +52,25 @@ public class TestPlayerController : NetworkBehaviour
         if(!IsOwner)
             return;
         
-        playerMotor.UpdatePlayerInputs(moveData);
+        inputData.PitchSensitivity = pitchSensitivity;
+        inputData.YawSensitivity = yawSensitivity;
+        playerController.UpdatePlayerInputs(inputData);
     }
 
     private void ClientHandleLook(Vector2 lookVector)
     {
-        moveData.LookInputVector = lookVector;
+        inputData.LookInputVector = lookVector;
     }
     
     private void ClientHandleMove(Vector2 moveVector)
     {
         //Debug.Log(moveVector);
-        moveData.MoveInputVector = moveVector; 
+        inputData.MoveInputVector = moveVector; 
+    }
+
+    private void ClientHandleItemUsage(bool use)
+    {
+        Debug.Log($"Item Use {use}");
+        playerController.UseItem(use);
     }
 }

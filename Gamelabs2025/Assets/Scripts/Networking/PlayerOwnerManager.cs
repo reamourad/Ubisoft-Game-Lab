@@ -11,7 +11,7 @@ namespace Networking
             if (!IsOwner)
             {
                 GetComponentInChildren<CinemachineCamera>().enabled = false;
-                GetComponentInChildren<TestPlayerController>().enabled = false;
+                GetComponentInChildren<TestPlayerInputController>().enabled = false;
             }
         }
     }
