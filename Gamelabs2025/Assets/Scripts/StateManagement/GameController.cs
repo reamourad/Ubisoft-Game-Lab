@@ -10,8 +10,20 @@ namespace StateManagement
     {
         [SerializeField] NetworkObject playerPrefab;
         [SerializeField] private List<Transform> spawnPoints;
-        
         private List<NetworkObject> players;
+        
+        // singleton pattern
+        private static GameController instance;
+        public static GameController Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = FindFirstObjectByType<GameController>();
+                
+                return instance;
+            }
+        }
         
         private void Start()
         {
@@ -37,6 +49,14 @@ namespace StateManagement
                 
                 indx = (indx + 1) % spawnPoints.Count;
             }
+        }
+
+        public void ServerHiderCaptured()
+        {
+            if(!IsServerStarted)
+                return;
+            
+            Debug.Log("HiderCaptured!!!");
         }
     }
 }

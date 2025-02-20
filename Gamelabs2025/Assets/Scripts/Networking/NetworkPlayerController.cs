@@ -41,6 +41,12 @@ namespace Networking
             rb = GetComponent<Rigidbody>();
         }
 
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+            name = $"Player [{(IsOwner ? "LOCAL_PLAYER" : "REMOTE_PLAYER")}]";
+        }
+
         public void UpdatePlayerInputs(PlayerInputData inputData)
         {
             this.playerInputData = inputData;
