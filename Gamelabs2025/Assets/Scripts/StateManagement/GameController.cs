@@ -9,8 +9,21 @@ namespace StateManagement
     public class GameController : NetworkBehaviour
     {
         [SerializeField] NetworkObject playerPrefab;
-
+        [SerializeField] private List<Transform> spawnPoints;
         private List<NetworkObject> players;
+        
+        // singleton pattern
+        private static GameController instance;
+        public static GameController Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = FindFirstObjectByType<GameController>();
+                
+                return instance;
+            }
+        }
         
         private void Start()
         {
@@ -25,12 +38,25 @@ namespace StateManagement
             //TODO: Make it spawn all players
             var networkManager = InstanceFinder.NetworkManager;
             players = new List<NetworkObject>();
+            int indx = 0;
             foreach (var connection in InstanceFinder.NetworkManager.ClientManager.Clients)
             {
-                NetworkObject nob = networkManager.GetPooledInstantiated(playerPrefab,Vector3.zero, Quaternion.identity, true);
+                var point = spawnPoints[indx];
+                
+                NetworkObject nob = networkManager.GetPooledInstantiated(playerPrefab,point.position, point.rotation, true);
                 networkManager.ServerManager.Spawn(nob, connection.Value);
                 players.Add(nob);
+                
+                indx = (indx + 1) % spawnPoints.Count;
             }
+        }
+
+        public void ServerHiderCaptured()
+        {
+            if(!IsServerStarted)
+                return;
+            
+            Debug.Log("HiderCaptured!!!");
         }
     }
 }
