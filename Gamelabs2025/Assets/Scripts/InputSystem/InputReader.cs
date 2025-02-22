@@ -15,6 +15,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     //Events
     public event Action<Vector2> OnMoveEvent;
     public event Action OnGrabEvent;
+    public event Action<bool> OnUseEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnPlacementModeEvent;
 
@@ -93,7 +94,19 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         //Debug.Log(context.ReadValue<Vector2>());
         OnLookEvent?.Invoke(context.ReadValue<Vector2>());
     }
-    
+
+    public void OnUseItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnUseEvent?.Invoke(true);
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            OnUseEvent?.Invoke(false);
+        }
+    }
+
     public static string GetCurrentBindingText(InputAction action)
     {
         if (Gamepad.current != null)
