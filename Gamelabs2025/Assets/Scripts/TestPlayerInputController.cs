@@ -44,7 +44,7 @@ public class TestPlayerInputController : NetworkBehaviour
         playerController = GetComponent<NetworkPlayerController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        playerVisuals.SetActive(false);
+        //playerVisuals.SetActive(false);
     }
 
     private void Update()
