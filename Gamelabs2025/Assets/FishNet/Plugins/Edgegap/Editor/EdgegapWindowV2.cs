@@ -17,6 +17,7 @@ using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor.VSAttribution.Edgegap;
 using Application = UnityEngine.Application;
 #if !EDGEGAP_PLUGIN_SERVERS
 using UnityEditor.Build;
@@ -837,6 +838,9 @@ namespace Edgegap.Editor
                 _containerProject = _credentials.Project;
                 _containerUsername = _credentials.Username;
                 _containerToken = _credentials.Token;
+
+                //VSA create new user
+                VSAttribution.SendAttributionEvent("verify", "Edgegap", _apiToken);
                 Debug.Log("Edgegap API token verified successfully.");
             }
             else

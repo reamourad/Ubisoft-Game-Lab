@@ -11,8 +11,8 @@ MonoImporter:
   assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
-  productId: 207815
-  packageName: 'FishNet: Networking Evolved'
-  packageVersion: 4.5.8R
+  productId: 212563
+  packageName: Edgegap Game Server & Hosting
+  packageVersion: 3.0.9
   assetPath: Assets/FishNet/Plugins/Edgegap/Editor/EdgegapWindowMetadata.cs
-  uploadId: 726025
+  uploadId: 715162
