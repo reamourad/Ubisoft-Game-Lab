@@ -18,6 +18,10 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<bool> OnUseEvent;
     public event Action<Vector2> OnLookEvent;
 
+    public event Action OnCloseUIEvent;
+    public event Action<float> OnCCTVCameraSwitchEvent;
+    
+
     private void OnEnable()
     {
         //singleton initialization
@@ -65,7 +69,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         //disable every other maps
         inputMap.Gameplay.Disable();
     }
-
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         //Debug.Log(context.ReadValue<Vector2>());
@@ -97,7 +101,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
             OnUseEvent?.Invoke(false);
         }
     }
-
+    
     public static string GetCurrentBindingText(InputAction action)
     {
         if (Gamepad.current != null)
@@ -109,5 +113,14 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
             return action.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
         }
     }
-    
+
+    public void OnCCTVSwitchCameras(InputAction.CallbackContext context)
+    {
+        OnCCTVCameraSwitchEvent?.Invoke(context.ReadValue<float>());
+    }
+
+    public void OnClose(InputAction.CallbackContext context)
+    {
+        OnCloseUIEvent?.Invoke();
+    }
 }
