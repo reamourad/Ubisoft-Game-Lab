@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 [CreateAssetMenu(menuName = "InputReader")]
 public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap.IUIActions
@@ -18,6 +19,8 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<bool> OnUseEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnPlacementModeEvent;
+    
+    private static bool isGamepad = false;
 
     private void OnEnable()
     {
@@ -109,7 +112,17 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public static string GetCurrentBindingText(InputAction action)
     {
-        if (Gamepad.current != null)
+        // This is a bit of a hack, it has to be called from a FixedUpdate or Update method to work properly
+        if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+        {
+            isGamepad = true;
+        }
+        else if (Keyboard.current != null && Keyboard.current.wasUpdatedThisFrame)
+        {
+            isGamepad = false;
+        }
+        
+        if (isGamepad)
         {
             return action.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontIncludeInteractions);
         }

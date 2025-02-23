@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,29 +17,28 @@ public class HiderController : PlayerController
     void FixedUpdate()
     {
         base.FixedUpdate();
-        
-        RaycastHit hit;
+
+        lookingAtObject = null;
         //TODO: @Rea this is shit please redo everything tomrrow thanks!
         // Raycast from the center of the camera's view
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, grabRange))
-        {
-            // Check if the object has the IGrabbable interface
-            IGrabableItem grabbableObject = hit.collider.GetComponent<IGrabableItem>();
-            
-            //check if its the same object
-            if (grabbableObject == null)
-            {
-                lookingAtObject = null;
-                inScreenUI.toolTipText.text = "";
-            }
-            
-            else if (lookingAtObject != grabbableObject)
-            {
-                lookingAtObject = grabbableObject;
-                //here I would add the grab event but since player input controller is separate idk 
-                inScreenUI.toolTipText.text = "Press " + InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.Grab) + " to grab  " + grabbableObject.gameObject.name;
-            }
 
+        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, grabRange))
+        {
+            lookingAtObject = hit.collider.GetComponent<IGrabableItem>();
+        }
+
+        // Check if the object has the IGrabbable interface
+
+        if (lookingAtObject != null)
+        {
+            inScreenUI.toolTipText.gameObject.SetActive(true);
+            inScreenUI.toolTipText.text = "Press " +
+                                          InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay
+                                              .Grab) + " to grab  " + lookingAtObject.gameObject.name;
+        }
+        else
+        {
+            inScreenUI.toolTipText.gameObject.SetActive(false);
         }
     }
     
@@ -47,26 +47,28 @@ public class HiderController : PlayerController
 
     public override void OnGrab()
     {
-        if (lookingAtObject != null)
-        {
-            if (grabbedObject == null)
-            {
-                grabbedObject = lookingAtObject;
-                grabbedObject.gameObject.transform.position = grabPlacement.position;
-                this.transform.SetParent(grabPlacement);
-            }
-            else
-            {
-                //handle previous grabbed object 
-                grabbedObject.gameObject.transform.SetParent(null);
-                grabbedObject.gameObject.transform.position = this.transform.position;
-    
-                grabbedObject = lookingAtObject;
-                grabbedObject.gameObject.transform.position = grabPlacement.position;
-                this.transform.SetParent(grabPlacement);
+        if (lookingAtObject == null) { return; }
 
-                Debug.Log("The object are switched");
-            }
+        if (grabbedObject == null)
+        {
+            grabbedObject = lookingAtObject;
+            grabbedObject.gameObject.transform.position = grabPlacement.position;
+            grabbedObject.gameObject.transform.SetParent(grabPlacement);
         }
+        else
+        {
+            grabbedObject.gameObject.transform.SetParent(null);
+            grabbedObject.gameObject.transform.position = lookingAtObject.gameObject.transform.position;
+
+            grabbedObject = lookingAtObject;
+            grabbedObject.gameObject.transform.position = grabPlacement.position;
+            grabbedObject.gameObject.transform.SetParent(grabPlacement);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * grabRange);
     }
 }
