@@ -324,8 +324,8 @@ MonoBehaviour:
     y: 0
     width: 426
     height: 933
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -388,8 +388,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 473
-    y: 431
+    x: 474
+    y: 24
     width: 1019
     height: 555
   m_SerializedDataModeController:
@@ -968,11 +968,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.24255164, y: 0.003254819, z: -0.00050531037, w: -0.9709028}
     speed: 2
-    m_Value: {x: -0.24237104, y: 0.00034184477, z: 0.00022217983, w: -0.9701836}
+    m_Value: {x: -0.24255164, y: 0.003254819, z: -0.00050531037, w: -0.9709028}
   m_Size:
     m_Target: 23.888594
     speed: 2
-    m_Value: 22.859898
+    m_Value: 23.888594
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1025,7 +1025,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79
+    y: 24
     width: 505
     height: 326
   m_SerializedDataModeController:
@@ -1041,9 +1041,9 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 479}
-      m_SelectedIDs: a0bdf9ff
-      m_LastClickedID: -410208
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
       m_ExpandedIDs: 6850f9ff5eeaf9ff8483faffd6cbfaffaa1efbff0245fbff1efcfbff1efefbff6202fcff0a04fcff2206fcff980bfcffc21ffcff5225fcffa469fcfff084fcff5c34fdffd0a0fdffcea9fdff6a2bfeff00b6feffcafdfefff206ffffce11ffff5cbbffff4cf4ffff2cf7ffff1cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1090,8 +1090,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Game\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 506
-    y: 79
+    x: 507
+    y: 24
     width: 986
     height: 326
   m_SerializedDataModeController:
@@ -1192,7 +1192,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 431
+    y: 24
     width: 472
     height: 555
   m_SerializedDataModeController:
@@ -1236,21 +1236,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 180}
     m_SelectedIDs: d8c40000
     m_LastClickedID: 50392
-    m_ExpandedIDs: 00000000c6b80000cab80000ccb8000030bb0000bcc4000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000034c3000036c3000038c300003ac300003cc30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: TudorWallTextures
-      m_OriginalName: TudorWallTextures
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 50540
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 12}
@@ -1265,7 +1265,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c6b80000c8b80000cab80000ccb80000
+    m_ExpandedIDs: 0000000034c3000036c3000038c300003ac300003cc30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1380,8 +1380,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1494
-    y: 79
+    x: 1495
+    y: 24
     width: 425
     height: 907
   m_SerializedDataModeController:
