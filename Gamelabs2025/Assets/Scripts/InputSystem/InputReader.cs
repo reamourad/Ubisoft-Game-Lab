@@ -10,7 +10,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     //making it into a singleton accessible in all classes
     public static InputReader Instance { get; private set; }
     
-    private InputMap inputMap;
+    public InputMap inputMap;
     
     //Events
     public event Action<Vector2> OnMoveEvent;

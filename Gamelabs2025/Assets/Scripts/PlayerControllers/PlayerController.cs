@@ -15,20 +15,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveInput;
     
-    //set up the input reader 
-    private void OnEnable()
-    {
-        inputReader.OnMoveEvent += HandleMove;
-        inputReader.OnLookEvent += HandleLook;
-    }
-
-
-    private void OnDisable()
-    {
-        inputReader.OnMoveEvent -= HandleMove;
-        inputReader.OnLookEvent -= HandleLook;
-    }
-
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -57,11 +43,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleLook(Vector2 obj)
+    public void Look(Vector2 obj)
     {
     }
 
-    private void HandleMove(Vector2 moveVector)
+    public void Move(Vector2 moveVector)
     {
         //Debug.Log(moveVector);
         moveInput = moveVector; 
