@@ -15,7 +15,9 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     
     //Events
     public event Action<Vector2> OnMoveEvent;
-    public event Action OnGrabEvent;
+    public event Action OnGrabActivateEvent;
+    
+    public event Action OnGrabReleaseEvent;
     public event Action<bool> OnUseEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnPlacementModeEvent;
@@ -80,7 +82,12 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            OnGrabEvent?.Invoke();
+            OnGrabActivateEvent?.Invoke();
+        }
+
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            OnGrabReleaseEvent?.Invoke();
         }
     }
     

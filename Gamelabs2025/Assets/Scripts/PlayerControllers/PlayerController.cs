@@ -55,4 +55,5 @@ public class PlayerController : MonoBehaviour
 
     //to be overridden in hider controller
     public virtual void OnGrab(){}
+    public virtual void OnGrabRelease(){}
 }
