@@ -153,6 +153,9 @@ namespace StateManagement
             GameStateController.Instance.Server_ChangeState(GameStates.GameOver);
         }
         
+        /// <summary>
+        /// Considers the game to be won by the seeker, Changes state to post game.
+        /// </summary>
         public void ServerHiderCaptured()
         {
             if(!IsServerStarted)

@@ -159,20 +159,20 @@ namespace Items
                 
                 // if this collider does not have authority here, ignore affecting it.
                 var nob = vacuumCache.NObj;
-                if (!IsServerStarted && nob && !nob.IsOwner)
+                if (IsClientStarted && nob && !nob.IsOwner)
                 {
                     continue;
                 }
 
                 // if player, use appropriate force value - for they are heavier!!!.
                 var force = vacuumCache.Role == null ? vacuumSuctionRegular : vacuumSuctionPlayer;
-                
+                var rbPos = (rb.centerOfMass + rb.position);
                 // apply suction force.
-                var dir = (suctionPoint.position - (rb.centerOfMass + rb.position)).normalized;
+                var dir = (suctionPoint.position - rbPos).normalized;
                 rb.AddForce(dir * force, ForceMode.Force);
                 
                 // distance check to if they can be considered as vacuumed.
-                if (Vector3.Distance(rb.position, suctionPoint.position) <= suctionCompleteDetectionRadius)
+                if (Vector3.Distance(rbPos, suctionPoint.position) <= suctionCompleteDetectionRadius)
                 {
                     if (IsServerStarted)
                         ServerVacuumedItem(rb);
@@ -228,7 +228,7 @@ namespace Items
         private void ClientVacuumedItem(Rigidbody rb)
         {
             var player = GetComponent<Player.PlayerRole>();
-            if (player.Role.Equals(PlayerRole.RoleType.Hider))
+            if (player != null && player.Role.Equals(PlayerRole.RoleType.Hider))
             {
                 RPC_SendHiderCapturedToServer();
             }
@@ -237,6 +237,7 @@ namespace Items
         [ServerRpc]
         private void RPC_SendHiderCapturedToServer()
         {
+            Debug.Log("Hider Captured!!!!");
             GameController.Instance.ServerHiderCaptured();
         }
         

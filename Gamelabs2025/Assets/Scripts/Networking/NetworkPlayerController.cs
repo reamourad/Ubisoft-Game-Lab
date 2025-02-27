@@ -118,12 +118,16 @@ namespace Networking
             var right = cameraTransform.transform.right;
             forward.y = 0;
             right.y = 0;
+            var currPos = rb.position;
             var dir = (forward * inputData.MoveInputVector.y + right * inputData.MoveInputVector.x).normalized;
             var move = dir * (speed / 10f);
-            rb.MovePosition(rb.position + move * deltaTime);
-            if (dir != Vector3.zero)
+            rb.MovePosition(currPos + move * deltaTime);
+            var newPos = rb.position;
+            var newMoveDir = (newPos - currPos).normalized;
+            newMoveDir.y = 0;
+            if (newMoveDir != Vector3.zero)
             {
-                transform.forward = Vector3.Lerp(transform.forward, dir, Time.deltaTime * tpsLookSpeed);
+                transform.forward = Vector3.Lerp(transform.forward, newMoveDir, Time.deltaTime * tpsLookSpeed);
             }
         }
         

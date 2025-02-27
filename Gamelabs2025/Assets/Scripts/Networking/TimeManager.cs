@@ -12,6 +12,7 @@ namespace Networking
         [SerializeField] private TMP_Text timerText;
         
         private readonly SyncVar<int> timer = new();
+        private readonly SyncVar<string> timerTitle = new(string.Empty);
         private Action onComplete;
         
         private bool isStarted;
@@ -35,7 +36,7 @@ namespace Networking
             //Initialize(300, null);
         }
 
-        public void Initialize(int startValue, Action onComplete)
+        public void Initialize(int startValue, Action onComplete, string title="")
         {
             if (!NetworkUtility.IsServer) return;
             timer.Value = startValue;

@@ -494,7 +494,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 5408301307720291325}
   _networkObjectCache: {fileID: 5408301307720291325}
   cameraTransform: {fileID: 6529424359605020131}
-  speed: 25
+  speed: 35
   maxLookAngle: 80
   cameraType: 1
   tpsLookSpeed: 100
