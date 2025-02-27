@@ -32,7 +32,7 @@ namespace Networking
         private void Start()
         {
             timer.OnChange += UpdateText;
-            Initialize(300, null);
+            //Initialize(300, null);
         }
 
         public void Initialize(int startValue, Action onComplete)

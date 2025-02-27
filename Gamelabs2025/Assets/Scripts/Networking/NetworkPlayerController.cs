@@ -27,11 +27,22 @@ namespace Networking
                 LookInputVector = lookInputVector;
             }
         }
+
+        public enum CameraType
+        {
+            None = 0,
+            FirstPerson,
+            ThirdPerson,
+        }
         
         [SerializeField] Transform cameraTransform;
         [SerializeField] private float speed=1f;
         [SerializeField] private float maxLookAngle=80f;
 
+        [Tooltip("FPS - Uses mouse (X,Y) to update view, TPS - Uses movement direction to handle rotation.")]
+        [SerializeField] private CameraType cameraType=CameraType.None;
+        [SerializeField] private float tpsLookSpeed=100;
+        
         [SerializeField] private IUsableItem usableItem;
         
         private PlayerInputData playerInputData;
@@ -41,12 +52,17 @@ namespace Networking
             rb = GetComponent<Rigidbody>();
         }
 
+        public void SetCameraTransform(Transform cameraTransform)
+        {
+            this.cameraTransform = cameraTransform;
+        }
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
             name = $"Player [{(IsOwner ? "LOCAL_PLAYER" : "REMOTE_PLAYER")}]";
         }
-
+        
         public void UpdatePlayerInputs(PlayerInputData inputData)
         {
             this.playerInputData = inputData;
@@ -66,8 +82,8 @@ namespace Networking
         {
             if(!IsOwner)
                 return;
-            
-            UpdateView(playerInputData, Time.deltaTime);
+
+            UpdateFirstPersonView(playerInputData, Time.deltaTime);
         }
 
         private void FixedUpdate()
@@ -77,20 +93,48 @@ namespace Networking
             
             UpdatePlayerMovement(playerInputData, Time.fixedDeltaTime);
         }
-        
+
         private void UpdatePlayerMovement(PlayerInputData inputData, float deltaTime)
+        {
+            if (cameraType == CameraType.FirstPerson)
+                FPSMove(inputData, deltaTime);
+            else if (cameraType == CameraType.ThirdPerson)
+                TPSMove(inputData, deltaTime);
+        }
+
+        private void FPSMove(PlayerInputData inputData, float deltaTime)
         {
             var rotation = transform.rotation;
             var forward = rotation * Vector3.forward;
             var right = rotation * Vector3.right;
-            
-            Vector3 move = (forward * inputData.MoveInputVector.y + right * inputData.MoveInputVector.x) * speed;
-            rb.MovePosition(transform.position + move * deltaTime);
-            
+            var dir = (forward * inputData.MoveInputVector.y + right * inputData.MoveInputVector.x).normalized;
+            var move = dir * (speed / 10f);
+            rb.MovePosition(rb.position + move * deltaTime);
         }
 
-        private void UpdateView(PlayerInputData inputData, float deltaTime)
+        private void TPSMove(PlayerInputData inputData, float deltaTime)
         {
+            var forward = cameraTransform.transform.forward;
+            var right = cameraTransform.transform.right;
+            forward.y = 0;
+            right.y = 0;
+            var dir = (forward * inputData.MoveInputVector.y + right * inputData.MoveInputVector.x).normalized;
+            var move = dir * (speed / 10f);
+            rb.MovePosition(rb.position + move * deltaTime);
+            if (dir != Vector3.zero)
+            {
+                transform.forward = Vector3.Lerp(transform.forward, dir, Time.deltaTime * tpsLookSpeed);
+            }
+        }
+        
+        private void UpdateFirstPersonView(PlayerInputData inputData, float deltaTime)
+        {
+            if(cameraType == CameraType.None || cameraType == CameraType.ThirdPerson)
+                return;
+            
+            if(cameraTransform == null)
+                return;
+            
             float pitchInput = inputData.LookInputVector.y;
             float yawInput = inputData.LookInputVector.x;
             
@@ -100,7 +144,7 @@ namespace Networking
             localCameraEuler.x = pitch < 0.0f? pitch + 360.0f : pitch;
             
             cameraTransform.localEulerAngles = localCameraEuler;
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.up * yawInput * inputData.YawSensitivity * deltaTime));
+            rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.up * (yawInput * inputData.YawSensitivity * deltaTime)));
         }
         
     }
