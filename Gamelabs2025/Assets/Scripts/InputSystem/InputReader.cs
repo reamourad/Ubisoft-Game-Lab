@@ -21,6 +21,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<bool> OnUseEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnPlacementModeEvent;
+    public event Action OnConnectItemsEvent;
     
     private static bool isGamepad = false;
 
@@ -114,6 +115,14 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         else if (context.phase == InputActionPhase.Canceled)
         {
             OnUseEvent?.Invoke(false);
+        }
+    }
+
+    public void OnConnectItems(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnConnectItemsEvent?.Invoke();
         }
     }
 
