@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -98,5 +99,10 @@ public class CameraObstructionHandler : MonoBehaviour
         Gizmos.DrawSphere(player.position, 0.2f);
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, 0.2f);
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Welp!!");
     }
 }

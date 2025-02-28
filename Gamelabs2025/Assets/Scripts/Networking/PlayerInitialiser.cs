@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Threading;
 using FishNet.Object;
 using Player;
 using Unity.Cinemachine;
@@ -24,10 +26,9 @@ namespace Networking
             else
                 OwnerIntialisation(playerRole);
         }
-
+        
         private void NonOwnerIntialisation(PlayerRole.RoleType playerRole)
         {
-            
             switch (playerRole)
             {
                 case PlayerRole.RoleType.Seeker:
@@ -70,8 +71,15 @@ namespace Networking
 
         private void OwnerHiderInitialisation()
         {
+            StartCoroutine(Delayed());
+        }
+
+        IEnumerator Delayed()
+        {
+            yield return new WaitUntil(()=>IsClientInitialized);
+            
             if(hiderCameraPrefab == null || hiderCameraTargetTransform == null)
-               return;
+                yield break;
             
             Debug.Log("Loading TPS Camera!!");
             hiderPlayerCamera = Instantiate(hiderCameraPrefab, hiderCameraTargetTransform.position, Quaternion.identity);
@@ -80,6 +88,7 @@ namespace Networking
             GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(cineCam.transform);
             cineCam.Target.TrackingTarget = hiderCameraTargetTransform;
             cineCam.Target.LookAtTarget = hiderCameraTargetTransform;
+            Debug.Log("Loading TPS Camera!! Done");
         }
     }
 }

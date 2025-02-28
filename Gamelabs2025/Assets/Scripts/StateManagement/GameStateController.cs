@@ -37,6 +37,9 @@ namespace StateManagement
             if(!NetworkUtility.IsServer)
                 return;
             
+            if(newState == currentState)
+                return;
+            
             Debug.Log($"GameStateController::<color=green> Switching state {currentState} --> {newState} </color>");
             switch (newState)
             {
