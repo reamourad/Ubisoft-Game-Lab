@@ -39,7 +39,8 @@ namespace StateManagement
         private readonly SyncVar<PlayerRole.RoleType> GameWinner = new SyncVar<PlayerRole.RoleType>(PlayerRole.RoleType.None);
 
         public Action<GameStage> OnStageChanged;
-        
+
+        private int readyClients=0;
         // singleton pattern
         private static GameController instance;
         public static GameController Instance
@@ -53,19 +54,39 @@ namespace StateManagement
             }
         }
         
-        private void Start()
+        private IEnumerator Start()
         {
             GameWinner.OnChange += GameWinnerOnOnChange;
+            if (IsClientStarted)
+            {
+                yield return new WaitUntil(() => GameWinner.Value == PlayerRole.RoleType.None);
+                if (IsServerStarted)
+                {
+                    ServerOnClientReady();
+                }
+                else
+                {
+                    RPC_InformClientIsReady();
+                }
+            }
         }
 
-        public override void OnStartServer()
+        [ServerRpc]
+        private void RPC_InformClientIsReady()
         {
-            base.OnStartServer();
-            
-            GameWinner.Value = PlayerRole.RoleType.None;
-            SwitchGameStage(GameStage.Preparing);
+            ServerOnClientReady();
         }
 
+        private void ServerOnClientReady()
+        {
+            readyClients += 1;
+            if (readyClients >= 0)
+            {
+                GameWinner.Value = PlayerRole.RoleType.None;
+                SwitchGameStage(GameStage.Preparing);
+            }
+        }
+        
         private void OnDestroy()
         {
             GameWinner.OnChange -= GameWinnerOnOnChange;
@@ -167,7 +188,7 @@ namespace StateManagement
         private void ServerGamePrepareStage()
         {
             ServerSpawnPlayers();
-            Networking.TimeManager.Instance.Initialize(prepTimeSeconds, () =>
+            Networking.TimeManager.Instance?.Initialize(prepTimeSeconds, () =>
             {
                 SwitchGameStage(GameStage.Game);
             });

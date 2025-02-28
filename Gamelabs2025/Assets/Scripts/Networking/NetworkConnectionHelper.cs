@@ -1,6 +1,9 @@
+using System.Net.Http;
+using System.Threading.Tasks;
 using FishNet;
 using FishNet.Transporting;
 using FishNet.Transporting.Tugboat;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Networking
@@ -18,20 +21,23 @@ namespace Networking
         private const string SERVER_IPADDR = "127.0.0.1";
         private const ushort SERVER_PORT = 7770;
 
-
+        private static NetworkConnectionInfo connectionInfo;
         private static LocalConnectionState connectionState;
         
+        public static bool ConnectionInfoAvailable => GetConnectionInfo() != null;
         public static string RemoteServerVersion => GetConnectionInfo().remoteServerVersion;
         
         private static NetworkConnectionInfo GetConnectionInfo()
         {
-            var txtAsset = Resources.Load<TextAsset>("NetworkConf/ConnectionInfo");
+            return connectionInfo;
+            
+            /*var txtAsset = Resources.Load<TextAsset>("NetworkConf/ConnectionInfo");
             if (txtAsset == null)
             {
                 Debug.LogError("<color=red>Network Connection Info is missing from Resources</color>");
                 return null;
             }
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<NetworkConnectionInfo>(txtAsset.text);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<NetworkConnectionInfo>(txtAsset.text);*/
         }
         
         public static void StartServer(System.Action<ServerConnectionStateArgs> serverConnectionStateCallback=null)
@@ -102,5 +108,18 @@ namespace Networking
                 tugboat.StopConnection(true);
             }
         }
+
+        public static async Task PullConnectionInfo()
+        {
+            var url =
+                "https://objectstorage.ca-montreal-1.oraclecloud.com/n/axadirgfhxca/b/Gamelabs/o/ConnectionInfo.json";
+            HttpClient client = new HttpClient();
+            var res = await client.GetAsync(url);
+            if (res.IsSuccessStatusCode)
+            {
+                var json = await res.Content.ReadAsStringAsync();
+                connectionInfo = JsonConvert.DeserializeObject<NetworkConnectionInfo>(json);
+            }
+        } 
     }
 }
