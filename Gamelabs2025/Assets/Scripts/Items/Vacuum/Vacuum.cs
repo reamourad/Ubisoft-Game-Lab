@@ -42,6 +42,7 @@ namespace Items
         private readonly SyncVar<bool> VacuumActive = new SyncVar<bool>();
         
         private Rigidbody parentRigidbody;
+        private bool suckedPlayer = false;
         
         private void Start()
         {
@@ -171,7 +172,6 @@ namespace Items
                 
                 // distance check to if they can be considered as vacuumed.
                 var dist = Vector3.Distance(rbPos, suctionPoint.position);
-                Debug.Log($"<color=green>VACUUM DIST:::: {dist} < {suctionCompleteDetectionRadius}</color>");
                 if (dist <= suctionCompleteDetectionRadius)
                 {
                     Capture(rb);
@@ -186,7 +186,7 @@ namespace Items
             var nob = rb.GetComponent<NetworkObject>();
             
             //check if player is sucked in
-            if (playerRole != null)
+            if (playerRole != null && !suckedPlayer)
             {
                 if(!playerRole.IsOwner)
                     return;
@@ -194,7 +194,9 @@ namespace Items
                     return;
                 
                 Debug.Log($"<color=cyan>VACUUM SUCKK!!: Player:{playerRole.Role}, Owner: {playerRole.IsOwner}, Server:{IsServerStarted}</color>");
-                GameController.Instance.ServerHiderCaptured();
+                suckedPlayer = true;
+                if(!suckedPlayer) 
+                    GameController.Instance.ServerHiderCaptured();
                 return;
             }
             
