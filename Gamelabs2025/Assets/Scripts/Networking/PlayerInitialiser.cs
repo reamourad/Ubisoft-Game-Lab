@@ -73,6 +73,7 @@ namespace Networking
             if(hiderCameraPrefab == null || hiderCameraTargetTransform == null)
                return;
             
+            Debug.Log("Loading TPS Camera!!");
             hiderPlayerCamera = Instantiate(hiderCameraPrefab, hiderCameraTargetTransform.position, Quaternion.identity);
             hiderPlayerCamera.GetComponent<CameraObstructionHandler>().player = this.transform;
             var cineCam = hiderPlayerCamera.GetComponent<CinemachineCamera>();
