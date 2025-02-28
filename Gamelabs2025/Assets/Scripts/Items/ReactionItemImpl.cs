@@ -5,7 +5,7 @@ using UnityEngine;
 public class ReactionItemImpl : MonoBehaviour, IReactionItem
 {
     [SerializeField] private Transform wireAnchor;
-    private Renderer renderer;
+    private Renderer meshRenderer;
     private Material originalMaterial;
     [SerializeField] Material GhostMaterial;
 
@@ -22,8 +22,8 @@ public class ReactionItemImpl : MonoBehaviour, IReactionItem
 
     private void Start()
     {
-        renderer = GetComponent<Renderer>();
-        originalMaterial = renderer.material;
+        meshRenderer = GetComponent<Renderer>();
+        originalMaterial = meshRenderer.material;
     }
 
     public Transform WireAnchor => wireAnchor;
@@ -35,6 +35,6 @@ public class ReactionItemImpl : MonoBehaviour, IReactionItem
 
     private void HandlePlayerHoldingWire(bool isHolding)
     {
-        renderer.material = isHolding ? GhostMaterial : originalMaterial;
+        meshRenderer.material = isHolding ? GhostMaterial : originalMaterial;
     }
 }
