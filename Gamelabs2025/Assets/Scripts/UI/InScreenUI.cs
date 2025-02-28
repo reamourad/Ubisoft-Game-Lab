@@ -1,7 +1,13 @@
 using TMPro;
 using UnityEngine;
+using Utils;
 
-public class InScreenUI : MonoBehaviour
+public class InScreenUI : SingletonBehaviour<InScreenUI>
 {
-    public TextMeshProUGUI toolTipText; 
+    [SerializeField] private TextMeshProUGUI toolTipText;
+
+    public void SetToolTipText(string text)
+    {
+        toolTipText.text = text;
+    }
 }

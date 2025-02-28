@@ -1,4 +1,6 @@
-using System;
+//OUTDATED GO TO NetworkPlayerItemController
+
+/*using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +13,7 @@ public class HiderController : PlayerController
     private IGrabableItem grabbedObject = null; 
     [SerializeField] private InScreenUI inScreenUI;
     
-    //this is varaibles for the placement mechanic
+    //this is variables for the placement mechanic
     public Material ghostMaterial;
     private Material originalMaterial; 
     public bool isBlueprintMode = false;
@@ -205,4 +207,4 @@ public class HiderController : PlayerController
         Gizmos.color = Color.red;
         Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * grabRange);
     }
-}
+}*/

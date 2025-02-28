@@ -9,7 +9,7 @@ public abstract class InteractiveItem : Item
     private void Awake()
     {
         inputSphere = GetComponentInChildren<InputSphereCollider>();
-        
+
         // Subscribe to events
         inputSphere.onPlayerEnter.AddListener(OnSphereEntered);
         inputSphere.onPlayerExit.AddListener(OnSphereExited);
@@ -22,7 +22,7 @@ public abstract class InteractiveItem : Item
         //InputReader.Instance.OnGrabEvent += HandleGrab;  
     }
 
-    private void OnSphereExited() 
+    private void OnSphereExited()
     {
         //Debug.Log("Player exited interactionsphere.");
         this.player = null;
@@ -38,8 +38,8 @@ public abstract class InteractiveItem : Item
         }
         //InputReader.Instance.OnGrabEvent -= HandleGrab; 
     }
-
-    //grab behaviour (x to grab): can only pick up one item at a time, it goes on the side of your screen, if you go 
+}
+//grab behaviour (x to grab): can only pick up one item at a time, it goes on the side of your screen, if you go 
     //into placement mode you can see where you can place the object (is placement mode needed to place the object, let's say yes for now) 
     //@Skye 
     //TODO: move to the player 
@@ -73,4 +73,4 @@ public abstract class InteractiveItem : Item
         this.transform.SetParent(player.GetComponent<PlayerController>().grabPlacement);
         inputSphere.gameObject.SetActive(false);
     }
-}
+}*/

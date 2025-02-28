@@ -153,6 +153,5 @@ namespace Networking
             cameraTransform.localEulerAngles = localCameraEuler;
             rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.up * (yawInput * inputData.YawSensitivity * deltaTime)));
         }
-        
     }
 }

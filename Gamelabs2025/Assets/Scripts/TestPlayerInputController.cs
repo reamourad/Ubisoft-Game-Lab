@@ -7,6 +7,8 @@ using Networking;
 using Unity.Cinemachine;
 using UnityEngine;
 
+
+//TODO: RENAME THIS TO PlayerInputController @Vishnu
 public class TestPlayerInputController : NetworkBehaviour
 {
     [SerializeField] private InputReader inputReader;
@@ -19,6 +21,7 @@ public class TestPlayerInputController : NetworkBehaviour
     private Vector2 moveInput;
     private NetworkPlayerController.PlayerInputData inputData = default;
     private NetworkPlayerController playerController;
+    private NetworkPlayerItemController playerItemController;
     
     private void OnDestroy()
     {
@@ -28,6 +31,8 @@ public class TestPlayerInputController : NetworkBehaviour
         inputReader.OnUseEvent -= ClientHandleItemUsage;
         inputReader.OnMoveEvent -= ClientHandleMove;
         inputReader.OnLookEvent -= ClientHandleLook;
+        inputReader.OnGrabReleaseEvent -= ClientHandleGrabRelease;
+        inputReader.OnGrabActivateEvent -= ClientHandleGrab;
     }
 
     public override void OnStartClient()
@@ -41,6 +46,8 @@ public class TestPlayerInputController : NetworkBehaviour
         inputReader.OnUseEvent += ClientHandleItemUsage;
         inputReader.OnMoveEvent += ClientHandleMove;
         inputReader.OnLookEvent += ClientHandleLook;
+        inputReader.OnGrabReleaseEvent += ClientHandleGrabRelease;
+        inputReader.OnGrabActivateEvent += ClientHandleGrab;
         
         playerController = GetComponent<NetworkPlayerController>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -73,5 +80,15 @@ public class TestPlayerInputController : NetworkBehaviour
     {
         Debug.Log($"Item Use {use}");
         playerController.UseItem(use);
+    }
+
+    private void ClientHandleGrabRelease()
+    {
+        playerItemController.OnGrabRelease(); 
+    }
+    
+    private void ClientHandleGrab()
+    {
+        playerItemController.OnGrab(); 
     }
 }
