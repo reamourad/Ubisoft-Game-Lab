@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Networking;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class TestPlayerInputController : NetworkBehaviour

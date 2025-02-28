@@ -9,13 +9,16 @@ namespace Networking
 {
     public class TimeManager : NetworkBehaviour
     {
-        [SerializeField] private TMP_Text timerText;
+        [SerializeField] private TimeManagerUI ui;
         
         private readonly SyncVar<int> timer = new();
+        private readonly SyncVar<string> timerTitle = new(string.Empty);
         private Action onComplete;
         
         private bool isStarted;
         private bool isPaused;
+        
+        private Coroutine timerRoutine;
         
         private static TimeManager instance;
         public static TimeManager Instance
@@ -32,10 +35,10 @@ namespace Networking
         private void Start()
         {
             timer.OnChange += UpdateText;
-            Initialize(300, null);
+            //Initialize(300, null);
         }
 
-        public void Initialize(int startValue, Action onComplete)
+        public void Initialize(int startValue, Action onComplete, string title="")
         {
             if (!NetworkUtility.IsServer) return;
             timer.Value = startValue;
@@ -47,7 +50,13 @@ namespace Networking
         {
             isStarted = true;
             isPaused = false;
-            StartCoroutine(TimerCoroutine());
+            timerRoutine = StartCoroutine(TimerCoroutine());
+        }
+
+        public void StopActiveTimer()
+        {
+            if(timerRoutine != null)
+                StopCoroutine(timerRoutine);
         }
         
         private IEnumerator TimerCoroutine()
@@ -61,12 +70,13 @@ namespace Networking
                 if (timer.Value > 0) continue;
                 onComplete?.Invoke();
                 isStarted = false;
+                break;
             }
         }
 
         private void UpdateText(int previousValue, int newValue, bool isServer)
         {
-            timerText.text = $"{newValue / 60}:{newValue % 60:D2}";
+            ui.SetTimerText($"{newValue / 60}:{newValue % 60:D2}");
         }
 
         
