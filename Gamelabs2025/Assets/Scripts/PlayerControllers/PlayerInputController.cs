@@ -16,6 +16,7 @@ public class PlayerInputController : MonoBehaviour
         InputReader.Instance.OnLookEvent += HandleLook;
         InputReader.Instance.OnGrabActivateEvent += HandleGrab; 
         InputReader.Instance.OnGrabReleaseEvent += HandleGrabRelease; 
+        InputReader.Instance.OnConnectItemsEvent += HandleConnection;
     }
 
 
@@ -25,6 +26,7 @@ public class PlayerInputController : MonoBehaviour
         InputReader.Instance.OnLookEvent -= HandleLook;
         InputReader.Instance.OnGrabActivateEvent -= HandleGrab;
         InputReader.Instance.OnGrabReleaseEvent -= HandleGrabRelease;
+        InputReader.Instance.OnConnectItemsEvent -= HandleConnection;
     }
     
     private void HandleLook(Vector2 obj)
@@ -45,5 +47,10 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("grab release");
         playerController.OnGrabRelease();
+    }
+
+    private void HandleConnection()
+    {
+        playerController.OnConnection();
     }
 }

@@ -135,6 +135,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ConnectItems"",
+                    ""type"": ""Button"",
+                    ""id"": ""4237456e-a933-4588-8f1c-13154bd6fc05"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -291,6 +300,28 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""PlacementMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebda4c53-e8f3-4b25-b5bb-5e449acb955f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConnectItems"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dbf50ef2-c031-4cf7-9d76-76ce749319da"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConnectItems"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -418,6 +449,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
         m_Gameplay_PlacementMode = m_Gameplay.FindAction("PlacementMode", throwIfNotFound: true);
         m_Gameplay_UseItem = m_Gameplay.FindAction("UseItem", throwIfNotFound: true);
+        m_Gameplay_ConnectItems = m_Gameplay.FindAction("ConnectItems", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CCTVSwitchCameras = m_UI.FindAction("CCTVSwitchCameras", throwIfNotFound: true);
@@ -508,6 +540,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Look;
     private readonly InputAction m_Gameplay_PlacementMode;
     private readonly InputAction m_Gameplay_UseItem;
+    private readonly InputAction m_Gameplay_ConnectItems;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -539,6 +572,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/UseItem".
         /// </summary>
         public InputAction @UseItem => m_Wrapper.m_Gameplay_UseItem;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/ConnectItems".
+        /// </summary>
+        public InputAction @ConnectItems => m_Wrapper.m_Gameplay_ConnectItems;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -580,6 +617,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
+            @ConnectItems.started += instance.OnConnectItems;
+            @ConnectItems.performed += instance.OnConnectItems;
+            @ConnectItems.canceled += instance.OnConnectItems;
         }
 
         /// <summary>
@@ -606,6 +646,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
+            @ConnectItems.started -= instance.OnConnectItems;
+            @ConnectItems.performed -= instance.OnConnectItems;
+            @ConnectItems.canceled -= instance.OnConnectItems;
         }
 
         /// <summary>
@@ -788,6 +831,13 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ConnectItems" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConnectItems(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
