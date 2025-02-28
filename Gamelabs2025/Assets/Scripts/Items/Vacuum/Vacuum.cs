@@ -186,7 +186,7 @@ namespace Items
             var nob = rb.GetComponent<NetworkObject>();
             
             //check if player is sucked in
-            if (playerRole != null && !suckedPlayer)
+            if (playerRole != null)
             {
                 if(!playerRole.IsOwner)
                     return;
@@ -194,9 +194,9 @@ namespace Items
                     return;
                 
                 Debug.Log($"<color=cyan>VACUUM SUCKK!!: Player:{playerRole.Role}, Owner: {playerRole.IsOwner}, Server:{IsServerStarted}</color>");
-                suckedPlayer = true;
                 if(!suckedPlayer) 
                     GameController.Instance.ServerHiderCaptured();
+                suckedPlayer = true;
                 return;
             }
             
