@@ -171,24 +171,24 @@ public class HiderController : PlayerController
             
             objectToPlace.transform.SetParent(null);
             
-            // Restore original layer
+            //Restore original layer
             objectToPlace.layer = originalLayer;
             
-            // Restore physics
+            //Restore physics
             Rigidbody rb = objectToPlace.GetComponent<Rigidbody>();
             if (rb != null) 
             {
                 rb.isKinematic = false;
             }
             
-            // Restore original material
+            //Restore original material
             Renderer renderer = objectToPlace.GetComponent<Renderer>();
             if (renderer != null && originalMaterial != null)
             {
                 renderer.material = originalMaterial;
             }
             
-            // Reset variables
+            //Reset variables
             grabbedObject = null;
             isBlueprintMode = false;
             
