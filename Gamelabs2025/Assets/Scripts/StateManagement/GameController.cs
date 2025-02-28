@@ -82,10 +82,11 @@ namespace StateManagement
             Debug.Log("GameController:: Spawning Players");
             var networkManager = InstanceFinder.NetworkManager;
             players = new List<NetworkObject>();
-            int seekerCount = 0;
-            foreach (var connection in InstanceFinder.NetworkManager.ClientManager.Clients)
+            foreach (var connection in InstanceFinder.NetworkManager.ServerManager.Clients)
             {
                 var randSel = SelectRandomSide();
+                Debug.Log($"GameController:: Spawning Player: {{ connection.Value.ClientId}} ({randSel.prefab.name})");
+                
                 NetworkObject nob = networkManager.GetPooledInstantiated(randSel.prefab,randSel.spawnPoint.position, randSel.spawnPoint.rotation, true);
                 networkManager.ServerManager.Spawn(nob, connection.Value);
                 players.Add(nob);
