@@ -109,6 +109,12 @@ namespace Networking
             }
         }
 
+        /// <summary>
+        /// Pull the server connection config from a cloud storage solution via a simple GET request
+        /// This allows our server config to be updated independent of the client build.
+        /// So if any errors happen during demo-day. we can re-deploy our server and update the config to continue
+        /// playing.
+        /// </summary>
         public static async Task PullConnectionInfo()
         {
             var url =
