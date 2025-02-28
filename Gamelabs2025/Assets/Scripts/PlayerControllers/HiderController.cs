@@ -27,7 +27,7 @@ public class HiderController : PlayerController
     private const int IGNORE_RAYCAST_LAYER = 2;
     
     // Update is called once per frame
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
         base.FixedUpdate();
 

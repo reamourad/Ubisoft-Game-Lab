@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Vector3 move = cameraTransform.forward * moveInput.y + cameraTransform.right * moveInput.x;
         move.y = 0f;
