@@ -92,7 +92,9 @@ namespace Networking
             void UpdateLookingAtObject()
             {
                 lookingAtObject = null;
-
+                if(playerCamera == null)
+                    playerCamera = Camera.main;
+                
                 // Raycast from the center of the camera's view
                 if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, grabRange))
                 {
