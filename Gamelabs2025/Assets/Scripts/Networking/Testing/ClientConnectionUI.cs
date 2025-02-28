@@ -45,9 +45,6 @@ namespace Networking.Testing
             {
                 Debug.LogWarning("ClientConnectionUI::Remote Server and Client version mismatch, Features/Systems may break due to a different version.");
             }
-            
-            InstanceFinder.NetworkManager.ServerManager.StopConnection(true);
-            NetworkConnectionHelper.StartServer();
         }
         
         private void Update()

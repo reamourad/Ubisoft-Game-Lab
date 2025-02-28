@@ -152,7 +152,7 @@ namespace FishNet.Demo.Prediction.Rigidbodies
             //Rigidbodies need tick and postTick.
             base.SetTickCallbacks(TickCallback.Tick | TickCallback.PostTick);
         }
-
+        
         protected override void TimeManager_OnTick()
         {
             PerformReplicate(BuildMoveData());
