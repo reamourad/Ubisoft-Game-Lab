@@ -17,6 +17,9 @@ public class CameraObstructionHandler : MonoBehaviour
 
     void HandleObstructions()
     {
+        if(player == null)
+            return;
+        
         Vector3 direction = transform.position - player.position;
         float distance = direction.magnitude;
         RaycastHit[] hits = Physics.RaycastAll(player.position, direction.normalized, distance, obstructionMask);

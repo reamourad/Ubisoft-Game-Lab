@@ -36,7 +36,7 @@ namespace StateManagement
         
         private GameStage currentStage = GameStage.None;
         private List<NetworkObject> players;
-        private readonly SyncVar<PlayerRole.RoleType> winner = new SyncVar<PlayerRole.RoleType>(PlayerRole.RoleType.None);
+        private readonly SyncVar<PlayerRole.RoleType> GameWinner = new SyncVar<PlayerRole.RoleType>(PlayerRole.RoleType.None);
 
         public Action<GameStage> OnStageChanged;
         
@@ -55,23 +55,24 @@ namespace StateManagement
         
         private void Start()
         {
+            GameWinner.OnChange += GameWinnerOnOnChange;
             if (!IsServerStarted)
             {
                 return;
             }
 
-            winner.Value = PlayerRole.RoleType.None;
-            winner.OnChange += WinnerOnOnChange;
+            GameWinner.Value = PlayerRole.RoleType.None;
             SwitchGameStage(GameStage.Preparing);
         }
 
         private void OnDestroy()
         {
-            winner.OnChange -= WinnerOnOnChange;
+            GameWinner.OnChange -= GameWinnerOnOnChange;
         }
 
-        private void WinnerOnOnChange(PlayerRole.RoleType prev, PlayerRole.RoleType next, bool asserver)
+        private void GameWinnerOnOnChange(PlayerRole.RoleType prev, PlayerRole.RoleType next, bool asserver)
         {
+            Debug.Log("GameLookupMemory Winner Data Modified!!");
             GameLookupMemory.Winner = next;
         }
 
@@ -190,7 +191,7 @@ namespace StateManagement
         {
             if(!IsServerStarted)
                 return;
-            GameLookupMemory.Winner = PlayerRole.RoleType.Hider;
+            GameWinner.Value = PlayerRole.RoleType.Hider;
             StartCoroutine(DelayedInvoke(() =>
             {
                 SwitchGameStage(GameStage.Postgame);
@@ -217,7 +218,7 @@ namespace StateManagement
                 hider.Despawn();
             
             Networking.TimeManager.Instance.StopActiveTimer();
-            GameLookupMemory.Winner = PlayerRole.RoleType.Seeker;
+            GameWinner.Value = PlayerRole.RoleType.Seeker;
             StartCoroutine(DelayedInvoke(() =>
             {
                 SwitchGameStage(GameStage.Postgame);

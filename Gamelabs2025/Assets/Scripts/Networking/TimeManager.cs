@@ -70,6 +70,7 @@ namespace Networking
                 if (timer.Value > 0) continue;
                 onComplete?.Invoke();
                 isStarted = false;
+                break;
             }
         }
 
