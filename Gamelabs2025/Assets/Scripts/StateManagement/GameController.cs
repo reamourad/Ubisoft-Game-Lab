@@ -77,7 +77,7 @@ namespace StateManagement
             GameLookupMemory.Winner = next;
         }
 
-        private void SpawnPlayers()
+        private void ServerSpawnPlayers()
         {
             Debug.Log("GameController:: Spawning Players");
             var networkManager = InstanceFinder.NetworkManager;
@@ -133,6 +133,9 @@ namespace StateManagement
             if(!IsServerStarted)
                 return;
             
+            if(currentStage == stage)
+                return;
+            
             Debug.Log($"GameController:: Switching Game Stage {currentStage} --> {stage}");
             switch (stage)
             {
@@ -162,7 +165,7 @@ namespace StateManagement
         
         private void ServerGamePrepareStage()
         {
-            SpawnPlayers();
+            ServerSpawnPlayers();
             Networking.TimeManager.Instance.Initialize(prepTimeSeconds, () =>
             {
                 SwitchGameStage(GameStage.Game);
