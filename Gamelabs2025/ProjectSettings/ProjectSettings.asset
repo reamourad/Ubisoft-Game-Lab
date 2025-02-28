@@ -140,8 +140,10 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.0.2a
-  preloadedAssets: []
+  bundleVersion: 0.0.3a
+  preloadedAssets:
+  - {fileID: -944628639613478452, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
+  - {fileID: 11400000, guid: 208cadece189b8048b50a3852d9c3cb9, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -844,8 +846,20 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   scriptingDefineSymbols:
-    Server: FISHNET;FISHNET_V4;EDGEGAP_PLUGIN_SERVERS
-    Standalone: FISHNET;FISHNET_V4;EDGEGAP_PLUGIN_SERVERS
+    Android: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES
+    EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2
+    GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2
+    Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2
+    PS4: UNITY_POST_PROCESSING_STACK_V2
+    PS5: UNITY_POST_PROCESSING_STACK_V2
+    QNX: UNITY_POST_PROCESSING_STACK_V2
+    ReservedCFE: UNITY_POST_PROCESSING_STACK_V2
+    Server: FISHNET;FISHNET_V4;EDGEGAP_PLUGIN_SERVERS;PROBUILDER_EXPERIMENTAL_FEATURES
+    Standalone: FISHNET;FISHNET_V4;EDGEGAP_PLUGIN_SERVERS;UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES
+    VisionOS: UNITY_POST_PROCESSING_STACK_V2
+    WebGL: UNITY_POST_PROCESSING_STACK_V2;PROBUILDER_EXPERIMENTAL_FEATURES
+    XboxOne: UNITY_POST_PROCESSING_STACK_V2
+    tvOS: UNITY_POST_PROCESSING_STACK_V2
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

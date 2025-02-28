@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Networking;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class TestPlayerInputController : NetworkBehaviour
@@ -44,7 +45,7 @@ public class TestPlayerInputController : NetworkBehaviour
         playerController = GetComponent<NetworkPlayerController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        playerVisuals.SetActive(false);
+        //playerVisuals.SetActive(false);
     }
 
     private void Update()

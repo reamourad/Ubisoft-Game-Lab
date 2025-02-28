@@ -32,9 +32,12 @@ namespace StateManagement
             InstanceFinder.NetworkManager.ClientManager.OnClientConnectionState += Client_OnClientConnectionStateChanged;
         }
 
-        public void Server_ChangeState(GameStates newState)
+        public void ServerChangeState(GameStates newState)
         {
             if(!NetworkUtility.IsServer)
+                return;
+            
+            if(newState == currentState)
                 return;
             
             Debug.Log($"GameStateController::<color=green> Switching state {currentState} --> {newState} </color>");
@@ -65,7 +68,7 @@ namespace StateManagement
                 connectedPlayers.Add(args.ConnectionId);
                 if (connectedPlayers.Count == minPlayers)
                 {
-                    Server_ChangeState(GameStates.CutScene);
+                    ServerChangeState(GameStates.CutScene);
                 }
             }
             else if (args.ConnectionState == RemoteConnectionState.Stopped)

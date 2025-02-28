@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - Hider
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -14,8 +13,8 @@ TagManager:
   - UI
   - Item
   - Player
-  - PlacementLayer
-  - 
+  - PostProcessing_CCTV
+  - Obstruction
   - 
   - 
   - 

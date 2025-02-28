@@ -14,6 +14,7 @@ public class InputSphereCollider : MonoBehaviour
     public UnityEvent<GameObject> onPlayerEnter;
     public UnityEvent onPlayerExit;
     
+    
 
     
     private void Start()
@@ -40,7 +41,7 @@ public class InputSphereCollider : MonoBehaviour
             onPlayerExit.Invoke();
         }
     }
-
+    
     private void OnDisable()
     {
         onPlayerExit.Invoke();
