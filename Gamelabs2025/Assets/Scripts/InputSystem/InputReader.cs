@@ -21,6 +21,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<bool> OnUseEvent;
     public event Action<Vector2> OnLookEvent;
     public event Action OnPlacementModeEvent;
+    public event Action OnConnectItemsEvent;
     
     private static bool isGamepad = false;
 
@@ -120,7 +121,15 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
             OnUseEvent?.Invoke(false);
         }
     }
-    
+
+    public void OnConnectItems(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnConnectItemsEvent?.Invoke();
+        }
+    }
+
     public static string GetCurrentBindingText(InputAction action)
     {
         // This is a bit of a hack, it has to be called from a FixedUpdate or Update method to work properly

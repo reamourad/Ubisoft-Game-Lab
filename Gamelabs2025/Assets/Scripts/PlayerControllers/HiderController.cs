@@ -21,11 +21,15 @@ public class HiderController : PlayerController
     private int originalLayer = 0;
     [SerializeField] private float placementOffset = 0.05f;
     
+    [SerializeField] private Transform wireAnchor;
+    private ITriggerItem holdingWireItem;
+    public static event Action<bool> OnHoldingWireItem;
+    
     // Define a specific layer for temporarily placing the grabbed object
     private const int IGNORE_RAYCAST_LAYER = 2;
     
     // Update is called once per frame
-    void FixedUpdate()
+    public override void FixedUpdate()
     {
         base.FixedUpdate();
 
@@ -199,6 +203,27 @@ public class HiderController : PlayerController
             {
                 inScreenUI.toolTipText.gameObject.SetActive(false);
             }
+        }
+    }
+
+    public override void OnConnection()
+    {
+        if (lookingAtObject == null || grabbedObject != null)
+        {
+            return;
+        }
+        
+        if (lookingAtObject.gameObject.TryGetComponent(out ITriggerItem triggerItem))
+        {
+            triggerItem.Connect(wireAnchor);
+            holdingWireItem = triggerItem;
+            OnHoldingWireItem?.Invoke(true);
+        }
+        else if (lookingAtObject.gameObject.TryGetComponent(out IReactionItem reactionItem))
+        {
+            holdingWireItem.Connect(reactionItem.WireAnchor);
+            holdingWireItem = null;
+            OnHoldingWireItem?.Invoke(false);
         }
     }
     

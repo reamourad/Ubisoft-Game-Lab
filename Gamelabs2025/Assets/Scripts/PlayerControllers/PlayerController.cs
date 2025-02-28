@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         Vector3 move = cameraTransform.forward * moveInput.y + cameraTransform.right * moveInput.x;
         move.y = 0f;
@@ -56,4 +56,5 @@ public class PlayerController : MonoBehaviour
     //to be overridden in hider controller
     public virtual void OnGrab(){}
     public virtual void OnGrabRelease(){}
+    public virtual void OnConnection(){}
 }
