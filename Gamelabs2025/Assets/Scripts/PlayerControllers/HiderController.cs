@@ -77,7 +77,7 @@ public class HiderController : PlayerController
             // Update UI text
             if (inScreenUI != null)
             {
-                inScreenUI.toolTipText.text = "Release to place object";
+                //inScreenUI.toolTipText.text = "Release to place object";
             }
         }
         else
@@ -104,14 +104,15 @@ public class HiderController : PlayerController
         // Check if the object has the IGrabbable interface
         if (lookingAtObject != null)
         {
-            inScreenUI.toolTipText.gameObject.SetActive(true);
-            inScreenUI.toolTipText.text = "Press " +
+           // inScreenUI.toolTipText.gameObject.SetActive(true);
+            /*inScreenUI.toolTipText.text = "Press " +
                                           InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay
                                               .Grab) + " to grab  " + lookingAtObject.gameObject.name;
+        */
         }
         else
         {
-            inScreenUI.toolTipText.gameObject.SetActive(false);
+            //inScreenUI.toolTipText.gameObject.SetActive(false);
         }
     }
     
@@ -158,8 +159,8 @@ public class HiderController : PlayerController
             
             if (inScreenUI != null)
             {
-                inScreenUI.toolTipText.gameObject.SetActive(true);
-                inScreenUI.toolTipText.text = "Release to place object";
+                //inScreenUI.toolTipText.gameObject.SetActive(true);
+                //inScreenUI.toolTipText.text = "Release to place object";
             }
         }
     }
@@ -199,7 +200,7 @@ public class HiderController : PlayerController
             // Update UI
             if (inScreenUI != null)
             {
-                inScreenUI.toolTipText.gameObject.SetActive(false);
+                //inScreenUI.toolTipText.gameObject.SetActive(false);
             }
         }
     }
