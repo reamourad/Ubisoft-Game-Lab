@@ -18104,7 +18104,7 @@ MonoBehaviour:
   hiderPrefab: {fileID: 5584394639087159213, guid: 2fbce9b8a7baa444289093c09e0d6dc4, type: 3}
   hiderSpawn: {fileID: 605336660}
   prepTimeSeconds: 30
-  gameTimeSeconds: 10
+  gameTimeSeconds: 480
   doorAnimator: {fileID: 150385639}
 --- !u!4 &1927739126
 Transform:
