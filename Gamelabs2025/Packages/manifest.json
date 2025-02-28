@@ -1,10 +1,7 @@
 {
   "dependencies": {
-<<<<<<< HEAD
     "com.unity.ai.navigation": "2.0.6",
-=======
     "com.unity.2d.sprite": "1.0.0",
->>>>>>> main
     "com.unity.cinemachine": "3.1.0",
     "com.unity.collab-proxy": "2.6.0",
     "com.unity.feature.development": "1.0.2",

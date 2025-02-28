@@ -121,7 +121,6 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
             OnUseEvent?.Invoke(false);
         }
     }
-<<<<<<< HEAD
 
     public void OnConnectItems(InputAction.CallbackContext context)
     {
@@ -131,9 +130,6 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         }
     }
 
-=======
-    
->>>>>>> main
     public static string GetCurrentBindingText(InputAction action)
     {
         // This is a bit of a hack, it has to be called from a FixedUpdate or Update method to work properly
