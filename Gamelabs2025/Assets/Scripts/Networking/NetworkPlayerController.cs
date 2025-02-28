@@ -114,6 +114,9 @@ namespace Networking
 
         private void TPSMove(PlayerInputData inputData, float deltaTime)
         {
+            if(cameraTransform == null)
+                return;
+            
             var forward = cameraTransform.transform.forward;
             var right = cameraTransform.transform.right;
             forward.y = 0;
