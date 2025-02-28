@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 [CreateAssetMenu(menuName = "InputReader")]
 public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap.IUIActions
@@ -10,13 +11,18 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     //making it into a singleton accessible in all classes
     public static InputReader Instance { get; private set; }
     
-    private InputMap inputMap;
+    public InputMap inputMap;
     
     //Events
     public event Action<Vector2> OnMoveEvent;
-    public event Action OnGrabEvent;
+    public event Action OnGrabActivateEvent;
+    
+    public event Action OnGrabReleaseEvent;
     public event Action<bool> OnUseEvent;
     public event Action<Vector2> OnLookEvent;
+    public event Action OnPlacementModeEvent;
+    
+    private static bool isGamepad = false;
 
     public event Action OnCloseUIEvent;
     public event Action<float> OnCCTVCameraSwitchEvent;
@@ -80,7 +86,20 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            OnGrabEvent?.Invoke();
+            OnGrabActivateEvent?.Invoke();
+        }
+
+        if (context.phase == InputActionPhase.Canceled)
+        {
+            OnGrabReleaseEvent?.Invoke();
+        }
+    }
+    
+    public void OnPlacementMode(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnPlacementModeEvent?.Invoke();
         }
     }
 
@@ -104,7 +123,17 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     
     public static string GetCurrentBindingText(InputAction action)
     {
-        if (Gamepad.current != null)
+        // This is a bit of a hack, it has to be called from a FixedUpdate or Update method to work properly
+        if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+        {
+            isGamepad = true;
+        }
+        else if (Keyboard.current != null && Keyboard.current.wasUpdatedThisFrame)
+        {
+            isGamepad = false;
+        }
+        
+        if (isGamepad)
         {
             return action.GetBindingDisplayString(1, InputBinding.DisplayStringOptions.DontIncludeInteractions);
         }
