@@ -56,11 +56,12 @@ namespace StateManagement
         private void Start()
         {
             GameWinner.OnChange += GameWinnerOnOnChange;
-            if (!IsServerStarted)
-            {
-                return;
-            }
+        }
 
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            
             GameWinner.Value = PlayerRole.RoleType.None;
             SwitchGameStage(GameStage.Preparing);
         }
@@ -78,6 +79,7 @@ namespace StateManagement
 
         private void SpawnPlayers()
         {
+            Debug.Log("GameController:: Spawning Players");
             var networkManager = InstanceFinder.NetworkManager;
             players = new List<NetworkObject>();
             int seekerCount = 0;
@@ -131,6 +133,7 @@ namespace StateManagement
             if(!IsServerStarted)
                 return;
             
+            Debug.Log($"GameController:: Switching Game Stage {currentStage} --> {stage}");
             switch (stage)
             {
                 case GameStage.Preparing:
@@ -147,6 +150,7 @@ namespace StateManagement
             currentStage = stage;
             OnStageChanged?.Invoke(currentStage);
             RPC_InformClientsOfGameStageChange(currentStage);
+            Debug.Log($"GameController:: Switched Game Stage {currentStage} --> {stage}");
         }
 
         [ObserversRpc]
