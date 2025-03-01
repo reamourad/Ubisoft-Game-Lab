@@ -50,6 +50,7 @@ public class TestPlayerInputController : NetworkBehaviour
         inputReader.OnGrabActivateEvent += ClientHandleGrab;
         
         playerController = GetComponent<NetworkPlayerController>();
+        playerItemController = GetComponent<NetworkPlayerItemController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //playerVisuals.SetActive(false);

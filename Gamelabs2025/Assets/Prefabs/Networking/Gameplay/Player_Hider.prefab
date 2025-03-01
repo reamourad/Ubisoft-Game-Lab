@@ -445,6 +445,9 @@ MonoBehaviour:
   grabPlacement: {fileID: 4595279820465698571}
   ghostMaterial: {fileID: 2100000, guid: ba3d9d27760433144a14ba296ac76b31, type: 2}
   placementOffset: 0.05
+  itemLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8815787860643524411
 GameObject:
   m_ObjectHideFlags: 0

@@ -110,8 +110,7 @@ public class HiderController : PlayerController
             /*inScreenUI.toolTipText.text = "Press " +
                                           InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay
                                               .Grab) + " to grab  " + lookingAtObject.gameObject.name;
-        */
-        }
+ }
         else
         {
             //inScreenUI.toolTipText.gameObject.SetActive(false);

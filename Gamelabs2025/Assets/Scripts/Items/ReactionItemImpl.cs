@@ -9,7 +9,7 @@ public class ReactionItemImpl : MonoBehaviour, IReactionItem
     private Material originalMaterial;
     [SerializeField] Material GhostMaterial;
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         HiderController.OnHoldingWireItem += HandlePlayerHoldingWire;
     }
@@ -18,7 +18,7 @@ public class ReactionItemImpl : MonoBehaviour, IReactionItem
     {
         HiderController.OnHoldingWireItem -= HandlePlayerHoldingWire;
 
-    }
+    }*/
 
     private void Start()
     {

@@ -23,6 +23,7 @@ namespace Networking
     
         // Define a specific layer for temporarily placing the grabbed object
         private const int IGNORE_RAYCAST_LAYER = 2;
+        [SerializeField] private LayerMask itemLayerMask;
 
         private void Start()
         {
@@ -53,7 +54,7 @@ namespace Networking
                 objectToPlace.layer = IGNORE_RAYCAST_LAYER;
                     
                 //Raycast so object follows crosshair 
-                if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, grabRange))
+                if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, grabRange))
                 {
                     // Get the collider's bounds for proper placement
                     Collider objCollider = objectToPlace.GetComponent<Collider>();
@@ -89,31 +90,66 @@ namespace Networking
                 objectToPlace.layer = currentLayer;
             }
 
+            private Vector3 point; 
             void UpdateLookingAtObject()
             {
+                if(!IsOwner){return;}
+                
                 lookingAtObject = null;
+                
                 if(playerCamera == null)
                     playerCamera = Camera.main;
                 
-                // Raycast from the center of the camera's view
-                if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, grabRange))
+                // Origin at the center of your character
+                Vector3 origin = transform.position;
+    
+                // Direction your character is facing
+                Vector3 direction = transform.forward;
+    
+                // Box dimensions (adjust based on your character's size)
+                Vector3 halfExtents = new Vector3(0.5f, 1.0f, 0.1f); // width, height, depth
+    
+                // Character's rotation
+                Quaternion orientation = transform.rotation;
+    
+                // Maximum distance to check
+                float maxDistance = 3.0f;
+    
+                // Layer mask for objects to check
+                LayerMask layerMask = itemLayerMask;
+                
+                // Raycast from the center of player view
+                Ray ray = new Ray(transform.position, transform.forward);
+                if (Physics.BoxCast(origin, halfExtents, direction, out RaycastHit hit, orientation, maxDistance, layerMask))
                 {
+                    point = hit.point;
+                    Debug.DrawLine(transform.position, hit.point, Color.red);
                     lookingAtObject = hit.collider.GetComponent<IGrabableItem>();
                 }
-
+                Visualization.DrawBoxCastBox(origin, halfExtents, direction, orientation, maxDistance, Color.green);
+                
                 // Check if the object has the IGrabbable interface
                 if (lookingAtObject != null)
                 {
-                    InScreenUI.Instance.SetToolTipText("Press " +
-                                                       InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay
-                                                           .Grab) + " to grab  " + lookingAtObject.gameObject.name);
+                    if (InScreenUI.Instance != null)
+                    {
+                        InScreenUI.Instance.SetToolTipText("Press " +
+                                                           InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay
+                                                               .Grab) + " to grab  " + lookingAtObject.gameObject.name);
+                    }
+                    
                 }
                 else
                 {
-                    InScreenUI.Instance.SetToolTipText("");
+                    if (InScreenUI.Instance != null)
+                    {
+                        InScreenUI.Instance.SetToolTipText("");
+                    }
+                    
                 }
             }
             
+
             // Called when grab button is pressed
             public void OnGrab()
             {
@@ -164,7 +200,7 @@ namespace Networking
             [ObserversRpc]
             private void RPC_SendGrabMessageToOtherClients(Vector3 position, Vector3 forward)
             {
-                if (Physics.Raycast(position, forward, out RaycastHit hit, grabRange))
+                if (Physics.Raycast(position, forward, out RaycastHit hit, grabRange, itemLayerMask))
                 {
                     lookingAtObject = hit.collider.GetComponent<IGrabableItem>();
                 }
@@ -175,44 +211,38 @@ namespace Networking
             public void OnGrabRelease()
             {
                 isGrabButtonHeld = false;
-                
+
                 if (isBlueprintMode && grabbedObject != null)
                 {
                     GameObject objectToPlace = grabbedObject.gameObject;
-                    
+
                     objectToPlace.transform.SetParent(null);
-                    
+
                     //Restore original layer
                     objectToPlace.layer = originalLayer;
-                    
+
                     //Restore physics
                     Rigidbody rb = objectToPlace.GetComponent<Rigidbody>();
-                    if (rb != null) 
+                    if (rb != null)
                     {
                         rb.isKinematic = false;
                     }
-                    
+
                     //Restore original material
                     Renderer renderer = objectToPlace.GetComponent<Renderer>();
                     if (renderer != null && originalMaterial != null)
                     {
                         renderer.material = originalMaterial;
                     }
-                    
+
                     //Reset variables
                     grabbedObject = null;
                     isBlueprintMode = false;
-                    
+
                     // Update UI
+
                     InScreenUI.Instance.SetToolTipText("");
                 }
-            }
-            
-            private void OnDrawGizmos()
-            {
-                if(playerCamera == null) {return;}
-                Gizmos.color = Color.red;
-                Gizmos.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * grabRange);
             }
     }
 }
