@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 2792347264255600806}
   - component: {fileID: 9026635170548686705}
   m_Layer: 0
-  m_Name: HouseWall
+  m_Name: HouseExteriorWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
