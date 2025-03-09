@@ -20,6 +20,8 @@ namespace Networking
         private bool isGrabButtonHeld = false;
         private int originalLayer = 0;
         [SerializeField] private float placementOffset = 0.05f;
+        
+        [SerializeField] float minPlacementDistance = 2.0f;
     
         // Define a specific layer for temporarily placing the grabbed object
         private const int IGNORE_RAYCAST_LAYER = 2;
@@ -38,27 +40,43 @@ namespace Networking
                     //place mechanic
                     UpdateBlueprintMode(); 
                 }
-                else if (!isBlueprintMode)
+                else if (!isBlueprintMode && grabbedObject == null)
                 {
                     //grab mechanic
                    UpdateLookingAtObject(); 
+                }
+                else
+                {
+                    InScreenUI.Instance.SetToolTipText("");
                 }
             }
 
             void UpdateBlueprintMode()
             {
+                
                 GameObject objectToPlace = grabbedObject.gameObject;
                     
                 // Move the grabbed object to the Ignore Raycast layer, so we don't
                 int currentLayer = objectToPlace.layer;
                 objectToPlace.layer = IGNORE_RAYCAST_LAYER;
-                    
+                
+                Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+                
+                Ray screenCenterRay = playerCamera.ScreenPointToRay(screenCenter);
+                
+                //TODO: look into the grab range since we are in third person now @rea
+                //TODO: change the raycast for a box cast 
                 //Raycast so object follows crosshair 
-                if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, grabRange))
+                if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabRange, ~LayerMask.GetMask("Player", "Ignore Raycast"), QueryTriggerInteraction.Ignore))
                 {
-                    // Get the collider's bounds for proper placement
-                    Collider objCollider = objectToPlace.GetComponent<Collider>();
+                    Debug.Log(hit.collider.gameObject);
                     Vector3 placementPosition = hit.point;
+                    
+                    /*TODO: if the hit collider game object is not a valid placement, we want to send a ray from the item down until it hits something,
+                     if it does check if that's a valid placement, if not then put the box there with a red outline, 
+                     if you release when youre at a red outline, the object goes back to your handsGet the collider's bounds for proper placement */
+                    
+                    Collider objCollider = objectToPlace.GetComponent<Collider>();
                     
                     if (objCollider != null)
                     {
@@ -82,7 +100,8 @@ namespace Networking
                 else
                 {
                     // No valid surface found
-                    objectToPlace.transform.position = playerCamera.transform.position + playerCamera.transform.forward * grabRange/2;
+                    Debug.Log("Raycast did not hit anything.");
+                    objectToPlace.transform.position = playerCamera.transform.position + playerCamera.transform.forward * grabRange;
                     objectToPlace.transform.up = Vector3.up; // Default orientation
                 }
                     
@@ -172,7 +191,7 @@ namespace Networking
                     }
 
                     objToGrab.transform.position = grabPlacement.position;
-                    objToGrab.transform.SetParent(grabPlacement);
+                    objToGrab.transform.SetParent(this.transform);
                     RPC_SendGrabMessageToOtherClients(playerCamera.transform.position, playerCamera.transform.forward);
                     
                 }
@@ -180,7 +199,7 @@ namespace Networking
                 else if (!isBlueprintMode)
                 {
                     GameObject objectToPlace = grabbedObject.gameObject;
-                    
+                    objectToPlace.transform.parent = null; 
                     // keep original data for the material + layer
                     Renderer renderer = objectToPlace.GetComponent<Renderer>();
                     if (renderer != null) 
