@@ -15,7 +15,7 @@ E:/Github/Ubisoft-Game-Lab/Gamelabs2025
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-55956
+50316
 -job-worker-count
 7
 -background-job-worker-count
@@ -59,16 +59,16 @@ E:/Github/Ubisoft-Game-Lab/Gamelabs2025
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [19040]  Target information:
+Player connection [17548]  Target information:
 
-Player connection [19040]  * "[IP] 192.168.1.184 [Port] 0 [Flags] 2 [Guid] 2252931462 [EditorId] 2252931462 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [17548]  * "[IP] 192.168.1.184 [Port] 0 [Flags] 2 [Guid] 2077095693 [EditorId] 2077095693 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [19040]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2252931462 [EditorId] 2252931462 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [17548]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2077095693 [EditorId] 2077095693 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [19040]  * "[IP] 192.168.72.2 [Port] 0 [Flags] 2 [Guid] 2252931462 [EditorId] 2252931462 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [17548]  * "[IP] 192.168.72.2 [Port] 0 [Flags] 2 [Guid] 2077095693 [EditorId] 2077095693 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [19040] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [19040] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [17548] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [17548] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -80,7 +80,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 1.74 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 93.28 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.36f1 (9fe3b5f71dbb)
 [Subsystems] Discovering subsystems at path E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/Resources/UnitySubsystems
@@ -96,52 +96,52 @@ Initialize mono
 Mono path[0] = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56584
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56336
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
-Registered in 0.005099 seconds.
-- Loaded All Assemblies, in  0.440 seconds
+Registered in 0.861158 seconds.
+- Loaded All Assemblies, in 12.824 seconds
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 Native extension for iOS target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 241 ms
+Android Extension - Scanning For ADB Devices 385 ms
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.660 seconds
-Domain Reload Profiling: 1100ms
-	BeginReloadAssembly (156ms)
+- Finished resetting the current domain, in  1.158 seconds
+Domain Reload Profiling: 13983ms
+	BeginReloadAssembly (8917ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (40ms)
-	RebuildNativeTypeToScriptingClass (14ms)
-	initialDomainReloadingComplete (54ms)
-	LoadAllAssembliesAndSetupDomain (176ms)
-		LoadAssemblies (157ms)
+	RebuildCommonClasses (609ms)
+	RebuildNativeTypeToScriptingClass (17ms)
+	initialDomainReloadingComplete (921ms)
+	LoadAllAssembliesAndSetupDomain (2360ms)
+		LoadAssemblies (8924ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (170ms)
-			TypeCache.Refresh (169ms)
-				TypeCache.ScanAssembly (155ms)
+		AnalyzeDomain (2347ms)
+			TypeCache.Refresh (2346ms)
+				TypeCache.ScanAssembly (2008ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (660ms)
+	FinalizeReload (1159ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (605ms)
+		SetupLoadedEditorAssemblies (1101ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (355ms)
+			InitializePlatformSupportModulesInManaged (755ms)
 			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (56ms)
-			ProcessInitializeOnLoadAttributes (127ms)
-			ProcessInitializeOnLoadMethodAttributes (62ms)
+			BeforeProcessingInitializeOnLoad (78ms)
+			ProcessInitializeOnLoadAttributes (176ms)
+			ProcessInitializeOnLoadMethodAttributes (88ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -154,9 +154,9 @@ Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInter
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  0.928 seconds
+- Loaded All Assemblies, in 12.519 seconds
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
-Refreshing native plugins compatible for Editor in 1.05 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.03 ms, found 3 plugins.
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -167,743 +167,60 @@ Package Manager log level set to [2]
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.002 seconds
-Domain Reload Profiling: 1930ms
-	BeginReloadAssembly (191ms)
+- Finished resetting the current domain, in  1.239 seconds
+Domain Reload Profiling: 13757ms
+	BeginReloadAssembly (235ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (6ms)
+		DisableScriptedObjects (9ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (29ms)
-	RebuildCommonClasses (42ms)
-	RebuildNativeTypeToScriptingClass (14ms)
-	initialDomainReloadingComplete (39ms)
-	LoadAllAssembliesAndSetupDomain (642ms)
-		LoadAssemblies (400ms)
+		CreateAndSetChildDomain (36ms)
+	RebuildCommonClasses (59ms)
+	RebuildNativeTypeToScriptingClass (15ms)
+	initialDomainReloadingComplete (45ms)
+	LoadAllAssembliesAndSetupDomain (12163ms)
+		LoadAssemblies (11037ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (366ms)
-			TypeCache.Refresh (280ms)
-				TypeCache.ScanAssembly (257ms)
-			BuildScriptInfoCaches (68ms)
-			ResolveRequiredComponents (15ms)
-	FinalizeReload (1002ms)
+		AnalyzeDomain (1279ms)
+			TypeCache.Refresh (1181ms)
+				TypeCache.ScanAssembly (1094ms)
+			BuildScriptInfoCaches (74ms)
+			ResolveRequiredComponents (19ms)
+	FinalizeReload (1240ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (852ms)
+		SetupLoadedEditorAssemblies (1053ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (15ms)
+			InitializePlatformSupportModulesInManaged (19ms)
 			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (108ms)
-			ProcessInitializeOnLoadAttributes (664ms)
-			ProcessInitializeOnLoadMethodAttributes (57ms)
+			BeforeProcessingInitializeOnLoad (132ms)
+			ProcessInitializeOnLoadAttributes (817ms)
+			ProcessInitializeOnLoadMethodAttributes (78ms)
 			AfterProcessingInitializeOnLoad (2ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 1.72 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (6ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 1.52 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 146 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 7215 unused Assets / (6.7 MB). Loaded Objects now: 7767.
-Memory consumption went from 164.0 MB to 157.3 MB.
-Total: 18.148500 ms (FindLiveObjects: 1.477100 ms CreateObjectMapping: 1.083000 ms MarkObjects: 8.949600 ms  DeleteObjects: 6.636100 ms)
+Memory consumption went from 162.1 MB to 155.4 MB.
+Total: 13.348800 ms (FindLiveObjects: 1.259600 ms CreateObjectMapping: 0.605300 ms MarkObjects: 6.753600 ms  DeleteObjects: 4.728600 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1630.823274 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/Room_Modified.fbx
-  artifactKey: Guid(474a2544e1943454ab80856703d665b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/Room_Modified.fbx using Guid(474a2544e1943454ab80856703d665b2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1547afe04dbaa479df10dd88339a742e') in 0.8138568 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 276
+  Time since last request: 1899.624973 seconds.
+  path: Assets/Prefabs/HouseModelPrefabs/room_2ndIteration.fbx
+  artifactKey: Guid(12937bc669ae1474796014c89480fbaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/HouseModelPrefabs/room_2ndIteration.fbx using Guid(12937bc669ae1474796014c89480fbaa) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e9ace0e8c9cdb96e01d0bb4850fc18e9') in 0.7224613 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 288
 
 ========================================================================
 Received Import Request.
-  Time since last request: 365.967105 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/walls.001.prefab
-  artifactKey: Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/walls.001.prefab using Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8b543cf9e4e66dc250b80ce2ab6473c5') in 0.6178047 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 293
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.078212 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomWall.prefab
-  artifactKey: Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomWall.prefab using Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '20a599807210bfcab4702d4164213967') in 0.4678107 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 293
-
-========================================================================
-Received Prepare
-Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
-Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  0.821 seconds
-Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
-Refreshing native plugins compatible for Editor in 1.05 ms, found 3 plugins.
-Native extension for iOS target not found
-Native extension for Android target not found
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
-[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Unable to send message (not connected to server process).
-[Package Manager] Cannot connect to Unity Package Manager local server
-Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.080 seconds
-Domain Reload Profiling: 1904ms
-	BeginReloadAssembly (237ms)
-		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (5ms)
-		BackupInstance (0ms)
-		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (63ms)
-	RebuildCommonClasses (38ms)
-	RebuildNativeTypeToScriptingClass (14ms)
-	initialDomainReloadingComplete (25ms)
-	LoadAllAssembliesAndSetupDomain (508ms)
-		LoadAssemblies (395ms)
-		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (240ms)
-			TypeCache.Refresh (8ms)
-				TypeCache.ScanAssembly (0ms)
-			BuildScriptInfoCaches (213ms)
-			ResolveRequiredComponents (15ms)
-	FinalizeReload (1080ms)
-		ReleaseScriptCaches (0ms)
-		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (930ms)
-			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (19ms)
-			SetLoadedEditorAssemblies (8ms)
-			BeforeProcessingInitializeOnLoad (133ms)
-			ProcessInitializeOnLoadAttributes (703ms)
-			ProcessInitializeOnLoadMethodAttributes (65ms)
-			AfterProcessingInitializeOnLoad (2ms)
-			EditorAssembliesLoaded (0ms)
-		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (7ms)
-Refreshing native plugins compatible for Editor in 1.63 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 34 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7213 unused Assets / (6.9 MB). Loaded Objects now: 7817.
-Memory consumption went from 145.1 MB to 138.2 MB.
-Total: 14.907500 ms (FindLiveObjects: 1.378500 ms CreateObjectMapping: 0.893900 ms MarkObjects: 7.067800 ms  DeleteObjects: 5.565800 ms)
-
-Prepare: number of updated asset objects reloaded= 0
-========================================================================
-Received Import Request.
-  Time since last request: 457.231127 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab
-  artifactKey: Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab using Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '94c655461d937c112b13a73bd5a0615d') in 0.5962457 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 293
-
-========================================================================
-Received Import Request.
-  Time since last request: 353.957480 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1076c168bc59ecc73145cd8c35ef3efb') in 0.1698617 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.107975 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab
-  artifactKey: Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab using Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0caf5cef4b43923c22b48bc141f91641') in 0.1317527 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 299
-
-========================================================================
-Received Import Request.
-  Time since last request: 26.240043 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab
-  artifactKey: Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab using Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2d3e23865d7f0e6c150a8ddf658f374f') in 0.1250156 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 299
-
-========================================================================
-Received Import Request.
-  Time since last request: 17.599325 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab
-  artifactKey: Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab using Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b5053c5f5b2b146af6c0ebb62ab61db5') in 0.1412398 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 299
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.080169 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab
-  artifactKey: Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab using Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e28ca7533870b8d36f2844b9e7e6ade7') in 0.1220603 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 299
-
-========================================================================
-Received Import Request.
-  Time since last request: 86.674796 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7e64ac35460c1785479d960767482b75') in 0.1404548 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.847663 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f03b1d10494c5ee0b54cdf6e10be76f7') in 0.1363819 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 22.841567 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '2ee129fc3ab882eeab2217430e8e1ebd') in 0.1490958 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 12.322555 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0b672d26c6c4f118192bd578cf21394f') in 0.1413119 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.281582 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '14416c30e3eb0c4a902dbb5c89774905') in 0.1363207 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.704635 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '229ee302ca66224004dfc7cc1daf7348') in 0.1409061 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 21.658720 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5b8ae7ba31a36761b38b165aa750f03e') in 0.1254481 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.743157 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '238812de90375eacbc407acac14e96d1') in 0.1268158 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 49.339635 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '04bc18b60b6a941ba36651ef4625240e') in 0.1306204 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.073666 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ae8a3a4d12cdb2e48de294f4a43a9d0c') in 0.123219 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.703905 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1a22bf09dbcda9a733f06e9367426474') in 0.1336211 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.053295 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1edba2696bbc40bc20be34a5a092e884') in 0.1408482 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 16.178783 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '263253539ceaa350a7af6acd1850e6a2') in 0.1470101 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.479491 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1a3f65f4b52736b227fb3caa9d2dee64') in 0.121727 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.268938 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0bb02f0a9e1062539bd86864feaf72ca') in 0.13462 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.872957 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ded1baea9f1702ca2ace62f85b72380a') in 0.1237874 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.505689 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '78c1b85b1202fd6157f8ab15c87c5786') in 0.1231844 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 464.382183 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '57bd9ce929f616eff92b811cde6e8642') in 0.1639618 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 11.913939 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3eded02346c07f48bc2a3f20992a618c') in 0.1235101 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.121509 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd768cb92ca00a1ddad2c7084e34dc3d6') in 0.1257414 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 106.715665 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0bf48e25ef8c3239fc830660533c719b') in 0.137122 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.715693 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0af7c48eabd7c0e7fbccd50d5a357808') in 0.124177 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.956246 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7ade87b30b835853c197dce1370c0f7e') in 0.129734 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.712005 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3a0afde98d0944848c690c498636914d') in 0.1263708 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.895984 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8519db137fc74705eedbbd7675f7cb5f') in 0.1231397 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 12.779661 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1d782c909286bd03446648c7483520f2') in 0.1348879 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 66.517957 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e4d7a72a153cae5cc897694e91064db1') in 0.1260144 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 322
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.886183 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab
-  artifactKey: Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomWindowWall.prefab using Guid(36468783229ec2e4089364bad9332e0a) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '090fba9be8239badb29c2f940d88dc4c') in 0.1203472 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 299
-
-========================================================================
-Received Import Request.
-  Time since last request: 235.023480 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomWall.prefab
-  artifactKey: Guid(3c3eccddb2393af449bf1317b6e228fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomWall.prefab using Guid(3c3eccddb2393af449bf1317b6e228fe) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cbac2ab9011cb138664a28d18cdffa2d') in 0.1527328 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 299
-
-========================================================================
-Received Import Request.
-  Time since last request: 1715.389249 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '23c877e78fec8f7771f240bbedcda41c') in 0.1296651 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 304
-
-========================================================================
-Received Import Request.
-  Time since last request: 7565.338018 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'be05e2a7745c0928b817d5a6e96ca98a') in 0.0297523 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 29
-
-========================================================================
-Received Import Request.
-  Time since last request: 19.446379 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/Room_Decimated.fbx
-  artifactKey: Guid(04a3a76e0fdeb42438ac6be0874da448) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/Room_Decimated.fbx using Guid(04a3a76e0fdeb42438ac6be0874da448) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '50fbcd903e4ba45f911c7ca12aac7912') in 0.5829056 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 290
-
-========================================================================
-Received Import Request.
-  Time since last request: 105.987953 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '77496f17004da5314e391783c6a554bb') in 0.0119425 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.275630 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '384b13162499d9ab33a9bb7f1842e493') in 0.0370701 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.605696 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '427fc9cbd6e4cba4b25f71d1da9ddc54') in 0.0368202 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.968211 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '33e71357f1ec855791157a873dc7cddd') in 0.0381289 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.621109 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dbee227e6c9b27c3830f1ac9446ef9a1') in 0.037817 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.566456 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6e5b453469c0d00073119cacefad82d7') in 0.039007 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.575520 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd257cc6ac1ea017bd1497c0bc27ab715') in 0.0350792 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.780193 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4782058776c6e457702c22e0fbdb3804') in 0.0344656 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.838338 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0bd77bacf255b775b7b6a39847774b02') in 0.0376341 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.802973 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f6685383ba31490ea7de9fd30ef230ab') in 0.0337911 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.577699 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'f07053c88e0ceba106096e18a1573670') in 0.0316878 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.599798 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '505f6164227483f1a7c37d6383bd7072') in 0.0358186 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.990581 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '23aad14af9280a7f5c0e10ad47739f26') in 0.0308324 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.167356 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a94a0cd6c70ffc047e0535ce89957157') in 0.0339665 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.169703 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a1af0f7dd43444363b6b2484af5b9d29') in 0.0328946 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 7.469217 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'cc048d1743340aa4999db3a4a0e12e35') in 0.0329133 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.798549 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1fd8654d82ad783fa510936b38e9dbf9') in 0.0321017 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.595022 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e7a515bb72fa6a7bd5162358cf664462') in 0.0322316 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 9.031085 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5a5f4ec8ca14646bac358d0199113b88') in 0.0324839 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.578168 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b58983963386b75fe27ffac947f66091') in 0.0331209 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.775040 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '921414787ed19200c567e459353c323f') in 0.0328616 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.209001 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8d0680dc2f6f927f69c834f284aff0d0') in 0.0354972 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 6.395288 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '68507a4124b1eb559efd01680fe7d7b2') in 0.0333893 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.174141 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '044c6c21f057de5861a17785245222d9') in 0.030304 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 8.638884 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ba3342227cae41408bfe8e70573b97f9') in 0.0313115 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 20.795973 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5e6728004774c7dbe3342589bdee2835') in 0.0306944 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.606349 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1bdc1e5e49bf655303466d7a73c7023a') in 0.0353618 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 29.088057 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab
-  artifactKey: Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HouseWall.prefab using Guid(2548f53bd8b692144b7720c595d6596e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c6d7c1ae0b1adddfc4ce1ec4c74e57a7') in 0.0313157 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 318
-
-========================================================================
-Received Import Request.
-  Time since last request: 5.938058 seconds.
-  path: Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_ambient_occlusion_1k.png
-  artifactKey: Guid(7b1da992757e27a4da13c1af9c09e946) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_ambient_occlusion_1k.png using Guid(7b1da992757e27a4da13c1af9c09e946) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'b8d57437c373fa931df06c57dc7a3333') in 0.0625572 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_roughness_1k.png
-  artifactKey: Guid(d66f6bcecf02f744081d3f85633edc58) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_roughness_1k.png using Guid(d66f6bcecf02f744081d3f85633edc58) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '4c4278ea205db83b9c4ed427dd4e8858') in 0.0205625 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_normal_dx_1k.png
-  artifactKey: Guid(6bacf64a7893fb8478d9d7e013aad2a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_normal_dx_1k.png using Guid(6bacf64a7893fb8478d9d7e013aad2a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '5273dd8f05431da052933405f2eac6d4') in 0.0296446 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_normal_gl_1k.png
-  artifactKey: Guid(7df1b3bc69ab29b4b905c275089ed578) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_normal_gl_1k.png using Guid(7df1b3bc69ab29b4b905c275089ed578) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0da28bd12f66e486b50a7c2075d7d9ce') in 0.0184844 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000076 seconds.
-  path: Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_height_1k.png
-  artifactKey: Guid(4866d43168e037b47999a27415d2f24c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/FloorTextures/wood_planks_05_height_1k.png using Guid(4866d43168e037b47999a27415d2f24c) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ed9e0d99d6a04abef4687cc3b05cab38') in 0.0143053 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.461046 seconds.
-  path: Assets/Materials/HouseTextures/PillarTextures/concrete_wall_02_ambient_occlusion_1k.png
-  artifactKey: Guid(984fad8486908a342936cd54abe62591) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/PillarTextures/concrete_wall_02_ambient_occlusion_1k.png using Guid(984fad8486908a342936cd54abe62591) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6ac15786e1d2e89de468a496e23ccd22') in 0.0144052 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000020 seconds.
-  path: Assets/Materials/HouseTextures/PillarTextures/concrete_wall_02_height_1k.png
-  artifactKey: Guid(3870ed88f5515c24fbd02f38a9a31f45) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/PillarTextures/concrete_wall_02_height_1k.png using Guid(3870ed88f5515c24fbd02f38a9a31f45) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ae81b8aa65798ab2146caa1c46060402') in 0.0136536 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000077 seconds.
-  path: Assets/Materials/HouseTextures/PillarTextures/concrete_wall_02_roughness_1k.png
-  artifactKey: Guid(f19d05e574471d144a2740649604d40d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/PillarTextures/concrete_wall_02_roughness_1k.png using Guid(f19d05e574471d144a2740649604d40d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '17ef4e43c5d8f06cd06874aef4109194') in 0.0147376 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 1.121155 seconds.
-  path: Assets/Materials/HouseTextures/WoodPlankWallTextures/wood_planks_07_ambient_occlusion_1k.png
-  artifactKey: Guid(9085b4ef4515ec34eb5a949bb06a3dde) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/WoodPlankWallTextures/wood_planks_07_ambient_occlusion_1k.png using Guid(9085b4ef4515ec34eb5a949bb06a3dde) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fcd634def31daef0cf532664e3a79385') in 0.0142275 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000084 seconds.
-  path: Assets/Materials/HouseTextures/WoodPlankWallTextures/wood_planks_07_normal_gl_1k.png
-  artifactKey: Guid(13500a75406dc0d48a568836439bbe21) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/WoodPlankWallTextures/wood_planks_07_normal_gl_1k.png using Guid(13500a75406dc0d48a568836439bbe21) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'd40320b841593c76e9791b880c3d5670') in 0.0194197 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/Materials/HouseTextures/WoodPlankWallTextures/wood_planks_07_height_1k.png
-  artifactKey: Guid(59b3b4b493d0f964db431bd3c9683143) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseTextures/WoodPlankWallTextures/wood_planks_07_height_1k.png using Guid(59b3b4b493d0f964db431bd3c9683143) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '52666e89c61222a6205ff8e097020f31') in 0.0142941 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 2
+  Time since last request: 1328.459638 seconds.
+  path: Assets/Prefabs/HouseModelPrefabs/HouseWalls/DoorRoomWall.prefab
+  artifactKey: Guid(8d9f97420ece33f448db5596fc5e903d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/HouseModelPrefabs/HouseWalls/DoorRoomWall.prefab using Guid(8d9f97420ece33f448db5596fc5e903d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6513ef6683bb74118ad02e57be44dc69') in 0.0763153 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 608
 
