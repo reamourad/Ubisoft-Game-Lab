@@ -80,18 +80,11 @@ namespace Networking
                     
                     if (objCollider != null)
                     {
-                        // Calculate how much to offset from the hit point based on object's bounds
-                        // This prevents the object from clipping through the ground or other objects
                         float yOffset = objCollider.bounds.extents.y + placementOffset;
-                        
-                        // Apply the offset along the surface normal
                         placementPosition = hit.point + hit.normal * yOffset;
                     }
                     
-                    // Move the blueprint to the adjusted position
                     objectToPlace.transform.position = placementPosition;
-                    
-                    // Align blueprint with the surface normal
                     objectToPlace.transform.up = hit.normal;
                     
                     // Update UI text
@@ -102,10 +95,26 @@ namespace Networking
                     // No valid surface found
                     Debug.Log("Raycast did not hit anything.");
                     objectToPlace.transform.position = playerCamera.transform.position + playerCamera.transform.forward * grabRange;
-                    objectToPlace.transform.up = Vector3.up; // Default orientation
-                }
+                    objectToPlace.transform.up = Vector3.up;
                     
-                // Restore the original layer
+                    //put the object on the floor 
+                    RaycastHit floorHit;
+                    if (Physics.Raycast(objectToPlace.transform.position, Vector3.down, out floorHit, 20f))
+                    {
+                        Renderer objectRenderer = objectToPlace.GetComponent<Renderer>();
+                        float yOffset = 0f;
+    
+                        if (objectRenderer != null)
+                        {
+                            Bounds bounds = objectRenderer.bounds;
+                            yOffset = bounds.extents.y;
+                        }
+
+                        objectToPlace.transform.position = floorHit.point + new Vector3(0, yOffset, 0);
+                        objectToPlace.transform.up = floorHit.normal; // Align with floor normal
+                    }
+                }
+                
                 objectToPlace.layer = currentLayer;
             }
 
@@ -125,7 +134,7 @@ namespace Networking
                 // Direction your character is facing
                 Vector3 direction = transform.forward;
     
-                // Box dimensions (adjust based on your character's size)
+                // Box dimensions
                 Vector3 halfExtents = new Vector3(0.5f, 1.0f, 0.1f); // width, height, depth
     
                 // Character's rotation
