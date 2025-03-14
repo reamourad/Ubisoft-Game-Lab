@@ -210,7 +210,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: 3187561327783888162, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
-        Gain: 125
+        Gain: 7
         LegacyInput: Mouse X
         LegacyGain: 200
         CancelDeltaTime: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: 3187561327783888162, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
-        Gain: -125
+        Gain: -7
         LegacyInput: Mouse Y
         LegacyGain: -200
         CancelDeltaTime: 0

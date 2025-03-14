@@ -70,13 +70,10 @@ namespace Items
                 GiveOwnership(parentNo.Owner);
         }
         
+        //Only called by player controller, which will only happen locally
         public void UseItem(bool isUsing)
         {
             Debug.Log($"Vacuum {isUsing} (IsOwner = {IsOwner})");
-            //don't use if not owner
-            if(!IsOwner)
-                return;
-            
             if(localUsingFlag == isUsing) return;
             localUsingFlag = isUsing;
             RPC_SendActivationRequestToServer(isUsing);

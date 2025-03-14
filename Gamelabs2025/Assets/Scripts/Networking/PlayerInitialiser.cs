@@ -14,6 +14,8 @@ namespace Networking
         private GameObject hiderCameraPrefab;
         [FormerlySerializedAs("hiderCameraTransform")] [SerializeField]
         private Transform hiderCameraTargetTransform;
+        [SerializeField]
+        private GameObject seekerRightHandTrf;
         
         private GameObject hiderPlayerCamera;
         
@@ -66,29 +68,48 @@ namespace Networking
         private void OwnerSeekerInitialisation()
         {
             //nothing as of now.
-            GetComponentInChildren<CinemachineCamera>().enabled = true;
+            StartCoroutine(Delayed(() =>
+            {
+                var fpsCam = GetComponentInChildren<CinemachineCamera>();
+                fpsCam.enabled = true;
+                var camTrf = Camera.main.transform;
+                camTrf.parent = fpsCam.transform;
+                camTrf.localPosition = Vector3.zero;
+                camTrf.localRotation = Quaternion.identity;
+                
+                //Move the hand under camera
+                seekerRightHandTrf.transform.parent = camTrf;
+                seekerRightHandTrf.transform.localPosition = Vector3.zero;
+                seekerRightHandTrf.transform.localRotation = Quaternion.identity;
+                
+                GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(camTrf);
+            }));
+            
         }
 
         private void OwnerHiderInitialisation()
         {
-            StartCoroutine(Delayed());
+            StartCoroutine(Delayed(() =>
+            {
+                if(hiderCameraPrefab == null || hiderCameraTargetTransform == null)
+                    return ;
+            
+                Debug.Log("Loading TPS Camera!!");
+                hiderPlayerCamera = Instantiate(hiderCameraPrefab, hiderCameraTargetTransform.position, Quaternion.identity);
+                hiderPlayerCamera.GetComponent<CameraObstructionHandler>().player = this.transform;
+                var cineCam = hiderPlayerCamera.GetComponent<CinemachineCamera>();
+                GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(cineCam.transform);
+                cineCam.Target.TrackingTarget = hiderCameraTargetTransform;
+                cineCam.Target.LookAtTarget = hiderCameraTargetTransform;
+                Debug.Log("Loading TPS Camera!! Done");
+            }));
         }
 
-        IEnumerator Delayed()
+        IEnumerator Delayed(System.Action callback)
         {
             yield return new WaitUntil(()=>IsClientInitialized);
-            
-            if(hiderCameraPrefab == null || hiderCameraTargetTransform == null)
-                yield break;
-            
-            Debug.Log("Loading TPS Camera!!");
-            hiderPlayerCamera = Instantiate(hiderCameraPrefab, hiderCameraTargetTransform.position, Quaternion.identity);
-            hiderPlayerCamera.GetComponent<CameraObstructionHandler>().player = this.transform;
-            var cineCam = hiderPlayerCamera.GetComponent<CinemachineCamera>();
-            GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(cineCam.transform);
-            cineCam.Target.TrackingTarget = hiderCameraTargetTransform;
-            cineCam.Target.LookAtTarget = hiderCameraTargetTransform;
-            Debug.Log("Loading TPS Camera!! Done");
+            yield return new WaitWhile(() => Camera.main == null);
+            callback?.Invoke();
         }
     }
 }
