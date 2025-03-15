@@ -13,19 +13,4 @@ public class GrabableObject : MonoBehaviour, IGrabableItem
     {
         
     }
-
-    public void OnGrab(PlayerController grabber)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnDrop()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnThrow()
-    {
-        throw new System.NotImplementedException();
-    }
 }
