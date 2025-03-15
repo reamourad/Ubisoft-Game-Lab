@@ -223,7 +223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7071264961641514966
 Transform:
   m_ObjectHideFlags: 0
@@ -236,8 +236,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.5000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5140702142174132775}
+  m_Children: []
   m_Father: {fileID: 1507686942425355671}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4812176538759028873
@@ -419,6 +418,8 @@ Transform:
   m_Children:
   - {fileID: 7071264961641514966}
   - {fileID: 3888338399173177535}
+  - {fileID: 5140702142174132775}
+  - {fileID: 8193140051566247539}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &749914873828565922
@@ -542,6 +543,8 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 2341094329731646923}
   _networkObjectCache: {fileID: 2341094329731646923}
+  hiderCameraPrefab: {fileID: 0}
+  hiderCameraTargetTransform: {fileID: 0}
 --- !u!114 &1517956396625777759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,6 +606,8 @@ MonoBehaviour:
   cameraTransform: {fileID: 7071264961641514966}
   speed: 2.5
   maxLookAngle: 67.5
+  cameraType: 0
+  tpsLookSpeed: 100
 --- !u!114 &1002367060268032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,6 +640,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f390b8d3a842bc983a7d864dd319c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 2341094329731646923}
+  _networkObjectCache: {fileID: 0}
   roleType: 2
 --- !u!1 &4099803267225658887
 GameObject:
@@ -662,13 +670,13 @@ Transform:
   m_GameObject: {fileID: 4099803267225658887}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.0000000037252903, w: 1}
-  m_LocalPosition: {x: 0.48700047, y: -0.24000025, z: 0.37999916}
+  m_LocalPosition: {x: 0.48700142, y: 1.2599999, z: 0.37999916}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7377353487711278918}
   - {fileID: 4803296644613721923}
-  m_Father: {fileID: 7071264961641514966}
+  m_Father: {fileID: 1507686942425355671}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-5609651459889064908
 MonoBehaviour:
@@ -685,6 +693,118 @@ MonoBehaviour:
   _componentIndexCache: 1
   _addedNetworkObject: {fileID: 2341094329731646923}
   _networkObjectCache: {fileID: 36244198137820681}
+--- !u!1 &5614972422946188749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8193140051566247539}
+  - component: {fileID: 7997949799188158688}
+  - component: {fileID: 8088069705392842915}
+  - component: {fileID: 5721804534662950925}
+  m_Layer: 0
+  m_Name: FreeLook Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8193140051566247539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614972422946188749}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1507686942425355671}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7997949799188158688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614972422946188749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20230301
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
+--- !u!114 &8088069705392842915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614972422946188749}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a076c17fe76165e4f8ed21498b877bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Modifiers: []
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &5721804534662950925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5614972422946188749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89875cdc57c54474a8a74efd9b2a3b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScanRecursively: 1
+  SuppressInputWhileBlending: 1
+  IgnoreTimeScale: 0
+  m_ControllerManager:
+    Controllers: []
+  PlayerIndex: -1
+  AutoEnableInputs: 1
 --- !u!1001 &5480210894199309536
 PrefabInstance:
   m_ObjectHideFlags: 0
