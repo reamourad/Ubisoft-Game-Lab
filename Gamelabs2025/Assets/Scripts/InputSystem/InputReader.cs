@@ -12,6 +12,10 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public static InputReader Instance { get; private set; }
     
     public InputMap inputMap;
+    public float movementInputDuration;
+    public bool movementInputDetected;
+    public Vector2 moveComposite;
+    public Vector2 mouseDelta;
     
     //Events
     public event Action<Vector2> OnMoveEvent;
@@ -27,6 +31,18 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public event Action OnCloseUIEvent;
     public event Action<float> OnCCTVCameraSwitchEvent;
+    
+    public event Action OnCrouchActivated;
+    public event Action OnCrouchDeactivated;
+
+    public event Action OnJumpPerformed;
+
+    public event Action OnLockOnToggled;
+
+    public event Action OnSprintActivated;
+    public event Action OnSprintDeactivated;
+
+    public event Action OnWalkToggled;
     
 
     private void OnEnable()
@@ -80,7 +96,9 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public void OnMove(InputAction.CallbackContext context)
     {
         //Debug.Log(context.ReadValue<Vector2>());
-        OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
+        moveComposite = context.ReadValue<Vector2>();
+        movementInputDetected = moveComposite.magnitude > 0;
+        OnMoveEvent?.Invoke(moveComposite);
     }
 
     public void OnGrab(InputAction.CallbackContext context)
