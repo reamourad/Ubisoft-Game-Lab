@@ -694,13 +694,13 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void CalculateInput()
         {
-            if (_inputReader._movementInputDetected)
+            if (_inputReader.movementInputDetected)
             {
-                if (_inputReader._movementInputDuration == 0)
+                if (_inputReader.movementInputDuration == 0)
                 {
                     _movementInputTapped = true;
                 }
-                else if (_inputReader._movementInputDuration > 0 && _inputReader._movementInputDuration < _buttonHoldThreshold)
+                else if (_inputReader.movementInputDuration > 0 && _inputReader.movementInputDuration < _buttonHoldThreshold)
                 {
                     _movementInputTapped = false;
                     _movementInputPressed = true;
@@ -713,18 +713,18 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
                     _movementInputHeld = true;
                 }
 
-                _inputReader._movementInputDuration += Time.deltaTime;
+                _inputReader.movementInputDuration += Time.deltaTime;
             }
             else
             {
-                _inputReader._movementInputDuration = 0;
+                _inputReader.movementInputDuration = 0;
                 _movementInputTapped = false;
                 _movementInputPressed = false;
                 _movementInputHeld = false;
             }
 
-            _moveDirection = (_cameraController.GetCameraForwardZeroedYNormalised() * _inputReader._moveComposite.y)
-                + (_cameraController.GetCameraRightZeroedYNormalised() * _inputReader._moveComposite.x);
+            _moveDirection = (_cameraController.GetCameraForwardZeroedYNormalised() * _inputReader.moveComposite.y)
+                + (_cameraController.GetCameraRightZeroedYNormalised() * _inputReader.moveComposite.x);
         }
 
         #endregion
@@ -1325,7 +1325,7 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void EnterLocomotionState()
         {
-            _inputReader.onJumpPerformed += LocomotionToJumpState;
+            _inputReader.OnJumpPerformed += LocomotionToJumpState;
         }
 
         /// <summary>
@@ -1363,7 +1363,7 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void ExitLocomotionState()
         {
-            _inputReader.onJumpPerformed -= LocomotionToJumpState;
+            _inputReader.OnJumpPerformed -= LocomotionToJumpState;
         }
 
         /// <summary>
@@ -1471,7 +1471,7 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void EnterCrouchState()
         {
-            _inputReader.onJumpPerformed += CrouchToJumpState;
+            _inputReader.OnJumpPerformed += CrouchToJumpState;
         }
 
         /// <summary>
@@ -1522,7 +1522,7 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void ExitCrouchState()
         {
-            _inputReader.onJumpPerformed -= CrouchToJumpState;
+            _inputReader.OnJumpPerformed -= CrouchToJumpState;
         }
 
         /// <summary>
