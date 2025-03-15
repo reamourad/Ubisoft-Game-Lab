@@ -146,6 +146,11 @@ namespace Networking
             var newRot = new Vector3(transform.eulerAngles.x, cameraRot.y, transform.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newRot);
         }
+
+        public Transform GetCamera()
+        {
+            return cameraTransform;
+        }
         
     }
 }

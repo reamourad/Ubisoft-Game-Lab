@@ -6,11 +6,13 @@
 // Sample scripts are included only as examples and are not intended as production-ready.
 
 using System.Collections.Generic;
+using Networking;
+using Synty.AnimationBaseLocomotion.Samples.Scripts;
 using UnityEngine;
 
-namespace Synty.AnimationBaseLocomotion.Samples.Scripts
+namespace Animation
 {
-    public class SamplePlayerAnimationController : MonoBehaviour
+    public class SeekerAnimationController : MonoBehaviour
     {
         #region Enum
 
@@ -81,9 +83,9 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         #region Scripts/Objects
 
         [Header("External Components")]
-        [Tooltip("Script controlling camera behavior")]
+        [Tooltip("Network player controller")]
         [SerializeField]
-        private SampleCameraController _cameraController;
+        private NetworkPlayerController controller;
         [Tooltip("InputReader handles player input")]
         private InputReader _inputReader;
         [Tooltip("Animator component for controlling player animations")]
@@ -375,57 +377,6 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
             _isStrafing = !_isSprinting && (_alwaysStrafe || _isLockedOn);
         }
 
-        /// <summary>
-        ///     Adds an object to the list of target candidates.
-        /// </summary>
-        /// <param name="newTarget">The object to add.</param>
-        public void AddTargetCandidate(GameObject newTarget)
-        {
-            if (newTarget != null)
-            {
-                _currentTargetCandidates.Add(newTarget);
-            }
-        }
-
-        /// <summary>
-        ///     Removes an object to the list of target candidates if present.
-        /// </summary>
-        /// <param name="targetToRemove">The object to remove if present.</param>
-        public void RemoveTarget(GameObject targetToRemove)
-        {
-            if (_currentTargetCandidates.Contains(targetToRemove))
-            {
-                _currentTargetCandidates.Remove(targetToRemove);
-            }
-        }
-
-        /// <summary>
-        ///     Toggle the lock-on state.
-        /// </summary>
-        private void ToggleLockOn()
-        {
-            EnableLockOn(!_isLockedOn);
-        }
-
-        /// <summary>
-        ///     Sets the lock-on state to the given state.
-        /// </summary>
-        /// <param name="enable">The state to set lock-on to.</param>
-        private void EnableLockOn(bool enable)
-        {
-            _isLockedOn = enable;
-            _isStrafing = false;
-
-            _isStrafing = enable ? !_isSprinting : _alwaysStrafe || _isAiming;
-
-            _cameraController.LockOn(enable, _targetLockOnPos);
-
-            if (enable && _currentLockOnTarget != null)
-            {
-                _currentLockOnTarget.GetComponent<SampleObjectLockOn>().Highlight(true, true);
-            }
-        }
-
         #endregion
 
         #region Walking State
@@ -676,8 +627,7 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         #endregion
 
         #endregion
-
-        #region Base State
+        
 
         #region Setup
 
@@ -723,8 +673,9 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
                 _movementInputHeld = false;
             }
 
-            _moveDirection = (_cameraController.GetCameraForwardZeroedYNormalised() * _inputReader.moveComposite.y)
-                + (_cameraController.GetCameraRightZeroedYNormalised() * _inputReader.moveComposite.x);
+            // _moveDirection = (_cameraController.GetCameraForwardZeroedYNormalised() * _inputReader.moveComposite.y)
+            //     + (_cameraController.GetCameraRightZeroedYNormalised() * _inputReader.moveComposite.x);
+            _moveDirection = _inputReader.moveComposite.y * Vector3.forward + _inputReader.moveComposite.x * Vector3.right;
         }
 
         #endregion
@@ -847,7 +798,8 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
             Vector3 characterRight = new Vector3(transform.right.x, 0f, transform.right.z).normalized;
             Vector3 directionForward = new Vector3(_moveDirection.x, 0f, _moveDirection.z).normalized;
 
-            _cameraForward = _cameraController.GetCameraForwardZeroedYNormalised();
+            var cam = controller.GetCamera();
+            _cameraForward = new Vector3(cam.transform.right.x, 0, cam.transform.right.z).normalized;
             Quaternion strafingTargetRotation = Quaternion.LookRotation(_cameraForward);
 
             _strafeAngle = characterForward != directionForward ? Vector3.SignedAngle(characterForward, directionForward, Vector3.up) : 0f;
@@ -1174,7 +1126,7 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
                 false
             );
 
-            float cameraTilt = _cameraController.GetCameraTiltX();
+            float cameraTilt = controller.GetCamera().eulerAngles.x;
             cameraTilt = (cameraTilt > 180f ? cameraTilt - 360f : cameraTilt) / -180;
             cameraTilt = Mathf.Clamp(cameraTilt, -0.1f, 1.0f);
             _headLookY = cameraTilt;
@@ -1248,75 +1200,7 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
 
         #endregion
 
-        #region Lock-on System
-
-        /// <summary>
-        ///     Updates and sets the best target for lock on from the list of available targets.
-        /// </summary>
-        private void UpdateBestTarget()
-        {
-            GameObject newBestTarget;
-
-            if (_currentTargetCandidates.Count == 0)
-            {
-                newBestTarget = null;
-            }
-            else if (_currentTargetCandidates.Count == 1)
-            {
-                newBestTarget = _currentTargetCandidates[0];
-            }
-            else
-            {
-                newBestTarget = null;
-                float bestTargetScore = 0f;
-
-                foreach (GameObject target in _currentTargetCandidates)
-                {
-                    target.GetComponent<SampleObjectLockOn>().Highlight(false, false);
-
-                    float distance = Vector3.Distance(transform.position, target.transform.position);
-                    float distanceScore = 1 / distance * 100;
-
-                    Vector3 targetDirection = target.transform.position - _cameraController.GetCameraPosition();
-                    float angleInView = Vector3.Dot(targetDirection.normalized, _cameraController.GetCameraForward());
-                    float angleScore = angleInView * 40;
-
-                    float totalScore = distanceScore + angleScore;
-
-                    if (totalScore > bestTargetScore)
-                    {
-                        bestTargetScore = totalScore;
-                        newBestTarget = target;
-                    }
-                }
-            }
-
-            if (!_isLockedOn)
-            {
-                _currentLockOnTarget = newBestTarget;
-
-                if (_currentLockOnTarget != null)
-                {
-                    _currentLockOnTarget.GetComponent<SampleObjectLockOn>().Highlight(true, false);
-                }
-            }
-            else
-            {
-                if (_currentTargetCandidates.Contains(_currentLockOnTarget))
-                {
-                    _currentLockOnTarget.GetComponent<SampleObjectLockOn>().Highlight(true, true);
-                }
-                else
-                {
-                    _currentLockOnTarget = newBestTarget;
-                    EnableLockOn(false);
-                }
-            }
-        }
-
-        #endregion
-
-        #endregion
+        
 
         #region Locomotion State
 
@@ -1333,7 +1217,7 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void UpdateLocomotionState()
         {
-            UpdateBestTarget();
+            
             GroundedCheck();
 
             if (!_isGrounded)
@@ -1395,7 +1279,6 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void UpdateJumpState()
         {
-            UpdateBestTarget();
             ApplyGravity();
 
             if (_velocity.y <= 0f)
@@ -1442,7 +1325,6 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void UpdateFallState()
         {
-            UpdateBestTarget();
             GroundedCheck();
 
             CalculateRotationalAdditives(false, _enableHeadTurn, _enableBodyTurn);
@@ -1479,7 +1361,6 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts
         /// </summary>
         private void UpdateCrouchState()
         {
-            UpdateBestTarget();
 
             GroundedCheck();
             if (!_isGrounded)
