@@ -66,7 +66,7 @@ namespace Networking
                 
                 //TODO: look into the grab range since we are in third person now @rea
                 //TODO: change the raycast for a box cast 
-                //Raycast so object follows crosshair 
+                //Raycast check if the object is in front of player 
                 if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabRange, ~LayerMask.GetMask("Player", "Ignore Raycast"), QueryTriggerInteraction.Ignore))
                 {
                     Debug.Log(hit.collider.gameObject);
@@ -154,7 +154,6 @@ namespace Networking
                     Debug.DrawLine(transform.position, hit.point, Color.red);
                     lookingAtObject = hit.collider.GetComponent<IGrabableItem>();
                 }
-                Visualization.DrawBoxCastBox(origin, halfExtents, direction, orientation, maxDistance, Color.green);
                 
                 // Check if the object has the IGrabbable interface
                 if (lookingAtObject != null)
@@ -239,7 +238,8 @@ namespace Networking
             public void OnGrabRelease()
             {
                 isGrabButtonHeld = false;
-
+                
+                //move the box if we are in blueprint mode 
                 if (isBlueprintMode && grabbedObject != null)
                 {
                     GameObject objectToPlace = grabbedObject.gameObject;

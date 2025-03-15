@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NetworkedScenes/GameOver.unity
     guid: bc96a349d8c0dcf4494092f3ccb1b00b
+  - enabled: 1
+    path: Assets/Scenes/NetworkedScenes/Game_SkyeTriesStuff.unity
+    guid: e64a64d17ab508f4e89203ddbaa915af
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 208cadece189b8048b50a3852d9c3cb9, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
