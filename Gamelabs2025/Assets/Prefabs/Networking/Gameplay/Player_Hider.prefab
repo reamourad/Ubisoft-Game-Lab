@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 6
+  _componentIndexCache: 5
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
 --- !u!1 &6550041569341229974
@@ -107,38 +107,7 @@ Transform:
   m_GameObject: {fileID: 6550041569341229974}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.105, z: -0.05}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2345969991160950087}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7112089731248111312
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4595279820465698571}
-  m_Layer: 7
-  m_Name: grabPlacement
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4595279820465698571
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7112089731248111312}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.897, z: 0.909}
+  m_LocalPosition: {x: 0, y: 2.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -162,7 +131,6 @@ GameObject:
   - component: {fileID: 1295166610558581582}
   - component: {fileID: 1316523921760133197}
   - component: {fileID: 5560258610018812767}
-  - component: {fileID: -4402204700274619689}
   m_Layer: 7
   m_Name: Player_Hider
   m_TagString: Untagged
@@ -186,7 +154,6 @@ Transform:
   - {fileID: 3760002842364422920}
   - {fileID: 5087658815998076627}
   - {fileID: 8103281972594245961}
-  - {fileID: 4595279820465698571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1950416566188362663
@@ -275,7 +242,6 @@ MonoBehaviour:
   - {fileID: 1295166610558581582}
   - {fileID: 1316523921760133197}
   - {fileID: 5560258610018812767}
-  - {fileID: -4402204700274619689}
   - {fileID: 3637104021805829915}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects:
@@ -329,6 +295,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 5584394639087159213}
   hiderCameraPrefab: {fileID: 5977199986633930315, guid: 77d7fd29bb1c92e4ca259ef614c881df, type: 3}
   hiderCameraTargetTransform: {fileID: 8103281972594245961}
+  seekerRightHandTrf: {fileID: 0}
 --- !u!114 &7758932996993362180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,29 +395,6 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
   roleType: 2
---- !u!114 &-4402204700274619689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8429881023617595796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7074fbee11d949c4bc71b37367a3199e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _componentIndexCache: 5
-  _addedNetworkObject: {fileID: 5584394639087159213}
-  _networkObjectCache: {fileID: 5584394639087159213}
-  grabRange: 10
-  grabPlacement: {fileID: 4595279820465698571}
-  ghostMaterial: {fileID: 2100000, guid: ba3d9d27760433144a14ba296ac76b31, type: 2}
-  placementOffset: 0.05
-  minPlacementDistance: 10
-  itemLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &8815787860643524411
 GameObject:
   m_ObjectHideFlags: 0

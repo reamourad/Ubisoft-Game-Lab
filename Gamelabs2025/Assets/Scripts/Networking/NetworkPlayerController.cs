@@ -142,16 +142,9 @@ namespace Networking
             if(cameraTransform == null)
                 return;
             
-            float pitchInput = inputData.LookInputVector.y;
-            float yawInput = inputData.LookInputVector.x;
-            
-            Vector3 localCameraEuler = cameraTransform.localEulerAngles;
-            float pitch = localCameraEuler.x > 180 ? localCameraEuler.x - 360.0f : localCameraEuler.x;
-            pitch = Mathf.Clamp(pitch - pitchInput * inputData.PitchSensitivity * deltaTime, -maxLookAngle, maxLookAngle);
-            localCameraEuler.x = pitch < 0.0f? pitch + 360.0f : pitch;
-            
-            cameraTransform.localEulerAngles = localCameraEuler;
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.up * (yawInput * inputData.YawSensitivity * deltaTime)));
+            var cameraRot = cameraTransform.eulerAngles;
+            var newRot = new Vector3(transform.eulerAngles.x, cameraRot.y, transform.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(newRot);
         }
     }
 }
