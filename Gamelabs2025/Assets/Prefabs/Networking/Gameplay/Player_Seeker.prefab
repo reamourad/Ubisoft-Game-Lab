@@ -996,7 +996,15 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 5408301307720291325}
   _networkObjectCache: {fileID: 0}
-  IgnoredParameters: []
+  IgnoredParameters:
+  - IsCrouching
+  - IsGrounded
+  - LeanValue
+  - IsJumping
+  - FallingDuration
+  - ShuffleDirectionZ
+  - ShuffleDirectionX
+  - StrafeDirectionX
   _animator: {fileID: 8437703686179186671}
   _synchronizeWhenDisabled: 1
   _smoothFloats: 1
