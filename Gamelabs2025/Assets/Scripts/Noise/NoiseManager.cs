@@ -1,5 +1,6 @@
 ﻿using FishNet.Object;
 using FishNet.Object.Synchronizing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +9,10 @@ public class NoiseManager : NetworkBehaviour
 {
     public static NoiseManager Instance { get; private set; }
 
-    private readonly List<INoiseListener> listeners = new List<INoiseListener>();
+    /// <summary>
+    /// Event triggered when noise is generated.
+    /// </summary>
+    public static event Action<Vector3, float, float> OnNoiseGenerated;
 
     private void Awake()
     {
@@ -25,20 +29,6 @@ public class NoiseManager : NetworkBehaviour
     }
 
     /// <summary>
-    /// Registers a noise listener (e.g., traps, AI) to receive noise events.
-    /// </summary>
-    public void RegisterListener(INoiseListener listener)
-    {
-        if (!listeners.Contains(listener))
-            listeners.Add(listener);
-    }
-
-    public void UnregisterListener(INoiseListener listener)
-    {
-        listeners.Remove(listener);
-    }
-
-    /// <summary>
     /// The server propagates noise and informs listeners.
     /// </summary>
     public void GenerateNoise(Vector3 position, float strength, float dissipation)
@@ -47,10 +37,8 @@ public class NoiseManager : NetworkBehaviour
 
         Debug.Log($"Noise generated at {position} with strength {strength} and dissipation {dissipation}");
 
-        foreach (var listener in listeners)
-        {
-            listener.ReceiveNoise(position, strength, dissipation);
-        }
+        // 🔹 Fire the event so all listeners respond
+        OnNoiseGenerated?.Invoke(position, strength, dissipation);
 
         RPC_NotifyClientsNoise(position, strength, dissipation);
     }
