@@ -27,11 +27,22 @@ namespace Networking
                 LookInputVector = lookInputVector;
             }
         }
+
+        public enum CameraType
+        {
+            None = 0,
+            FirstPerson,
+            ThirdPerson,
+        }
         
         [SerializeField] Transform cameraTransform;
         [SerializeField] private float speed=1f;
         [SerializeField] private float maxLookAngle=80f;
 
+        [Tooltip("FPS - Uses mouse (X,Y) to update view, TPS - Uses movement direction to handle rotation.")]
+        [SerializeField] private CameraType cameraType=CameraType.None;
+        [SerializeField] private float tpsLookSpeed=100;
+        
         [SerializeField] private IUsableItem usableItem;
         
         private PlayerInputData playerInputData;
@@ -41,12 +52,17 @@ namespace Networking
             rb = GetComponent<Rigidbody>();
         }
 
+        public void SetCameraTransform(Transform cameraTransform)
+        {
+            this.cameraTransform = cameraTransform;
+        }
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
             name = $"Player [{(IsOwner ? "LOCAL_PLAYER" : "REMOTE_PLAYER")}]";
         }
-
+        
         public void UpdatePlayerInputs(PlayerInputData inputData)
         {
             this.playerInputData = inputData;
@@ -66,8 +82,8 @@ namespace Networking
         {
             if(!IsOwner)
                 return;
-            
-            UpdateView(playerInputData, Time.deltaTime);
+
+            UpdateFirstPersonView(playerInputData, Time.deltaTime);
         }
 
         private void FixedUpdate()
@@ -77,30 +93,58 @@ namespace Networking
             
             UpdatePlayerMovement(playerInputData, Time.fixedDeltaTime);
         }
-        
+
         private void UpdatePlayerMovement(PlayerInputData inputData, float deltaTime)
+        {
+            if (cameraType == CameraType.FirstPerson)
+                FPSMove(inputData, deltaTime);
+            else if (cameraType == CameraType.ThirdPerson)
+                TPSMove(inputData, deltaTime);
+        }
+
+        private void FPSMove(PlayerInputData inputData, float deltaTime)
         {
             var rotation = transform.rotation;
             var forward = rotation * Vector3.forward;
             var right = rotation * Vector3.right;
-            
-            Vector3 move = (forward * inputData.MoveInputVector.y + right * inputData.MoveInputVector.x) * speed;
-            rb.MovePosition(transform.position + move * deltaTime);
-            
+            var dir = (forward * inputData.MoveInputVector.y + right * inputData.MoveInputVector.x).normalized;
+            var move = dir * (speed / 10f);
+            rb.MovePosition(rb.position + move * deltaTime);
         }
 
-        private void UpdateView(PlayerInputData inputData, float deltaTime)
+        private void TPSMove(PlayerInputData inputData, float deltaTime)
         {
-            float pitchInput = inputData.LookInputVector.y;
-            float yawInput = inputData.LookInputVector.x;
+            if(cameraTransform == null)
+                return;
             
-            Vector3 localCameraEuler = cameraTransform.localEulerAngles;
-            float pitch = localCameraEuler.x > 180 ? localCameraEuler.x - 360.0f : localCameraEuler.x;
-            pitch = Mathf.Clamp(pitch - pitchInput * inputData.PitchSensitivity * deltaTime, -maxLookAngle, maxLookAngle);
-            localCameraEuler.x = pitch < 0.0f? pitch + 360.0f : pitch;
+            var forward = cameraTransform.transform.forward;
+            var right = cameraTransform.transform.right;
+            forward.y = 0;
+            right.y = 0;
+            var currPos = rb.position;
+            var dir = (forward * inputData.MoveInputVector.y + right * inputData.MoveInputVector.x).normalized;
+            var move = dir * (speed / 10f);
+            rb.MovePosition(currPos + move * deltaTime);
+            var newPos = rb.position;
+            var newMoveDir = (newPos - currPos).normalized;
+            newMoveDir.y = 0;
+            if (newMoveDir != Vector3.zero)
+            {
+                transform.forward = Vector3.Lerp(transform.forward, newMoveDir, Time.deltaTime * tpsLookSpeed);
+            }
+        }
+        
+        private void UpdateFirstPersonView(PlayerInputData inputData, float deltaTime)
+        {
+            if(cameraType == CameraType.None || cameraType == CameraType.ThirdPerson)
+                return;
             
-            cameraTransform.localEulerAngles = localCameraEuler;
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(Vector3.up * yawInput * inputData.YawSensitivity * deltaTime));
+            if(cameraTransform == null)
+                return;
+            
+            var cameraRot = cameraTransform.eulerAngles;
+            var newRot = new Vector3(transform.eulerAngles.x, cameraRot.y, transform.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(newRot);
         }
         
     }

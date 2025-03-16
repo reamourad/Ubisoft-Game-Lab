@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using FishNet;
 using UnityEngine;
 
@@ -13,7 +14,8 @@ namespace Networking.Testing
         
         [SerializeField] TMPro.TMP_InputField portInputField;
         [SerializeField] TMPro.TMP_Text versionText;
-        
+        [SerializeField] GameObject fetchUI;
+        [SerializeField] GameObject fetchFailUI;
         public void OnClickConnectToRemoteServer()
         {
             NetworkConnectionHelper.ConnectToRemoteServer();
@@ -34,8 +36,20 @@ namespace Networking.Testing
             NetworkConnectionHelper.ConnectToServer("127.0.0.1", ushort.Parse(portInputField.text));
         }
 
-        void Start()
+        IEnumerator Start()
         {
+#if !UNITY_SERVER
+            fetchUI.gameObject.SetActive(true);
+            var res = NetworkConnectionHelper.PullConnectionInfo();
+            yield return new WaitUntil(() => res.IsCompleted);
+            fetchUI.gameObject.SetActive(false);
+            if (!NetworkConnectionHelper.ConnectionInfoAvailable)
+            {
+                fetchFailUI.gameObject.SetActive(true);
+                yield break;
+            }
+            
+            
             var clientVersion = Application.version;
             var serverVersion = NetworkConnectionHelper.RemoteServerVersion;
             versionText.text = $"Remote server version: {serverVersion}\n" +
@@ -45,9 +59,7 @@ namespace Networking.Testing
             {
                 Debug.LogWarning("ClientConnectionUI::Remote Server and Client version mismatch, Features/Systems may break due to a different version.");
             }
-            
-            InstanceFinder.NetworkManager.ServerManager.StopConnection(true);
-            NetworkConnectionHelper.StartServer();
+#endif
         }
         
         private void Update()

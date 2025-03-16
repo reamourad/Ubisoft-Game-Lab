@@ -10,11 +10,12 @@ using Utils;
 namespace StateManagement
 {
     public class GameStateController : SingletonBehaviour<GameStateController>
-    {   
-        private const string SCENE_MAINMENU = "MainMenu";
-        private const string SCENE_CUTSCENE = "Cutscene";
-        private const string SCENE_GAME = "Game";
-        private const string SCENE_GAMEOVER = "GameOver";
+    {
+        [SerializeField] private string MainMenuSceneName = "MainMenu";
+        [SerializeField] private string CutsceneSceneName = "Cutscene";
+        [SerializeField] private string GameSceneName = "GameOver";
+        [SerializeField] private string GameOverSceneName = "Gameplay";
+        
         
         [SerializeField]
         private GameStates currentState;
@@ -32,25 +33,28 @@ namespace StateManagement
             InstanceFinder.NetworkManager.ClientManager.OnClientConnectionState += Client_OnClientConnectionStateChanged;
         }
 
-        public void Server_ChangeState(GameStates newState)
+        public void ServerChangeState(GameStates newState)
         {
             if(!NetworkUtility.IsServer)
+                return;
+            
+            if(newState == currentState)
                 return;
             
             Debug.Log($"GameStateController::<color=green> Switching state {currentState} --> {newState} </color>");
             switch (newState)
             {
                 case GameStates.MainMenu:
-                    NetworkUtility.Server_LoadScene(SCENE_MAINMENU);
+                    NetworkUtility.Server_LoadScene(MainMenuSceneName);
                     break;
                 case GameStates.CutScene:
-                    NetworkUtility.Server_LoadScene(SCENE_CUTSCENE);
+                    NetworkUtility.Server_LoadScene(CutsceneSceneName);
                     break;
                 case GameStates.Game:
-                    NetworkUtility.Server_LoadScene(SCENE_GAME);
+                    NetworkUtility.Server_LoadScene(GameSceneName);
                     break;
                 case GameStates.GameOver:
-                    NetworkUtility.Server_LoadScene(SCENE_GAMEOVER);
+                    NetworkUtility.Server_LoadScene(GameOverSceneName);
                     break;
             }
             currentState = newState;
@@ -65,7 +69,7 @@ namespace StateManagement
                 connectedPlayers.Add(args.ConnectionId);
                 if (connectedPlayers.Count == minPlayers)
                 {
-                    Server_ChangeState(GameStates.CutScene);
+                    ServerChangeState(GameStates.CutScene);
                 }
             }
             else if (args.ConnectionState == RemoteConnectionState.Stopped)
@@ -92,7 +96,7 @@ namespace StateManagement
         {
             NetworkConnectionHelper.ResetConnections();
             Destroy(InstanceFinder.NetworkManager.gameObject);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(SCENE_MAINMENU);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(MainMenuSceneName);
             Destroy(this.gameObject); //delete the state-manager
         }
     }

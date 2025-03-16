@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,9 @@ public class CameraObstructionHandler : MonoBehaviour
 
     void HandleObstructions()
     {
+        if(player == null)
+            return;
+        
         Vector3 direction = transform.position - player.position;
         float distance = direction.magnitude;
         RaycastHit[] hits = Physics.RaycastAll(player.position, direction.normalized, distance, obstructionMask);
@@ -95,5 +99,10 @@ public class CameraObstructionHandler : MonoBehaviour
         Gizmos.DrawSphere(player.position, 0.2f);
         Gizmos.color = Color.blue;
         Gizmos.DrawSphere(transform.position, 0.2f);
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("Welp!!");
     }
 }

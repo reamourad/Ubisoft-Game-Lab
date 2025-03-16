@@ -17,7 +17,7 @@ namespace StateManagement
             Debug.Log("Waiting for cutscene...");
             yield return new WaitForSeconds(1f);
             Debug.Log("Cutscene complete");
-            GameStateController.Instance?.Server_ChangeState(GameStates.Game);
+            GameStateController.Instance?.ServerChangeState(GameStates.Game);
         }
     }
 }

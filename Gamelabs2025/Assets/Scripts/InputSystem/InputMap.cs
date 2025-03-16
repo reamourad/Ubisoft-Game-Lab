@@ -119,9 +119,27 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""PlacementMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8ea38b7-63f7-4f33-b461-638ec57eac0e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""UseItem"",
                     ""type"": ""Button"",
                     ""id"": ""04acb66e-0a95-4ff1-a58a-8668912683b2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ConnectItems"",
+                    ""type"": ""Button"",
+                    ""id"": ""4237456e-a933-4588-8f1c-13154bd6fc05"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -222,7 +240,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""id"": ""8192ec5c-1892-4cc0-b082-5192a2dd46f6"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": ""ScaleVector2"",
+                    ""processors"": ""ScaleVector2(x=25,y=25)"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -230,11 +248,11 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""440f167a-9ad5-4896-931d-88febf92cc25"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""fde53605-3408-4ece-b41d-19c38143c0ca"",
+                    ""path"": ""<Pointer>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
-                    ""groups"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse;Touch"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -258,6 +276,50 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af402465-0a49-4782-af4f-1d79ee8b6d3d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlacementMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b3d3f99-233c-4606-b112-fe62af129610"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlacementMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ebda4c53-e8f3-4b25-b5bb-5e449acb955f"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConnectItems"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dbf50ef2-c031-4cf7-9d76-76ce749319da"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConnectItems"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -385,7 +447,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Grab = m_Gameplay.FindAction("Grab", throwIfNotFound: true);
         m_Gameplay_Look = m_Gameplay.FindAction("Look", throwIfNotFound: true);
+        m_Gameplay_PlacementMode = m_Gameplay.FindAction("PlacementMode", throwIfNotFound: true);
         m_Gameplay_UseItem = m_Gameplay.FindAction("UseItem", throwIfNotFound: true);
+        m_Gameplay_ConnectItems = m_Gameplay.FindAction("ConnectItems", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CCTVSwitchCameras = m_UI.FindAction("CCTVSwitchCameras", throwIfNotFound: true);
@@ -474,7 +538,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Grab;
     private readonly InputAction m_Gameplay_Look;
+    private readonly InputAction m_Gameplay_PlacementMode;
     private readonly InputAction m_Gameplay_UseItem;
+    private readonly InputAction m_Gameplay_ConnectItems;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -499,9 +565,17 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Look => m_Wrapper.m_Gameplay_Look;
         /// <summary>
+        /// Provides access to the underlying input action "Gameplay/PlacementMode".
+        /// </summary>
+        public InputAction @PlacementMode => m_Wrapper.m_Gameplay_PlacementMode;
+        /// <summary>
         /// Provides access to the underlying input action "Gameplay/UseItem".
         /// </summary>
         public InputAction @UseItem => m_Wrapper.m_Gameplay_UseItem;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/ConnectItems".
+        /// </summary>
+        public InputAction @ConnectItems => m_Wrapper.m_Gameplay_ConnectItems;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -537,9 +611,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @PlacementMode.started += instance.OnPlacementMode;
+            @PlacementMode.performed += instance.OnPlacementMode;
+            @PlacementMode.canceled += instance.OnPlacementMode;
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
+            @ConnectItems.started += instance.OnConnectItems;
+            @ConnectItems.performed += instance.OnConnectItems;
+            @ConnectItems.canceled += instance.OnConnectItems;
         }
 
         /// <summary>
@@ -560,9 +640,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @PlacementMode.started -= instance.OnPlacementMode;
+            @PlacementMode.performed -= instance.OnPlacementMode;
+            @PlacementMode.canceled -= instance.OnPlacementMode;
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
+            @ConnectItems.started -= instance.OnConnectItems;
+            @ConnectItems.performed -= instance.OnConnectItems;
+            @ConnectItems.canceled -= instance.OnConnectItems;
         }
 
         /// <summary>
@@ -732,12 +818,26 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLook(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "PlacementMode" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPlacementMode(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "UseItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnUseItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ConnectItems" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConnectItems(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

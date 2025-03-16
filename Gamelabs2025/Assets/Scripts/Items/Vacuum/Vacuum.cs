@@ -34,8 +34,6 @@ namespace Items
         [SerializeField] private float vacuumSuctionRegular = 10;
         [SerializeField] private float vacuumSuctionPlayer = 10;
         
-        [SerializeField] private float vacuumSuctionRadius = 0.5f;
-        
         [SerializeField] private ParticleSystem particles;
         
         private Dictionary<Collider, VacuumCacheStruct> vacuumCache = new Dictionary<Collider, VacuumCacheStruct>();
@@ -44,6 +42,7 @@ namespace Items
         private readonly SyncVar<bool> VacuumActive = new SyncVar<bool>();
         
         private Rigidbody parentRigidbody;
+        private bool suckedPlayer = false;
         
         private void Start()
         {
@@ -71,13 +70,10 @@ namespace Items
                 GiveOwnership(parentNo.Owner);
         }
         
+        //Only called by player controller, which will only happen locally
         public void UseItem(bool isUsing)
         {
             Debug.Log($"Vacuum {isUsing} (IsOwner = {IsOwner})");
-            //don't use if not owner
-            if(!IsOwner)
-                return;
-            
             if(localUsingFlag == isUsing) return;
             localUsingFlag = isUsing;
             RPC_SendActivationRequestToServer(isUsing);
@@ -159,26 +155,55 @@ namespace Items
                 
                 // if this collider does not have authority here, ignore affecting it.
                 var nob = vacuumCache.NObj;
-                if (!IsServerStarted && nob && !nob.IsOwner)
+                if (IsClientStarted && nob && !nob.IsOwner)
                 {
                     continue;
                 }
 
                 // if player, use appropriate force value - for they are heavier!!!.
                 var force = vacuumCache.Role == null ? vacuumSuctionRegular : vacuumSuctionPlayer;
-                
+                var rbPos = (rb.centerOfMass + rb.position);
                 // apply suction force.
-                var dir = (suctionPoint.position - (rb.centerOfMass + rb.position)).normalized;
+                var dir = (suctionPoint.position - rbPos).normalized;
                 rb.AddForce(dir * force, ForceMode.Force);
                 
                 // distance check to if they can be considered as vacuumed.
-                if (Vector3.Distance(rb.position, suctionPoint.position) <= suctionCompleteDetectionRadius)
+                var dist = Vector3.Distance(rbPos, suctionPoint.position);
+                if (dist <= suctionCompleteDetectionRadius)
                 {
-                    if (IsServerStarted)
-                        ServerVacuumedItem(rb);
-                    else
-                        ClientVacuumedItem(rb);
+                    Capture(rb);
                 }
+            }
+        }
+        
+        private void Capture(Rigidbody rb)
+        {
+            //detect for player captured
+            var playerRole = rb.GetComponent<PlayerRole>();
+            var nob = rb.GetComponent<NetworkObject>();
+            
+            //check if player is sucked in
+            if (playerRole != null)
+            {
+                if(!playerRole.IsOwner)
+                    return;
+                if(playerRole.Role != PlayerRole.RoleType.Hider)
+                    return;
+                
+                Debug.Log($"<color=cyan>VACUUM SUCKK!!: Player:{playerRole.Role}, Owner: {playerRole.IsOwner}, Server:{IsServerStarted}</color>");
+                if(!suckedPlayer) 
+                    GameController.Instance.ServerHiderCaptured();
+                suckedPlayer = true;
+                return;
+            }
+            
+            //check if its a normal item
+            if (IsServerStarted)
+            {   
+                var item = rb.GetComponent<IVacuumDestroyable>();
+                item?.OnVacuumed();
+
+                nob.Despawn();   
             }
         }
         
@@ -215,29 +240,6 @@ namespace Items
             var cacheEntry = new VacuumCacheStruct(nob, rb, role);
             vacuumCache.Add(collider,cacheEntry);
             return cacheEntry;
-        }
-        
-        private void ServerVacuumedItem(Rigidbody rb)
-        {
-            if (rb.TryGetComponent<NetworkObject>(out var nob))
-            {
-                nob.Despawn();
-            }
-        }
-
-        private void ClientVacuumedItem(Rigidbody rb)
-        {
-            var player = GetComponent<Player.PlayerRole>();
-            if (player.Role.Equals(PlayerRole.RoleType.Hider))
-            {
-                RPC_SendHiderCapturedToServer();
-            }
-        }
-
-        [ServerRpc]
-        private void RPC_SendHiderCapturedToServer()
-        {
-            GameController.Instance.ServerHiderCaptured();
         }
         
         private void OnDrawGizmos()
