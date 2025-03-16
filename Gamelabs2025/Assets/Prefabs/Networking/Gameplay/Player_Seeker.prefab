@@ -707,6 +707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 095b8cf16ffa0984f8a9b6237c5e15ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5408301307720291325}
+  _networkObjectCache: {fileID: 0}
   controller: {fileID: 8635005515862044389}
   animator: {fileID: 8437703686179186671}
   _alwaysStrafe: 1
@@ -995,7 +998,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 0}
   IgnoredParameters: []
   _animator: {fileID: 8437703686179186671}
-  _synchronizeWhenDisabled: 0
+  _synchronizeWhenDisabled: 1
   _smoothFloats: 1
   _interpolation: 2
   _clientAuthoritative: 1

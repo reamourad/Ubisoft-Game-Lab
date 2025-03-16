@@ -6,13 +6,14 @@
 // Sample scripts are included only as examples and are not intended as production-ready.
 
 using System.Collections.Generic;
+using FishNet.Object;
 using Networking;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Animation
 {
-    public class SeekerAnimationController : MonoBehaviour
+    public class SeekerAnimationController : NetworkBehaviour
     {
         #region Enum
 
@@ -306,7 +307,6 @@ namespace Animation
         private float _strafeDirectionZ;
         private GameObject _currentLockOnTarget;
         private GaitState _currentGait;
-        private Transform _targetLockOnPos;
         private Vector3 _currentRotation = new Vector3(0f, 0f, 0f);
         private Vector3 _moveDirection;
         private Vector3 _previousRotation;
@@ -335,8 +335,16 @@ namespace Animation
         /// <inheritdoc cref="Start" />
         private void Start()
         {
+            
             inputReader = InputReader.Instance;
-            _targetLockOnPos = transform.Find("TargetLockOnPos");
+            Subscribe();
+            _isStrafing = _alwaysStrafe;
+            SwitchState(AnimationState.Locomotion);
+        }
+
+        private void Subscribe()
+        {
+            if(!IsOwner) return;
             
             // _inputReader.onLockOnToggled += ToggleLockOn;
             inputReader.OnMoveEvent += ToggleWalk;
@@ -346,10 +354,6 @@ namespace Animation
             // _inputReader.onCrouchDeactivated += DeactivateCrouch;
             // _inputReader.onAimActivated += ActivateAim;
             // _inputReader.onAimDeactivated += DeactivateAim;
-
-            _isStrafing = _alwaysStrafe;
-
-            SwitchState(AnimationState.Locomotion);
         }
 
         #endregion
@@ -545,6 +549,9 @@ namespace Animation
         /// <inheritdoc cref="Update" />
         private void Update()
         {
+            if(!IsOwner)
+                return;
+            
             switch (_currentState)
             {
                 case AnimationState.Locomotion:
