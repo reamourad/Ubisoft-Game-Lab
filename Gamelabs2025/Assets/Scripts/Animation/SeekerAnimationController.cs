@@ -7,8 +7,8 @@
 
 using System.Collections.Generic;
 using Networking;
-using Synty.AnimationBaseLocomotion.Samples.Scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Animation
 {
@@ -87,13 +87,11 @@ namespace Animation
         [SerializeField]
         private NetworkPlayerController controller;
         [Tooltip("InputReader handles player input")]
-        private InputReader _inputReader;
+        private InputReader inputReader;
+        [FormerlySerializedAs("_animator")]
         [Tooltip("Animator component for controlling player animations")]
         [SerializeField]
-        private Animator _animator;
-        [Tooltip("Character Controller component for controlling player movement")]
-        [SerializeField]
-        private CharacterController _controller;
+        private Animator animator;
 
         #endregion
 
@@ -337,11 +335,11 @@ namespace Animation
         /// <inheritdoc cref="Start" />
         private void Start()
         {
-            _inputReader = InputReader.Instance;
+            inputReader = InputReader.Instance;
             _targetLockOnPos = transform.Find("TargetLockOnPos");
             
             // _inputReader.onLockOnToggled += ToggleLockOn;
-            _inputReader.OnMoveEvent += ToggleWalk;
+            inputReader.OnMoveEvent += ToggleWalk;
             // _inputReader.onSprintActivated += ActivateSprint;
             // _inputReader.onSprintDeactivated += DeactivateSprint;
             // _inputReader.onCrouchActivated += ActivateCrouch;
@@ -441,7 +439,6 @@ namespace Animation
 
             if (_isGrounded)
             {
-                CapsuleCrouchingSize(true);
                 DeactivateSprint();
                 _isCrouching = true;
             }
@@ -456,7 +453,6 @@ namespace Animation
 
             if (!_cannotStandUp && !_isSliding)
             {
-                CapsuleCrouchingSize(false);
                 _isCrouching = false;
             }
         }
@@ -476,24 +472,7 @@ namespace Animation
         {
             _isSliding = false;
         }
-
-        /// <summary>
-        ///     Adjusts the capsule size for the player, depending on the passed in boolean value.
-        /// </summary>
-        /// <param name="crouching">Whether the player is crouching or not.</param>
-        private void CapsuleCrouchingSize(bool crouching)
-        {
-            if (crouching)
-            {
-                _controller.center = new Vector3(0f, _capsuleCrouchingCentre, 0f);
-                _controller.height = _capsuleCrouchingHeight;
-            }
-            else
-            {
-                _controller.center = new Vector3(0f, _capsuleStandingCentre, 0f);
-                _controller.height = _capsuleStandingHeight;
-            }
-        }
+        
 
         #endregion
 
@@ -588,40 +567,40 @@ namespace Animation
         /// </summary>
         private void UpdateAnimatorController()
         {
-            _animator.SetFloat(_leanValueHash, _leanValue);
-            _animator.SetFloat(_headLookXHash, _headLookX);
-            _animator.SetFloat(_headLookYHash, _headLookY);
-            _animator.SetFloat(_bodyLookXHash, _bodyLookX);
-            _animator.SetFloat(_bodyLookYHash, _bodyLookY);
+            animator.SetFloat(_leanValueHash, _leanValue);
+            animator.SetFloat(_headLookXHash, _headLookX);
+            animator.SetFloat(_headLookYHash, _headLookY);
+            animator.SetFloat(_bodyLookXHash, _bodyLookX);
+            animator.SetFloat(_bodyLookYHash, _bodyLookY);
 
-            _animator.SetFloat(_isStrafingHash, _isStrafing ? 1.0f : 0.0f);
+            animator.SetFloat(_isStrafingHash, _isStrafing ? 1.0f : 0.0f);
 
-            _animator.SetFloat(_inclineAngleHash, _inclineAngle);
+            animator.SetFloat(_inclineAngleHash, _inclineAngle);
 
-            _animator.SetFloat(_moveSpeedHash, _speed2D);
-            _animator.SetInteger(_currentGaitHash, (int) _currentGait);
+            animator.SetFloat(_moveSpeedHash, _speed2D);
+            animator.SetInteger(_currentGaitHash, (int) _currentGait);
 
-            _animator.SetFloat(_strafeDirectionXHash, _strafeDirectionX);
-            _animator.SetFloat(_strafeDirectionZHash, _strafeDirectionZ);
-            _animator.SetFloat(_forwardStrafeHash, _forwardStrafe);
-            _animator.SetFloat(_cameraRotationOffsetHash, _cameraRotationOffset);
+            animator.SetFloat(_strafeDirectionXHash, _strafeDirectionX);
+            animator.SetFloat(_strafeDirectionZHash, _strafeDirectionZ);
+            animator.SetFloat(_forwardStrafeHash, _forwardStrafe);
+            animator.SetFloat(_cameraRotationOffsetHash, _cameraRotationOffset);
 
-            _animator.SetBool(_movementInputHeldHash, _movementInputHeld);
-            _animator.SetBool(_movementInputPressedHash, _movementInputPressed);
-            _animator.SetBool(_movementInputTappedHash, _movementInputTapped);
-            _animator.SetFloat(_shuffleDirectionXHash, _shuffleDirectionX);
-            _animator.SetFloat(_shuffleDirectionZHash, _shuffleDirectionZ);
+            animator.SetBool(_movementInputHeldHash, _movementInputHeld);
+            animator.SetBool(_movementInputPressedHash, _movementInputPressed);
+            animator.SetBool(_movementInputTappedHash, _movementInputTapped);
+            animator.SetFloat(_shuffleDirectionXHash, _shuffleDirectionX);
+            animator.SetFloat(_shuffleDirectionZHash, _shuffleDirectionZ);
 
-            _animator.SetBool(_isTurningInPlaceHash, _isTurningInPlace);
-            _animator.SetBool(_isCrouchingHash, _isCrouching);
+            animator.SetBool(_isTurningInPlaceHash, _isTurningInPlace);
+            animator.SetBool(_isCrouchingHash, _isCrouching);
 
-            _animator.SetFloat(_fallingDurationHash, _fallingDuration);
-            _animator.SetBool(_isGroundedHash, _isGrounded);
+            animator.SetFloat(_fallingDurationHash, _fallingDuration);
+            animator.SetBool(_isGroundedHash, _isGrounded);
 
-            _animator.SetBool(_isWalkingHash, _isWalking);
-            _animator.SetBool(_isStoppedHash, _isStopped);
+            animator.SetBool(_isWalkingHash, _isWalking);
+            animator.SetBool(_isStoppedHash, _isStopped);
 
-            _animator.SetFloat(_locomotionStartDirectionHash, _locomotionStartDirection);
+            animator.SetFloat(_locomotionStartDirectionHash, _locomotionStartDirection);
         }
 
         #endregion
@@ -644,13 +623,13 @@ namespace Animation
         /// </summary>
         private void CalculateInput()
         {
-            if (_inputReader.movementInputDetected)
+            if (inputReader.movementInputDetected)
             {
-                if (_inputReader.movementInputDuration == 0)
+                if (inputReader.movementInputDuration == 0)
                 {
                     _movementInputTapped = true;
                 }
-                else if (_inputReader.movementInputDuration > 0 && _inputReader.movementInputDuration < _buttonHoldThreshold)
+                else if (inputReader.movementInputDuration > 0 && inputReader.movementInputDuration < _buttonHoldThreshold)
                 {
                     _movementInputTapped = false;
                     _movementInputPressed = true;
@@ -663,40 +642,23 @@ namespace Animation
                     _movementInputHeld = true;
                 }
 
-                _inputReader.movementInputDuration += Time.deltaTime;
+                inputReader.movementInputDuration += Time.deltaTime;
             }
             else
             {
-                _inputReader.movementInputDuration = 0;
+                inputReader.movementInputDuration = 0;
                 _movementInputTapped = false;
                 _movementInputPressed = false;
                 _movementInputHeld = false;
             }
-
-            // _moveDirection = (_cameraController.GetCameraForwardZeroedYNormalised() * _inputReader.moveComposite.y)
-            //     + (_cameraController.GetCameraRightZeroedYNormalised() * _inputReader.moveComposite.x);
-            _moveDirection = _inputReader.moveComposite.y * Vector3.forward + _inputReader.moveComposite.x * Vector3.right;
+            _moveDirection = (controller.GetCameraForwardZeroedYNormalised() * inputReader.moveComposite.y)
+                + (controller.GetCameraRightZeroedYNormalised() * inputReader.moveComposite.x);
         }
 
         #endregion
 
         #region Movement
-
-        /// <summary>
-        ///     Performs the movement of the player
-        /// </summary>
-        private void Move()
-        {
-            _controller.Move(_velocity * Time.deltaTime);
-
-            if (_isLockedOn)
-            {
-                if (_currentLockOnTarget != null)
-                {
-                    _targetLockOnPos.position = _currentLockOnTarget.transform.position;
-                }
-            }
-        }
+        
 
         /// <summary>
         ///     Applies gravity to the player.
@@ -798,8 +760,7 @@ namespace Animation
             Vector3 characterRight = new Vector3(transform.right.x, 0f, transform.right.z).normalized;
             Vector3 directionForward = new Vector3(_moveDirection.x, 0f, _moveDirection.z).normalized;
 
-            var cam = controller.GetCamera();
-            _cameraForward = new Vector3(cam.transform.right.x, 0, cam.transform.right.z).normalized;
+            _cameraForward = controller.GetCameraForwardZeroedYNormalised();
             Quaternion strafingTargetRotation = Quaternion.LookRotation(_cameraForward);
 
             _strafeAngle = characterForward != directionForward ? Vector3.SignedAngle(characterForward, directionForward, Vector3.up) : 0f;
@@ -911,7 +872,7 @@ namespace Animation
                     if (!_isStarting)
                     {
                         _locomotionStartDirection = _newDirectionDifferenceAngle;
-                        _animator.SetFloat(_locomotionStartDirectionHash, _locomotionStartDirection);
+                        animator.SetFloat(_locomotionStartDirectionHash, _locomotionStartDirection);
                     }
 
                     float delayTime = 0.2f;
@@ -928,7 +889,7 @@ namespace Animation
             }
 
             _isStarting = isStartingCheck;
-            _animator.SetBool(_isStartingHash, _isStarting);
+            animator.SetBool(_isStartingHash, _isStarting);
         }
 
         /// <summary>
@@ -954,11 +915,11 @@ namespace Animation
         private void GroundedCheck()
         {
             Vector3 spherePosition = new Vector3(
-                _controller.transform.position.x,
-                _controller.transform.position.y - _groundedOffset,
-                _controller.transform.position.z
+                controller.transform.position.x,
+                controller.transform.position.y - _groundedOffset,
+                controller.transform.position.z
             );
-            _isGrounded = Physics.CheckSphere(spherePosition, _controller.radius, _groundLayerMask, QueryTriggerInteraction.Ignore);
+            _isGrounded = Physics.CheckSphere(spherePosition, 15, _groundLayerMask, QueryTriggerInteraction.Ignore);
 
             if (_isGrounded)
             {
@@ -1209,7 +1170,7 @@ namespace Animation
         /// </summary>
         private void EnterLocomotionState()
         {
-            _inputReader.OnJumpPerformed += LocomotionToJumpState;
+            inputReader.OnJumpPerformed += LocomotionToJumpState;
         }
 
         /// <summary>
@@ -1238,7 +1199,6 @@ namespace Animation
             CheckIfStarting();
             CheckIfStopped();
             FaceMoveDirection();
-            Move();
             UpdateAnimatorController();
         }
 
@@ -1247,7 +1207,7 @@ namespace Animation
         /// </summary>
         private void ExitLocomotionState()
         {
-            _inputReader.OnJumpPerformed -= LocomotionToJumpState;
+            inputReader.OnJumpPerformed -= LocomotionToJumpState;
         }
 
         /// <summary>
@@ -1267,7 +1227,7 @@ namespace Animation
         /// </summary>
         private void EnterJumpState()
         {
-            _animator.SetBool(_isJumpingAnimHash, true);
+            animator.SetBool(_isJumpingAnimHash, true);
 
             _isSliding = false;
 
@@ -1283,7 +1243,7 @@ namespace Animation
 
             if (_velocity.y <= 0f)
             {
-                _animator.SetBool(_isJumpingAnimHash, false);
+                animator.SetBool(_isJumpingAnimHash, false);
                 SwitchState(AnimationState.Fall);
             }
 
@@ -1292,7 +1252,6 @@ namespace Animation
             CalculateRotationalAdditives(false, _enableHeadTurn, _enableBodyTurn);
             CalculateMoveDirection();
             FaceMoveDirection();
-            Move();
             UpdateAnimatorController();
         }
 
@@ -1301,7 +1260,7 @@ namespace Animation
         /// </summary>
         private void ExitJumpState()
         {
-            _animator.SetBool(_isJumpingAnimHash, false);
+            animator.SetBool(_isJumpingAnimHash, false);
         }
 
         #endregion
@@ -1333,13 +1292,12 @@ namespace Animation
             FaceMoveDirection();
 
             ApplyGravity();
-            Move();
             UpdateAnimatorController();
 
-            if (_controller.isGrounded)
+            /*if (_controller.isGrounded)
             {
                 SwitchState(AnimationState.Locomotion);
-            }
+            }*/
 
             UpdateFallingDuration();
         }
@@ -1353,7 +1311,7 @@ namespace Animation
         /// </summary>
         private void EnterCrouchState()
         {
-            _inputReader.OnJumpPerformed += CrouchToJumpState;
+            inputReader.OnJumpPerformed += CrouchToJumpState;
         }
 
         /// <summary>
@@ -1366,7 +1324,6 @@ namespace Animation
             if (!_isGrounded)
             {
                 DeactivateCrouch();
-                CapsuleCrouchingSize(false);
                 SwitchState(AnimationState.Fall);
             }
 
@@ -1380,7 +1337,6 @@ namespace Animation
 
             if (!_isCrouching)
             {
-                CapsuleCrouchingSize(false);
                 SwitchToLocomotionState();
             }
 
@@ -1394,7 +1350,6 @@ namespace Animation
             CheckIfStopped();
 
             FaceMoveDirection();
-            Move();
             UpdateAnimatorController();
         }
 
@@ -1403,7 +1358,7 @@ namespace Animation
         /// </summary>
         private void ExitCrouchState()
         {
-            _inputReader.OnJumpPerformed -= CrouchToJumpState;
+            inputReader.OnJumpPerformed -= CrouchToJumpState;
         }
 
         /// <summary>
