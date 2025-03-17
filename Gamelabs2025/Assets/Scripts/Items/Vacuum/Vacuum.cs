@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
+using FishNet;
 using FishNet.Component.Transforming;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Items.Interfaces;
 using Player;
+using Player.Inventory;
 using StateManagement;
 using UnityEngine;
 
 namespace Items
 {
-    public class Vacuum : NetworkBehaviour, IUsableItem
+    public class Vacuum : NetworkBehaviour, IUsableItem, ISeekerAttachable
     {
         private struct VacuumCacheStruct
         {
@@ -25,6 +27,8 @@ namespace Items
                 Role = role;
             }
         }
+
+        [SerializeField] private NetworkObject worldDummyRef;
         
         [SerializeField] private SphereCollider triggerVolume;
         [SerializeField] private Transform suctionPoint;
@@ -53,9 +57,6 @@ namespace Items
         public override void OnStartClient()
         {
             base.OnStartNetwork();
-            
-            //move this to on-grab
-            InitialiseVacuum();
         }
 
         private void InitialiseVacuum()
@@ -169,6 +170,7 @@ namespace Items
                 
                 // distance check to if they can be considered as vacuumed.
                 var dist = Vector3.Distance(rbPos, suctionPoint.position);
+                Debug.Log($"Vacumm Suction::Distance To {rb.name} = {dist}m");
                 if (dist <= suctionCompleteDetectionRadius)
                 {
                     Capture(rb);
@@ -185,15 +187,20 @@ namespace Items
             //check if player is sucked in
             if (playerRole != null)
             {
+                //Run only on the Authority holding client.
                 if(!playerRole.IsOwner)
                     return;
+                
+                //Ignore if not player
                 if(playerRole.Role != PlayerRole.RoleType.Hider)
                     return;
                 
                 Debug.Log($"<color=cyan>VACUUM SUCKK!!: Player:{playerRole.Role}, Owner: {playerRole.IsOwner}, Server:{IsServerStarted}</color>");
-                if(!suckedPlayer) 
+                if (!suckedPlayer)
+                {
                     GameController.Instance.ServerHiderCaptured();
-                suckedPlayer = true;
+                    suckedPlayer = true;
+                }
                 return;
             }
             
@@ -251,10 +258,41 @@ namespace Items
             Gizmos.DrawWireSphere(suctionPoint.position, suctionCompleteDetectionRadius);
             if (triggerVolume.gameObject.activeInHierarchy)
             {
-                Gizmos.color = new Color(0f, 0f, 1f, 0.5f);
+                Gizmos.color = new Color(0f, 0f, 1f, 0.25f);
                 var scale = triggerVolume.transform.localScale;
-                Gizmos.DrawSphere(triggerVolume.center + triggerVolume.transform.position, triggerVolume.radius * Mathf.Max(scale.x, scale.y, scale.z));
+                Gizmos.DrawSphere(triggerVolume.center + triggerVolume.transform.position, triggerVolume.radius);
             }
+        }
+
+        public void OnAttach(Transform parentTrf)
+        {
+            transform.SetParent(parentTrf);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            
+            Debug.Log("Vacuum:::OnAttach");
+            if(IsOwner)
+                InitialiseVacuum();
+        }
+
+        public void OnDetach(Transform parentTrf, bool spawnWorldDummy)
+        {
+            Debug.Log("Vacuum:::OnDetach");
+            var dummySpawnLoc = parentTrf.position + parentTrf.forward * 2f;
+            RPC_ServerRequestDespawn(dummySpawnLoc, spawnWorldDummy);
+        }
+
+        [ServerRpc]
+        private void RPC_ServerRequestDespawn(Vector3 spawnLoc, bool spawnWorldDummy)
+        {
+            if (spawnWorldDummy)
+            {
+                var netManager = InstanceFinder.NetworkManager;
+                var nob = netManager.GetPooledInstantiated(worldDummyRef, spawnLoc, Quaternion.identity, true);
+                netManager.ServerManager.Spawn(nob);
+            }
+
+            Despawn();
         }
     }
 }

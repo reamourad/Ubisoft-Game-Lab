@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Networking
 {
+    [RequireComponent(typeof(Rigidbody))]
    public class RigidbodySync : NetworkBehaviour
 {
     //Replicate structure.

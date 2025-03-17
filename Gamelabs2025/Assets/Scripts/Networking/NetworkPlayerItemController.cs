@@ -118,53 +118,59 @@ namespace Networking
                 objectToPlace.layer = currentLayer;
             }
 
-            private Vector3 point; 
+            private Vector3 point;
+
             void UpdateLookingAtObject()
             {
-                if(!IsOwner){return;}
-                
+                if (!IsOwner)
+                {
+                    return;
+                }
+
                 lookingAtObject = null;
-                
-                if(playerCamera == null)
+
+                if (playerCamera == null)
                     playerCamera = Camera.main;
-                
+
                 // Origin at the center of your character
                 Vector3 origin = transform.position;
-    
+
                 // Direction your character is facing
                 Vector3 direction = transform.forward;
-    
+
                 // Box dimensions
                 Vector3 halfExtents = new Vector3(0.5f, 1.0f, 0.1f); // width, height, depth
-    
+
                 // Character's rotation
                 Quaternion orientation = transform.rotation;
-    
+
                 // Maximum distance to check
                 float maxDistance = 3.0f;
-    
+
                 // Layer mask for objects to check
                 LayerMask layerMask = itemLayerMask;
-                
+
                 // Raycast from the center of player view
                 Ray ray = new Ray(transform.position, transform.forward);
-                if (Physics.BoxCast(origin, halfExtents, direction, out RaycastHit hit, orientation, maxDistance, layerMask))
+                if (Physics.BoxCast(origin, halfExtents, direction, out RaycastHit hit, orientation, maxDistance,
+                        layerMask))
                 {
                     point = hit.point;
                     Debug.DrawLine(transform.position, hit.point, Color.red);
                     lookingAtObject = hit.collider.GetComponent<IGrabableItem>();
                 }
-                
+
                 // Check if the object has the IGrabbable interface
                 if (lookingAtObject != null)
                 {
                     if (InScreenUI.Instance != null)
                     {
                         InScreenUI.Instance.SetToolTipText("Press " +
-                                                           InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay
+                                                           InputReader.GetCurrentBindingText(InputReader.Instance
+                                                               .inputMap.Gameplay
                                                                .Grab) + " to grab  " + lookingAtObject.gameObject.name);
                     }
-                    
+
                 }
                 else
                 {
@@ -172,10 +178,9 @@ namespace Networking
                     {
                         InScreenUI.Instance.SetToolTipText("");
                     }
-                    
+
                 }
             }
-            
 
             // Called when grab button is pressed
             public void OnGrab()

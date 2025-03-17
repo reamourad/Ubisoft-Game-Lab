@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class TestPlayerInputController : NetworkBehaviour
 {
-    [SerializeField] private InputReader inputReader;
+    private InputReader inputReader;
     [SerializeField] private GameObject playerVisuals;
     [SerializeField] private Transform playerItemHolderRight;
     
@@ -38,6 +38,7 @@ public class TestPlayerInputController : NetworkBehaviour
             return;
         }
         
+        inputReader = InputReader.Instance;
         inputReader.OnUseEvent += ClientHandleItemUsage;
         inputReader.OnMoveEvent += ClientHandleMove;
         inputReader.OnLookEvent += ClientHandleLook;

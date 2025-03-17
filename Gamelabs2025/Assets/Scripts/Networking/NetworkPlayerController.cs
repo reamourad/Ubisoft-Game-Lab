@@ -70,11 +70,7 @@ namespace Networking
 
         public void UseItem(bool isUsing)
         {
-            if (usableItem == null)
-            {
-                usableItem = GetComponentInChildren<IUsableItem>();
-            }
-
+            usableItem = GetComponentInChildren<IUsableItem>();
             usableItem?.UseItem(isUsing);
         }
         
