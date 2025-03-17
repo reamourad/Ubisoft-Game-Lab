@@ -23,7 +23,7 @@ namespace SeekerGrabSystem
                 aimDetector = GetComponent<FPSAimDetector>();
                 
                 InputReader.Instance.OnGrabActivateEvent += OnPickup;
-                InputReader.Instance.OnGrabActivateEvent += OnDrop;
+                InputReader.Instance.OnDropItemEvent += OnDrop;
                 
                 aimDetector.OnLookingAtObject += OnLookingAtObject;
                 aimDetector.Initialise();
@@ -35,6 +35,7 @@ namespace SeekerGrabSystem
             if(aimDetector != null)
                 aimDetector.OnLookingAtObject -= OnLookingAtObject;
             InputReader.Instance.OnGrabActivateEvent -= OnPickup;
+            InputReader.Instance.OnDropItemEvent -= OnDrop;
         }
 
         private void OnLookingAtObject(Collider obj)
@@ -61,7 +62,7 @@ namespace SeekerGrabSystem
         
         private void OnDrop()
         {
-            Debug.Log("SeekerPickupSystem::::OnPickup");
+            Debug.Log("SeekerPickupSystem::::OnDrop");
             if(seekerInventory == null) return;
             seekerInventory.RemoveActiveItem();
         }

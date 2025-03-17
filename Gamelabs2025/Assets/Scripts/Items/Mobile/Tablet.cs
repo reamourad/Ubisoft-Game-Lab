@@ -33,7 +33,7 @@ namespace Items
         public void OnDetach(Transform parentTrf, bool spawnWorldDummy)
         {
             Debug.Log("Tablet:::OnDetach");
-            var dummySpawnLoc = parentTrf.position + parentTrf.forward * 2f;
+            var dummySpawnLoc = parentTrf.position + new Vector3(0,1,0) + parentTrf.forward * 2f;
             RPC_ServerRequestDespawn(dummySpawnLoc, spawnWorldDummy);
         }
 

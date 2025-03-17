@@ -9,6 +9,6 @@ namespace Player.Inventory
         public NetworkObject ItemToSpawn;
         public Sprite ItemSprite;
         
-        public bool IsAvailable => ItemToSpawn == null;
+        public bool IsSlotEmpty => ItemToSpawn == null;
     }
 }

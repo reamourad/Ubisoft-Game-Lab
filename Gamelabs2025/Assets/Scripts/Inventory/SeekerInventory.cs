@@ -58,7 +58,7 @@ namespace Player.Inventory
       {
          for (uint i = 0; i < items.Length; i++)
          {
-            if (items[i] != null && items[i].IsAvailable)
+            if (items[i] != null && items[i].IsSlotEmpty)
             {
                availableSlotId = i;
                return true;
@@ -75,9 +75,10 @@ namespace Player.Inventory
       /// <param name="item"></param>
       public void AddToInventory(NetworkObject item, Sprite icon)
       {
-         Debug.Log("SeekerPickupSystem::::AddToInventory");
-         if (GetEmptySlot(out uint availableSlotId))
+         Debug.Log("SeekerInventory::::AddToInventory");
+         if (GetEmptySlot(out uint availableSlotId)) //availableSlotId is zero-indexed
          {
+            Debug.Log($"SeekerInventory::::AddToInventory At Slot {availableSlotId}");
             items[availableSlotId] = new InventoryItemContainer()
             {
                ItemToSpawn = item,
@@ -90,7 +91,7 @@ namespace Player.Inventory
          }
          else
          {
-            Debug.Log("No Empty Slots");
+            Debug.Log("SeekerInventory:::No Empty Slots");
          }
       }
 
@@ -103,8 +104,26 @@ namespace Player.Inventory
          if(activeItem == null)
             return;
          
+         Debug.Log($"SeekerInventory:::Removing Item {selectedItem}");
          guiRef.RemoveItemData((int)selectedItem);
+         //Remove data
+         items[selectedItem].ItemToSpawn = null;
+         items[selectedItem].ItemSprite = null;
+         
          Detach(activeItem, true); 
+         activeItem = null;
+         selectedItem = 0;
+         
+         //Equip other inventory item.
+         for (int i = 0; i < items.Length; i++)
+         {
+            if (items[i] != null && !items[i].IsSlotEmpty)
+            {
+               Debug.Log("SeekerInventory:::Equip-ing other item in inventory");
+               Equip((uint)i);
+               break;
+            }
+         }
       }
 
       /// <summary>
@@ -118,16 +137,19 @@ namespace Player.Inventory
             return;
 
          // Ignore if empty slot
-         if (items[id - 1] == null)
+         if (items[id - 1] == null || items[id - 1].IsSlotEmpty)
+         {
+            Debug.Log("SeekerInventory:::Equip Failed (ITEM NULL OR ITEM.SPAWN_ITEM NULL)");
             return;
+         }
 
          if (activeItem != null)
             Detach(activeItem, false);
 
          selectedItem = id - 1;
+         guiRef.Equip((int)selectedItem); 
          RPC_RequestSpawnAttachable(items[id - 1].ItemToSpawn, OwnerId);
-         //ofcourse my stupid brain made this zero-indexed, I shouldn't code at 3AM
-         guiRef.Equip((int)id-1); 
+         //of-course my stupid brain made this zero-indexed, I shouldn't code at 3AM
       }
 
       private void Attach(NetworkObject networkObject)
@@ -136,7 +158,7 @@ namespace Player.Inventory
          var seekerAttachable = networkObject.GetComponentInChildren<ISeekerAttachable>();
          if (seekerAttachable == null)
          {
-            Debug.Log("INVENTORY (Attach)::::Seeker Attachable NULL!!!");
+            Debug.Log("SeekerInventory (Attach)::::Seeker Attachable NULL!!!");
             return;
          }
          activeItem = seekerAttachable;
