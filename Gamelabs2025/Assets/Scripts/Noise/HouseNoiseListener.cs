@@ -7,8 +7,8 @@ public class HouseNoiseListener : NetworkBehaviour
     [SerializeField] private float noiseThreshold = 100f;
     [SerializeField] private float noiseDecayRate = 5f;
 
-    private readonly SyncVar<float> noiseMeter = new SyncVar<float>(0f, new SyncTypeSettings(1f));
-    private readonly SyncVar<bool> isAngry = new SyncVar<bool>(false, new SyncTypeSettings(1f));
+    public readonly SyncVar<float> noiseMeter = new SyncVar<float>(0f, new SyncTypeSettings(1f));
+    public readonly SyncVar<bool> isAngry = new SyncVar<bool>(false, new SyncTypeSettings(1f));
 
     private void Awake()
     {
