@@ -15,7 +15,7 @@ E:/Github/Ubisoft-Game-Lab/Gamelabs2025
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-50316
+54980
 -job-worker-count
 7
 -background-job-worker-count
@@ -59,16 +59,16 @@ E:/Github/Ubisoft-Game-Lab/Gamelabs2025
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [15908]  Target information:
+Player connection [32044]  Target information:
 
-Player connection [15908]  * "[IP] 192.168.1.184 [Port] 0 [Flags] 2 [Guid] 2684932119 [EditorId] 2684932119 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [32044]  * "[IP] 192.168.1.184 [Port] 0 [Flags] 2 [Guid] 771211253 [EditorId] 771211253 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [15908]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2684932119 [EditorId] 2684932119 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [32044]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 771211253 [EditorId] 771211253 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [15908]  * "[IP] 192.168.72.2 [Port] 0 [Flags] 2 [Guid] 2684932119 [EditorId] 2684932119 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [32044]  * "[IP] 192.168.72.2 [Port] 0 [Flags] 2 [Guid] 771211253 [EditorId] 771211253 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [15908] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [15908] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [32044] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [32044] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -80,7 +80,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 77.47 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.64 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.36f1 (9fe3b5f71dbb)
 [Subsystems] Discovering subsystems at path E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/Resources/UnitySubsystems
@@ -96,52 +96,52 @@ Initialize mono
 Mono path[0] = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56804
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56736
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
-Registered in 0.859051 seconds.
-- Loaded All Assemblies, in 12.825 seconds
+Registered in 0.005771 seconds.
+- Loaded All Assemblies, in  0.727 seconds
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 Native extension for iOS target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 381 ms
+Android Extension - Scanning For ADB Devices 327 ms
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.158 seconds
-Domain Reload Profiling: 13982ms
-	BeginReloadAssembly (8916ms)
+- Finished resetting the current domain, in  0.825 seconds
+Domain Reload Profiling: 1552ms
+	BeginReloadAssembly (267ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (611ms)
-	RebuildNativeTypeToScriptingClass (18ms)
-	initialDomainReloadingComplete (917ms)
-	LoadAllAssembliesAndSetupDomain (2361ms)
-		LoadAssemblies (8925ms)
+	RebuildCommonClasses (70ms)
+	RebuildNativeTypeToScriptingClass (22ms)
+	initialDomainReloadingComplete (72ms)
+	LoadAllAssembliesAndSetupDomain (296ms)
+		LoadAssemblies (273ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (2348ms)
-			TypeCache.Refresh (2347ms)
-				TypeCache.ScanAssembly (1999ms)
+		AnalyzeDomain (285ms)
+			TypeCache.Refresh (284ms)
+				TypeCache.ScanAssembly (260ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (0ms)
-	FinalizeReload (1158ms)
+	FinalizeReload (826ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1100ms)
+		SetupLoadedEditorAssemblies (773ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (749ms)
-			SetLoadedEditorAssemblies (5ms)
-			BeforeProcessingInitializeOnLoad (72ms)
-			ProcessInitializeOnLoadAttributes (181ms)
-			ProcessInitializeOnLoadMethodAttributes (94ms)
+			InitializePlatformSupportModulesInManaged (453ms)
+			SetLoadedEditorAssemblies (4ms)
+			BeforeProcessingInitializeOnLoad (66ms)
+			ProcessInitializeOnLoadAttributes (175ms)
+			ProcessInitializeOnLoadMethodAttributes (73ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -154,9 +154,9 @@ Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInter
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in 12.508 seconds
+- Loaded All Assemblies, in  1.463 seconds
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
-Refreshing native plugins compatible for Editor in 1.07 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.79 ms, found 3 plugins.
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -167,78 +167,137 @@ Package Manager log level set to [2]
 [Package Manager] Unable to send message (not connected to server process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.249 seconds
-Domain Reload Profiling: 13756ms
-	BeginReloadAssembly (228ms)
+- Finished resetting the current domain, in  1.360 seconds
+Domain Reload Profiling: 2823ms
+	BeginReloadAssembly (209ms)
 		ExecutionOrderSort (0ms)
-		DisableScriptedObjects (9ms)
+		DisableScriptedObjects (8ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (38ms)
-	RebuildCommonClasses (52ms)
+		CreateAndSetChildDomain (37ms)
+	RebuildCommonClasses (41ms)
 	RebuildNativeTypeToScriptingClass (15ms)
-	initialDomainReloadingComplete (44ms)
-	LoadAllAssembliesAndSetupDomain (12167ms)
-		LoadAssemblies (11036ms)
+	initialDomainReloadingComplete (42ms)
+	LoadAllAssembliesAndSetupDomain (1154ms)
+		LoadAssemblies (759ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (1278ms)
-			TypeCache.Refresh (1181ms)
-				TypeCache.ScanAssembly (1096ms)
-			BuildScriptInfoCaches (74ms)
-			ResolveRequiredComponents (18ms)
-	FinalizeReload (1250ms)
+		AnalyzeDomain (520ms)
+			TypeCache.Refresh (423ms)
+				TypeCache.ScanAssembly (392ms)
+			BuildScriptInfoCaches (78ms)
+			ResolveRequiredComponents (16ms)
+	FinalizeReload (1361ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1052ms)
+		SetupLoadedEditorAssemblies (1150ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (20ms)
-			SetLoadedEditorAssemblies (8ms)
-			BeforeProcessingInitializeOnLoad (129ms)
-			ProcessInitializeOnLoadAttributes (816ms)
-			ProcessInitializeOnLoadMethodAttributes (76ms)
+			InitializePlatformSupportModulesInManaged (22ms)
+			SetLoadedEditorAssemblies (9ms)
+			BeforeProcessingInitializeOnLoad (174ms)
+			ProcessInitializeOnLoadAttributes (841ms)
+			ProcessInitializeOnLoadMethodAttributes (100ms)
 			AfterProcessingInitializeOnLoad (3ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (6ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 1.50 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (8ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 1.65 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 146 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7215 unused Assets / (6.6 MB). Loaded Objects now: 7767.
-Memory consumption went from 162.1 MB to 155.4 MB.
-Total: 13.113200 ms (FindLiveObjects: 1.163100 ms CreateObjectMapping: 0.514100 ms MarkObjects: 6.645600 ms  DeleteObjects: 4.788700 ms)
+Unloading 7215 unused Assets / (7.1 MB). Loaded Objects now: 7768.
+Memory consumption went from 164.3 MB to 157.2 MB.
+Total: 15.979800 ms (FindLiveObjects: 1.404100 ms CreateObjectMapping: 0.683000 ms MarkObjects: 8.537800 ms  DeleteObjects: 5.350300 ms)
+
+========================================================================
+Received Prepare
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory is not a mono symbol file
+- Loaded All Assemblies, in  0.890 seconds
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+Refreshing native plugins compatible for Editor in 1.05 ms, found 3 plugins.
+Native extension for iOS target not found
+Native extension for Android target not found
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
+[Package Manager] Failed to launch server process. Reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] Unable to send message (not connected to server process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.065 seconds
+Domain Reload Profiling: 1958ms
+	BeginReloadAssembly (252ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (5ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (62ms)
+	RebuildCommonClasses (41ms)
+	RebuildNativeTypeToScriptingClass (15ms)
+	initialDomainReloadingComplete (30ms)
+	LoadAllAssembliesAndSetupDomain (555ms)
+		LoadAssemblies (432ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (266ms)
+			TypeCache.Refresh (9ms)
+				TypeCache.ScanAssembly (0ms)
+			BuildScriptInfoCaches (235ms)
+			ResolveRequiredComponents (16ms)
+	FinalizeReload (1066ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (893ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (18ms)
+			SetLoadedEditorAssemblies (7ms)
+			BeforeProcessingInitializeOnLoad (124ms)
+			ProcessInitializeOnLoadAttributes (679ms)
+			ProcessInitializeOnLoadMethodAttributes (63ms)
+			AfterProcessingInitializeOnLoad (2ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (7ms)
+Refreshing native plugins compatible for Editor in 1.49 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 34 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 7213 unused Assets / (6.3 MB). Loaded Objects now: 7771.
+Memory consumption went from 139.7 MB to 133.5 MB.
+Total: 12.026200 ms (FindLiveObjects: 1.108100 ms CreateObjectMapping: 0.594700 ms MarkObjects: 5.922200 ms  DeleteObjects: 4.399700 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+========================================================================
+Received Import Request.
+  Time since last request: 28970.944490 seconds.
+  path: Assets/Prefabs/HouseModelPrefabs/RoomVariants/Room2_LShaped.prefab
+  artifactKey: Guid(42e829dabc6a31c4586259697896b5b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/HouseModelPrefabs/RoomVariants/Room2_LShaped.prefab using Guid(42e829dabc6a31c4586259697896b5b0) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '783a4f79d68207e99d092966dbec869e') in 0.3173883 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1391
 
 ========================================================================
 Received Import Request.
-  Time since last request: 1899.624854 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RectangularRoomPrefab.prefab
-  artifactKey: Guid(7e7457ad8c4ee324f8f9ef832fba9b9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RectangularRoomPrefab.prefab using Guid(7e7457ad8c4ee324f8f9ef832fba9b9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '90d8303ff2fa54d99f0eb7532368769d') in 0.2391857 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 732
+  Time since last request: 116.727089 seconds.
+  path: Assets/Materials/HouseMaterials/DecorYellow.mat
+  artifactKey: Guid(a50c57e07a8919643b0d4ce2943f639f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/HouseMaterials/DecorYellow.mat using Guid(a50c57e07a8919643b0d4ce2943f639f) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '725f97b023f29f636d8c86f67ac290dd') in 0.0692239 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/bookshelf.fbx
-  artifactKey: Guid(5a333d054fbf65f42b0fd6cf8f99f973) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/bookshelf.fbx using Guid(5a333d054fbf65f42b0fd6cf8f99f973) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e39e41e1c8963ddabced957ad6554a62') in 0.1439894 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 20
+  Time since last request: 4.028469 seconds.
+  path: Assets/Prefabs/HouseModelPrefabs/RoomDecor/Floor Lamp.prefab
+  artifactKey: Guid(03d354d1b55bd1d4ab1384dd2e6b1984) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/HouseModelPrefabs/RoomDecor/Floor Lamp.prefab using Guid(03d354d1b55bd1d4ab1384dd2e6b1984) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '425cf05138652b00e5616ad2d0482c02') in 0.0312463 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 317
 
 ========================================================================
 Received Import Request.
   Time since last request: 0.000030 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/LShapedRoomPrefab.prefab
-  artifactKey: Guid(3eaecbbdd74a9fb449ecb5b4bc725510) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/LShapedRoomPrefab.prefab using Guid(3eaecbbdd74a9fb449ecb5b4bc725510) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'c5c236cd77588d3405aea9da43e704ca') in 0.0426286 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 694
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000022 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/ShortRoomWall2.prefab
-  artifactKey: Guid(753dc2b904c96914087ab9ebc9c35e2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/ShortRoomWall2.prefab using Guid(753dc2b904c96914087ab9ebc9c35e2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'a410eb74e089fb0f29a896209c816a4c') in 0.0452143 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 307
+  path: Assets/Prefabs/HouseModelPrefabs/RoomDecor/night stand.prefab
+  artifactKey: Guid(51af507bc88090248932a0b2f3560ca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/HouseModelPrefabs/RoomDecor/night stand.prefab using Guid(51af507bc88090248932a0b2f3560ca2) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8f014fe108a6ffa07e3fe4995dc3abd8') in 0.035285 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 310
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 AssetImportWorker is now disconnected from the server
