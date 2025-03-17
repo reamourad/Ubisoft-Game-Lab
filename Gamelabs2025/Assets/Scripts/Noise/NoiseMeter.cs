@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using TMPro;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
@@ -34,4 +34,4 @@ public class NoiseMeterUI : NetworkBehaviour
     {
         noiseText.text = $"Noise Level: {newNoise}%";
     }
-}
+}*/
