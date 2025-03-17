@@ -81,16 +81,19 @@ public class TestPlayerInputController : NetworkBehaviour
     private void ClientHandleItemUsage(bool use)
     {
         Debug.Log($"Item Use {use}");
-        playerController.UseItem(use);
+        if(playerController != null) 
+            playerController.UseItem(use);
     }
 
     private void ClientHandleGrabRelease()
     {
-        playerItemController.OnGrabRelease(); 
+        if(playerItemController != null) 
+            playerItemController.OnGrabRelease(); 
     }
     
     private void ClientHandleGrab()
     {
-        playerItemController.OnGrab(); 
+        if(playerItemController != null) 
+            playerItemController.OnGrab(); 
     }
 }

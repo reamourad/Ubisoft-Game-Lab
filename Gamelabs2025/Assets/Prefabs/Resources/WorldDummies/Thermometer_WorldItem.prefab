@@ -219,7 +219,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 0}
   itemReference: {fileID: -6058531601468372682, guid: 0280af94a1d9e5f4093392e836e9f655, type: 3}
   icon: {fileID: 21300000, guid: bdc04c8a8089d75468ea89597b4c2b59, type: 3}
-  highlight: {fileID: 0}
+  highlight: {fileID: 6141197860897892842}
 --- !u!114 &5041931714993849273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +335,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -344,6 +348,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
+--- !u!1 &6141197860897892842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
+  m_PrefabInstance: {fileID: 6483075953667347643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6805566060717503312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}

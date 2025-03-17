@@ -5411,6 +5411,8 @@ MonoBehaviour:
   navMeshSampleCount: 10
   navMeshRaycastDistance: 20
   navMeshOffset: 0.1
+  useNavMeshPathfinding: 1
+  navMeshAreaMask: -1
 --- !u!1 &3005996376942840889
 GameObject:
   m_ObjectHideFlags: 0

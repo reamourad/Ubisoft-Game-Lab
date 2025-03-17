@@ -14,13 +14,6 @@ namespace Player.Inventory
       private ISeekerAttachable activeItem;
 
       public Action<NetworkObject> OnAttachableSpawned;
-
-      [Header("Testing...")] [SerializeField]
-      private NetworkObject testVacuumObject;
-
-      [SerializeField] private NetworkObject testTabletObject;
-      [SerializeField] private NetworkObject testThermometerObject;
-      
       private SeekerInventoryGui guiRef;
 
       public bool HasItemEquipped => activeItem != null;
