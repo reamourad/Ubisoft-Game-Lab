@@ -10,4 +10,14 @@ public class InScreenUI : SingletonBehaviour<InScreenUI>
     {
         toolTipText.text = text;
     }
+
+    public void AddToolTipText(string text)
+    {
+        toolTipText.text += "\n" + text;
+    }
+    
+    public string GetToolTipText()
+    {
+        return toolTipText.text;
+    }
 }

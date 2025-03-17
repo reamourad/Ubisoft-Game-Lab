@@ -22,6 +22,7 @@ public class TestPlayerInputController : NetworkBehaviour
     private NetworkPlayerController.PlayerInputData inputData = default;
     private NetworkPlayerController playerController;
     private NetworkPlayerItemController playerItemController;
+    private NetworkPlayerConnectionController playerConnectionController;
     
     private void OnDestroy()
     {
@@ -33,7 +34,10 @@ public class TestPlayerInputController : NetworkBehaviour
         inputReader.OnLookEvent -= ClientHandleLook;
         inputReader.OnGrabReleaseEvent -= ClientHandleGrabRelease;
         inputReader.OnGrabActivateEvent -= ClientHandleGrab;
+        inputReader.OnConnectItemsEvent -= ClientHandleConnectItems;
     }
+
+
 
     public override void OnStartClient()
     {
@@ -48,9 +52,12 @@ public class TestPlayerInputController : NetworkBehaviour
         inputReader.OnLookEvent += ClientHandleLook;
         inputReader.OnGrabReleaseEvent += ClientHandleGrabRelease;
         inputReader.OnGrabActivateEvent += ClientHandleGrab;
+        inputReader.OnConnectItemsEvent += ClientHandleConnectItems;
+
         
         playerController = GetComponent<NetworkPlayerController>();
         playerItemController = GetComponent<NetworkPlayerItemController>();
+        playerConnectionController = GetComponent<NetworkPlayerConnectionController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //playerVisuals.SetActive(false);
@@ -91,5 +98,10 @@ public class TestPlayerInputController : NetworkBehaviour
     private void ClientHandleGrab()
     {
         playerItemController.OnGrab(); 
+    }
+    
+    private void ClientHandleConnectItems()
+    {
+        playerConnectionController.OnConnectButtonPressed(); 
     }
 }
