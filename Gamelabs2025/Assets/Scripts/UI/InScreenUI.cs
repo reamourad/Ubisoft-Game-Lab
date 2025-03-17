@@ -4,11 +4,10 @@ using Utils;
 
 public class InScreenUI : SingletonBehaviour<InScreenUI>
 {
-    [SerializeField]
-    private TextMeshProUGUI toolTipText;
+    [SerializeField] private TextMeshProUGUI toolTipText;
 
-    public void SetToolTipText(string tooltip)
+    public void SetToolTipText(string text)
     {
-        toolTipText.text = tooltip;
+        toolTipText.text = text;
     }
 }

@@ -19,8 +19,7 @@ namespace Networking
             public Vector2 MoveInputVector;
             public Vector2 LookInputVector;
 
-            public PlayerInputData(float pitchSensitivity, float yawSensitivity, Vector2 moveInputVector,
-                Vector2 lookInputVector)
+            public PlayerInputData(float pitchSensitivity, float yawSensitivity, Vector2 moveInputVector, Vector2 lookInputVector)
             {
                 PitchSensitivity = pitchSensitivity;
                 YawSensitivity = yawSensitivity;
@@ -35,22 +34,19 @@ namespace Networking
             FirstPerson,
             ThirdPerson,
         }
-
+        
         [SerializeField] Transform cameraTransform;
-        [SerializeField] private float speed = 1f;
-        [SerializeField] private float maxLookAngle = 80f;
+        [SerializeField] private float speed=1f;
+        [SerializeField] private float maxLookAngle=80f;
 
         [Tooltip("FPS - Uses mouse (X,Y) to update view, TPS - Uses movement direction to handle rotation.")]
-        [SerializeField]
-        private CameraType cameraType = CameraType.None;
-
-        [SerializeField] private float tpsLookSpeed = 100;
-
+        [SerializeField] private CameraType cameraType=CameraType.None;
+        [SerializeField] private float tpsLookSpeed=100;
+        
         [SerializeField] private IUsableItem usableItem;
-
+        
         private PlayerInputData playerInputData;
         private Rigidbody rb;
-
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -60,13 +56,13 @@ namespace Networking
         {
             this.cameraTransform = cameraTransform;
         }
-
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
             name = $"Player [{(IsOwner ? "LOCAL_PLAYER" : "REMOTE_PLAYER")}]";
         }
-
+        
         public void UpdatePlayerInputs(PlayerInputData inputData)
         {
             this.playerInputData = inputData;
@@ -81,10 +77,10 @@ namespace Networking
 
             usableItem?.UseItem(isUsing);
         }
-
+        
         private void Update()
         {
-            if (!IsOwner)
+            if(!IsOwner)
                 return;
 
             UpdateFirstPersonView(playerInputData, Time.deltaTime);
@@ -92,9 +88,9 @@ namespace Networking
 
         private void FixedUpdate()
         {
-            if (!IsOwner)
+            if(!IsOwner)
                 return;
-
+            
             UpdatePlayerMovement(playerInputData, Time.fixedDeltaTime);
         }
 
@@ -118,9 +114,9 @@ namespace Networking
 
         private void TPSMove(PlayerInputData inputData, float deltaTime)
         {
-            if (cameraTransform == null)
+            if(cameraTransform == null)
                 return;
-
+            
             var forward = cameraTransform.transform.forward;
             var right = cameraTransform.transform.right;
             forward.y = 0;
@@ -137,15 +133,15 @@ namespace Networking
                 transform.forward = Vector3.Lerp(transform.forward, newMoveDir, Time.deltaTime * tpsLookSpeed);
             }
         }
-
+        
         private void UpdateFirstPersonView(PlayerInputData inputData, float deltaTime)
         {
-            if (cameraType == CameraType.None || cameraType == CameraType.ThirdPerson)
+            if(cameraType == CameraType.None || cameraType == CameraType.ThirdPerson)
                 return;
-
-            if (cameraTransform == null)
+            
+            if(cameraTransform == null)
                 return;
-
+            
             var cameraRot = cameraTransform.eulerAngles;
             var newRot = new Vector3(transform.eulerAngles.x, cameraRot.y, transform.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newRot);

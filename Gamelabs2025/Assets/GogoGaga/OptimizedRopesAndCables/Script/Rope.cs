@@ -65,6 +65,17 @@ namespace GogoGaga.OptimizedRopesAndCables
         
         [Tooltip("Offset from the NavMesh surface")]
         public float navMeshOffset = 0.1f;
+        
+        [Tooltip("Use NavMesh pathfinding for the entire rope path")]
+        public bool useNavMeshPathfinding = true;
+
+        [Tooltip("Area mask for NavMesh pathfinding")]
+        public int navMeshAreaMask = NavMesh.AllAreas;
+        
+        // Path for NavMesh pathfinding
+        private NavMeshPath navMeshPath;
+        private List<Vector3> navMeshPathPoints = new List<Vector3>();
+        private bool prevUseNavMeshPathfinding;
 
         private Vector3 currentValue;
         private Vector3 currentVelocity;
@@ -86,6 +97,7 @@ namespace GogoGaga.OptimizedRopesAndCables
         private float prevstiffness;
         private float prevDampness;
         private float prevRopeLength;
+        private bool prevUseNavMeshCollision;
         
         // Cache for NavMesh adjusted points
         private List<Vector3> navMeshAdjustedPoints = new List<Vector3>();
@@ -100,7 +112,8 @@ namespace GogoGaga.OptimizedRopesAndCables
                 currentValue = GetMidPoint();
                 targetValue = currentValue;
                 currentVelocity = Vector3.zero;
-                SetSplinePoint(); // Ensure initial spline point is set correctly
+                navMeshPath = new NavMeshPath(); // Add this line
+                SetSplinePoint();
             }
         }
 
@@ -111,6 +124,7 @@ namespace GogoGaga.OptimizedRopesAndCables
                 InitializeLineRenderer();
                 if (AreEndPointsValid())
                 {
+                    navMeshPath = navMeshPath ?? new NavMeshPath(); // Add this line
                     RecalculateRope();
                     SimulatePhysics();
                 }
@@ -159,6 +173,8 @@ namespace GogoGaga.OptimizedRopesAndCables
                 prevstiffness = stiffness;
                 prevDampness = damping;
                 prevRopeLength = ropeLength;
+                prevUseNavMeshCollision = useNavMeshCollision;
+                prevUseNavMeshPathfinding = useNavMeshPathfinding;
             }
         }
 
@@ -169,10 +185,7 @@ namespace GogoGaga.OptimizedRopesAndCables
 
         private void SetSplinePoint()
         {
-            if (lineRenderer.positionCount != linePoints + 1)
-            {
-                lineRenderer.positionCount = linePoints + 1;
-            }
+            if (!AreEndPointsValid()) return;
 
             Vector3 mid = GetMidPoint();
             targetValue = mid;
@@ -183,10 +196,129 @@ namespace GogoGaga.OptimizedRopesAndCables
                 midPoint.position = GetRationalBezierPoint(startPoint.position, mid, endPoint.position, midPointPosition, StartPointWeight, midPointWeight, EndPointWeight);
             }
 
+            // Generate navmesh path if needed
+            if (useNavMeshCollision && useNavMeshPathfinding)
+            {
+                CalculateNavMeshPath();
+            }
+
             // Clear previous adjusted points
             navMeshAdjustedPoints.Clear();
+    
+            // If using NavMesh pathfinding and we have a valid path, use that to set the rope points
+            if (useNavMeshCollision && useNavMeshPathfinding && navMeshPathPoints.Count > 1)
+            {
+                SetRopePointsFromPath();
+            }
+            else
+            {
+                // Use the bezier curve as normal
+                SetRopePointsFromBezier(mid);
+            }
+        }
+        
+        private void CalculateNavMeshPath()
+        {
+            navMeshPathPoints.Clear();
+            navMeshPath.ClearCorners();
             
-            // Generate the base spline points
+            // Get NavMesh positions for start and end points
+            NavMeshHit startHit, endHit;
+            Vector3 startNavPos = startPoint.position;
+            Vector3 endNavPos = endPoint.position;
+            
+            bool foundStartPos = NavMesh.SamplePosition(startPoint.position, out startHit, navMeshRaycastDistance, navMeshAreaMask);
+            bool foundEndPos = NavMesh.SamplePosition(endPoint.position, out endHit, navMeshRaycastDistance, navMeshAreaMask);
+            
+            if (foundStartPos && foundEndPos)
+            {
+                startNavPos = startHit.position + Vector3.up * navMeshOffset;
+                endNavPos = endHit.position + Vector3.up * navMeshOffset;
+                
+                // Calculate path between the two points
+                if (NavMesh.CalculatePath(startNavPos, endNavPos, navMeshAreaMask, navMeshPath))
+                {
+                    // Convert corners to path points
+                    navMeshPathPoints.AddRange(navMeshPath.corners);
+                    
+                    // If we need more points for a smoother path, interpolate between corners
+                    if (linePoints + 1 > navMeshPathPoints.Count && navMeshPathPoints.Count > 1)
+                    {
+                        List<Vector3> interpolatedPoints = new List<Vector3>();
+                        
+                        // Calculate total path length
+                        float totalLength = 0;
+                        for (int i = 0; i < navMeshPathPoints.Count - 1; i++)
+                        {
+                            totalLength += Vector3.Distance(navMeshPathPoints[i], navMeshPathPoints[i + 1]);
+                        }
+                        
+                        // Create evenly spaced points along the path
+                        for (int i = 0; i <= linePoints; i++)
+                        {
+                            float t = i / (float)linePoints;
+                            float targetDistance = t * totalLength;
+                            float currentDistance = 0;
+                            
+                            if (i == 0)
+                            {
+                                interpolatedPoints.Add(navMeshPathPoints[0]);
+                                continue;
+                            }
+                            
+                            if (i == linePoints)
+                            {
+                                interpolatedPoints.Add(navMeshPathPoints[navMeshPathPoints.Count - 1]);
+                                continue;
+                            }
+                            
+                            for (int j = 0; j < navMeshPathPoints.Count - 1; j++)
+                            {
+                                float segmentLength = Vector3.Distance(navMeshPathPoints[j], navMeshPathPoints[j + 1]);
+                                
+                                if (currentDistance + segmentLength >= targetDistance)
+                                {
+                                    float segmentT = (targetDistance - currentDistance) / segmentLength;
+                                    Vector3 point = Vector3.Lerp(navMeshPathPoints[j], navMeshPathPoints[j + 1], segmentT);
+                                    interpolatedPoints.Add(point);
+                                    break;
+                                }
+                                
+                                currentDistance += segmentLength;
+                            }
+                        }
+                        
+                        navMeshPathPoints = interpolatedPoints;
+                    }
+                }
+            }
+        }
+
+        private void SetRopePointsFromPath()
+        {
+            if (navMeshPathPoints.Count == 0)
+            {
+                return;
+            }
+            
+            // Match the renderer position count to our path point count
+            lineRenderer.positionCount = navMeshPathPoints.Count;
+            
+            // Set all the points
+            for (int i = 0; i < navMeshPathPoints.Count; i++)
+            {
+                lineRenderer.SetPosition(i, navMeshPathPoints[i]);
+                navMeshAdjustedPoints.Add(navMeshPathPoints[i]);
+            }
+        }
+
+        private void SetRopePointsFromBezier(Vector3 midControlPoint)
+        {
+            if (lineRenderer.positionCount != linePoints + 1)
+            {
+                lineRenderer.positionCount = linePoints + 1;
+            }
+            
             for (int i = 0; i <= linePoints; i++)
             {
                 float t = i / (float)linePoints;
@@ -196,13 +328,17 @@ namespace GogoGaga.OptimizedRopesAndCables
                 {
                     point = endPoint.position; // Make sure the last point is exactly the end point
                 }
+                else if (i == 0)
+                {
+                    point = startPoint.position; // Make sure the first point is exactly the start point
+                }
                 else
                 {
-                    point = GetRationalBezierPoint(startPoint.position, mid, endPoint.position, t, StartPointWeight, midPointWeight, EndPointWeight);
+                    point = GetRationalBezierPoint(startPoint.position, midControlPoint, endPoint.position, t, StartPointWeight, midPointWeight, EndPointWeight);
                 }
                 
-                // Apply NavMesh collision if enabled
-                if (useNavMeshCollision && Application.isPlaying)
+                // Apply NavMesh collision if enabled without pathfinding
+                if (useNavMeshCollision && !useNavMeshPathfinding)
                 {
                     point = AdjustPointToNavMesh(point);
                 }
@@ -211,6 +347,7 @@ namespace GogoGaga.OptimizedRopesAndCables
                 lineRenderer.SetPosition(i, point);
             }
         }
+
 
         private Vector3 AdjustPointToNavMesh(Vector3 point)
         {
@@ -265,20 +402,33 @@ namespace GogoGaga.OptimizedRopesAndCables
                 return Vector3.zero;
             }
 
-            Vector3 bezierPoint = GetRationalBezierPoint(startPoint.position, currentValue, endPoint.position, t, StartPointWeight, midPointWeight, EndPointWeight);
+            // If NavMesh pathfinding is enabled, interpolate between path points
+            if (useNavMeshCollision && useNavMeshPathfinding && navMeshPathPoints.Count > 1)
+            {
+                int index = Mathf.FloorToInt(t * (navMeshPathPoints.Count - 1));
+                float localT = (t * (navMeshPathPoints.Count - 1)) - index;
+        
+                if (index >= navMeshPathPoints.Count - 1)
+                    return navMeshPathPoints[navMeshPathPoints.Count - 1];
             
-            // If NavMesh collision is enabled and we have adjusted points, interpolate between them
-            if (useNavMeshCollision && Application.isPlaying && navMeshAdjustedPoints.Count > 0)
+                return Vector3.Lerp(navMeshPathPoints[index], navMeshPathPoints[index + 1], localT);
+            }
+    
+            // Original bezier behavior
+            Vector3 bezierPoint = GetRationalBezierPoint(startPoint.position, currentValue, endPoint.position, t, StartPointWeight, midPointWeight, EndPointWeight);
+    
+            // If NavMesh collision is enabled without pathfinding
+            if (useNavMeshCollision && !useNavMeshPathfinding && navMeshAdjustedPoints.Count > 0)
             {
                 int index = Mathf.FloorToInt(t * linePoints);
                 float localT = (t * linePoints) - index;
-                
+        
                 if (index >= navMeshAdjustedPoints.Count - 1)
                     return navMeshAdjustedPoints[navMeshAdjustedPoints.Count - 1];
-                    
+            
                 return Vector3.Lerp(navMeshAdjustedPoints[index], navMeshAdjustedPoints[index + 1], localT);
             }
-            
+    
             return bezierPoint;
         }
 
@@ -313,24 +463,7 @@ namespace GogoGaga.OptimizedRopesAndCables
                 currentVelocity = Vector3.zero;
             }
         }
-
-        private void OnDrawGizmos()
-        {
-            if (!AreEndPointsValid())
-                return;
-
-            Vector3 midPos = GetMidPoint();
-            
-            // Draw NavMesh sample points
-            if (useNavMeshCollision && navMeshAdjustedPoints.Count > 0)
-            {
-                Gizmos.color = Color.green;
-                foreach (Vector3 point in navMeshAdjustedPoints)
-                {
-                    Gizmos.DrawSphere(point, 0.1f);
-                }
-            }
-        }
+        
 
         // API methods for setting points
         public void SetStartPoint(Transform newStartPoint, bool instantAssign = false)
@@ -371,6 +504,31 @@ namespace GogoGaga.OptimizedRopesAndCables
             NotifyPointsChanged();
         }
 
+        // Methods to control NavMesh collision via script
+        public void EnableNavMeshCollision()
+        {
+            if (!useNavMeshCollision)
+            {
+                useNavMeshCollision = true;
+                RecalculateRope();
+            }
+        }
+
+        public void DisableNavMeshCollision()
+        {
+            if (useNavMeshCollision)
+            {
+                useNavMeshCollision = false;
+                RecalculateRope();
+            }
+        }
+
+        public void ToggleNavMeshCollision()
+        {
+            useNavMeshCollision = !useNavMeshCollision;
+            RecalculateRope();
+        }
+
         public void RecalculateRope()
         {
             if (!AreEndPointsValid())
@@ -396,7 +554,7 @@ namespace GogoGaga.OptimizedRopesAndCables
             var endPointMoved = endPoint.position != prevEndPointPosition;
             return startPointMoved || endPointMoved;
         }
-
+        
         private bool IsRopeSettingsChanged()
         {
             var lineQualityChanged = !Mathf.Approximately(linePoints, prevLineQuality);
@@ -406,6 +564,7 @@ namespace GogoGaga.OptimizedRopesAndCables
             var ropeLengthChanged = !Mathf.Approximately(ropeLength, prevRopeLength);
             var midPointPositionChanged = !Mathf.Approximately(midPointPosition, prevMidPointPosition);
             var midPointWeightChanged = !Mathf.Approximately(midPointWeight, prevMidPointWeight);
+            var pathfindingChanged = prevUseNavMeshPathfinding != useNavMeshPathfinding;
 
             return lineQualityChanged
                    || ropeWidthChanged
@@ -413,7 +572,69 @@ namespace GogoGaga.OptimizedRopesAndCables
                    || dampnessChanged
                    || ropeLengthChanged
                    || midPointPositionChanged
-                   || midPointWeightChanged;
+                   || midPointWeightChanged
+                   || pathfindingChanged;
+        }
+        // Add these methods for toggling pathfinding
+        public void EnableNavMeshPathfinding()
+        {
+            if (!useNavMeshPathfinding)
+            {
+                useNavMeshPathfinding = true;
+                RecalculateRope();
+            }
+        }
+
+        public void DisableNavMeshPathfinding()
+        {
+            if (useNavMeshPathfinding)
+            {
+                useNavMeshPathfinding = false;
+                RecalculateRope();
+            }
+        }
+
+        public void ToggleNavMeshPathfinding()
+        {
+            useNavMeshPathfinding = !useNavMeshPathfinding;
+            RecalculateRope();
+        }
+
+        // Modify OnDrawGizmos to show the NavMesh path
+        private void OnDrawGizmos()
+        {
+            if (!AreEndPointsValid())
+                return;
+
+            Vector3 midPos = GetMidPoint();
+    
+            // Draw NavMesh path points if pathfinding is enabled
+            if (useNavMeshCollision && useNavMeshPathfinding && navMeshPathPoints.Count > 0)
+            {
+                Gizmos.color = Color.blue;
+                foreach (Vector3 point in navMeshPathPoints)
+                {
+                    Gizmos.DrawSphere(point, 0.2f);
+                }
+        
+                // Draw lines between path points
+                Gizmos.color = Color.yellow;
+                for (int i = 0; i < navMeshPathPoints.Count - 1; i++)
+                {
+                    Gizmos.DrawLine(navMeshPathPoints[i], navMeshPathPoints[i + 1]);
+                }
+            }
+            // Draw individual adjusted points if using simple collision
+            else if (useNavMeshCollision && navMeshAdjustedPoints.Count > 0)
+            {
+                Gizmos.color = Color.green;
+                foreach (Vector3 point in navMeshAdjustedPoints)
+                {
+                    Gizmos.DrawSphere(point, 0.1f);
+                }
+            }
         }
     }
+    
+    
 }

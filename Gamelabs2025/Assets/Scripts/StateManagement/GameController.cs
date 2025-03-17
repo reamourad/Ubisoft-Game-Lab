@@ -265,5 +265,10 @@ namespace StateManagement
             yield return new WaitForSeconds(delay);
             action?.Invoke();
         }
+        
+        public NetworkObject GetPlayer(int clientId)
+        {
+            return players.Find(a => a.LocalConnection.ClientId == clientId);
+        }
     }
 }
