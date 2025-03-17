@@ -124,7 +124,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""id"": ""b8ea38b7-63f7-4f33-b461-638ec57eac0e"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""initialStateCheck"": false
                 },
                 {

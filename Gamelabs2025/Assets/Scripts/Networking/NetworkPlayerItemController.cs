@@ -53,7 +53,6 @@ namespace Networking
 
             void UpdateBlueprintMode()
             {
-                
                 GameObject objectToPlace = grabbedObject.gameObject;
                     
                 // Move the grabbed object to the Ignore Raycast layer, so we don't
@@ -121,8 +120,6 @@ namespace Networking
             private Vector3 point; 
             void UpdateLookingAtObject()
             {
-                if(!IsOwner){return;}
-                
                 lookingAtObject = null;
                 
                 if(playerCamera == null)
@@ -185,60 +182,86 @@ namespace Networking
                 //grab mechanic
                 if (grabbedObject == null)
                 {
-                    //nothing happens if youre not currently looking at something
-                    if (lookingAtObject == null) { return; }
-                    
-                                
-                    // Move to object to grab placement and parent with the player
-                    grabbedObject = lookingAtObject;
-                    GameObject objToGrab = grabbedObject.gameObject;
-                    Rigidbody rb = objToGrab.GetComponent<Rigidbody>();
-                    if (rb != null) 
-                    {
-                        rb.isKinematic = true;
-                    }
-
-                    objToGrab.transform.position = grabPlacement.position;
-                    objToGrab.transform.SetParent(this.transform);
-                    RPC_SendGrabMessageToOtherClients(playerCamera.transform.position, playerCamera.transform.forward);
-                    
+                    PickupObject();
+                    //inform server 
+                    RPC_InformServerOnGrab();
                 }
                 //place mechanic
                 else if (!isBlueprintMode)
                 {
-                    GameObject objectToPlace = grabbedObject.gameObject;
-                    objectToPlace.transform.parent = null; 
-                    // keep original data for the material + layer
-                    Renderer renderer = objectToPlace.GetComponent<Renderer>();
-                    if (renderer != null) 
-                    {
-                        originalMaterial = renderer.material;
-                        renderer.material = ghostMaterial; // Change to blueprint material
-                    }
-                    originalLayer = objectToPlace.layer;
-                    
-                    // Set blueprint mode 
-                    isBlueprintMode = true;
-
-                    InScreenUI.Instance.SetToolTipText("Release to place object");
+                   EnterBlueprintMode();
+                  
                 }
             }
-            
-            [ObserversRpc]
-            private void RPC_SendGrabMessageToOtherClients(Vector3 position, Vector3 forward)
+
+            void PickupObject()
             {
-                if (Physics.Raycast(position, forward, out RaycastHit hit, grabRange, itemLayerMask))
+                //nothing happens if youre not currently looking at something
+                if (lookingAtObject == null) { return; }
+                    
+                                
+                // Move to object to grab placement and parent with the player
+                grabbedObject = lookingAtObject;
+                GameObject objToGrab = grabbedObject.gameObject;
+                Rigidbody rb = objToGrab.GetComponent<Rigidbody>();
+                if (rb != null) 
                 {
-                    lookingAtObject = hit.collider.GetComponent<IGrabableItem>();
+                    rb.isKinematic = true;
                 }
-                OnGrab();
+
+                objToGrab.transform.position = grabPlacement.position;
+                objToGrab.transform.SetParent(this.transform);
+            }
+
+            void EnterBlueprintMode()
+            {
+                GameObject objectToPlace = grabbedObject.gameObject;
+                objectToPlace.transform.parent = null; 
+                // keep original data for the material + layer
+                Renderer renderer = objectToPlace.GetComponent<Renderer>();
+                if (renderer != null) 
+                {
+                    originalMaterial = renderer.material;
+                    renderer.material = ghostMaterial; // Change to blueprint material
+                }
+                originalLayer = objectToPlace.layer;
+                    
+                // Set blueprint mode 
+                isBlueprintMode = true;
+
+                InScreenUI.Instance.SetToolTipText("Release to place object");
+            }
+            
+            [ServerRpc]
+            private void RPC_InformServerOnGrab()
+            {
+                Debug.Log("Received Grab Message from observer");
+                PickupObject();
+                BroadcastPickupToClients();
+            }
+            
+            [ObserversRpc(ExcludeOwner = true)]
+            void BroadcastPickupToClients(){
+                PickupObject();
+            }
+            
+            [ServerRpc]
+            private void RPC_InformServerOnPlace(Vector3 position, Quaternion rotation)
+            {
+                Debug.Log("Received Grab Message from observer");
+                PlaceObjectAt(position, rotation);
+                BroadcastOnPlaceToClients(position, rotation);
+            }
+            
+            [ObserversRpc(ExcludeOwner = true)]
+            void BroadcastOnPlaceToClients(Vector3 position, Quaternion rotation){
+                PlaceObjectAt(position, rotation);
             }
 
             // Called when grab button is released
             public void OnGrabRelease()
             {
                 isGrabButtonHeld = false;
-                
                 //move the box if we are in blueprint mode 
                 if (isBlueprintMode && grabbedObject != null)
                 {
@@ -262,15 +285,37 @@ namespace Networking
                     {
                         renderer.material = originalMaterial;
                     }
-
+                    //inform server 
+                    RPC_InformServerOnPlace(objectToPlace.transform.position, objectToPlace.transform.rotation);
+                    
                     //Reset variables
                     grabbedObject = null;
                     isBlueprintMode = false;
 
                     // Update UI
-
                     InScreenUI.Instance.SetToolTipText("");
                 }
+            }
+
+            void PlaceObjectAt(Vector3 position, Quaternion rotation)
+            {
+                if(grabbedObject == null) {return;}
+                
+                GameObject objectToPlace = grabbedObject.gameObject;
+                //unparent the object 
+                objectToPlace.transform.SetParent(null);
+                //reset its rigidbody status
+                //Restore physics
+                Rigidbody rb = objectToPlace.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.isKinematic = false;
+                }
+                //update the position and rotation
+                objectToPlace.transform.position = position;
+                objectToPlace.transform.rotation = rotation;
+                
+                grabbedObject = null;
             }
     }
 }
