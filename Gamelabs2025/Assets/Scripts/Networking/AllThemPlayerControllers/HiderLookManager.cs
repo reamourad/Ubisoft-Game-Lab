@@ -33,10 +33,10 @@ public class HiderLookManager : NetworkBehaviour
             Debug.DrawLine(transform.position, hit.point, Color.red);
             currentLookTarget = hit.collider.gameObject;
         }
-        var grabable = currentLookTarget?.GetComponent<IGrabableItem>();
+        var grabable = currentLookTarget?.GetComponent<IHiderGrabableItem>();
         var connectable = currentLookTarget?.GetComponent<IConnectable>();
         
-        InScreenUI.Instance.SetToolTipText("");
+        InScreenUI.Instance?.SetToolTipText("");
         // Check if the object has the IGrabbable interface
         if (grabable != null)
         {
@@ -57,7 +57,6 @@ public class HiderLookManager : NetworkBehaviour
                                                    + " to connect  " + grabable.gameObject.name);
             }
         }
-
     }
 
     /// <summary>

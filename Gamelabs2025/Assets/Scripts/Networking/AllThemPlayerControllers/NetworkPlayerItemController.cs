@@ -119,7 +119,7 @@ namespace Networking
 
             void UpdateLookingAtObject()
             {
-                if (hiderLookManager.GetCurrentLookTarget()?.GetComponent<IGrabableItem>() != null)
+                if (hiderLookManager.GetCurrentLookTarget()?.GetComponent<IHiderGrabableItem>() != null)
                 {
                     lookingAtObject = hiderLookManager.GetCurrentLookTarget(); 
                 }
