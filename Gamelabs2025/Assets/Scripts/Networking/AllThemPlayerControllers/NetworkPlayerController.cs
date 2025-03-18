@@ -70,11 +70,7 @@ namespace Networking
 
         public void UseItem(bool isUsing)
         {
-            if (usableItem == null)
-            {
-                usableItem = GetComponentInChildren<IUsableItem>();
-            }
-
+            usableItem = GetComponentInChildren<IUsableItem>();
             usableItem?.UseItem(isUsing);
         }
         
@@ -145,6 +141,31 @@ namespace Networking
             var cameraRot = cameraTransform.eulerAngles;
             var newRot = new Vector3(transform.eulerAngles.x, cameraRot.y, transform.eulerAngles.z);
             transform.rotation = Quaternion.Euler(newRot);
+        }
+
+        public Transform GetCamera()
+        {
+            return cameraTransform;
+        }
+
+        public Vector3 GetCameraForwardZeroedYNormalised()
+        {
+            return GetCameraForwardZeroedY().normalized;
+        }
+        
+        public Vector3 GetCameraRightZeroedYNormalised()
+        {
+            return GetCameraRightZeroedY().normalized;
+        }
+        
+        private Vector3 GetCameraForwardZeroedY()
+        {
+            return new Vector3(cameraTransform.transform.forward.x, 0, cameraTransform.transform.forward.z);
+        }
+        
+        private Vector3 GetCameraRightZeroedY()
+        {
+            return new Vector3(cameraTransform.transform.right.x, 0, cameraTransform.transform.right.z);
         }
     }
 }

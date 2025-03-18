@@ -14,9 +14,6 @@ namespace Networking
         private GameObject hiderCameraPrefab;
         [FormerlySerializedAs("hiderCameraTransform")] [SerializeField]
         private Transform hiderCameraTargetTransform;
-        [SerializeField]
-        private GameObject seekerRightHandTrf;
-        
         private GameObject hiderPlayerCamera;
         
         public override void OnStartClient()
@@ -76,11 +73,6 @@ namespace Networking
                 camTrf.parent = fpsCam.transform;
                 camTrf.localPosition = Vector3.zero;
                 camTrf.localRotation = Quaternion.identity;
-                
-                //Move the hand under camera
-                seekerRightHandTrf.transform.parent = camTrf;
-                seekerRightHandTrf.transform.localPosition = Vector3.zero;
-                seekerRightHandTrf.transform.localRotation = Quaternion.identity;
                 
                 GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(camTrf);
             }));

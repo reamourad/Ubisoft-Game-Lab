@@ -11,7 +11,7 @@ using UnityEngine;
 //TODO: RENAME THIS TO PlayerInputController @Vishnu
 public class TestPlayerInputController : NetworkBehaviour
 {
-    [SerializeField] private InputReader inputReader;
+    private InputReader inputReader;
     [SerializeField] private GameObject playerVisuals;
     [SerializeField] private Transform playerItemHolderRight;
     
@@ -47,6 +47,7 @@ public class TestPlayerInputController : NetworkBehaviour
             return;
         }
         
+        inputReader = InputReader.Instance;
         inputReader.OnUseEvent += ClientHandleItemUsage;
         inputReader.OnMoveEvent += ClientHandleMove;
         inputReader.OnLookEvent += ClientHandleLook;
@@ -87,17 +88,20 @@ public class TestPlayerInputController : NetworkBehaviour
     private void ClientHandleItemUsage(bool use)
     {
         Debug.Log($"Item Use {use}");
-        playerController.UseItem(use);
+        if(playerController != null) 
+            playerController.UseItem(use);
     }
 
     private void ClientHandleGrabRelease()
     {
-        playerItemController.OnGrabRelease(); 
+        if(playerItemController != null) 
+            playerItemController.OnGrabRelease(); 
     }
     
     private void ClientHandleGrab()
     {
-        playerItemController.OnGrab(); 
+        if(playerItemController != null) 
+            playerItemController.OnGrab(); 
     }
     
     private void ClientHandleConnectItems()
