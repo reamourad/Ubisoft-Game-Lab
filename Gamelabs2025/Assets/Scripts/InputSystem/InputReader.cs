@@ -9,8 +9,6 @@ using UnityEngine.PlayerLoop;
 public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap.IUIActions
 {
     //making it into a singleton accessible in all classes
-    public static InputReader Instance { get; private set; }
-    
     public InputMap inputMap;
     public float movementInputDuration;
     public bool movementInputDetected;
@@ -26,6 +24,11 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<Vector2> OnLookEvent;
     public event Action OnPlacementModeEvent;
     public event Action OnConnectItemsEvent;
+
+    public event Action<uint> OnEquipInventoryItemEvent;
+    public event Action OnToggleEquippedItemEvent;
+    
+    public event Action OnDropItemEvent;
     
     private static bool isGamepad = false;
 
@@ -45,34 +48,34 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action OnWalkToggled;
     
 
-    private void OnEnable()
+    private static InputReader _instance = null;
+
+    public static InputReader Instance
     {
-        //singleton initialization
-        if (Instance == null)
+        get
         {
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Debug.LogWarning("Multiple InputReaders found! Using the first instance.");
-            return;
-        }
-        
-        //initialize the input map
-        if (inputMap == null)
-        {
-            inputMap = new InputMap();
-            
-            inputMap.Gameplay.SetCallbacks(this);
-            inputMap.UI.SetCallbacks(this);
-            
-            //start with the gameplay inputs
-            SetToGameplayInputs();
+            if (_instance == null)
+            {
+                _instance = Resources.Load<InputReader>("InputReaderAsset");
+                _instance.Initialise();
+            }
+            return _instance;
         }
     }
-
+    private void Initialise()
+    {
+        inputMap = new InputMap();
+        inputMap.Gameplay.SetCallbacks(this);
+        inputMap.UI.SetCallbacks(this);
+        //start with the gameplay inputs
+        SetToGameplayInputs();
+    }
+    
     public void OnDisable()
     {
+        if(inputMap == null)
+            return;
+        
         inputMap.Gameplay.Disable();
         inputMap.UI.Disable();
     }
@@ -148,6 +151,30 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         }
     }
 
+    public void OnEquipInventoryItem1(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnEquipInventoryItemEvent?.Invoke(1);
+    }
+
+    public void OnEquipInventoryItem2(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnEquipInventoryItemEvent?.Invoke(2);
+    }
+
+    public void OnToggleEquipInventoryItem(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnToggleEquippedItemEvent?.Invoke();
+    }
+
+    public void OnDrop(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnDropItemEvent?.Invoke();
+    }
+
     public static string GetCurrentBindingText(InputAction action)
     {
         // This is a bit of a hack, it has to be called from a FixedUpdate or Update method to work properly
@@ -179,4 +206,5 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     {
         OnCloseUIEvent?.Invoke();
     }
+    
 }

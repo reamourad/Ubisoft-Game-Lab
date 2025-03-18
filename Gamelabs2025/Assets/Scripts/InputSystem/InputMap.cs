@@ -144,6 +144,42 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipInventoryItem1"",
+                    ""type"": ""Button"",
+                    ""id"": ""8790bc70-7581-4257-b4e3-d715282070aa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipInventoryItem2"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c3026b0-6507-4d87-b290-c01ee1ca09ab"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleEquipInventoryItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""17751175-d39e-4b1b-aa31-ef320b7efc7c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""6dca67e0-a027-4b13-ac83-39fc1911ebf8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -322,6 +358,72 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""ConnectItems"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa0b1125-b64d-4d62-bb9f-1b7b65c292fc"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipInventoryItem1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6aa99809-1614-4eda-96a4-74945e5c3538"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipInventoryItem2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4437cf0b-0df3-4c3d-adc2-ee33eeb92404"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleEquipInventoryItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""828ab629-4960-4b18-9505-7573a923ded6"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleEquipInventoryItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3bf38423-8aa3-4fd0-bc3e-d30d2acd61b4"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e6a45b6-d942-4a54-b2a8-ef448404c07a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -450,6 +552,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Gameplay_PlacementMode = m_Gameplay.FindAction("PlacementMode", throwIfNotFound: true);
         m_Gameplay_UseItem = m_Gameplay.FindAction("UseItem", throwIfNotFound: true);
         m_Gameplay_ConnectItems = m_Gameplay.FindAction("ConnectItems", throwIfNotFound: true);
+        m_Gameplay_EquipInventoryItem1 = m_Gameplay.FindAction("EquipInventoryItem1", throwIfNotFound: true);
+        m_Gameplay_EquipInventoryItem2 = m_Gameplay.FindAction("EquipInventoryItem2", throwIfNotFound: true);
+        m_Gameplay_ToggleEquipInventoryItem = m_Gameplay.FindAction("ToggleEquipInventoryItem", throwIfNotFound: true);
+        m_Gameplay_Drop = m_Gameplay.FindAction("Drop", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CCTVSwitchCameras = m_UI.FindAction("CCTVSwitchCameras", throwIfNotFound: true);
@@ -541,6 +647,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_PlacementMode;
     private readonly InputAction m_Gameplay_UseItem;
     private readonly InputAction m_Gameplay_ConnectItems;
+    private readonly InputAction m_Gameplay_EquipInventoryItem1;
+    private readonly InputAction m_Gameplay_EquipInventoryItem2;
+    private readonly InputAction m_Gameplay_ToggleEquipInventoryItem;
+    private readonly InputAction m_Gameplay_Drop;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -576,6 +686,22 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/ConnectItems".
         /// </summary>
         public InputAction @ConnectItems => m_Wrapper.m_Gameplay_ConnectItems;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/EquipInventoryItem1".
+        /// </summary>
+        public InputAction @EquipInventoryItem1 => m_Wrapper.m_Gameplay_EquipInventoryItem1;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/EquipInventoryItem2".
+        /// </summary>
+        public InputAction @EquipInventoryItem2 => m_Wrapper.m_Gameplay_EquipInventoryItem2;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/ToggleEquipInventoryItem".
+        /// </summary>
+        public InputAction @ToggleEquipInventoryItem => m_Wrapper.m_Gameplay_ToggleEquipInventoryItem;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Drop".
+        /// </summary>
+        public InputAction @Drop => m_Wrapper.m_Gameplay_Drop;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -620,6 +746,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @ConnectItems.started += instance.OnConnectItems;
             @ConnectItems.performed += instance.OnConnectItems;
             @ConnectItems.canceled += instance.OnConnectItems;
+            @EquipInventoryItem1.started += instance.OnEquipInventoryItem1;
+            @EquipInventoryItem1.performed += instance.OnEquipInventoryItem1;
+            @EquipInventoryItem1.canceled += instance.OnEquipInventoryItem1;
+            @EquipInventoryItem2.started += instance.OnEquipInventoryItem2;
+            @EquipInventoryItem2.performed += instance.OnEquipInventoryItem2;
+            @EquipInventoryItem2.canceled += instance.OnEquipInventoryItem2;
+            @ToggleEquipInventoryItem.started += instance.OnToggleEquipInventoryItem;
+            @ToggleEquipInventoryItem.performed += instance.OnToggleEquipInventoryItem;
+            @ToggleEquipInventoryItem.canceled += instance.OnToggleEquipInventoryItem;
+            @Drop.started += instance.OnDrop;
+            @Drop.performed += instance.OnDrop;
+            @Drop.canceled += instance.OnDrop;
         }
 
         /// <summary>
@@ -649,6 +787,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @ConnectItems.started -= instance.OnConnectItems;
             @ConnectItems.performed -= instance.OnConnectItems;
             @ConnectItems.canceled -= instance.OnConnectItems;
+            @EquipInventoryItem1.started -= instance.OnEquipInventoryItem1;
+            @EquipInventoryItem1.performed -= instance.OnEquipInventoryItem1;
+            @EquipInventoryItem1.canceled -= instance.OnEquipInventoryItem1;
+            @EquipInventoryItem2.started -= instance.OnEquipInventoryItem2;
+            @EquipInventoryItem2.performed -= instance.OnEquipInventoryItem2;
+            @EquipInventoryItem2.canceled -= instance.OnEquipInventoryItem2;
+            @ToggleEquipInventoryItem.started -= instance.OnToggleEquipInventoryItem;
+            @ToggleEquipInventoryItem.performed -= instance.OnToggleEquipInventoryItem;
+            @ToggleEquipInventoryItem.canceled -= instance.OnToggleEquipInventoryItem;
+            @Drop.started -= instance.OnDrop;
+            @Drop.performed -= instance.OnDrop;
+            @Drop.canceled -= instance.OnDrop;
         }
 
         /// <summary>
@@ -838,6 +988,34 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnConnectItems(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EquipInventoryItem1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEquipInventoryItem1(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EquipInventoryItem2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEquipInventoryItem2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleEquipInventoryItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleEquipInventoryItem(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Drop" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDrop(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

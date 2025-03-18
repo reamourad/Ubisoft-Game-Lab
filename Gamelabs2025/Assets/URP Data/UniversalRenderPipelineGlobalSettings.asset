@@ -189,7 +189,7 @@ MonoBehaviour:
       data:
         m_Version: 0
         m_StripUnusedPostProcessingVariants: 0
-        m_StripUnusedVariants: 1
+        m_StripUnusedVariants: 0
         m_StripScreenCoordOverrideVariants: 1
     - rid: 4173280581189369972
       type: {class: GPUResidentDrawerResources, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.GPUDriven.Runtime}
