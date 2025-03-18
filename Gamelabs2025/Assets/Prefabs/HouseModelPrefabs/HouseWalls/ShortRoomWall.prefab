@@ -545,25 +545,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6348342292929283828}
     m_Modifications:
-    - target: {fileID: 337772699128986758, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 671173656054006525, guid: 53f7542084cab894bae2a3fea24f7c29, type: 3}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5220909
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5220912
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5220912
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -571,11 +567,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.039716337
+      value: -0.03951
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.02687455
+      value: 0.02687
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalRotation.w
