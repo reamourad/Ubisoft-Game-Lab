@@ -21366,6 +21366,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_Seeker
       objectReference: {fileID: 0}
+    - target: {fileID: 7577582542216918470, guid: b035d9798899cc449882e67c2a224cc3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9205012861180938949, guid: b035d9798899cc449882e67c2a224cc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.9535259
@@ -27585,6 +27589,10 @@ PrefabInstance:
     - target: {fileID: 8429881023617595796, guid: 2fbce9b8a7baa444289093c09e0d6dc4, type: 3}
       propertyPath: m_Name
       value: Player_Hider
+      objectReference: {fileID: 0}
+    - target: {fileID: 8429881023617595796, guid: 2fbce9b8a7baa444289093c09e0d6dc4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
