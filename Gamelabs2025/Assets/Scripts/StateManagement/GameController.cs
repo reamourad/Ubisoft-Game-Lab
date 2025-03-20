@@ -34,6 +34,9 @@ namespace StateManagement
         [SerializeField] private int gameTimeSeconds = 480;
         [SerializeField] private NetworkAnimator doorAnimator;
         
+        [Header("Particles")]
+        [SerializeField] private GameObject vacuumedSuckedParticles;
+        
         private GameStage currentStage = GameStage.None;
         private List<NetworkObject> players;
         private readonly SyncVar<PlayerRole.RoleType> GameWinner = new SyncVar<PlayerRole.RoleType>(PlayerRole.RoleType.None);
@@ -241,17 +244,26 @@ namespace StateManagement
                 
             if(currentStage != GameStage.Game)
                 return;
-            
+
             var hider = players.Find(a => a.GetComponent<PlayerRole>().Role == PlayerRole.RoleType.Hider);
-            if(hider != null)
+            if (hider != null)
+            {
+                RPC_SpawnDustParticles(hider.transform.position + hider.GetComponent<Rigidbody>().centerOfMass);
                 hider.Despawn();
-            
+            }
+
             Networking.TimeManager.Instance.StopActiveTimer();
             GameWinner.Value = PlayerRole.RoleType.Seeker;
             StartCoroutine(DelayedInvoke(() =>
             {
                 SwitchGameStage(GameStage.Postgame);
             }, 3f));
+        }
+
+        [ObserversRpc]
+        private void RPC_SpawnDustParticles(Vector3 position)
+        {
+            var go = Instantiate(vacuumedSuckedParticles, position, Quaternion.identity);
         }
 
         [ServerRpc(RequireOwnership = false)]
