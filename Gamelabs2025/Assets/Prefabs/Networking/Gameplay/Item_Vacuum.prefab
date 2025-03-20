@@ -137,6 +137,9 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 2866075501819036166}
   _networkObjectCache: {fileID: 2866075501819036166}
+  maxPower: 100
+  rechargeRatePerSec: 15
+  useRatePerSec: 25
   worldDummyRef: {fileID: 4516739179589109691, guid: 2cfced3a1112ffb4aacfcf01ee01ece9, type: 3}
   triggerVolume: {fileID: 3929786879222386344}
   suctionPoint: {fileID: 4828172100082360110}

@@ -418,6 +418,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 5408301307720291325}
   _networkObjectCache: {fileID: 5408301307720291325}
+  fpsGraphicsObject: {fileID: 6197334997823422946}
   hiderCameraPrefab: {fileID: 0}
   hiderCameraTargetTransform: {fileID: 0}
 --- !u!114 &6249505558912432160

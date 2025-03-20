@@ -10,10 +10,16 @@ namespace Networking
 {
     public class PlayerInitialiser : NetworkBehaviour
     {
-        [SerializeField]
+        [Header("Seeker"), SerializeField]
+        private GameObject fpsGraphicsObject;
+        
+        [Header("Hider"), SerializeField]
+        
         private GameObject hiderCameraPrefab;
+        
         [FormerlySerializedAs("hiderCameraTransform")] [SerializeField]
         private Transform hiderCameraTargetTransform;
+        
         private GameObject hiderPlayerCamera;
         
         public override void OnStartClient()
@@ -75,6 +81,8 @@ namespace Networking
                 camTrf.localRotation = Quaternion.identity;
                 
                 GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(camTrf);
+                if(fpsGraphicsObject != null)
+                    fpsGraphicsObject.SetActive(false);
             }));
             
         }

@@ -3212,6 +3212,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8932471862698213399}
     m_Modifications:
+    - target: {fileID: 149410354791811053, guid: 1558d4efe30943344921bc018a100494, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 964259816102411016, guid: 1558d4efe30943344921bc018a100494, type: 3}
       propertyPath: m_Name
       value: LongRoomWall
