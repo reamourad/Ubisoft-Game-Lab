@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Networking
 {
     [RequireComponent(typeof(HiderLookManager))]
-    public class NetworkPlayerItemController : NetworkBehaviour
+    public class NetworkPlayerGrabController : NetworkBehaviour
     {
         [SerializeField] private int grabRange;
     
@@ -60,6 +60,11 @@ namespace Networking
                 objectToPlace.layer = IGNORE_RAYCAST_LAYER;
                 
                 Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+                if (!playerCamera)
+                {
+                    playerCamera = Camera.main;
+                }
                 
                 Ray screenCenterRay = playerCamera.ScreenPointToRay(screenCenter);
                 
@@ -68,7 +73,6 @@ namespace Networking
                 //Raycast check if the object is in front of player 
                 if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabRange, ~LayerMask.GetMask("Player", "Ignore Raycast"), QueryTriggerInteraction.Ignore))
                 {
-                    Debug.Log(hit.collider.gameObject);
                     Vector3 placementPosition = hit.point;
                     
                     /*TODO: if the hit collider game object is not a valid placement, we want to send a ray from the item down until it hits something,
@@ -123,6 +127,10 @@ namespace Networking
                 {
                     lookingAtObject = hiderLookManager.GetCurrentLookTarget(); 
                 }
+                else
+                {
+                    lookingAtObject = null;
+                }
             }
             
 
@@ -134,6 +142,7 @@ namespace Networking
                 //grab mechanic
                 if (grabbedObject == null)
                 {
+                   
                     PickupObject();
                     //inform server 
                     RPC_InformServerOnGrab();
@@ -150,8 +159,8 @@ namespace Networking
             {
                 //nothing happens if youre not currently looking at something
                 if (lookingAtObject == null) { return; }
-                    
-                                
+                
+                hiderLookManager.SetActive(false); 
                 // Move to object to grab placement and parent with the player
                 grabbedObject = lookingAtObject;
                 Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
@@ -166,6 +175,7 @@ namespace Networking
 
             void EnterBlueprintMode()
             {
+                hiderLookManager.SetActive(true);
                 grabbedObject.transform.parent = null; 
                 // keep original data for the material + layer
                 Renderer renderer = grabbedObject.GetComponent<Renderer>();

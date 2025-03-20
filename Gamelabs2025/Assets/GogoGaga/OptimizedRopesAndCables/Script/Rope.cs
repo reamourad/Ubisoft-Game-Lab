@@ -101,8 +101,52 @@ namespace GogoGaga.OptimizedRopesAndCables
         
         // Cache for NavMesh adjusted points
         private List<Vector3> navMeshAdjustedPoints = new List<Vector3>();
+        public delegate void NavMeshCollisionModeChangedHandler(bool isNavMeshMode);
+        public event NavMeshCollisionModeChangedHandler OnNavMeshCollisionModeChanged;
+
         
         public bool IsPrefab => gameObject.scene.rootCount == 0;
+        
+        public Vector3[] GetCurrentRopePoints()
+        {
+            LineRenderer lineRenderer = GetComponent<LineRenderer>();
+            if (lineRenderer != null)
+            {
+                Vector3[] points = new Vector3[lineRenderer.positionCount];
+                lineRenderer.GetPositions(points);
+                return points;
+            }
+            return null;
+        }
+
+        public static Rope CreateRope(GameObject ropePrefab, Transform start, Transform end)
+        {
+            GameObject ropeObject = Instantiate(ropePrefab, Vector3.zero, Quaternion.identity);
+            Rope rope = ropeObject.GetComponent<Rope>();
+    
+            // Ensure initialization before setting points
+            rope.InitializeComponents();
+    
+            // Now set the points
+            rope.SetStartPoint(start, true);
+            rope.SetEndPoint(end, true);
+    
+            return rope;
+        }
+        
+        // In your Rope class
+        public void InitializeComponents()
+        {
+            // Initialize all necessary components here
+            lineRenderer = GetComponent<LineRenderer>();
+            if (lineRenderer == null)
+            {
+                lineRenderer = gameObject.AddComponent<LineRenderer>();
+            }
+            navMeshPath = new NavMeshPath();
+            // Other initialization
+        }
+
         
         private void Start()
         {
@@ -112,7 +156,7 @@ namespace GogoGaga.OptimizedRopesAndCables
                 currentValue = GetMidPoint();
                 targetValue = currentValue;
                 currentVelocity = Vector3.zero;
-                navMeshPath = new NavMeshPath(); // Add this line
+                navMeshPath = new NavMeshPath();
                 SetSplinePoint();
             }
         }
@@ -314,7 +358,12 @@ namespace GogoGaga.OptimizedRopesAndCables
 
         private void SetRopePointsFromBezier(Vector3 midControlPoint)
         {
-            if (lineRenderer.positionCount != linePoints + 1)
+            Debug.Log(lineRenderer);
+            if (lineRenderer == null)
+            {
+                lineRenderer = GetComponent<LineRenderer>();
+            }
+            if (lineRenderer != null && lineRenderer.positionCount != linePoints + 1)
             {
                 lineRenderer.positionCount = linePoints + 1;
             }
@@ -510,6 +559,7 @@ namespace GogoGaga.OptimizedRopesAndCables
             if (!useNavMeshCollision)
             {
                 useNavMeshCollision = true;
+                OnNavMeshCollisionModeChanged?.Invoke(true);
                 RecalculateRope();
             }
         }
@@ -519,6 +569,7 @@ namespace GogoGaga.OptimizedRopesAndCables
             if (useNavMeshCollision)
             {
                 useNavMeshCollision = false;
+                OnNavMeshCollisionModeChanged?.Invoke(false);
                 RecalculateRope();
             }
         }

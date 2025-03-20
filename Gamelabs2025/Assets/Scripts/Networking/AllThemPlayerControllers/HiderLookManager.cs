@@ -8,6 +8,7 @@ public class HiderLookManager : NetworkBehaviour
     [SerializeField] private LayerMask itemLayerMask;
     [SerializeField] private float lookRange = 3.0f;
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.5f, 1.0f, 0.1f);
+    public bool isActive = true; 
 
     // The current object the player is looking at
     private GameObject currentLookTarget;
@@ -23,7 +24,7 @@ public class HiderLookManager : NetworkBehaviour
 
     private void UpdateLookingAt()
     {
-        if (!IsOwner) { return;}
+        if (!IsOwner || !isActive) { return;}
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;
         Quaternion orientation = transform.rotation;
@@ -59,9 +60,17 @@ public class HiderLookManager : NetworkBehaviour
         }
     }
 
-    /// <summary>
+
+    public void SetActive(bool active)
+    {
+        isActive = active; 
+        if (active == false)
+        {
+            InScreenUI.Instance?.SetToolTipText("");
+        }
+    }
+    
     /// Get the object player is currently looking at
-    /// </summary>
     public GameObject GetCurrentLookTarget()
     {
         return currentLookTarget;
