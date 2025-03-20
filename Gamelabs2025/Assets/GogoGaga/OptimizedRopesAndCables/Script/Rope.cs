@@ -358,7 +358,6 @@ namespace GogoGaga.OptimizedRopesAndCables
 
         private void SetRopePointsFromBezier(Vector3 midControlPoint)
         {
-            Debug.Log(lineRenderer);
             if (lineRenderer == null)
             {
                 lineRenderer = GetComponent<LineRenderer>();
