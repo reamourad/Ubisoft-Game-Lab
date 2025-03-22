@@ -22,8 +22,6 @@ namespace GogoGaga.OptimizedRopesAndCables
         private MeshRenderer meshRenderer;
         private Mesh ropeMesh;
         private bool isStartOrEndPointMissing;
-        private bool navMeshCollisionMode = false;
-
 
         // Use fields to store lists
         private List<Vector3> vertices = new List<Vector3>();
@@ -80,33 +78,9 @@ namespace GogoGaga.OptimizedRopesAndCables
                 meshFilter = GetComponent<MeshFilter>();
             if (!meshRenderer)
                 meshRenderer = GetComponent<MeshRenderer>();
-            
-            if (rope != null)
-            {
-                // You'll need to add an event in the Rope class for this
-                rope.OnNavMeshCollisionModeChanged += HandleNavMeshModeChanged;
-            }
 
             CheckEndPoints();
         }
-        
-        void HandleNavMeshModeChanged(bool isNavMeshMode)
-        {
-            navMeshCollisionMode = isNavMeshMode;
-    
-            // Toggle visibility based on mode
-            /*
-            if (lineRenderer != null)
-                lineRenderer.enabled = !navMeshCollisionMode;
-                */
-        
-            if (meshRenderer != null)
-                meshRenderer.enabled = true; // Always keep the mesh visible
-    
-            // Force mesh regeneration to ensure it follows the current path
-            DelayedGenerateMesh();
-        }
-
 
         private void CheckEndPoints()
         {

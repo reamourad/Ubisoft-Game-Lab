@@ -11,10 +11,12 @@ namespace Networking
     {
         private GameObject lookingAtObject = null;
         private HiderLookManager hiderLookManager;
-        private bool isInConnectionMode = false;
-        private bool isATrigger = false;
+        public bool isInConnectionMode = false;
+        private bool lookingAtObjectIsATrigger = false;
+        private bool connectedToObjectIsATrigger = false;
         [SerializeField] private GameObject ropePrefab;
-        [SerializeField] private Transform wireGrab; 
+        [SerializeField] private Transform wireGrab;
+        private Rope currentRope; 
         
         //when looking at a trigger or reaction object it should say "Press A to grab a wire"
         //Once you pressed A, the rope should follow you around 
@@ -29,17 +31,30 @@ namespace Networking
         
         public void OnConnectButtonPressed()
         {
-            if (lookingAtObject == null) { return; }
             
+            Debug.Log("Pressed Connect Button");
             //this is the first object you connect to, connect the rope from the object to you 
             if (!isInConnectionMode)
             {
+                if (lookingAtObject == null) { return; }
                 isInConnectionMode = true;
                 //we want to create a rope from the object to the ghost 
-                Rope.CreateRope(ropePrefab, lookingAtObject.transform, this.wireGrab);
+                //TODO: we can make this a bool and check if it created a rope
+                currentRope = Rope.CreateRope(ropePrefab, lookingAtObject.transform, this.wireGrab);
+                connectedToObjectIsATrigger = lookingAtObjectIsATrigger; 
                 Debug.Log("You are now in connection mode");
             }
-            
+            else
+            {
+                Debug.Log("Currently in Connection Mode");
+                //not looking at a relevant object 
+                if (!lookingAtObject)
+                {
+                    isInConnectionMode = false;
+                    Destroy(currentRope.gameObject); 
+                    Debug.Log("You are now in normal mode");
+                }
+            }
         }
 
         public void Update()
@@ -50,17 +65,36 @@ namespace Networking
                 //check if its a trigger or a reaction object 
                 if (lookingAtObject.GetComponent<ITriggerItem>() != null)
                 {
-                    isATrigger = true;
+                    lookingAtObjectIsATrigger = true;
                 }
                 else
                 {
-                    isATrigger = false;
+                    lookingAtObjectIsATrigger = false;
+                }
+                
+                //if you are in connection mode, you need to check if you can connect to that item
+                if (isInConnectionMode)
+                {
+                    if ((connectedToObjectIsATrigger && !lookingAtObjectIsATrigger) || (!connectedToObjectIsATrigger && lookingAtObjectIsATrigger))
+                    {
+                        InScreenUI.Instance.SetToolTipText("Press " + 
+                                                           InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.ConnectItems) 
+                                                           + " to connect"); 
+                    }
                 }
             }
             else
             {
                 lookingAtObject = null;
+                if (isInConnectionMode)
+                {
+                    InScreenUI.Instance.SetToolTipText("Press " + 
+                                                       InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.ConnectItems) 
+                                                       + " to cancel connection");
+                }
             }
+            
+            
         }
     }
 

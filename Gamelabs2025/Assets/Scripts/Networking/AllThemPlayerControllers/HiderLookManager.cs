@@ -1,5 +1,6 @@
 using FishNet.Object;
 using Items.Interfaces;
+using Networking;
 using UnityEngine;
 using Utils;
 
@@ -8,10 +9,17 @@ public class HiderLookManager : NetworkBehaviour
     [SerializeField] private LayerMask itemLayerMask;
     [SerializeField] private float lookRange = 3.0f;
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.5f, 1.0f, 0.1f);
-    public bool isActive = true; 
+    public bool isActive = true;
+    
+    private NetworkPlayerConnectionController playerConnectionController;
 
     // The current object the player is looking at
     private GameObject currentLookTarget;
+    
+    private void Start()
+    {
+        playerConnectionController = GetComponent<NetworkPlayerConnectionController>();
+    }
     
     private void Update()
     {
@@ -37,27 +45,37 @@ public class HiderLookManager : NetworkBehaviour
         var grabable = currentLookTarget?.GetComponent<IHiderGrabableItem>();
         var connectable = currentLookTarget?.GetComponent<IConnectable>();
         
-        InScreenUI.Instance?.SetToolTipText("");
-        // Check if the object has the IGrabbable interface
-        if (grabable != null)
+        //if its in connection mode we want to override grabable and it has control over the tooltip 
+        if (playerConnectionController.isInConnectionMode)
         {
-            if(InScreenUI.Instance != null)
-            {
-                InScreenUI.Instance.SetToolTipText("Press " + 
-                                                   InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.Grab) 
-                                                   + " to grab  " + grabable.gameObject.name);
-            }
+            grabable = null;
         }
+        else
+        {
+            InScreenUI.Instance?.SetToolTipText("");
+            // Check if the object has the IGrabbable interface
+            if (grabable != null)
+            {
+                if(InScreenUI.Instance != null)
+                {
+                    InScreenUI.Instance.SetToolTipText("Press " + 
+                                                       InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.Grab) 
+                                                       + " to grab  " + grabable.gameObject.name);
+                }
+            }
 
-        if (connectable != null)
-        {
-            if(InScreenUI.Instance != null)
+            if (connectable != null)
             {
-                InScreenUI.Instance.AddToolTipText("Press " + 
-                                                   InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.ConnectItems) 
-                                                   + " to connect  " + grabable.gameObject.name);
+                if(InScreenUI.Instance != null)
+                {
+                    InScreenUI.Instance.AddToolTipText("Press " + 
+                                                       InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.ConnectItems) 
+                                                       + " to connect  " + grabable.gameObject.name);
+                }
             }
         }
+        
+        
     }
 
 
