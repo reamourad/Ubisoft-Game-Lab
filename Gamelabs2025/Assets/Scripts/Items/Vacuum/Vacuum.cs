@@ -9,6 +9,7 @@ using Player;
 using Player.Inventory;
 using StateManagement;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Items
 {
@@ -28,16 +29,19 @@ namespace Items
             }
         }
 
-        [SerializeField] private NetworkObject worldDummyRef;
+        [Header("Power Params")]
+        [SerializeField] private float maxPower = 100f;
+        [FormerlySerializedAs("rechargeRate")] [SerializeField] private float rechargeRatePerSec = 1.5f;
+        [FormerlySerializedAs("useRate")] [SerializeField] private float useRatePerSec = 2.5f;
         
+        [Header("References and Other Params")]
+        [SerializeField] private NetworkObject worldDummyRef;
         [SerializeField] private SphereCollider triggerVolume;
         [SerializeField] private Transform suctionPoint;
         [SerializeField] private float suctionCompleteDetectionRadius=0.25f;
-        
         [SerializeField] private LayerMask layerMask;
         [SerializeField] private float vacuumSuctionRegular = 10;
         [SerializeField] private float vacuumSuctionPlayer = 10;
-        
         [SerializeField] private ParticleSystem particles;
         
         private Dictionary<Collider, VacuumCacheStruct> vacuumCache = new Dictionary<Collider, VacuumCacheStruct>();
@@ -48,12 +52,20 @@ namespace Items
         private Rigidbody parentRigidbody;
         private bool suckedPlayer = false;
         
+        private VacuumGui vacuumGui;
+        
         private void Start()
         {
             if(!IsServerStarted)
                 triggerVolume.gameObject.SetActive(false);
         }
-        
+
+        private void OnDestroy()
+        {
+            if(vacuumGui != null)
+                Destroy(vacuumGui.gameObject);
+        }
+
         public override void OnStartClient()
         {
             base.OnStartNetwork();
@@ -67,8 +79,16 @@ namespace Items
                 return;
             
             //if already attached to an owner
-            if(parentNo.IsOwner)
+            if (parentNo.IsOwner)
+            {
                 GiveOwnership(parentNo.Owner);
+                vacuumGui = Instantiate(Resources.Load<GameObject>("VacuumCanvas")).GetComponent<VacuumGui>();
+                VacuumPowerManager.Instance.Initialise(maxPower, useRatePerSec, rechargeRatePerSec);
+                VacuumPowerManager.Instance.OnPowerDepleted += () =>
+                {
+                    UseItem(false);
+                };
+            }
         }
         
         //Only called by player controller, which will only happen locally
@@ -76,8 +96,11 @@ namespace Items
         {
             Debug.Log($"Vacuum {isUsing} (IsOwner = {IsOwner})");
             if(localUsingFlag == isUsing) return;
+            if(isUsing && !VacuumPowerManager.Instance.HasPower)
+                return;
             localUsingFlag = isUsing;
             RPC_SendActivationRequestToServer(isUsing);
+            VacuumPowerManager.Instance.SetVacuumActiveStatus(isUsing);
             Debug.Log($"Vacuum Activation Request Sent!!");
         }
 
@@ -117,6 +140,13 @@ namespace Items
             {
                 particles.Stop();
             }
+        }
+
+        private void Update()
+        {
+            if(vacuumGui == null) return;
+            
+            vacuumGui.SetPowerPercentage(VacuumPowerManager.Instance.PowerPercentage);
         }
 
         void FixedUpdate()
