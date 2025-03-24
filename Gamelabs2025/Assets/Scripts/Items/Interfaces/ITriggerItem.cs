@@ -1,7 +1,10 @@
+using Items.Interfaces;
 using UnityEngine;
 
-public interface ITriggerItem
+public interface ITriggerItem : IConnectable
 {
-    public void Connect(Transform target);
-    public void Connect(IReactionItem reactionItem);
+
+    // Event that will be raised when trigger criteria is met
+    event System.Action<ITriggerItem> OnTriggerActivated;
+
 }

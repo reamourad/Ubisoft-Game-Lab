@@ -134,7 +134,33 @@ namespace GogoGaga.OptimizedRopesAndCables
                 }
             }
         }
+        public static Rope CreateRope(GameObject ropePrefab, Transform start, Transform end)
+        {
+            GameObject ropeObject = Instantiate(ropePrefab, Vector3.zero, Quaternion.identity);
+            Rope rope = ropeObject.GetComponent<Rope>();
 
+            // Ensure initialization before setting points
+            rope.InitializeComponents();
+
+            // Now set the points
+            rope.SetStartPoint(start, true);
+            rope.SetEndPoint(end, true);
+
+            return rope;
+        }
+        
+        public void InitializeComponents()
+        {
+            // Initialize all necessary components here
+            lineRenderer = GetComponent<LineRenderer>();
+            if (lineRenderer == null)
+            {
+                lineRenderer = gameObject.AddComponent<LineRenderer>();
+            }
+            navMeshPath = new NavMeshPath();
+            // Other initialization
+        }
+        
         private void InitializeLineRenderer()
         {
             if (!lineRenderer)

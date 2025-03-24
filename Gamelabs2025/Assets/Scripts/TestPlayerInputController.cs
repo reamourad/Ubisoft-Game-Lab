@@ -21,7 +21,8 @@ public class TestPlayerInputController : NetworkBehaviour
     private Vector2 moveInput;
     private NetworkPlayerController.PlayerInputData inputData = default;
     private NetworkPlayerController playerController;
-    private NetworkPlayerItemController playerItemController;
+    private NetworkPlayerGrabController _playerGrabController;
+    private NetworkPlayerConnectionController playerConnectionController;
     
     private void OnDestroy()
     {
@@ -33,7 +34,10 @@ public class TestPlayerInputController : NetworkBehaviour
         inputReader.OnLookEvent -= ClientHandleLook;
         inputReader.OnGrabReleaseEvent -= ClientHandleGrabRelease;
         inputReader.OnGrabActivateEvent -= ClientHandleGrab;
+        inputReader.OnConnectItemsEvent -= ClientHandleConnectItems;
     }
+
+
 
     public override void OnStartClient()
     {
@@ -49,9 +53,12 @@ public class TestPlayerInputController : NetworkBehaviour
         inputReader.OnLookEvent += ClientHandleLook;
         inputReader.OnGrabReleaseEvent += ClientHandleGrabRelease;
         inputReader.OnGrabActivateEvent += ClientHandleGrab;
+        inputReader.OnConnectItemsEvent += ClientHandleConnectItems;
+
         
         playerController = GetComponent<NetworkPlayerController>();
-        playerItemController = GetComponent<NetworkPlayerItemController>();
+        _playerGrabController = GetComponent<NetworkPlayerGrabController>();
+        playerConnectionController = GetComponent<NetworkPlayerConnectionController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //playerVisuals.SetActive(false);
@@ -87,13 +94,18 @@ public class TestPlayerInputController : NetworkBehaviour
 
     private void ClientHandleGrabRelease()
     {
-        if(playerItemController != null) 
-            playerItemController.OnGrabRelease(); 
+        if(_playerGrabController != null) 
+            _playerGrabController.OnGrabRelease(); 
     }
     
     private void ClientHandleGrab()
     {
-        if(playerItemController != null) 
-            playerItemController.OnGrab(); 
+        if(_playerGrabController != null) 
+            _playerGrabController.OnGrab(); 
+    }
+    
+    private void ClientHandleConnectItems()
+    {
+        playerConnectionController.OnConnectButtonPressed(); 
     }
 }

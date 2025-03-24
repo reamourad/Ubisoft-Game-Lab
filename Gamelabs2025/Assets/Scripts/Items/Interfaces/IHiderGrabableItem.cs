@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IGrabableItem
+public interface IHiderGrabableItem
 {
     GameObject gameObject { get; }
 }
