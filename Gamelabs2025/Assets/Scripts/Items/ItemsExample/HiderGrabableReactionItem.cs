@@ -1,22 +1,11 @@
+using GogoGaga.OptimizedRopesAndCables;
 using UnityEngine;
 
 public class HiderGrabableReactionItem : MonoBehaviour, IHiderGrabableItem, IReactionItem
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Rope rope { get; set; }
+    public void OnTrigger(ITriggerItem triggerItem)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public Transform WireAnchor { get; }
-    public void OnTrigger()
-    {
-        throw new System.NotImplementedException();
+        Debug.Log("I reacted to the object trigger.");
     }
 }

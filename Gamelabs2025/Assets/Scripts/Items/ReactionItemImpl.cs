@@ -1,4 +1,5 @@
 using System;
+using GogoGaga.OptimizedRopesAndCables;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
@@ -36,5 +37,11 @@ public class ReactionItemImpl : MonoBehaviour, IReactionItem
     private void HandlePlayerHoldingWire(bool isHolding)
     {
         meshRenderer.material = isHolding ? GhostMaterial : originalMaterial;
+    }
+
+    public Rope rope { get; set; }
+    public void OnTrigger(ITriggerItem triggerItem)
+    {
+        Debug.Log("I reacted to the object trigger.");
     }
 }

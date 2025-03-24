@@ -1,3 +1,5 @@
+using System;
+using GogoGaga.OptimizedRopesAndCables;
 using UnityEngine;
 
 public class HiderGrabableTriggerObject : MonoBehaviour, IHiderGrabableItem, ITriggerItem
@@ -11,16 +13,14 @@ public class HiderGrabableTriggerObject : MonoBehaviour, IHiderGrabableItem, ITr
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            OnTriggerActivated?.Invoke(this);
+        }
     }
+    
 
-    public void Connect(Transform target)
-    {
-        throw new System.NotImplementedException();
-    }
+    public Rope rope { get; set; }
 
-    public void Connect(IReactionItem reactionItem)
-    {
-        throw new System.NotImplementedException();
-    }
+    public event Action<ITriggerItem> OnTriggerActivated;
 }

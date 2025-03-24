@@ -3,6 +3,5 @@ using UnityEngine;
 
 public interface IReactionItem : IConnectable
 {
-    public Transform WireAnchor { get; }
-    public void OnTrigger();
+    public void OnTrigger(ITriggerItem triggerItem);
 }

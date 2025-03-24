@@ -10,10 +10,14 @@ namespace Networking
     public class NetworkPlayerConnectionController : NetworkBehaviour
     {
         private GameObject lookingAtObject = null;
-        private HiderLookManager hiderLookManager;
-        public bool isInConnectionMode = false;
+        private GameObject connectedToObject = null;
+        
         private bool lookingAtObjectIsATrigger = false;
         private bool connectedToObjectIsATrigger = false;
+        
+        private HiderLookManager hiderLookManager;
+        public bool isInConnectionMode = false;
+
         [SerializeField] private GameObject ropePrefab;
         [SerializeField] private Transform wireGrab;
         private Rope currentRope; 
@@ -38,21 +42,49 @@ namespace Networking
             {
                 if (lookingAtObject == null) { return; }
                 isInConnectionMode = true;
+                //remove any previous rope 
+                if (lookingAtObject.GetComponent<IConnectable>().rope != null)
+                {
+                    Destroy(lookingAtObject.GetComponent<IConnectable>().rope.gameObject);
+                }
+                
                 //we want to create a rope from the object to the ghost 
-                //TODO: we can make this a bool and check if it created a rope
                 currentRope = Rope.CreateRope(ropePrefab, lookingAtObject.transform, this.wireGrab);
+                lookingAtObject.GetComponent<IConnectable>().rope = currentRope;
+                connectedToObject = lookingAtObject;
                 connectedToObjectIsATrigger = lookingAtObjectIsATrigger; 
                 Debug.Log("You are now in connection mode");
             }
             else
             {
-                Debug.Log("Currently in Connection Mode");
-                //not looking at a relevant object 
+                isInConnectionMode = false;
+                //not looking at a relevant object, cancel the connection
                 if (!lookingAtObject)
                 {
-                    isInConnectionMode = false;
                     Destroy(currentRope.gameObject); 
-                    Debug.Log("You are now in normal mode");
+                }
+                else
+                {
+                    //connected two items together 
+                    currentRope.SetEndPoint(lookingAtObject.transform);
+
+                    ITriggerItem trigger = null;
+                    IReactionItem reaction = null; 
+                    // subscribe to the trigger's event
+                    if (connectedToObjectIsATrigger)
+                    {
+                        trigger = connectedToObject.GetComponent<ITriggerItem>();
+                        reaction = lookingAtObject.GetComponent<IReactionItem>();
+                    }
+                    else
+                    {
+                        trigger = lookingAtObject.GetComponent<ITriggerItem>();
+                        reaction = connectedToObject.GetComponent<IReactionItem>();
+                    }
+                    
+                    trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
+                    
+
                 }
             }
         }
@@ -75,11 +107,17 @@ namespace Networking
                 //if you are in connection mode, you need to check if you can connect to that item
                 if (isInConnectionMode)
                 {
-                    if ((connectedToObjectIsATrigger && !lookingAtObjectIsATrigger) || (!connectedToObjectIsATrigger && lookingAtObjectIsATrigger))
+                    if ((connectedToObjectIsATrigger && !lookingAtObjectIsATrigger) ||
+                        (!connectedToObjectIsATrigger && lookingAtObjectIsATrigger))
                     {
-                        InScreenUI.Instance.SetToolTipText("Press " + 
-                                                           InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.ConnectItems) 
-                                                           + " to connect"); 
+                        InScreenUI.Instance.SetToolTipText("Press " +
+                                                           InputReader.GetCurrentBindingText(InputReader.Instance
+                                                               .inputMap.Gameplay.ConnectItems)
+                                                           + " to connect");
+                    }
+                    else
+                    {
+                        lookingAtObject = null;
                     }
                 }
             }
