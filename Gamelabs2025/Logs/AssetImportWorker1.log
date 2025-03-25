@@ -15,7 +15,7 @@ E:/Github/Ubisoft-Game-Lab/Gamelabs2025
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-53195
+49250
 -job-worker-count
 7
 -background-job-worker-count
@@ -59,16 +59,16 @@ E:/Github/Ubisoft-Game-Lab/Gamelabs2025
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [25096]  Target information:
+Player connection [1720]  Target information:
 
-Player connection [25096]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 2430026671 [EditorId] 2430026671 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [1720]  * "[IP] 192.168.1.184 [Port] 0 [Flags] 2 [Guid] 358599626 [EditorId] 358599626 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [25096]  * "[IP] 192.168.72.2 [Port] 0 [Flags] 2 [Guid] 2430026671 [EditorId] 2430026671 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [1720]  * "[IP] 192.168.56.1 [Port] 0 [Flags] 2 [Guid] 358599626 [EditorId] 358599626 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [25096]  * "[IP] 192.168.1.194 [Port] 0 [Flags] 2 [Guid] 2430026671 [EditorId] 2430026671 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+Player connection [1720]  * "[IP] 192.168.72.2 [Port] 0 [Flags] 2 [Guid] 358599626 [EditorId] 358599626 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-6LT3KIC) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
 
-Player connection [25096] Host joined multi-casting on [225.0.0.222:54997]...
-Player connection [25096] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [1720] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [1720] Host joined alternative multi-casting on [225.0.0.222:34997]...
 JobSystem: Creating JobQueue using job-worker-count value 7
 Input System module state changed to: Initialized.
 [Physics::Module] Initialized fallback backend.
@@ -80,7 +80,7 @@ Library Redirect Path: Library/
 [Physics::Module] SDK Version: 4.1.2
 [Physics::Module] Integration Version: 1.0.0
 [Physics::Module] Threading Mode: Multi-Threaded
-Refreshing native plugins compatible for Editor in 2.21 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 2.34 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 6000.0.36f1 (9fe3b5f71dbb)
 [Subsystems] Discovering subsystems at path E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/Resources/UnitySubsystems
@@ -96,52 +96,52 @@ Initialize mono
 Mono path[0] = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/Managed'
 Mono path[1] = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56196
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56508
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: E:/Unity/UnityEditors/6000.0.36f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
-Registered in 0.004112 seconds.
-- Loaded All Assemblies, in  0.445 seconds
+Registered in 0.004462 seconds.
+- Loaded All Assemblies, in  0.506 seconds
 [usbmuxd] Start listen thread
 [usbmuxd] Listen thread started
 Native extension for iOS target not found
 Native extension for Android target not found
-Android Extension - Scanning For ADB Devices 1343 ms
+Android Extension - Scanning For ADB Devices 315 ms
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.784 seconds
-Domain Reload Profiling: 2228ms
-	BeginReloadAssembly (160ms)
+- Finished resetting the current domain, in  0.811 seconds
+Domain Reload Profiling: 1317ms
+	BeginReloadAssembly (181ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (42ms)
-	RebuildNativeTypeToScriptingClass (15ms)
-	initialDomainReloadingComplete (47ms)
-	LoadAllAssembliesAndSetupDomain (180ms)
-		LoadAssemblies (162ms)
+	RebuildCommonClasses (50ms)
+	RebuildNativeTypeToScriptingClass (19ms)
+	initialDomainReloadingComplete (55ms)
+	LoadAllAssembliesAndSetupDomain (201ms)
+		LoadAssemblies (182ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (175ms)
-			TypeCache.Refresh (173ms)
-				TypeCache.ScanAssembly (159ms)
+		AnalyzeDomain (195ms)
+			TypeCache.Refresh (193ms)
+				TypeCache.ScanAssembly (175ms)
 			BuildScriptInfoCaches (0ms)
 			ResolveRequiredComponents (1ms)
-	FinalizeReload (1784ms)
+	FinalizeReload (812ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (1724ms)
+		SetupLoadedEditorAssemblies (745ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (1460ms)
-			SetLoadedEditorAssemblies (4ms)
-			BeforeProcessingInitializeOnLoad (62ms)
-			ProcessInitializeOnLoadAttributes (130ms)
-			ProcessInitializeOnLoadMethodAttributes (67ms)
+			InitializePlatformSupportModulesInManaged (446ms)
+			SetLoadedEditorAssemblies (6ms)
+			BeforeProcessingInitializeOnLoad (68ms)
+			ProcessInitializeOnLoadAttributes (142ms)
+			ProcessInitializeOnLoadMethodAttributes (84ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -154,9 +154,9 @@ Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInter
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory is not a mono symbol file
-- Loaded All Assemblies, in  1.074 seconds
+- Loaded All Assemblies, in  1.188 seconds
 Assembly reference Packages/com.unity.cinemachine/Editor/Samples/ExposeHDRPInternals/HDRP-Editor-ref.asmref has no target assembly definition
-Refreshing native plugins compatible for Editor in 1.25 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.67 ms, found 3 plugins.
 Native extension for iOS target not found
 Native extension for Android target not found
 Native extension for WindowsStandalone target not found
@@ -170,157 +170,77 @@ Package Manager log level set to [2]
 [MODES] ModeService[none].LoadModes
 [MODES] Loading mode Default (0) for mode-current-id-Gamelabs2025
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.148 seconds
-Domain Reload Profiling: 2221ms
-	BeginReloadAssembly (227ms)
+- Finished resetting the current domain, in  1.506 seconds
+Domain Reload Profiling: 2692ms
+	BeginReloadAssembly (224ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (6ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (37ms)
-	RebuildCommonClasses (54ms)
-	RebuildNativeTypeToScriptingClass (15ms)
-	initialDomainReloadingComplete (45ms)
-	LoadAllAssembliesAndSetupDomain (731ms)
-		LoadAssemblies (489ms)
+		CreateAndSetChildDomain (39ms)
+	RebuildCommonClasses (46ms)
+	RebuildNativeTypeToScriptingClass (18ms)
+	initialDomainReloadingComplete (50ms)
+	LoadAllAssembliesAndSetupDomain (847ms)
+		LoadAssemblies (515ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (395ms)
-			TypeCache.Refresh (301ms)
-				TypeCache.ScanAssembly (275ms)
-			BuildScriptInfoCaches (73ms)
-			ResolveRequiredComponents (16ms)
-	FinalizeReload (1149ms)
+		AnalyzeDomain (477ms)
+			TypeCache.Refresh (368ms)
+				TypeCache.ScanAssembly (333ms)
+			BuildScriptInfoCaches (87ms)
+			ResolveRequiredComponents (17ms)
+	FinalizeReload (1506ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (951ms)
+		SetupLoadedEditorAssemblies (1267ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (17ms)
-			SetLoadedEditorAssemblies (6ms)
-			BeforeProcessingInitializeOnLoad (120ms)
-			ProcessInitializeOnLoadAttributes (675ms)
-			ProcessInitializeOnLoadMethodAttributes (131ms)
+			InitializePlatformSupportModulesInManaged (20ms)
+			SetLoadedEditorAssemblies (7ms)
+			BeforeProcessingInitializeOnLoad (141ms)
+			ProcessInitializeOnLoadAttributes (923ms)
+			ProcessInitializeOnLoadMethodAttributes (174ms)
 			AfterProcessingInitializeOnLoad (2ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (5ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.01 seconds
-Refreshing native plugins compatible for Editor in 1.08 ms, found 3 plugins.
+		AwakeInstancesAfterBackupRestoration (7ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 1.97 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 232 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 7736 unused Assets / (5.0 MB). Loaded Objects now: 8450.
-Memory consumption went from 190.9 MB to 185.9 MB.
-Total: 12.275300 ms (FindLiveObjects: 1.138200 ms CreateObjectMapping: 0.621200 ms MarkObjects: 6.527800 ms  DeleteObjects: 3.986600 ms)
+Unloading 7740 unused Assets / (5.3 MB). Loaded Objects now: 8454.
+Memory consumption went from 189.0 MB to 183.7 MB.
+Total: 15.539400 ms (FindLiveObjects: 1.641800 ms CreateObjectMapping: 0.934400 ms MarkObjects: 8.907300 ms  DeleteObjects: 4.053800 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 43132.338323 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomVariants/room2_modified.fbx
-  artifactKey: Guid(53f7542084cab894bae2a3fea24f7c29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomVariants/room2_modified.fbx using Guid(53f7542084cab894bae2a3fea24f7c29) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'bbeec280ad173de1bcc5022ca1ab1057') in 1.0990959 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 328
+  Time since last request: 6344.610197 seconds.
+  path: Assets/Prefabs/HouseModelPrefabs/RoomVariants/Room2_BigRoom.prefab
+  artifactKey: Guid(25fe5c5c5aa006c4a91f9feb26e6d829) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/HouseModelPrefabs/RoomVariants/Room2_BigRoom.prefab using Guid(25fe5c5c5aa006c4a91f9feb26e6d829) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '307454f9d3348aa70eeb8bacd0cc5d28') in 0.7654901 seconds
+Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1771
 
 ========================================================================
 Received Import Request.
-  Time since last request: 11.243778 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomDecor/bookshelf2_noBooks.prefab
-  artifactKey: Guid(9650de0e95229984eb42d94bd17b6856) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomDecor/bookshelf2_noBooks.prefab using Guid(9650de0e95229984eb42d94bd17b6856) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '0a927f8627a1eb1cba8acb645d4d4ce3') in 0.0286004 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 55
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000025 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomDecor/frame.prefab
-  artifactKey: Guid(1283aac94deabf44da1a3831e8a122f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomDecor/frame.prefab using Guid(1283aac94deabf44da1a3831e8a122f8) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'ae58414f4c3cc6236d8515896cfc8bbc') in 0.0488764 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 8
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomDecor/bookshelf2_prefab.prefab
-  artifactKey: Guid(32dfbdf6dd87a2844811e4c35f1f7df3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomDecor/bookshelf2_prefab.prefab using Guid(32dfbdf6dd87a2844811e4c35f1f7df3) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '1b833d14bf3e2adb56fcaf853d0d509e') in 0.0217376 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 71
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/RoomDecor/Old Table.prefab
-  artifactKey: Guid(eaa1542ed99c0a143ab89df271d64a47) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/RoomDecor/Old Table.prefab using Guid(eaa1542ed99c0a143ab89df271d64a47) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '960e81b95d013ae21fa564edbb721d6b') in 0.0304945 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 336
-
-========================================================================
-Received Import Request.
-  Time since last request: 3.941100 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/HousePost.prefab
-  artifactKey: Guid(21044de370c374a4da71a4f5ccc175ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/HousePost.prefab using Guid(21044de370c374a4da71a4f5ccc175ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '616adf110ac7de51ab648fa17dee210f') in 0.0462267 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 13
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000031 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/InnerCornerRoof.prefab
-  artifactKey: Guid(526cb633db374294286580e1850b77f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/InnerCornerRoof.prefab using Guid(526cb633db374294286580e1850b77f6) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dd3104926bd634b7f8b8df074631276b') in 0.0386893 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/Roof.prefab
-  artifactKey: Guid(5facc02e88826c34cb937b7c51e4d146) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/Roof.prefab using Guid(5facc02e88826c34cb937b7c51e4d146) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3ec8007e58942e9568db6a60bfc4f57d') in 0.0554534 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 11
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000046 seconds.
-  path: Assets/Prefabs/HouseModelPrefabs/PillarBase.prefab
-  artifactKey: Guid(2b13759aa4d4547429e3fbbd2a7d004e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/HouseModelPrefabs/PillarBase.prefab using Guid(2b13759aa4d4547429e3fbbd2a7d004e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '945d173c3cfc041f59d668cd03861c10') in 0.0239129 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 18
-
-========================================================================
-Received Import Request.
-  Time since last request: 2.121695 seconds.
-  path: Assets/Materials/HouseMaterials/DecorDarkPurple.mat
-  artifactKey: Guid(ca513f69a5036a544b623685e850febb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseMaterials/DecorDarkPurple.mat using Guid(ca513f69a5036a544b623685e850febb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'e00a99c83ee68b5bb224c3af5affe418') in 0.0187407 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000029 seconds.
-  path: Assets/Materials/HouseMaterials/DecorWhite.mat
-  artifactKey: Guid(9e0e1c02b6ffb424f8a0123889634b9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseMaterials/DecorWhite.mat using Guid(9e0e1c02b6ffb424f8a0123889634b9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '8b73fef30db8c25afe058b4fcc95df06') in 0.0398282 seconds
-Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
-
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/Materials/HouseMaterials/HorizontalBeam.mat
-  artifactKey: Guid(414291e112fc8284b96c6c636c4bc21d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseMaterials/HorizontalBeam.mat using Guid(414291e112fc8284b96c6c636c4bc21d) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '6810dd3d2f1c4e3eea8eea24d6cf349a') in 0.0165818 seconds
+  Time since last request: 402.308548 seconds.
+  path: Assets/Materials/HouseMaterials/CornerPillar.mat
+  artifactKey: Guid(9bd414093bdfada4ab3e5f9b850c4901) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/HouseMaterials/CornerPillar.mat using Guid(9bd414093bdfada4ab3e5f9b850c4901) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'dfd4a3ec108db01f5f8426dd9ff4a9d1') in 0.0775264 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 6
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/Materials/HouseMaterials/Default.mat
-  artifactKey: Guid(b95ab18e4f812c546be318448ce10358) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseMaterials/Default.mat using Guid(b95ab18e4f812c546be318448ce10358) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '3c3c257c848781ca21ed0b93c7493f44') in 0.0078442 seconds
+  Time since last request: 0.000076 seconds.
+  path: Assets/Materials/HouseMaterials/DecorWhite.mat
+  artifactKey: Guid(9e0e1c02b6ffb424f8a0123889634b9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/HouseMaterials/DecorWhite.mat using Guid(9e0e1c02b6ffb424f8a0123889634b9e) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '60bb802486477c5c12a225a60e820228') in 0.0248257 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 ========================================================================
 Received Import Request.
-  Time since last request: 2.682981 seconds.
-  path: Assets/Materials/HouseMaterials/WallBase.mat
-  artifactKey: Guid(54358ba3d7c054b4582d7a0cc9295cc5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Materials/HouseMaterials/WallBase.mat using Guid(54358ba3d7c054b4582d7a0cc9295cc5) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: '7c91fe38a86b9ed0ac27e38f42050335') in 0.0128898 seconds
+  Time since last request: 0.000049 seconds.
+  path: Assets/Materials/HouseMaterials/DecorDarkPurple.mat
+  artifactKey: Guid(ca513f69a5036a544b623685e850febb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Materials/HouseMaterials/DecorDarkPurple.mat using Guid(ca513f69a5036a544b623685e850febb) Importer(815301076,1909f56bfc062723c751e8b465ee728b) (PreviewImporter) -> (artifact id: 'fe7c392095be1bf77606df8775d825fb') in 0.0248767 seconds
 Number of updated asset objects reloaded before import = 0Number of asset objects unloaded after import = 1
 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
