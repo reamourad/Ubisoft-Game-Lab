@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GrabableObject : MonoBehaviour, IGrabableItem
+public class HiderGrabableObject : MonoBehaviour, IHiderGrabableItem
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

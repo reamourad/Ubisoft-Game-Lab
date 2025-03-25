@@ -1,17 +1,20 @@
 using System;
 using FishNet.Object;
+using Items.Interfaces;
 using UnityEngine;
 
 namespace Networking
 {
-    public class NetworkPlayerItemController : NetworkBehaviour
+    [RequireComponent(typeof(HiderLookManager))]
+    public class NetworkPlayerGrabController : NetworkBehaviour
     {
         [SerializeField] private int grabRange;
     
         public Transform grabPlacement; 
-        private IGrabableItem lookingAtObject = null; 
-        private IGrabableItem grabbedObject = null; 
+        private GameObject lookingAtObject = null; 
+        private GameObject grabbedObject = null; 
         private Camera playerCamera;
+        private HiderLookManager hiderLookManager;
     
         //this is variables for the placement mechanic
         public Material ghostMaterial;
@@ -30,6 +33,7 @@ namespace Networking
         private void Start()
         {
             playerCamera = Camera.main;
+            hiderLookManager = GetComponent<HiderLookManager>();
         }
 
         // Update is called once per frame
@@ -45,10 +49,6 @@ namespace Networking
                     //grab mechanic
                    UpdateLookingAtObject(); 
                 }
-                else
-                {
-                    InScreenUI.Instance.SetToolTipText("");
-                }
             }
 
             void UpdateBlueprintMode()
@@ -60,6 +60,11 @@ namespace Networking
                 objectToPlace.layer = IGNORE_RAYCAST_LAYER;
                 
                 Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
+
+                if (!playerCamera)
+                {
+                    playerCamera = Camera.main;
+                }
                 
                 Ray screenCenterRay = playerCamera.ScreenPointToRay(screenCenter);
                 
@@ -68,7 +73,6 @@ namespace Networking
                 //Raycast check if the object is in front of player 
                 if (Physics.Raycast(screenCenterRay, out RaycastHit hit, grabRange, ~LayerMask.GetMask("Player", "Ignore Raycast"), QueryTriggerInteraction.Ignore))
                 {
-                    Debug.Log(hit.collider.gameObject);
                     Vector3 placementPosition = hit.point;
                     
                     /*TODO: if the hit collider game object is not a valid placement, we want to send a ray from the item down until it hits something,
@@ -115,61 +119,17 @@ namespace Networking
                 }
                 
                 objectToPlace.layer = currentLayer;
-            }
+            } 
 
-            private Vector3 point; 
             void UpdateLookingAtObject()
             {
-                lookingAtObject = null;
-                
-                if(playerCamera == null)
-                    playerCamera = Camera.main;
-                
-                // Origin at the center of your character
-                Vector3 origin = transform.position;
-    
-                // Direction your character is facing
-                Vector3 direction = transform.forward;
-    
-                // Box dimensions
-                Vector3 halfExtents = new Vector3(0.5f, 1.0f, 0.1f); // width, height, depth
-    
-                // Character's rotation
-                Quaternion orientation = transform.rotation;
-    
-                // Maximum distance to check
-                float maxDistance = 3.0f;
-    
-                // Layer mask for objects to check
-                LayerMask layerMask = itemLayerMask;
-                
-                // Raycast from the center of player view
-                Ray ray = new Ray(transform.position, transform.forward);
-                if (Physics.BoxCast(origin, halfExtents, direction, out RaycastHit hit, orientation, maxDistance, layerMask))
+                if (hiderLookManager.GetCurrentLookTarget()?.GetComponent<IHiderGrabableItem>() != null)
                 {
-                    point = hit.point;
-                    Debug.DrawLine(transform.position, hit.point, Color.red);
-                    lookingAtObject = hit.collider.GetComponent<IGrabableItem>();
-                }
-                
-                // Check if the object has the IGrabbable interface
-                if (lookingAtObject != null)
-                {
-                    if (InScreenUI.Instance != null)
-                    {
-                        InScreenUI.Instance.SetToolTipText("Press " +
-                                                           InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay
-                                                               .Grab) + " to grab  " + lookingAtObject.gameObject.name);
-                    }
-                    
+                    lookingAtObject = hiderLookManager.GetCurrentLookTarget(); 
                 }
                 else
                 {
-                    if (InScreenUI.Instance != null)
-                    {
-                        InScreenUI.Instance.SetToolTipText("");
-                    }
-                    
+                    lookingAtObject = null;
                 }
             }
             
@@ -182,6 +142,7 @@ namespace Networking
                 //grab mechanic
                 if (grabbedObject == null)
                 {
+                   
                     PickupObject();
                     //inform server 
                     RPC_InformServerOnGrab();
@@ -198,33 +159,32 @@ namespace Networking
             {
                 //nothing happens if youre not currently looking at something
                 if (lookingAtObject == null) { return; }
-                    
-                                
+                
+                hiderLookManager.SetActive(false); 
                 // Move to object to grab placement and parent with the player
                 grabbedObject = lookingAtObject;
-                GameObject objToGrab = grabbedObject.gameObject;
-                Rigidbody rb = objToGrab.GetComponent<Rigidbody>();
+                Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
                 if (rb != null) 
                 {
                     rb.isKinematic = true;
                 }
 
-                objToGrab.transform.position = grabPlacement.position;
-                objToGrab.transform.SetParent(this.transform);
+                grabbedObject.transform.position = grabPlacement.position;
+                grabbedObject.transform.SetParent(this.transform);
             }
 
             void EnterBlueprintMode()
             {
-                GameObject objectToPlace = grabbedObject.gameObject;
-                objectToPlace.transform.parent = null; 
+                hiderLookManager.SetActive(true);
+                grabbedObject.transform.parent = null; 
                 // keep original data for the material + layer
-                Renderer renderer = objectToPlace.GetComponent<Renderer>();
+                Renderer renderer = grabbedObject.GetComponent<Renderer>();
                 if (renderer != null) 
                 {
                     originalMaterial = renderer.material;
                     renderer.material = ghostMaterial; // Change to blueprint material
                 }
-                originalLayer = objectToPlace.layer;
+                originalLayer = grabbedObject.layer;
                     
                 // Set blueprint mode 
                 isBlueprintMode = true;
@@ -265,28 +225,27 @@ namespace Networking
                 //move the box if we are in blueprint mode 
                 if (isBlueprintMode && grabbedObject != null)
                 {
-                    GameObject objectToPlace = grabbedObject.gameObject;
 
-                    objectToPlace.transform.SetParent(null);
+                    grabbedObject.transform.SetParent(null);
 
                     //Restore original layer
-                    objectToPlace.layer = originalLayer;
+                    grabbedObject.layer = originalLayer;
 
                     //Restore physics
-                    Rigidbody rb = objectToPlace.GetComponent<Rigidbody>();
+                    Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
                     if (rb != null)
                     {
                         rb.isKinematic = false;
                     }
 
                     //Restore original material
-                    Renderer renderer = objectToPlace.GetComponent<Renderer>();
+                    Renderer renderer = grabbedObject.GetComponent<Renderer>();
                     if (renderer != null && originalMaterial != null)
                     {
                         renderer.material = originalMaterial;
                     }
                     //inform server 
-                    RPC_InformServerOnPlace(objectToPlace.transform.position, objectToPlace.transform.rotation);
+                    RPC_InformServerOnPlace(grabbedObject.transform.position, grabbedObject.transform.rotation);
                     
                     //Reset variables
                     grabbedObject = null;
@@ -300,20 +259,19 @@ namespace Networking
             void PlaceObjectAt(Vector3 position, Quaternion rotation)
             {
                 if(grabbedObject == null) {return;}
-                
-                GameObject objectToPlace = grabbedObject.gameObject;
+
                 //unparent the object 
-                objectToPlace.transform.SetParent(null);
+                grabbedObject.transform.SetParent(null);
                 //reset its rigidbody status
                 //Restore physics
-                Rigidbody rb = objectToPlace.GetComponent<Rigidbody>();
+                Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
                     rb.isKinematic = false;
                 }
                 //update the position and rotation
-                objectToPlace.transform.position = position;
-                objectToPlace.transform.rotation = rotation;
+                grabbedObject.transform.position = position;
+                grabbedObject.transform.rotation = rotation;
                 
                 grabbedObject = null;
             }

@@ -1,7 +1,9 @@
 using System;
+using GogoGaga.OptimizedRopesAndCables;
 using UnityEngine;
 using UnityEngine.AI;
 
+/*
 [RequireComponent(typeof(LineRenderer))]
 public class TriggerItemImpl : MonoBehaviour, ITriggerItem
 {
@@ -75,4 +77,7 @@ public class TriggerItemImpl : MonoBehaviour, ITriggerItem
     {
         reactionItem?.OnTrigger();
     }
+
+    public Rope rope { get; set; }
 }
+*/
