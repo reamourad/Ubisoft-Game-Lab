@@ -51637,9 +51637,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3036544047104886012, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
+    - target: {fileID: 4682854888429254139, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
       propertyPath: <SceneId>k__BackingField
-      value: 4227800423
+      value: 3853981567
+      objectReference: {fileID: 0}
+    - target: {fileID: 4682854888429254139, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
+      propertyPath: 'NetworkBehaviours.Array.data[1]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6302525577933857997, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
       propertyPath: m_Name
