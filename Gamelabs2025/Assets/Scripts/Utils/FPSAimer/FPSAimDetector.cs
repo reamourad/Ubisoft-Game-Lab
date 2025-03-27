@@ -40,9 +40,9 @@ namespace Utils
             
             var ray = cam.ScreenPointToRay(screenCenter);
             
-            if (Physics.SphereCast(ray, 0.1f, out RaycastHit hit, maxTraceDistance,mask))
+            if (Physics.Raycast(ray, out RaycastHit hit, maxTraceDistance,mask))
             {
-                Debug.DrawRay(ray.origin, hit.collider.transform.position, Color.cyan);
+                Debug.DrawRay(ray.origin, hit.point, Color.cyan);
                 gui?.Enlarge();
                 OnLookingAtObject?.Invoke(hit.collider);
             }

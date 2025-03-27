@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1087030035363849802}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1079851885042163259}
   - component: {fileID: 666382446063838851}
   - component: {fileID: 4259793075077798629}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Reading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 279640252263267092}
   - component: {fileID: 5417665228483415288}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 5222841209645217539}
   - component: {fileID: 5315467251490244198}
   - component: {fileID: 7941574049204540911}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: ReadingTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +449,7 @@ GameObject:
   - component: {fileID: 3088763203616699933}
   - component: {fileID: 7747022825487793299}
   - component: {fileID: 2159627251965753911}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -625,7 +625,7 @@ GameObject:
   - component: {fileID: 8529166532181666457}
   - component: {fileID: 4050607852461264231}
   - component: {fileID: 7053805173752715945}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -952,7 +952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
       propertyPath: m_IsActive
@@ -960,7 +960,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
