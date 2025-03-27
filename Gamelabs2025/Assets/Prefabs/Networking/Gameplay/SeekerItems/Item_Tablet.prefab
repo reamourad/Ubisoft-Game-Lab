@@ -1167,7 +1167,8 @@ MonoBehaviour:
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
   NetworkBehaviours:
-  - {fileID: 0}
+  - {fileID: 923230739753934544}
+  - {fileID: 3533425047262078356}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -1193,9 +1194,9 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 19
+  <PrefabId>k__BackingField: 13
   <SpawnableCollectionId>k__BackingField: 0
-  <AssetPathHash>k__BackingField: 13979537786705959159
+  <AssetPathHash>k__BackingField: 18258582002738191849
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
@@ -1214,9 +1215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: -6259644617633404328}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: -6259644617633404328}
 --- !u!114 &3533425047262078356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1229,9 +1230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faee25b63df7f9448ba126903c89cf05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 1
   _addedNetworkObject: {fileID: -6259644617633404328}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: -6259644617633404328}
   worldDummyRef: {fileID: 5701981939116943949, guid: 0a13f4b554781084c9ba21234aa046fb, type: 3}
 --- !u!1 &5667235173795683094
 GameObject:
