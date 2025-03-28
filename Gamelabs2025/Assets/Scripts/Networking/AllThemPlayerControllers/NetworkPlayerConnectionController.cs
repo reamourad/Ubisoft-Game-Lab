@@ -44,13 +44,13 @@ namespace Networking
             //remove any previous rope 
             if (objectToConnectTo.GetComponent<IConnectable>().rope != null)
             {
+                //Destroy the rope 
+                Destroy(objectToConnectTo.GetComponent<IConnectable>().rope.gameObject);
+                
                 //get the rope endpoint and delete its rope reference 
                 Rope rope = objectToConnectTo.GetComponent<IConnectable>().rope;
                 rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
                 rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
-                
-                //Destroy the rope 
-                Destroy(objectToConnectTo.GetComponent<IConnectable>().rope.gameObject);
             }
                 
             //we want to create a rope from the object to the ghost 
