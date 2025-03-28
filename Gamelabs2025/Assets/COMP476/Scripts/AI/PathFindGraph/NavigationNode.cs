@@ -1,4 +1,5 @@
 using UnityEngine;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,7 +11,6 @@ public class NavigationNode : MonoBehaviour
     public float connectionRadius = 100f;
     public LayerMask obstacleMask;
     public bool autoConnectOnCreate = true;
-    public bool manualModeOnly = false;  // New flag to disable all automatic behavior
 
     [Header("Visual Settings")]
     public Color nodeColor = Color.cyan;
@@ -19,31 +19,24 @@ public class NavigationNode : MonoBehaviour
     private Vector3 lastPosition;
     private bool isInitialized = false;
 
-    private void Start()
-    {
-        if (!manualModeOnly && autoConnectOnCreate && Application.isPlaying)
-        {
-            AutoConnectToNearbyNodes();
-        }
-    }
-
 #if UNITY_EDITOR
     private void OnValidate()
     {
-        if (manualModeOnly) return;
+        if (this == null) return; // Safety check
 
-        CleanUpConnections();
         // Only run in editor, not in play mode
         if (autoConnectOnCreate && !Application.isPlaying)
         {
-            UnityEditor.EditorApplication.delayCall += () => AutoConnectToNearbyNodes();
+            UnityEditor.EditorApplication.delayCall += () =>
+            {
+                if (this != null) AutoConnectToNearbyNodes();
+            };
         }
     }
 
     private void OnEnable()
     {
-        if (manualModeOnly) return;
-
+        if (this == null) return;
         lastPosition = transform.position;
         EditorApplication.update += EditorUpdate;
         isInitialized = true;
@@ -51,14 +44,12 @@ public class NavigationNode : MonoBehaviour
 
     private void OnDisable()
     {
-        if (manualModeOnly) return;
-
         EditorApplication.update -= EditorUpdate;
     }
 
     private void EditorUpdate()
     {
-        if (manualModeOnly || !isInitialized) return;
+        if (!isInitialized || this == null) return;
 
         if (transform.position != lastPosition)
         {
@@ -70,40 +61,45 @@ public class NavigationNode : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (manualModeOnly) return;
+        if (this == null) return;
         CleanUpConnections();
     }
 
     public void CleanUpConnections()
     {
+        if (this == null) return;
+
         NavigationGraph graph = GetComponentInParent<NavigationGraph>();
-        if (graph == null) return;
+        if (graph == null || graph.connections == null) return;
 
         // Remove all connections that involve this node
         graph.connections.RemoveAll(conn =>
-            conn.fromNode == this || conn.toNode == this);
+            conn != null &&
+            conn.fromNode == this ||
+            conn.toNode == this);
 
         Debug.Log($"Removed all connections for node {name}");
     }
 
     public void AutoConnectToNearbyNodes()
     {
-        if (manualModeOnly) return;
+        if (this == null) return;
 
         NavigationGraph graph = GetComponentInParent<NavigationGraph>();
         if (graph == null) return;
 
         // Find all other nodes in the graph
         NavigationNode[] allNodes = graph.GetComponentsInChildren<NavigationNode>();
+        if (allNodes == null) return;
 
         foreach (NavigationNode otherNode in allNodes)
         {
-            if (otherNode == this) continue;
+            if (otherNode == null || otherNode == this) continue;
 
             float distance = Vector3.Distance(transform.position, otherNode.transform.position);
 
             // Check if within connection radius
-            if (distance <= connectionRadius || true)
+            if (distance <= connectionRadius)
             {
                 // Check for obstacles between nodes
                 if (!Physics.Linecast(transform.position, otherNode.transform.position, obstacleMask))
@@ -112,7 +108,7 @@ public class NavigationNode : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Blocked");
+                    //Debug.Log("Blocked");
                 }
             }
         }
@@ -120,12 +116,9 @@ public class NavigationNode : MonoBehaviour
 
     private void OnNodeMoved()
     {
-        if (manualModeOnly) return;
+        if (this == null) return;
 
-        Debug.Log($"Node {name} moved to {transform.position}");
-
-        // Clean up old connections
-        CleanUpConnections();
+        //Debug.Log($"Node {name} moved to {transform.position}");
 
         // Re-establish new connections
         if (autoConnectOnCreate)
@@ -136,6 +129,8 @@ public class NavigationNode : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (this == null) return;
+
         // Draw the node
         Gizmos.color = new Color(nodeColor.r, nodeColor.g, nodeColor.b, 0.7f);
         Gizmos.DrawSphere(transform.position, nodeSize);
@@ -147,9 +142,52 @@ public class NavigationNode : MonoBehaviour
     // Public method to manually connect nodes
     public void ManualConnectTo(NavigationNode otherNode)
     {
+        if (this == null || otherNode == null) return;
+
         NavigationGraph graph = GetComponentInParent<NavigationGraph>();
         if (graph == null) return;
 
         graph.AddConnection(this, otherNode);
     }
+
+    // Public method to manually disconnect nodes
+    public void ManualDisconnectAll()
+    {
+        if (this == null) return;
+        CleanUpConnections();
+    }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(NavigationNode))]
+public class NavigationNodeEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+
+        NavigationNode node = (NavigationNode)target;
+        if (node == null) return; // Important safety check
+
+        DrawDefaultInspector();
+
+        GUILayout.Space(10);
+        if (GUILayout.Button("Disconnect All", GUILayout.Height(30)))
+        {
+            Undo.RecordObject(node, "Disconnect All");
+            node.ManualDisconnectAll();
+            EditorUtility.SetDirty(node);
+        }
+
+        GUILayout.Space(5);
+        if (GUILayout.Button("Reconnect (Auto)", GUILayout.Height(30)))
+        {
+            Undo.RecordObject(node, "Reconnect Auto");
+            node.AutoConnectToNearbyNodes();
+            EditorUtility.SetDirty(node);
+        }
+
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+#endif

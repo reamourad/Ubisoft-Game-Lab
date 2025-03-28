@@ -130,7 +130,7 @@ public class NavigationGraph : MonoBehaviour
             if ((conn.fromNode == from && conn.toNode == to) ||
                 (conn.fromNode == to && conn.toNode == from))
             {
-                Debug.LogWarning("Connection already exists between these nodes");
+                //Debug.LogWarning("Connection already exists between these nodes");
                 return;
             }
         }
@@ -141,6 +141,6 @@ public class NavigationGraph : MonoBehaviour
             toNode = to,
             connectionColor = Color.Lerp(from.nodeColor, to.nodeColor, 0.5f)
         });
-        Debug.Log($"Added connection between {from.name} and {to.name}");
+        //Debug.Log($"Added connection between {from.name} and {to.name}");
     }
 }
