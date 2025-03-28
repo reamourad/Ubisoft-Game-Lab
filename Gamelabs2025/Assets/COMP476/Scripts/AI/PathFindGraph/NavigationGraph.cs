@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class NavigationGraph : MonoBehaviour
@@ -20,6 +21,30 @@ public class NavigationGraph : MonoBehaviour
     public bool alwaysVisible = true;
     public bool drawNodeLabels = true;
     public bool drawConnectionWeights = true;
+
+    public void ClearAllConnections()
+    {
+        connections.Clear();
+        Debug.Log("Cleared all connections in the graph");
+    }
+
+    public void ReconnectAllNodes()
+    {
+        ClearAllConnections();
+
+        NavigationNode[] allNodes = GetComponentsInChildren<NavigationNode>();
+        if (allNodes == null || allNodes.Length == 0) return;
+
+        foreach (NavigationNode node in allNodes)
+        {
+            if (node != null)
+            {
+                node.AutoConnectToNearbyNodes();
+            }
+        }
+
+        Debug.Log($"Reconnected all {allNodes.Length} nodes in the graph");
+    }
 
     private void OnDrawGizmos()
     {
@@ -50,6 +75,9 @@ public class NavigationGraph : MonoBehaviour
                 // Primary colored line
                 Gizmos.color = connection.connectionColor;
 #if UNITY_EDITOR
+
+
+
                 UnityEditor.Handles.color = connection.connectionColor;
                 UnityEditor.Handles.DrawAAPolyLine(connection.lineThickness, fromPos, toPos);
 #else
@@ -144,3 +172,35 @@ public class NavigationGraph : MonoBehaviour
         //Debug.Log($"Added connection between {from.name} and {to.name}");
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(NavigationGraph))]
+public class NavigationGraphEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        NavigationGraph graph = (NavigationGraph)target;
+
+        GUILayout.Space(15);
+        EditorGUILayout.LabelField("Graph Actions", EditorStyles.boldLabel);
+
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Clear All Connections", GUILayout.Height(30)))
+        {
+            Undo.RecordObject(graph, "Clear All Connections");
+            graph.ClearAllConnections();
+            EditorUtility.SetDirty(graph);
+        }
+
+        if (GUILayout.Button("Reconnect All Nodes", GUILayout.Height(30)))
+        {
+            Undo.RecordObject(graph, "Reconnect All Nodes");
+            graph.ReconnectAllNodes();
+            EditorUtility.SetDirty(graph);
+        }
+        GUILayout.EndHorizontal();
+    }
+}
+#endif
