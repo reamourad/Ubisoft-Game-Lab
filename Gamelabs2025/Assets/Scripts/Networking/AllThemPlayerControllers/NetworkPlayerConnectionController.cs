@@ -32,23 +32,28 @@ namespace Networking
             hiderLookManager = GetComponent<HiderLookManager>();
         }
 
-        public void CreateNewRopeAndDestroyOldOne()
+        public void CreateNewRopeAndDestroyOldOne(Transform objectToConnectTo)
         {
-            if (lookingAtObject == null) { return; }
+            if (objectToConnectTo == null)
+            {
+                Debug.Log("No object to connect to");
+                return; 
+            }
             isInConnectionMode = true;
             //remove any previous rope 
-            if (lookingAtObject.GetComponent<IConnectable>().rope != null)
+            if (objectToConnectTo.GetComponent<IConnectable>().rope != null)
             {
-                Destroy(lookingAtObject.GetComponent<IConnectable>().rope.gameObject);
+                Destroy(objectToConnectTo.GetComponent<IConnectable>().rope.gameObject);
             }
                 
             //we want to create a rope from the object to the ghost 
-            currentRope = Rope.CreateRope(ropePrefab, lookingAtObject.transform, this.wireGrab);
-            lookingAtObject.GetComponent<IConnectable>().rope = currentRope;
-            connectedToObject = lookingAtObject;
+            currentRope = Rope.CreateRope(ropePrefab, objectToConnectTo.transform, this.wireGrab);
+            objectToConnectTo.GetComponent<IConnectable>().rope = currentRope;
+            
             connectedToObjectIsATrigger = lookingAtObjectIsATrigger; 
             Debug.Log("You are now in connection mode");
         }
+        
         
         public void OnConnectButtonPressed()
         {
@@ -57,7 +62,10 @@ namespace Networking
             //this is the first object you connect to, connect the rope from the object to you 
             if (!isInConnectionMode)
             {
-               RPC_InformServerOnRopeCreate();
+               CreateNewRopeAndDestroyOldOne(lookingAtObject.transform); 
+               connectedToObject = lookingAtObject;
+               
+               RPC_InformServerOnRopeCreate(lookingAtObject.transform);
             }
             else
             {
@@ -135,31 +143,27 @@ namespace Networking
                                                        + " to cancel connection");
                 }
             }
-            
-            
         }
         
         
         [ServerRpc]
-        private void RPC_InformServerOnRopeCreate()
+        private void RPC_InformServerOnRopeCreate(Transform objectToConnectTo)
         {
             Debug.Log("Received rope creation request from client");
         
             // Server creates the rope
-            CreateNewRopeAndDestroyOldOne();
+            //CreateNewRopeAndDestroyOldOne(objectToConnectTo);
         
             // Tell all other clients to create the rope as well
-            BroadcastRopeCreateToClients();
+            BroadcastRopeCreateToClients(objectToConnectTo);
         }
         
         [ObserversRpc(ExcludeOwner = true)]
-        void BroadcastRopeCreateToClients()
+        void BroadcastRopeCreateToClients(Transform objectToConnectTo)
         {
             // All clients except the owner will create the rope locally
-            CreateNewRopeAndDestroyOldOne();
+            CreateNewRopeAndDestroyOldOne(objectToConnectTo);
         }
-
-
     }
 
 }
