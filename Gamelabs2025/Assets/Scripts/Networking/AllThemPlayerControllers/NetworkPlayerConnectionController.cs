@@ -22,6 +22,7 @@ namespace Networking
         [SerializeField] private Transform wireGrab;
         private Rope currentRope; 
         
+        
         //when looking at a trigger or reaction object it should say "Press A to grab a wire"
         //Once you pressed A, the rope should follow you around 
         //when you look at the contrary item, it should say "Press A to connect" 
@@ -43,6 +44,12 @@ namespace Networking
             //remove any previous rope 
             if (objectToConnectTo.GetComponent<IConnectable>().rope != null)
             {
+                //get the rope endpoint and delete its rope reference 
+                Rope rope = objectToConnectTo.GetComponent<IConnectable>().rope;
+                rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
+                rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
+                
+                //Destroy the rope 
                 Destroy(objectToConnectTo.GetComponent<IConnectable>().rope.gameObject);
             }
                 
@@ -64,7 +71,6 @@ namespace Networking
             {
                CreateNewRopeAndDestroyOldOne(lookingAtObject.transform); 
                connectedToObject = lookingAtObject;
-               
                RPC_InformServerOnRopeCreate(lookingAtObject.transform);
             }
             else
@@ -82,6 +88,7 @@ namespace Networking
 
                     ITriggerItem trigger = null;
                     IReactionItem reaction = null; 
+                    lookingAtObject.GetComponent<IConnectable>().rope = currentRope;
                     // subscribe to the trigger's event
                     if (connectedToObjectIsATrigger)
                     {
@@ -95,8 +102,6 @@ namespace Networking
                     }
                     
                     trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
-                    
-
                 }
             }
         }
@@ -165,6 +170,5 @@ namespace Networking
             CreateNewRopeAndDestroyOldOne(objectToConnectTo);
         }
     }
-
 }
 
