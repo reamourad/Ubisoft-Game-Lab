@@ -283,12 +283,12 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 0
+  <PrefabId>k__BackingField: 1
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 1472425559985563034
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
-    Position: {x: -7.590443, y: 0.88374007, z: 20.565271}
+    Position: {x: 0, y: 0, z: 0}
     Rotation: {x: 0, y: 0, z: 0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
     IsValid: 1
@@ -310,7 +310,7 @@ MonoBehaviour:
   effects: 6
   range: 5
   SmokeFx: {fileID: 5837352466476978006, guid: e98fb25bff18cf7429d7376b46cbb690, type: 3}
-  fxKillTime: 5
+  fxKillTime: 10
   fxDestroyTime: 10
   showBounds: 0
   targetAlignTest: {fileID: 0}

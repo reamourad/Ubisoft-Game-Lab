@@ -14,7 +14,6 @@ namespace Player.Items.HiderItems.Reaction
         [SerializeField] private float range;
         [SerializeField] private GameObject SmokeFx;
         [SerializeField] private float fxKillTime = 5;
-        [SerializeField] private float fxDestroyTime = 10;
         
         [Header("Tests")]
         [SerializeField] private bool showBounds;
@@ -23,11 +22,12 @@ namespace Player.Items.HiderItems.Reaction
         public Rope rope { get; set; }
         public void OnTrigger(ITriggerItem triggerItem)
         {
-            RPC_OnServerExplode();
+            Debug.Log("Smoke Triggered");
+            OnServerExplode();
         }
         
-        [ServerRpc]
-        private void RPC_OnServerExplode()
+        [Server]
+        private void OnServerExplode()
         {
             RPC_OnClientExplode();
             ApplySmokeEffect();
@@ -81,6 +81,7 @@ namespace Player.Items.HiderItems.Reaction
         [ObserversRpc]
         private void RPC_OnClientExplode()
         {
+            Debug.Log("TACTICAL SMOKE");
             var go = Instantiate(SmokeFx, transform.position, Quaternion.identity);
             Destroy(go,fxKillTime);
         }

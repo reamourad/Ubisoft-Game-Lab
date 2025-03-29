@@ -50,7 +50,7 @@ namespace Player.Items.HiderItems
         {
            yield return new WaitForSeconds(activationDelay);
            OnTriggerActivated?.Invoke(this);
-           Debug.Log("PressurePlate::ACTIVATED");
+           Debug.Log($"PressurePlate::ACTIVATED CONNECTION {OnTriggerActivated != null}");
         }
         
     }
