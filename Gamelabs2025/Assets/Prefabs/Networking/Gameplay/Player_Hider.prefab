@@ -308,7 +308,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 14
+  <PrefabId>k__BackingField: 15
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 14779710232724903091
   <SceneId>k__BackingField: 0
@@ -332,6 +332,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
+  fpsGraphicsObject: {fileID: 0}
   hiderCameraPrefab: {fileID: 5977199986633930315, guid: 77d7fd29bb1c92e4ca259ef614c881df, type: 3}
   hiderCameraTargetTransform: {fileID: 8103281972594245961}
 --- !u!114 &7758932996993362180
@@ -450,6 +451,7 @@ MonoBehaviour:
   grabRange: 20
   grabPlacement: {fileID: 3924656172372742504}
   ghostMaterial: {fileID: 2100000, guid: ba3d9d27760433144a14ba296ac76b31, type: 2}
+  invalidPlacementMaterial: {fileID: 2100000, guid: 05c2671ae9ab6e34aaa2a62983aefd6f, type: 2}
   placementOffset: 0.05
   minPlacementDistance: 2
   itemLayerMask:
@@ -491,7 +493,8 @@ MonoBehaviour:
   _componentIndexCache: 7
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
-  ropePrefab: {fileID: 3187836456931121904, guid: a4238d21c8153f040ab76668093f19cf, type: 3}
+  isInConnectionMode: 0
+  ropePrefab: {fileID: 3187836456931121904, guid: b7d37c536377beb4b96eddef1b271f60, type: 3}
   wireGrab: {fileID: 1128045424219024279}
 --- !u!1 &8815787860643524411
 GameObject:
@@ -863,6 +866,10 @@ PrefabInstance:
     - target: {fileID: 6436991034390799412, guid: 2f96b072326674e4799cc624cdced9b2, type: 3}
       propertyPath: <IsNested>k__BackingField
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436991034390799412, guid: 2f96b072326674e4799cc624cdced9b2, type: 3}
+      propertyPath: <PrefabId>k__BackingField
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6436991034390799412, guid: 2f96b072326674e4799cc624cdced9b2, type: 3}
       propertyPath: <ComponentIndex>k__BackingField

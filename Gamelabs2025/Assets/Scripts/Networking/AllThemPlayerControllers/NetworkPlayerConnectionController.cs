@@ -9,8 +9,8 @@ namespace Networking
     [RequireComponent(typeof(HiderLookManager))]
     public class NetworkPlayerConnectionController : NetworkBehaviour
     {
-        private GameObject lookingAtObject = null;
-        private GameObject connectedToObject = null;
+        private NetworkObject lookingAtObject = null;
+        private NetworkObject connectedToObject = null;
         
         private bool lookingAtObjectIsATrigger = false;
         private bool connectedToObjectIsATrigger = false;
@@ -22,6 +22,7 @@ namespace Networking
         [SerializeField] private Transform wireGrab;
         private Rope currentRope; 
         
+        
         //when looking at a trigger or reaction object it should say "Press A to grab a wire"
         //Once you pressed A, the rope should follow you around 
         //when you look at the contrary item, it should say "Press A to connect" 
@@ -30,6 +31,34 @@ namespace Networking
         void Start()
         {
             hiderLookManager = GetComponent<HiderLookManager>();
+        }
+
+        public void CreateNewRopeAndDestroyOldOne(NetworkObject objectToConnectTo)
+        {
+            if (objectToConnectTo == null)
+            {
+                Debug.Log("No object to connect to");
+                return; 
+            }
+            isInConnectionMode = true;
+            //remove any previous rope 
+            if (objectToConnectTo.GetComponent<IConnectable>().rope != null)
+            {
+                //Destroy the rope 
+                Destroy(objectToConnectTo.GetComponent<IConnectable>().rope.gameObject);
+                
+                //get the rope endpoint and delete its rope reference 
+                Rope rope = objectToConnectTo.GetComponent<IConnectable>().rope;
+                rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
+                rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
+            }
+                
+            //we want to create a rope from the object to the ghost 
+            currentRope = Rope.CreateRope(ropePrefab, objectToConnectTo.transform, this.wireGrab);
+            objectToConnectTo.GetComponent<IConnectable>().rope = currentRope;
+            
+            connectedToObjectIsATrigger = lookingAtObjectIsATrigger; 
+            Debug.Log("You are now in connection mode");
         }
         
         
@@ -40,20 +69,9 @@ namespace Networking
             //this is the first object you connect to, connect the rope from the object to you 
             if (!isInConnectionMode)
             {
-                if (lookingAtObject == null) { return; }
-                isInConnectionMode = true;
-                //remove any previous rope 
-                if (lookingAtObject.GetComponent<IConnectable>().rope != null)
-                {
-                    Destroy(lookingAtObject.GetComponent<IConnectable>().rope.gameObject);
-                }
-                
-                //we want to create a rope from the object to the ghost 
-                currentRope = Rope.CreateRope(ropePrefab, lookingAtObject.transform, this.wireGrab);
-                lookingAtObject.GetComponent<IConnectable>().rope = currentRope;
-                connectedToObject = lookingAtObject;
-                connectedToObjectIsATrigger = lookingAtObjectIsATrigger; 
-                Debug.Log("You are now in connection mode");
+               CreateNewRopeAndDestroyOldOne(lookingAtObject); 
+               connectedToObject = lookingAtObject;
+               RPC_InformServerOnRopeCreate(lookingAtObject,true);
             }
             else
             {
@@ -61,15 +79,18 @@ namespace Networking
                 //not looking at a relevant object, cancel the connection
                 if (!lookingAtObject)
                 {
+                    RPC_InformServerOnRopeCreate(lookingAtObject,false);
                     Destroy(currentRope.gameObject); 
                 }
                 else
                 {
                     //connected two items together 
                     currentRope.SetEndPoint(lookingAtObject.transform);
+                    RPC_InformServerOnRopeAttach(lookingAtObject,connectedToObject);
 
                     ITriggerItem trigger = null;
                     IReactionItem reaction = null; 
+                    lookingAtObject.GetComponent<IConnectable>().rope = currentRope;
                     // subscribe to the trigger's event
                     if (connectedToObjectIsATrigger)
                     {
@@ -83,19 +104,44 @@ namespace Networking
                     }
                     
                     trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
-                    
-
                 }
             }
+        }
+
+        private void ConnectTwoObjects(NetworkObject objectToConnectTo,NetworkObject secondObject)
+        {
+            //connected two items together 
+            if (!IsServerInitialized)
+            {
+                currentRope.SetEndPoint(objectToConnectTo.transform);
+                objectToConnectTo.GetComponent<IConnectable>().rope = currentRope;
+            }
+
+            ITriggerItem trigger = null;
+            IReactionItem reaction = null; 
+            // subscribe to the trigger's event
+            if (connectedToObjectIsATrigger)
+            {
+                trigger = objectToConnectTo.GetComponent<ITriggerItem>();
+                reaction = secondObject.GetComponent<IReactionItem>();
+            }
+            else
+            {
+                trigger = secondObject.GetComponent<ITriggerItem>();
+                reaction = objectToConnectTo.GetComponent<IReactionItem>();
+            }
+                    
+            trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
+            Debug.Log($"{objectToConnectTo.name} is connected to {secondObject.name}");
         }
 
         public void Update()
         { 
             if (hiderLookManager.GetCurrentLookTarget()?.GetComponent<IConnectable>() != null)
             {
-                lookingAtObject = hiderLookManager.GetCurrentLookTarget();
+                lookingAtObject = hiderLookManager.GetCurrentLookTarget().GetComponent<NetworkObject>();
                 //check if its a trigger or a reaction object 
-                if (lookingAtObject.GetComponent<ITriggerItem>() != null)
+                if (lookingAtObject != null && lookingAtObject.GetComponent<ITriggerItem>() != null)
                 {
                     lookingAtObjectIsATrigger = true;
                 }
@@ -131,10 +177,48 @@ namespace Networking
                                                        + " to cancel connection");
                 }
             }
-            
-            
+        }
+        
+        
+        [ServerRpc]
+        private void RPC_InformServerOnRopeCreate(NetworkObject objectToConnectTo,bool creation)
+        {
+            Debug.Log("Received rope creation request from client");
+        
+            // Server creates the rope
+            //CreateNewRopeAndDestroyOldOne(objectToConnectTo);
+        
+            // Tell all other clients to create the rope as well
+            BroadcastRopeCreateToClients(objectToConnectTo,creation);
+        }
+        
+        [ObserversRpc(ExcludeOwner = true)]
+        void BroadcastRopeCreateToClients(NetworkObject objectToConnectTo, bool creation)
+        {
+            // All clients except the owner will create the rope locally
+            if(creation)
+                CreateNewRopeAndDestroyOldOne(objectToConnectTo);
+            else
+                DestroyRope();
+        }
+
+        [ServerRpc]
+        private void RPC_InformServerOnRopeAttach(NetworkObject objectToConnectTo, NetworkObject secondObject)
+        {
+            ConnectTwoObjects(objectToConnectTo,secondObject);
+            BroadcastRopeConnectToClients(objectToConnectTo, secondObject);
+        }
+        
+        [ObserversRpc(ExcludeOwner = true)]
+        private void BroadcastRopeConnectToClients(NetworkObject objectToConnectTo, NetworkObject secondObject)
+        {
+            ConnectTwoObjects(objectToConnectTo,secondObject);
+        }
+
+        private void DestroyRope()
+        {
+            Destroy(currentRope.gameObject); 
         }
     }
-
 }
 

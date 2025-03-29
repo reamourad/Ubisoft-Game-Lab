@@ -661,6 +661,4 @@ namespace GogoGaga.OptimizedRopesAndCables
             }
         }
     }
-    
-    
 }
