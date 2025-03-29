@@ -308,7 +308,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 15
+  <PrefabId>k__BackingField: 17
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 14779710232724903091
   <SceneId>k__BackingField: 0
@@ -494,7 +494,7 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
   isInConnectionMode: 0
-  ropePrefab: {fileID: 3187836456931121904, guid: b7d37c536377beb4b96eddef1b271f60, type: 3}
+  ropePrefab: {fileID: 3187836456931121904, guid: f4fbb7b00853abb4889bde151241718a, type: 3}
   wireGrab: {fileID: 1128045424219024279}
 --- !u!1 &8815787860643524411
 GameObject:

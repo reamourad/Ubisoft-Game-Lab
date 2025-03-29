@@ -86,7 +86,7 @@ namespace Networking
                 {
                     //connected two items together 
                     currentRope.SetEndPoint(lookingAtObject.transform);
-                    RPC_InformServerOnRopeAttach(lookingAtObject,connectedToObject);
+                    RPC_InformServerOnRopeAttach(connectedToObject,lookingAtObject, connectedToObjectIsATrigger);
 
                     ITriggerItem trigger = null;
                     IReactionItem reaction = null; 
@@ -108,7 +108,7 @@ namespace Networking
             }
         }
 
-        private void ConnectTwoObjects(NetworkObject objectToConnectTo,NetworkObject secondObject)
+        private void ConnectTwoObjects(NetworkObject objectToConnectTo,NetworkObject secondObject, bool firstIsTrigger)
         {
             //connected two items together 
             if (!IsServerInitialized)
@@ -120,7 +120,7 @@ namespace Networking
             ITriggerItem trigger = null;
             IReactionItem reaction = null; 
             // subscribe to the trigger's event
-            if (connectedToObjectIsATrigger)
+            if (firstIsTrigger)
             {
                 trigger = objectToConnectTo.GetComponent<ITriggerItem>();
                 reaction = secondObject.GetComponent<IReactionItem>();
@@ -131,8 +131,9 @@ namespace Networking
                 reaction = objectToConnectTo.GetComponent<IReactionItem>();
             }
                     
+            Debug.Log($"{objectToConnectTo.name} is connected to {secondObject.name} {firstIsTrigger}");
+            Debug.Log($"{trigger == null} is connected to {reaction==null}");
             trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
-            Debug.Log($"{objectToConnectTo.name} is connected to {secondObject.name}");
         }
 
         public void Update()
@@ -203,16 +204,16 @@ namespace Networking
         }
 
         [ServerRpc]
-        private void RPC_InformServerOnRopeAttach(NetworkObject objectToConnectTo, NetworkObject secondObject)
+        private void RPC_InformServerOnRopeAttach(NetworkObject objectToConnectTo, NetworkObject secondObject, bool connectedToObjectIsATrigger)
         {
-            ConnectTwoObjects(objectToConnectTo,secondObject);
-            BroadcastRopeConnectToClients(objectToConnectTo, secondObject);
+            ConnectTwoObjects(objectToConnectTo,secondObject, connectedToObjectIsATrigger);
+            BroadcastRopeConnectToClients(objectToConnectTo, secondObject, connectedToObjectIsATrigger);
         }
         
         [ObserversRpc(ExcludeOwner = true)]
-        private void BroadcastRopeConnectToClients(NetworkObject objectToConnectTo, NetworkObject secondObject)
+        private void BroadcastRopeConnectToClients(NetworkObject objectToConnectTo, NetworkObject secondObject, bool connectedToObjectIsATrigger)
         {
-            ConnectTwoObjects(objectToConnectTo,secondObject);
+            ConnectTwoObjects(objectToConnectTo,secondObject, connectedToObjectIsATrigger);
         }
 
         private void DestroyRope()

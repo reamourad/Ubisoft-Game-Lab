@@ -26,8 +26,15 @@ namespace SeekerGrabSystem
                 InputReader.Instance.OnDropItemEvent += OnDrop;
                 
                 aimDetector.OnLookingAtObject += OnLookingAtObject;
-                aimDetector.Initialise();
+                aimDetector.Initialise(DetectionTest);
             }
+        }
+
+        private bool DetectionTest(Collider other)
+        {
+            if (other == null)
+                return false;
+            return other.GetComponentInParent<SeekerWorldDummy>() != null;
         }
         
         private void OnDestroy()

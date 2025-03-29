@@ -15,9 +15,12 @@ namespace Utils
         
         public Action<Collider> OnLookingAtObject;
         private FPSAimerGui gui;
+
+        private Func<Collider, bool> DetectionTest = null;
         
-        public void Initialise()
+        public void Initialise(Func<Collider, bool> detectionTest)
         {
+            DetectionTest = detectionTest;
             StartCoroutine(ClientInitialiser());
         }
 
@@ -39,19 +42,29 @@ namespace Utils
                 return;
             
             var ray = cam.ScreenPointToRay(screenCenter);
-            
-            if (Physics.SphereCast(ray, 0.1f, out RaycastHit hit, maxTraceDistance,mask))
+            if (Physics.Raycast(ray, out RaycastHit hit, maxTraceDistance,mask))
             {
-                Debug.DrawRay(ray.origin, hit.collider.transform.position, Color.cyan);
+                if (DetectionTest == null || !DetectionTest(hit.collider))
+                {
+                    RayTestFail(ray);
+                    return;
+                }
+
+                Debug.DrawRay(ray.origin, hit.point, Color.cyan);
                 gui?.Enlarge();
                 OnLookingAtObject?.Invoke(hit.collider);
             }
             else
             {
-                OnLookingAtObject?.Invoke(null);
-                Debug.DrawRay(ray.origin, ray.direction * maxTraceDistance, Color.yellow);
-                gui?.Shrink();
+                RayTestFail(ray);
             }
+        }
+
+        private void RayTestFail(Ray ray)
+        {
+            OnLookingAtObject?.Invoke(null);
+            Debug.DrawRay(ray.origin, ray.direction * maxTraceDistance, Color.yellow);
+            gui?.Shrink();
         }
     }
 }
