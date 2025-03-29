@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -9143964777272583732, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.052
@@ -52,6 +56,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5165997804347468283, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1315685348205790216, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1315685348205790216, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -59,6 +71,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
       propertyPath: m_Name
       value: bookshelf2_prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5068081489474572228, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6457026956222381334, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
+      propertyPath: m_StaticShadowCaster
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
