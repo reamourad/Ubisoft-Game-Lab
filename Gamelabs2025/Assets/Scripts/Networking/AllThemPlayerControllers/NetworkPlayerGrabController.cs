@@ -2,6 +2,7 @@ using System;
 using FishNet.Object;
 using Items.Interfaces;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Networking
 {
@@ -11,14 +12,16 @@ namespace Networking
         [SerializeField] private int grabRange;
     
         public Transform grabPlacement; 
-        private GameObject lookingAtObject = null; 
-        private GameObject grabbedObject = null; 
+        private NetworkObject lookingAtObject = null; 
+        private NetworkObject grabbedObject = null; 
         private Camera playerCamera;
         private HiderLookManager hiderLookManager;
     
         //this is variables for the placement mechanic
         public Material ghostMaterial;
-        private Material originalMaterial; 
+        public Material invalidPlacementMaterial;
+        private Material originalMaterial;
+        private Transform originalTransform; 
         private bool isBlueprintMode = false;
         private bool isGrabButtonHeld = false;
         private int originalLayer = 0;
@@ -42,6 +45,7 @@ namespace Networking
                 if (isBlueprintMode && isGrabButtonHeld && grabbedObject != null)
                 {
                     //place mechanic
+                    originalTransform = grabbedObject.transform;
                     UpdateBlueprintMode(); 
                 }
                 else if (!isBlueprintMode && grabbedObject == null)
@@ -90,8 +94,7 @@ namespace Networking
                     objectToPlace.transform.position = placementPosition;
                     objectToPlace.transform.up = hit.normal;
                     
-                    // Update UI text
-                    InScreenUI.Instance.SetToolTipText("Release to place object");
+                    SendToClosestNavMeshPoint(placementPosition, objectToPlace);
                 }
                 else
                 {
@@ -117,15 +120,68 @@ namespace Networking
                         objectToPlace.transform.up = floorHit.normal; // Align with floor normal
                     }
                 }
-                
                 objectToPlace.layer = currentLayer;
-            } 
+            }
+
+            void SendToClosestNavMeshPoint(Vector3 position, GameObject objectToPlace)
+            {
+                //put the object on the floor 
+                RaycastHit floorHit;
+                if (Physics.Raycast(position, Vector3.down, out floorHit, 20f))
+                {
+                    Renderer objectRenderer = objectToPlace.GetComponent<Renderer>();
+                    float yOffset = 0f;
+    
+                    if (objectRenderer != null)
+                    {
+                        Bounds bounds = objectRenderer.bounds;
+                        yOffset = bounds.extents.y;
+                    }
+
+                    objectToPlace.transform.position = floorHit.point + new Vector3(0, yOffset, 0);
+                    objectToPlace.transform.up = floorHit.normal; // Align with floor normal
+                }
+                
+                NavMeshHit navHit;
+                bool onNavMesh = NavMesh.SamplePosition(position, out navHit, 2.0f, NavMesh.AllAreas);
+                if (onNavMesh)
+                {
+                    Renderer objectRenderer = objectToPlace.GetComponent<Renderer>();
+                    float yOffset = 0f;
+    
+                    if (objectRenderer != null)
+                    {
+                        Bounds bounds = objectRenderer.bounds;
+                        yOffset = bounds.extents.y;
+                    }
+
+                    objectToPlace.transform.position = navHit.position + new Vector3(0, yOffset, 0);
+                    objectToPlace.transform.up = navHit.normal; // Align with floor normal
+                    
+                    // Update UI text
+                    InScreenUI.Instance.SetToolTipText("Release to place object");
+                }
+                else
+                {
+                    SetGrabbedObjectMaterial(invalidPlacementMaterial);
+                }
+                
+            }
+
+            void SetGrabbedObjectMaterial(Material material)
+            {
+                Renderer renderer = grabbedObject.GetComponent<Renderer>();
+                if (renderer != null)
+                {
+                    renderer.material = material;
+                }
+            }
 
             void UpdateLookingAtObject()
             {
                 if (hiderLookManager.GetCurrentLookTarget()?.GetComponent<IHiderGrabableItem>() != null)
                 {
-                    lookingAtObject = hiderLookManager.GetCurrentLookTarget(); 
+                    lookingAtObject = hiderLookManager.GetCurrentLookTarget().GetComponent<NetworkObject>(); 
                 }
                 else
                 {
@@ -143,9 +199,9 @@ namespace Networking
                 if (grabbedObject == null)
                 {
                    
-                    PickupObject();
+                    PickupObject(lookingAtObject);
                     //inform server 
-                    RPC_InformServerOnGrab();
+                    RPC_InformServerOnGrab(grabbedObject);
                 }
                 //place mechanic
                 else if (!isBlueprintMode)
@@ -155,14 +211,14 @@ namespace Networking
                 }
             }
 
-            void PickupObject()
+            void PickupObject(NetworkObject networkObject)
             {
                 //nothing happens if youre not currently looking at something
-                if (lookingAtObject == null) { return; }
+                if (networkObject.gameObject == null) { return; }
                 
                 hiderLookManager.SetActive(false); 
                 // Move to object to grab placement and parent with the player
-                grabbedObject = lookingAtObject;
+                grabbedObject = networkObject;
                 Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
                 if (rb != null) 
                 {
@@ -184,7 +240,7 @@ namespace Networking
                     originalMaterial = renderer.material;
                     renderer.material = ghostMaterial; // Change to blueprint material
                 }
-                originalLayer = grabbedObject.layer;
+                originalLayer = grabbedObject.gameObject.layer;
                     
                 // Set blueprint mode 
                 isBlueprintMode = true;
@@ -193,16 +249,16 @@ namespace Networking
             }
             
             [ServerRpc]
-            private void RPC_InformServerOnGrab()
+            private void RPC_InformServerOnGrab(NetworkObject obj)
             {
                 Debug.Log("Received Grab Message from observer");
-                PickupObject();
-                BroadcastPickupToClients();
+                PickupObject(obj);
+                BroadcastPickupToClients(obj);
             }
             
             [ObserversRpc(ExcludeOwner = true)]
-            void BroadcastPickupToClients(){
-                PickupObject();
+            void BroadcastPickupToClients(NetworkObject obj){
+                PickupObject(obj);
             }
             
             [ServerRpc]
@@ -229,7 +285,7 @@ namespace Networking
                     grabbedObject.transform.SetParent(null);
 
                     //Restore original layer
-                    grabbedObject.layer = originalLayer;
+                    grabbedObject.gameObject.layer = originalLayer;
 
                     //Restore physics
                     Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();

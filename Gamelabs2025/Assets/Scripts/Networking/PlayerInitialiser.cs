@@ -47,12 +47,12 @@ namespace Networking
 
         private void NonOwnerSeekerInitialisation()
         {
-            GetComponentInChildren<TestPlayerInputController>().enabled = false;
+            GetComponentInChildren<Player.PlayerInputController>().enabled = false;
         }
         
         private void NonOwnerHiderInitialisation()
         {
-            GetComponentInChildren<TestPlayerInputController>().enabled = false;
+            GetComponentInChildren<Player.PlayerInputController>().enabled = false;
         }
         
         private void OwnerIntialisation(PlayerRole.RoleType playerRole)
