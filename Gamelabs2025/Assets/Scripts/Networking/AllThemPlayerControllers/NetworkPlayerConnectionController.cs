@@ -9,8 +9,8 @@ namespace Networking
     [RequireComponent(typeof(HiderLookManager))]
     public class NetworkPlayerConnectionController : NetworkBehaviour
     {
-        private GameObject lookingAtObject = null;
-        private GameObject connectedToObject = null;
+        private NetworkObject lookingAtObject = null;
+        private NetworkObject connectedToObject = null;
         
         private bool lookingAtObjectIsATrigger = false;
         private bool connectedToObjectIsATrigger = false;
@@ -33,7 +33,7 @@ namespace Networking
             hiderLookManager = GetComponent<HiderLookManager>();
         }
 
-        public void CreateNewRopeAndDestroyOldOne(Transform objectToConnectTo)
+        public void CreateNewRopeAndDestroyOldOne(NetworkObject objectToConnectTo)
         {
             if (objectToConnectTo == null)
             {
@@ -69,9 +69,9 @@ namespace Networking
             //this is the first object you connect to, connect the rope from the object to you 
             if (!isInConnectionMode)
             {
-               CreateNewRopeAndDestroyOldOne(lookingAtObject.transform); 
+               CreateNewRopeAndDestroyOldOne(lookingAtObject); 
                connectedToObject = lookingAtObject;
-               RPC_InformServerOnRopeCreate(lookingAtObject.transform);
+               RPC_InformServerOnRopeCreate(lookingAtObject,true);
             }
             else
             {
@@ -79,12 +79,14 @@ namespace Networking
                 //not looking at a relevant object, cancel the connection
                 if (!lookingAtObject)
                 {
+                    RPC_InformServerOnRopeCreate(lookingAtObject,false);
                     Destroy(currentRope.gameObject); 
                 }
                 else
                 {
                     //connected two items together 
                     currentRope.SetEndPoint(lookingAtObject.transform);
+                    RPC_InformServerOnRopeAttach(lookingAtObject,connectedToObject);
 
                     ITriggerItem trigger = null;
                     IReactionItem reaction = null; 
@@ -106,13 +108,40 @@ namespace Networking
             }
         }
 
+        private void ConnectTwoObjects(NetworkObject objectToConnectTo,NetworkObject secondObject)
+        {
+            //connected two items together 
+            if (!IsServerInitialized)
+            {
+                currentRope.SetEndPoint(objectToConnectTo.transform);
+                objectToConnectTo.GetComponent<IConnectable>().rope = currentRope;
+            }
+
+            ITriggerItem trigger = null;
+            IReactionItem reaction = null; 
+            // subscribe to the trigger's event
+            if (connectedToObjectIsATrigger)
+            {
+                trigger = objectToConnectTo.GetComponent<ITriggerItem>();
+                reaction = secondObject.GetComponent<IReactionItem>();
+            }
+            else
+            {
+                trigger = secondObject.GetComponent<ITriggerItem>();
+                reaction = objectToConnectTo.GetComponent<IReactionItem>();
+            }
+                    
+            trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
+            Debug.Log($"{objectToConnectTo.name} is connected to {secondObject.name}");
+        }
+
         public void Update()
         { 
             if (hiderLookManager.GetCurrentLookTarget()?.GetComponent<IConnectable>() != null)
             {
-                lookingAtObject = hiderLookManager.GetCurrentLookTarget();
+                lookingAtObject = hiderLookManager.GetCurrentLookTarget().GetComponent<NetworkObject>();
                 //check if its a trigger or a reaction object 
-                if (lookingAtObject.GetComponent<ITriggerItem>() != null)
+                if (lookingAtObject != null && lookingAtObject.GetComponent<ITriggerItem>() != null)
                 {
                     lookingAtObjectIsATrigger = true;
                 }
@@ -152,7 +181,7 @@ namespace Networking
         
         
         [ServerRpc]
-        private void RPC_InformServerOnRopeCreate(Transform objectToConnectTo)
+        private void RPC_InformServerOnRopeCreate(NetworkObject objectToConnectTo,bool creation)
         {
             Debug.Log("Received rope creation request from client");
         
@@ -160,14 +189,35 @@ namespace Networking
             //CreateNewRopeAndDestroyOldOne(objectToConnectTo);
         
             // Tell all other clients to create the rope as well
-            BroadcastRopeCreateToClients(objectToConnectTo);
+            BroadcastRopeCreateToClients(objectToConnectTo,creation);
         }
         
         [ObserversRpc(ExcludeOwner = true)]
-        void BroadcastRopeCreateToClients(Transform objectToConnectTo)
+        void BroadcastRopeCreateToClients(NetworkObject objectToConnectTo, bool creation)
         {
             // All clients except the owner will create the rope locally
-            CreateNewRopeAndDestroyOldOne(objectToConnectTo);
+            if(creation)
+                CreateNewRopeAndDestroyOldOne(objectToConnectTo);
+            else
+                DestroyRope();
+        }
+
+        [ServerRpc]
+        private void RPC_InformServerOnRopeAttach(NetworkObject objectToConnectTo, NetworkObject secondObject)
+        {
+            ConnectTwoObjects(objectToConnectTo,secondObject);
+            BroadcastRopeConnectToClients(objectToConnectTo, secondObject);
+        }
+        
+        [ObserversRpc(ExcludeOwner = true)]
+        private void BroadcastRopeConnectToClients(NetworkObject objectToConnectTo, NetworkObject secondObject)
+        {
+            ConnectTwoObjects(objectToConnectTo,secondObject);
+        }
+
+        private void DestroyRope()
+        {
+            Destroy(currentRope.gameObject); 
         }
     }
 }
