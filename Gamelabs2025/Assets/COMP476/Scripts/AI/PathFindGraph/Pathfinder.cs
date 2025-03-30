@@ -13,12 +13,103 @@ public class Pathfinder : MonoBehaviour
     public NavigationNode startNode;
     public NavigationNode endNode;
 
+    public LayerMask obstructionMask;
+    public Transform testTransform;
+
     [Header("Visual Settings")]
     public Color pathColor = Color.green;
+    public Color accessibleColor = Color.blue;
+    public Color blockedColor = Color.red;
     public float pathNodeSizeMultiplier = 1.5f;
     public bool drawPathGizmo = true;
 
+    private List<NavigationNode> accessibleNodes = new List<NavigationNode>();
+    private NavigationNode optimalAccessPoint;
     private List<NavigationNode> currentPath = new List<NavigationNode>();
+
+    /// <summary>
+    /// Finds all accessible nodes from transform, then returns the one with shortest path to destination
+    /// </summary>
+    public NavigationNode FindOptimalAccessPoint(Transform transform, NavigationNode destination)
+    {
+        if (graph == null || transform == null || destination == null)
+        {
+            Debug.LogWarning("Missing references in FindOptimalAccessPoint");
+            return null;
+        }
+
+        accessibleNodes.Clear();
+        optimalAccessPoint = null;
+        float shortestPathLength = Mathf.Infinity;
+
+        // Get all accessible nodes
+        foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
+        {
+            if (!Physics.Linecast(transform.position, node.transform.position, obstructionMask))
+            {
+                accessibleNodes.Add(node);
+            }
+        }
+
+        // Find the accessible node with shortest path to destination
+        foreach (var node in accessibleNodes)
+        {
+            var path = FindShortestPath(node, destination);
+            if (path != null)
+            {
+                float pathLength = CalculatePathLength(path);
+                if (pathLength < shortestPathLength)
+                {
+                    shortestPathLength = pathLength;
+                    optimalAccessPoint = node;
+                    currentPath = path;
+                }
+            }
+        }
+
+        HighlightAccessibility();
+        return optimalAccessPoint;
+    }
+
+    private float CalculatePathLength(List<NavigationNode> path)
+    {
+        float length = 0f;
+        for (int i = 0; i < path.Count - 1; i++)
+        {
+            length += Vector3.Distance(path[i].transform.position, path[i + 1].transform.position);
+        }
+        return length;
+    }
+
+    private void HighlightAccessibility()
+    {
+        // Reset all nodes first
+        foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
+        {
+            node.nodeColor = Color.white;
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(node);
+#endif
+        }
+
+        // Highlight accessible nodes
+        foreach (var node in accessibleNodes)
+        {
+            node.nodeColor = accessibleColor;
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(node);
+#endif
+        }
+
+        // Highlight optimal access point
+        if (optimalAccessPoint != null)
+        {
+            optimalAccessPoint.nodeColor = Color.yellow;
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(optimalAccessPoint);
+#endif
+        }
+    }
 
     public void FindAndShowPath()
     {
@@ -169,34 +260,37 @@ public class Pathfinder : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if (!drawPathGizmo || currentPath == null || currentPath.Count < 2) return;
+        if (!drawPathGizmo) return;
 
-        Handles.color = pathColor;
-        for (int i = 0; i < currentPath.Count - 1; i++)
+        // Draw accessibility lines
+        if (testTransform != null)
         {
-            if (currentPath[i] != null && currentPath[i + 1] != null)
+            foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
             {
-                Handles.DrawAAPolyLine(4f,
-                    currentPath[i].transform.position,
-                    currentPath[i + 1].transform.position);
+                bool isAccessible = accessibleNodes.Contains(node);
+                bool isOptimal = (node == optimalAccessPoint);
 
-                // Draw direction indicator
-                Vector3 dir = (currentPath[i + 1].transform.position - currentPath[i].transform.position).normalized;
-                Handles.ArrowHandleCap(0,
-                    currentPath[i].transform.position + dir * 0.5f,
-                    Quaternion.LookRotation(dir),
-                    1f,
-                    EventType.Repaint);
+                Color color = isOptimal ? Color.yellow :
+                             isAccessible ? accessibleColor : blockedColor;
+                float width = isOptimal ? 4f : isAccessible ? 2f : 1f;
+
+                Handles.color = color;
+                Handles.DrawAAPolyLine(width, testTransform.position, node.transform.position);
             }
         }
 
-        // Draw larger spheres for path nodes
-        foreach (var node in currentPath)
+        // Draw path if available
+        if (currentPath != null && currentPath.Count > 1)
         {
-            if (node != null)
+            Handles.color = pathColor;
+            for (int i = 0; i < currentPath.Count - 1; i++)
             {
-                Gizmos.color = pathColor;
-                Gizmos.DrawSphere(node.transform.position, node.nodeSize * pathNodeSizeMultiplier);
+                if (currentPath[i] != null && currentPath[i + 1] != null)
+                {
+                    Handles.DrawAAPolyLine(4f,
+                        currentPath[i].transform.position,
+                        currentPath[i + 1].transform.position);
+                }
             }
         }
     }
@@ -211,18 +305,22 @@ public class Pathfinder : MonoBehaviour
             Pathfinder pathfinder = (Pathfinder)target;
 
             GUILayout.Space(10);
-            if (GUILayout.Button("Find Path", GUILayout.Height(30)))
+            if (GUILayout.Button("Find Optimal Path", GUILayout.Height(30)))
             {
-                Undo.RecordObject(pathfinder, "Find Path");
-                pathfinder.FindAndShowPath();
-                EditorUtility.SetDirty(pathfinder);
+                if (pathfinder.testTransform != null && pathfinder.endNode != null)
+                {
+                    Undo.RecordObject(pathfinder, "Find Optimal Path");
+                    pathfinder.FindOptimalAccessPoint(pathfinder.testTransform, pathfinder.endNode);
+                    EditorUtility.SetDirty(pathfinder);
+                }
             }
 
-            if (GUILayout.Button("Clear Path", GUILayout.Height(30)))
+            if (GUILayout.Button("Clear All", GUILayout.Height(30)))
             {
-                Undo.RecordObject(pathfinder, "Clear Path");
+                Undo.RecordObject(pathfinder, "Clear All");
+                pathfinder.accessibleNodes.Clear();
                 pathfinder.currentPath.Clear();
-                pathfinder.HighlightPath(null);
+                pathfinder.HighlightAccessibility();
                 EditorUtility.SetDirty(pathfinder);
             }
         }

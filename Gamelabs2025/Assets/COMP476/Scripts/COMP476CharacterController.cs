@@ -20,5 +20,4 @@ public class COMP476CharacterController : MonoBehaviour
         // Apply movement
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
     }
-
 }

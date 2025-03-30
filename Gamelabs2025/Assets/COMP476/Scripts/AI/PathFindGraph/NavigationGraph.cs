@@ -22,6 +22,12 @@ public class NavigationGraph : MonoBehaviour
     public bool drawNodeLabels = true;
     public bool drawConnectionWeights = true;
 
+    [Header("Transform Accessibility Settings")]
+    public LayerMask obstructionMask;
+    public Transform testTransform; // For editor debugging
+    public Color accessibleColor = Color.green;
+    public Color blockedColor = Color.red;
+
     public void ClearAllConnections()
     {
         connections.Clear();
@@ -54,6 +60,25 @@ public class NavigationGraph : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         if (!alwaysVisible) DrawConnections();
+
+        if (testTransform != null) {
+
+            // Draw lines to all nodes with accessibility check
+            foreach (var node in GetComponentsInChildren<NavigationNode>())
+            {
+                bool isAccessible = !Physics.Linecast(testTransform.position, node.transform.position, obstructionMask);
+                if (!isAccessible) continue;
+                Color lineColor = isAccessible ? accessibleColor : blockedColor;
+                float lineWidth = isAccessible ? 2f : 1f;
+
+                Handles.color = lineColor;
+                Handles.DrawAAPolyLine(lineWidth, testTransform.position, node.transform.position);
+
+                // Draw small indicator at node position
+                Gizmos.color = isAccessible ? accessibleColor : blockedColor;
+                Gizmos.DrawSphere(node.transform.position, 0.2f);
+            }
+        }
     }
 
     private void DrawConnections()
@@ -171,6 +196,22 @@ public class NavigationGraph : MonoBehaviour
         });
         //Debug.Log($"Added connection between {from.name} and {to.name}");
     }
+
+    public List<NavigationNode> GetAccessibleNodes(Transform transform)
+    {
+        List<NavigationNode> accessibleNodes = new List<NavigationNode>();
+        if (transform == null) return accessibleNodes;
+
+        foreach (var node in GetComponentsInChildren<NavigationNode>())
+        {
+            if (!Physics.Linecast(transform.position, node.transform.position, obstructionMask))
+            {
+                accessibleNodes.Add(node);
+            }
+        }
+
+        return accessibleNodes;
+    }
 }
 
 #if UNITY_EDITOR
@@ -201,6 +242,21 @@ public class NavigationGraphEditor : Editor
             EditorUtility.SetDirty(graph);
         }
         GUILayout.EndHorizontal();
+
+        GUILayout.Space(10);
+        if (GUILayout.Button("Test Transform Accessibility", GUILayout.Height(30)))
+        {
+            if (graph.testTransform != null)
+            {
+                Undo.RecordObject(graph, "Test Transform Accessibility");
+                EditorUtility.SetDirty(graph);
+                SceneView.RepaintAll(); // Refresh the scene view
+            }
+            else
+            {
+                Debug.LogWarning("Assign a test transform first!");
+            }
+        }
     }
 }
 #endif
