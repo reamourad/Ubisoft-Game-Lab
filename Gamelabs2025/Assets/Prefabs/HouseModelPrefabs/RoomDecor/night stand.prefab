@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ornate Candle Stand
       objectReference: {fileID: 0}
+    - target: {fileID: 8536420562764500454, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
