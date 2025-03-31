@@ -187,22 +187,22 @@
                 },
                 {
                     "name": "",
-                    "id": "8192ec5c-1892-4cc0-b082-5192a2dd46f6",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "fde53605-3408-4ece-b41d-19c38143c0ca",
+                    "path": "<Pointer>/delta",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=25,y=25)",
-                    "groups": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse;Touch",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "fde53605-3408-4ece-b41d-19c38143c0ca",
-                    "path": "<Pointer>/delta",
+                    "id": "8192ec5c-1892-4cc0-b082-5192a2dd46f6",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
+                    "processors": "ScaleVector2(x=25,y=25)",
+                    "groups": "",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -366,39 +366,6 @@
             ],
             "bindings": [
                 {
-                    "name": "Gamepad",
-                    "id": "730e5132-dece-4370-afc5-75cd030c13ce",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CCTVSwitchCameras",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "285c4be4-5574-42ee-af3f-a65b64411042",
-                    "path": "<Gamepad>/dpad/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CCTVSwitchCameras",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "7c839c4c-6368-4baa-824a-3a03c7ca3f89",
-                    "path": "<Gamepad>/dpad/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CCTVSwitchCameras",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "Keyboard",
                     "id": "313b070a-8327-4af6-bfe8-2b65fee95f0a",
                     "path": "1DAxis",
@@ -432,9 +399,42 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Gamepad",
+                    "id": "730e5132-dece-4370-afc5-75cd030c13ce",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CCTVSwitchCameras",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "285c4be4-5574-42ee-af3f-a65b64411042",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CCTVSwitchCameras",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "7c839c4c-6368-4baa-824a-3a03c7ca3f89",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CCTVSwitchCameras",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
-                    "id": "26be3f01-40fe-450f-b444-a28350531869",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "86297e4e-7b43-4027-bc4a-b2d04e917acb",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -444,8 +444,8 @@
                 },
                 {
                     "name": "",
-                    "id": "86297e4e-7b43-4027-bc4a-b2d04e917acb",
-                    "path": "<Keyboard>/escape",
+                    "id": "26be3f01-40fe-450f-b444-a28350531869",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

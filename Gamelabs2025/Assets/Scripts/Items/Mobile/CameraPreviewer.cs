@@ -14,6 +14,8 @@ namespace Items
         
         private void Start()
         {
+            inputReader = InputReader.Instance;
+            
             mainCamera = Camera.main;
             mainCamera.gameObject.SetActive(false);
             inputReader.OnCCTVCameraSwitchEvent += InputReaderOnOnCCTVCameraSwitchEvent;
@@ -56,6 +58,9 @@ namespace Items
         {
             if (previewCamera)
                 previewCamera.ActivateCamera(false);
+            
+            if(CCTVCamera.CameraList == null || CCTVCamera.CameraList.Count == 0)
+                return;
             
             if (dir > 0)
                 id = (id + 1) % CCTVCamera.CameraList.Count;

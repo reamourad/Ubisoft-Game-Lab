@@ -11,6 +11,10 @@ namespace Player.UI.ControlPrompts
         [SerializeField] private Image target;
         [SerializeField] private InputActionReference actionReference;
 
+        [Header("For Composite Mapping, Enable this boolean and then set which part of the binding this Img shows")]
+        [SerializeField] private bool hasPositiveNegative;
+        [SerializeField] private bool showPositive;
+        
         InputAction inputAction;
         
         private void Start()
@@ -39,7 +43,7 @@ namespace Player.UI.ControlPrompts
         
         private void UpdateImage()
         {
-            target.sprite = ControlImageLoader.Load(InputReader.GetCurrentBindingText(inputAction));
+            target.sprite = ControlImageLoader.Load(inputAction, hasPositiveNegative, showPositive);
         }
     }
 }
