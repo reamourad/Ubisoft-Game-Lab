@@ -9,20 +9,24 @@ namespace Player.UI.ControlPrompts
     public class DynamicInputPrompts : MonoBehaviour
     {
         [SerializeField] private GameObject referencePrompt;
-        private Dictionary<InputAction, GameObject> inputActions = new Dictionary<InputAction, GameObject>();
+        private Dictionary<InputAction, (GameObject go, TMPro.TMP_Text prompt)> inputActions = new Dictionary<InputAction, (GameObject, TMPro.TMP_Text)>();
 
         
-        public void AddShowInputPrompt(InputAction action, string text)
+        public void ShowInputPrompt(InputAction action, string text)
         {
             //we already have the key
-            if(inputActions.ContainsKey(action))
+            if (inputActions.ContainsKey(action))
+            {
+                inputActions[action].prompt.text = text;
                 return;
-        
-            Instantiate(referencePrompt, this.transform);
-            referencePrompt.SetActive(true);
-            referencePrompt.GetComponent<ControlPromptDisplayer>().SetActionReference(action);
-            referencePrompt.GetComponentInChildren<TMPro.TMP_Text>().text = text;
-            inputActions.Add(action, referencePrompt);
+            }
+
+            var go = Instantiate(referencePrompt, this.transform);
+            go.SetActive(true);
+            go.GetComponent<ControlPromptDisplayer>().SetActionReference(action);
+            var txt = go.GetComponentInChildren<TMPro.TMP_Text>();
+            txt.text = text;
+            inputActions.Add(action, (go, txt));
 
             StartCoroutine(RebuildLayout());
         }
@@ -31,8 +35,8 @@ namespace Player.UI.ControlPrompts
         {
             if (inputActions.ContainsKey(action))
             {
-                var go = inputActions[action];
-                Destroy(go);
+                var tuple = inputActions[action];
+                Destroy(tuple.go);
                 inputActions.Remove(action);
                 StartCoroutine(RebuildLayout());
             }
@@ -42,6 +46,15 @@ namespace Player.UI.ControlPrompts
         {
             yield return new WaitForEndOfFrame();
             LayoutRebuilder.MarkLayoutForRebuild(this.GetComponent<RectTransform>());
+        }
+
+        public void Clear()
+        {
+            foreach (var action in inputActions)
+            {
+                Destroy(action.Value.go);
+            }
+            inputActions.Clear();
         }
     }
 }

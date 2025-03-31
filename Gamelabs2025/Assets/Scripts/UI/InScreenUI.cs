@@ -20,7 +20,7 @@ public class InScreenUI : SingletonBehaviour<InScreenUI>
     private void LoadDynamicPrompts()
     {
         var go = Instantiate(Resources.Load<GameObject>(INPUT_PROMPT_PATH), this.transform);
-        inputPrompts = GetComponent<DynamicInputPrompts>();
+        inputPrompts = go.GetComponent<DynamicInputPrompts>();
         var rect = go.GetComponent<RectTransform>();
         rect.anchoredPosition = new Vector2(0, 125f);
     }
@@ -35,16 +35,21 @@ public class InScreenUI : SingletonBehaviour<InScreenUI>
         toolTipText.text += "\n" + text;
     }
 
-    public void AddInputPrompt(InputAction action, string promptText)
+    public void ShowInputPrompt(InputAction action, string promptText)
     {
         if(action == null)
             return;
-        inputPrompts.AddShowInputPrompt(action, promptText);
+        inputPrompts.ShowInputPrompt(action, promptText);
     }
 
     public void RemoveInputPrompt(InputAction action)
     {
         inputPrompts.RemoveInputPrompt(action);
+    }
+
+    public void ClearInputPrompts()
+    {
+        inputPrompts.Clear();
     }
     
     public string GetToolTipText()

@@ -16,13 +16,11 @@ namespace Player.UI.ControlPrompts
         
         public static Sprite Load(string strKey)
         {
-            Debug.Log(strKey);
             if(images.ContainsKey(strKey))
                 return images[strKey];
             
             Sprite sprite = null;
             var gamepad = Gamepad.current;
-            var keyboard = Keyboard.current;
             string searchpath="";
             if (gamepad != null && gamepad.wasUpdatedThisFrame)
             {
