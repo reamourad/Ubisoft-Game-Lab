@@ -3,6 +3,7 @@ using FishNet;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Items.Interfaces;
+using Player.IK;
 using Player.Inventory;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ namespace Player.Items.Thermometer
         private const string NORMAL_READING = "NORM";
         private const string LOW_READING = "LOW";
         private const string NONE_READING = "--";
+        
+        [Header("Attachment")]
+        [SerializeField] private Transform graphicsAttachment;
         
         [SerializeField] private float boxCastRange = 10;
         
@@ -77,6 +81,23 @@ namespace Player.Items.Thermometer
             
             if(IsOwner)
                 gui = Instantiate(Resources.Load<GameObject>("ThermometerCanvas")).GetComponent<ThermometerGui>();
+            
+            Transform attachmentTarget = null;
+            if (IsOwner)
+            {
+                attachmentTarget = Camera.main.transform;
+            }
+            else
+            {
+                attachmentTarget = GetComponentInParent<SeekerLocators>().SeekerHeadNonOwner;
+               
+            }
+            
+            //Attach the graphic to player
+            var temp = attachmentTarget.localRotation;
+            attachmentTarget.localRotation = Quaternion.identity;
+            graphicsAttachment.parent = attachmentTarget;
+            attachmentTarget.localRotation = temp;
         }
 
         public void OnDetach(Transform parentTrf, bool spawnWorldDummy)
@@ -90,6 +111,9 @@ namespace Player.Items.Thermometer
         {
             if(gui != null)
                 Destroy(gui.gameObject);
+            
+            if(graphicsAttachment != null)
+                Destroy(graphicsAttachment.gameObject);
         }
 
         [ServerRpc]
