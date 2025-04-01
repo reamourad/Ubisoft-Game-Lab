@@ -10,7 +10,7 @@ namespace Player.Inventory
       [SerializeField] private GameObject inventoryGuiPrefab;
       [SerializeField] private InventoryItemContainer[] items = new InventoryItemContainer[2];
       
-      private uint selectedItem = 0;
+      private int selectedItem = -1;
       private ISeekerAttachable activeItem;
 
       public Action<NetworkObject> OnAttachableSpawned;
@@ -105,7 +105,7 @@ namespace Player.Inventory
          
          Detach(activeItem, true); 
          activeItem = null;
-         selectedItem = 0;
+         selectedItem = -1;
          
          //Equip other inventory item.
          for (int i = 0; i < items.Length; i++)
@@ -129,6 +129,9 @@ namespace Player.Inventory
          if (id - 1 > items.Length)
             return;
 
+         if(id - 1 == selectedItem)
+            return;
+         
          // Ignore if empty slot
          if (items[id - 1] == null || items[id - 1].IsSlotEmpty)
          {
@@ -139,7 +142,7 @@ namespace Player.Inventory
          if (activeItem != null)
             Detach(activeItem, false);
 
-         selectedItem = id - 1;
+         selectedItem = (int)id - 1;
          guiRef.Equip((int)selectedItem); 
          RPC_RequestSpawnAttachable(items[id - 1].ItemToSpawn, OwnerId);
          //of-course my stupid brain made this zero-indexed, I shouldn't code at 3AM

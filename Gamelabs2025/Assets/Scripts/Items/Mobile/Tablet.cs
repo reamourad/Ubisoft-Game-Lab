@@ -1,7 +1,9 @@
+using System;
 using FishNet;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Items.Interfaces;
+using Player.IK;
 using Player.Inventory;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +12,10 @@ namespace Items
 {
     public class Tablet : NetworkBehaviour, IUsableItem, ISeekerAttachable
     {
+        [Header("Attachment")]
+        [SerializeField] private Transform graphicsAttachment;
         [SerializeField] private NetworkObject worldDummyRef;
+        
         private CameraPreviewer cameraPreviewer;
         
         public void UseItem(bool isUsing)
@@ -28,6 +33,23 @@ namespace Items
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
             Debug.Log("Tablet:::OnAttach");
+
+            Transform attachmentTarget = null;
+            if (IsOwner)
+            {
+                attachmentTarget = Camera.main.transform;
+            }
+            else
+            {
+                attachmentTarget = GetComponentInParent<SeekerLocators>().SeekerHeadNonOwner;
+               
+            }
+            
+            //Attach the graphic to player
+            var temp = attachmentTarget.localRotation;
+            attachmentTarget.localRotation = Quaternion.identity;
+            graphicsAttachment.parent = attachmentTarget;
+            attachmentTarget.localRotation = temp;
         }
 
         public void OnDetach(Transform parentTrf, bool spawnWorldDummy)
@@ -48,6 +70,12 @@ namespace Items
             }
 
             Despawn();
+        }
+
+        private void OnDestroy()
+        {
+            if(graphicsAttachment != null)
+                Destroy(graphicsAttachment.gameObject);
         }
     }
 }

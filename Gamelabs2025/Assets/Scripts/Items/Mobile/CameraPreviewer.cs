@@ -1,5 +1,8 @@
 using System;
+using Networking;
+using StateManagement;
 using UnityEngine;
+using Utils;
 
 namespace Items
 {
@@ -25,6 +28,8 @@ namespace Items
             Debug.Log("Enabling UI Inputs ONLY!!");
             inputReader.SetToUIInputs();
             CycleCamera(1);
+            
+            GameLookupMemory.LocalPlayer.GetComponent<SeekerGraphicsManager>().SetRendererEnabled(true);
         }
         
         private void OnDestroy()
@@ -34,6 +39,7 @@ namespace Items
             
             //Move this to appropriate location later
             Debug.Log("Enabling UI Game Inputs ONLY!!");
+            GameLookupMemory.LocalPlayer.GetComponent<SeekerGraphicsManager>().SetRendererEnabled(false);
             inputReader.SetToGameplayInputs();
         }
 
