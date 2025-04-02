@@ -6,6 +6,7 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Items.Interfaces;
 using Player;
+using Player.IK;
 using Player.Inventory;
 using StateManagement;
 using UnityEngine;
@@ -29,6 +30,11 @@ namespace Items
             }
         }
 
+        [FormerlySerializedAs("vacummHead")]
+        [Header("Basic Attachment")] 
+        [SerializeField] private Transform vacuumHead;
+        [SerializeField] private Transform vacuumBody;
+        
         [Header("Power Params")]
         [SerializeField] private float maxPower = 100f;
         [FormerlySerializedAs("rechargeRate")] [SerializeField] private float rechargeRatePerSec = 1.5f;
@@ -64,6 +70,12 @@ namespace Items
         {
             if(vacuumGui != null)
                 Destroy(vacuumGui.gameObject);
+            
+            if(vacuumHead != null)
+                Destroy(vacuumHead.gameObject);
+            
+            if(vacuumBody != null)
+                Destroy(vacuumBody.gameObject);
         }
 
         public override void OnStartClient()
@@ -88,6 +100,16 @@ namespace Items
                 {
                     UseItem(false);
                 };
+                
+                //dirty hack to attach the head correctly.
+                var camera = Camera.main.transform;
+                var temp = camera.transform.localRotation;
+                camera.transform.localRotation = Quaternion.identity;
+                vacuumHead.parent = Camera.main.transform;
+                // lets move the head locally slightly
+                vacuumHead.transform.localPosition += new Vector3(0.05f, 0.1f, 0f);
+                vacuumBody.gameObject.SetActive(false);
+                camera.transform.localRotation = temp;
             }
         }
         
@@ -300,9 +322,24 @@ namespace Items
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
             
+            
             Debug.Log("Vacuum:::OnAttach");
             if(IsOwner)
                 InitialiseVacuum();
+            else
+            {
+                var target = GetComponentInParent<SeekerLocators>();
+                
+                //hack to reliably attach to seeker's head
+                //Todo: Fix this Issue where the vacuum head does not maintain consistant rotation
+                
+                var temp = target.SeekerHeadNonOwner.localRotation;
+                target.SeekerHeadNonOwner.localRotation = Quaternion.identity;
+                vacuumHead.parent = target.SeekerHeadNonOwner;
+                target.SeekerHeadNonOwner.localRotation = temp;
+                
+                vacuumBody.parent = target.SeekerBodyNonOwner;
+            }
         }
 
         public void OnDetach(Transform parentTrf, bool spawnWorldDummy)
@@ -310,6 +347,11 @@ namespace Items
             Debug.Log("Vacuum:::OnDetach");
             var dummySpawnLoc = parentTrf.position + new Vector3(0,1,0) + parentTrf.forward * 2f;
             RPC_ServerRequestDespawn(dummySpawnLoc, spawnWorldDummy);
+        }
+
+        public string GetUsePromptText()
+        {
+            return "Use vacuum";
         }
 
         [ServerRpc]

@@ -52,17 +52,22 @@ namespace SeekerGrabSystem
                 if (ctxDummy != null)
                     ctxDummy.Highlight(false);
                 ctxDummy = null;
+                InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab);
                 return;
             }
             ctxDummy = obj.GetComponentInParent<SeekerWorldDummy>();
-            if(ctxDummy != null)
+            if (ctxDummy != null)
+            {
                 ctxDummy.Highlight(true);
+                InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab,"Pick up");
+            }
         }
         
         private void OnPickup()
         {
             Debug.Log("SeekerPickupSystem::::OnPickup");
             if(ctxDummy == null) return;
+            if(!seekerInventory.HasStorage) return;
             seekerInventory.AddToInventory(ctxDummy.ItemReference, ctxDummy.Icon);
             ctxDummy.OnPickedUp();
         }

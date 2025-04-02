@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using FishNet.Object;
 using GogoGaga.OptimizedRopesAndCables;
+using Player.Audio;
 using UnityEngine;
 
 namespace Player.Items.HiderItems
@@ -11,6 +12,8 @@ namespace Player.Items.HiderItems
         
         [SerializeField] private Animator animator;
         [SerializeField] private float activationDelay=0.25f;
+        [SerializeField] private AudioClip pressSFX;
+        [SerializeField] private AudioSource localSFXSource;
         public Rope rope { get; set; }
         public event Action<ITriggerItem> OnTriggerActivated;
         
@@ -26,11 +29,18 @@ namespace Player.Items.HiderItems
             if (role.Role == PlayerRole.RoleType.Seeker)
             {
                 activationRoutine = StartCoroutine(DelayedActivation());
+                RPC_OnPlayerEntered();
                 Debug.Log("PressurePlate::PRESSED");
             }
             animator.SetBool("pressed", true);
         }
 
+        [ObserversRpc(ExcludeOwner = false)]
+        private void RPC_OnPlayerEntered()
+        {
+            localSFXSource.PlayOneShot(pressSFX);
+        }
+        
         [Server]
         private void OnTriggerExit(Collider other)
         {

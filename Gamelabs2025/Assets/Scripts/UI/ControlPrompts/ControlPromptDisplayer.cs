@@ -19,7 +19,9 @@ namespace Player.UI.ControlPrompts
         
         private void Start()
         {
-            inputAction = actionReference.action;
+            if(actionReference)
+                inputAction = actionReference.action;
+            
             UpdateImage();
         }
 

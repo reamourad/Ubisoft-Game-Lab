@@ -104,13 +104,13 @@ MonoBehaviour:
   Radius: 10
   Orbits:
     Top:
-      Radius: 3
+      Radius: 4
       Height: 5.42
     Center:
-      Radius: 4
+      Radius: 5
       Height: 2.25
     Bottom:
-      Radius: 3
+      Radius: 4
       Height: -0.7
     SplineCurvature: 0.5
   RecenteringTarget: 2

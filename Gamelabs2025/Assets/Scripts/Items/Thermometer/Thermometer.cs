@@ -3,6 +3,8 @@ using FishNet;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Items.Interfaces;
+using Player.Audio;
+using Player.IK;
 using Player.Inventory;
 using UnityEngine;
 
@@ -20,18 +22,24 @@ namespace Player.Items.Thermometer
         private const string LOW_READING = "LOW";
         private const string NONE_READING = "--";
         
+        [Header("Attachment")]
+        [SerializeField] private Transform graphicsAttachment;
+        
         [SerializeField] private float boxCastRange = 10;
         
         [SerializeField] private NetworkObject worldDummyRef;
         [SerializeField] private LayerMask layerMask;
         [SerializeField] private BoxCollider detector;
         [SerializeField] private TMPro.TMP_Text readingText;
+        
+        [SerializeField] private AudioClip readSound;
 
         private ThermometerGui gui;
         
         public void UseItem(bool isUsing)
         {
             var temp = ReadTemperature();
+            AudioManager.Instance.PlaySFX(readSound);
             switch (temp)
             {
                 case TempType.Normal:
@@ -77,6 +85,24 @@ namespace Player.Items.Thermometer
             
             if(IsOwner)
                 gui = Instantiate(Resources.Load<GameObject>("ThermometerCanvas")).GetComponent<ThermometerGui>();
+            
+            Transform attachmentTarget = null;
+            if (IsOwner)
+            {
+                transform.localPosition += new Vector3(0, 0.015f, 0);
+                attachmentTarget = Camera.main.transform;
+            }
+            else
+            {
+                attachmentTarget = GetComponentInParent<SeekerLocators>().SeekerHeadNonOwner;
+               
+            }
+            
+            //Attach the graphic to player
+            var temp = attachmentTarget.localRotation;
+            attachmentTarget.localRotation = Quaternion.identity;
+            graphicsAttachment.parent = attachmentTarget;
+            attachmentTarget.localRotation = temp;
         }
 
         public void OnDetach(Transform parentTrf, bool spawnWorldDummy)
@@ -86,10 +112,18 @@ namespace Player.Items.Thermometer
             RPC_ServerRequestDespawn(dummySpawnLoc, spawnWorldDummy);
         }
 
+        public string GetUsePromptText()
+        {
+            return "Take reading";
+        }
+
         private void OnDestroy()
         {
             if(gui != null)
                 Destroy(gui.gameObject);
+            
+            if(graphicsAttachment != null)
+                Destroy(graphicsAttachment.gameObject);
         }
 
         [ServerRpc]
