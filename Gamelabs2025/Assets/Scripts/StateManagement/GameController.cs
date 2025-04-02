@@ -8,6 +8,7 @@ using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Networking;
 using Player;
+using Player.Audio;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -36,6 +37,14 @@ namespace StateManagement
         
         [Header("Particles")]
         [SerializeField] private GameObject vacuumedSuckedParticles;
+        
+        [Header("Audio")]
+        [SerializeField] private AudioClip mainSeekerBGM;
+        [SerializeField] private AudioClip mainHiderBGM;
+        [SerializeField] private AudioClip chaseBGM;
+        
+        [SerializeField] private AudioClip ambiance;
+        
         
         private GameStage currentStage = GameStage.None;
         private List<NetworkObject> players;
@@ -71,15 +80,36 @@ namespace StateManagement
                 {
                     RPC_InformClientIsReady();
                 }
+
+                PlayMainTheme();
             }
         }
-
+        
+        private void PlayMainTheme()
+        {
+            StartCoroutine(StartPlayingMainTheme());
+        }
+        
+        private IEnumerator StartPlayingMainTheme()
+        {
+            Debug.Log("GameController:: Playing Main Theme");
+            yield return new WaitUntil(() => GameLookupMemory.LocalPlayer != null);
+            if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Hider)
+                AudioManager.Instance.PlayBG(mainHiderBGM);
+            else if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Seeker)
+            {
+                AudioManager.Instance.PlayBG(mainSeekerBGM);
+                AudioManager.Instance.PlayAmbience(ambiance);
+            }
+        }
+        
         [ServerRpc]
         private void RPC_InformClientIsReady()
         {
             ServerOnClientReady();
         }
 
+        [Server]
         private void ServerOnClientReady()
         {
             readyClients += 1;
@@ -101,6 +131,7 @@ namespace StateManagement
             GameLookupMemory.Winner = next;
         }
 
+        [Server]
         private void ServerSpawnPlayers()
         {
             Debug.Log("GameController:: Spawning Players");
@@ -116,6 +147,36 @@ namespace StateManagement
                 players.Add(nob);
             }
         }
+        
+        [Server]
+        public void ServerInitiateChase()
+        {
+            RPC_ClientPlayChaseMusic();
+        }
+        
+        [Server]
+        public void ServerStopChase()
+        {
+            RPC_ClientStopChaseMusic();
+        }
+
+        [ObserversRpc(ExcludeOwner = false)]
+        private void RPC_ClientPlayChaseMusic()
+        {
+            AudioManager.Instance.PlayBG(chaseBGM);
+        }
+        
+        [ObserversRpc(ExcludeOwner = false)]
+        private void RPC_ClientStopChaseMusic()
+        {
+            if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Hider)
+                AudioManager.Instance.PlayBG(mainHiderBGM);
+            else if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Seeker)
+            {
+                AudioManager.Instance.PlayBG(mainSeekerBGM);
+            }
+        }
+        
         
         //Lets not look here, its quite shitty :p
         private (NetworkObject prefab, Transform spawnPoint) SelectRandomSide()

@@ -42,7 +42,6 @@ namespace Items
             else
             {
                 attachmentTarget = GetComponentInParent<SeekerLocators>().SeekerHeadNonOwner;
-               
             }
             
             //Attach the graphic to player
@@ -57,6 +56,11 @@ namespace Items
             Debug.Log("Tablet:::OnDetach");
             var dummySpawnLoc = parentTrf.position + new Vector3(0,1,0) + parentTrf.forward * 2f;
             RPC_ServerRequestDespawn(dummySpawnLoc, spawnWorldDummy);
+        }
+
+        public string GetUsePromptText()
+        {
+            return "Use Cameras";
         }
 
         [ServerRpc]

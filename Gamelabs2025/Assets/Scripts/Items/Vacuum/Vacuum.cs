@@ -349,6 +349,11 @@ namespace Items
             RPC_ServerRequestDespawn(dummySpawnLoc, spawnWorldDummy);
         }
 
+        public string GetUsePromptText()
+        {
+            return "Use vacuum";
+        }
+
         [ServerRpc]
         private void RPC_ServerRequestDespawn(Vector3 spawnLoc, bool spawnWorldDummy)
         {

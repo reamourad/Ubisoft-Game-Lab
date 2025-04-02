@@ -16,6 +16,15 @@ namespace Player.Inventory
       public Action<NetworkObject> OnAttachableSpawned;
       private SeekerInventoryGui guiRef;
 
+      public bool HasStorage
+      {
+         get
+         {
+            uint id = 0;
+            return GetEmptySlot(out id);
+         }
+      }
+
       public bool HasItemEquipped => activeItem != null;
       
       public override void OnStartNetwork()
@@ -159,11 +168,22 @@ namespace Player.Inventory
          }
          activeItem = seekerAttachable;
          activeItem.OnAttach(this.transform);
+         
+         if (IsOwner)
+         {
+            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.UseItem, seekerAttachable.GetUsePromptText());
+            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Drop, "Drop");
+         }
       }
 
       private void Detach(ISeekerAttachable attachable, bool removed)
       {
          attachable?.OnDetach(this.transform, removed);
+         if (IsOwner)
+         {
+            InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.UseItem);
+            InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Drop);
+         }
       }
       
       [ServerRpc]
