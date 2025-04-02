@@ -22,7 +22,10 @@ public class InScreenUI : SingletonBehaviour<InScreenUI>
         var go = Instantiate(Resources.Load<GameObject>(INPUT_PROMPT_PATH), this.transform);
         inputPrompts = go.GetComponent<DynamicInputPrompts>();
         var rect = go.GetComponent<RectTransform>();
-        rect.anchoredPosition = new Vector2(0, 125f);
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
     }
     
     public void SetToolTipText(string text)
