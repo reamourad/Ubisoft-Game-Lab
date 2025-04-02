@@ -3,6 +3,7 @@ using FishNet;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
 using Items.Interfaces;
+using Player.Audio;
 using Player.IK;
 using Player.Inventory;
 using UnityEngine;
@@ -30,12 +31,15 @@ namespace Player.Items.Thermometer
         [SerializeField] private LayerMask layerMask;
         [SerializeField] private BoxCollider detector;
         [SerializeField] private TMPro.TMP_Text readingText;
+        
+        [SerializeField] private AudioClip readSound;
 
         private ThermometerGui gui;
         
         public void UseItem(bool isUsing)
         {
             var temp = ReadTemperature();
+            AudioManager.Instance.PlaySFX(readSound);
             switch (temp)
             {
                 case TempType.Normal:
@@ -85,6 +89,7 @@ namespace Player.Items.Thermometer
             Transform attachmentTarget = null;
             if (IsOwner)
             {
+                transform.localPosition += new Vector3(0, 0.015f, 0);
                 attachmentTarget = Camera.main.transform;
             }
             else
@@ -105,6 +110,11 @@ namespace Player.Items.Thermometer
             Debug.Log("Thermometer:::OnDetach");
             var dummySpawnLoc = parentTrf.position + new Vector3(0,1,0) + parentTrf.forward * 2f;
             RPC_ServerRequestDespawn(dummySpawnLoc, spawnWorldDummy);
+        }
+
+        public string GetUsePromptText()
+        {
+            return "Take reading";
         }
 
         private void OnDestroy()

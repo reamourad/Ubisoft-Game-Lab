@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1087030035363849802}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748072398621525805}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: IK_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1079851885042163259}
   - component: {fileID: 666382446063838851}
   - component: {fileID: 4259793075077798629}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Reading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 279640252263267092}
   - component: {fileID: 5417665228483415288}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 5222841209645217539}
   - component: {fileID: 5315467251490244198}
   - component: {fileID: 7941574049204540911}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: ReadingTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 3088763203616699933}
   - component: {fileID: 7747022825487793299}
   - component: {fileID: 2159627251965753911}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Type
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   - component: {fileID: 8529166532181666457}
   - component: {fileID: 4050607852461264231}
   - component: {fileID: 7053805173752715945}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -830,7 +830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7647035052858226997}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: IK_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -861,7 +861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 303188748171088428}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: IK_Targets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -897,7 +897,7 @@ GameObject:
   - component: {fileID: -6058531601468372682}
   - component: {fileID: 7845776800582638264}
   - component: {fileID: 3307783328836838417}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Item_Thermometer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,6 +995,7 @@ MonoBehaviour:
     m_Bits: 128
   detector: {fileID: 5417665228483415288}
   readingText: {fileID: 4259793075077798629}
+  readSound: {fileID: 8300000, guid: 94cbf2d2eb581074781575452523d995, type: 3}
 --- !u!114 &3307783328836838417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,7 +1064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
       propertyPath: m_IsActive
@@ -1071,7 +1072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: eabc0a0802ab4824d8d31f22277bbd98, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

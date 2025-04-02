@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 975260249970137266}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 2866075501819036166}
   - component: {fileID: 5215922288501928580}
   - component: {fileID: 6879136399781367266}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Item_Vacuum
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 33472189182823504}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Vacuum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 3350199765669252191}
   - component: {fileID: 1754057753230507082}
   - component: {fileID: 7788913480969096354}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 7960171035188510238}
   - component: {fileID: 4411144503938375094}
   - component: {fileID: 7139088071396333299}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5151,7 +5151,7 @@ GameObject:
   - component: {fileID: 4581258240059345118}
   - component: {fileID: 1505169485982438560}
   - component: {fileID: 1927002746622454328}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: blob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5258,7 +5258,7 @@ GameObject:
   - component: {fileID: 1315525994234865840}
   - component: {fileID: 147253343311820181}
   - component: {fileID: 3114003894551427893}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: VacuumTube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5442,7 +5442,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4828172100082360110}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: SuctionPoint
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -5474,7 +5474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7938811459433381824}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: RopeStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5506,7 +5506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9083406590647140210}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: RopeEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5539,7 +5539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5892474792244837764}
   - component: {fileID: 184528263471275869}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5667,7 +5667,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 990036037760506081}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -5700,7 +5700,7 @@ GameObject:
   - component: {fileID: 3101498363022141113}
   - component: {fileID: 1726919653603471843}
   - component: {fileID: 6087767562103734088}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Swirl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10533,7 +10533,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8117592395590481670}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: IK Targets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10566,7 +10566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3040037011705993568}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -10658,7 +10658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6b091dbe13f8a464c8a1b1149d1c544a, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6b091dbe13f8a464c8a1b1149d1c544a, type: 3}
       propertyPath: m_IsActive
@@ -10775,7 +10775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 345614eed93fe0a4ebd9f8ac9546a634, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 345614eed93fe0a4ebd9f8ac9546a634, type: 3}
       propertyPath: m_IsActive
@@ -10860,7 +10860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 47eb95dad6cbb784d943fc2af0824f58, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

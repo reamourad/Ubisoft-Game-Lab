@@ -13,5 +13,7 @@ namespace Player.Inventory
         /// Handle Destroy Logic
         /// </summary>
         void OnDetach(Transform parent, bool spawnWorldDummy);
+
+        string GetUsePromptText();
     }
 }

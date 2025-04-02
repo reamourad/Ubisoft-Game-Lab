@@ -14,6 +14,9 @@ namespace Networking
     {
         [Header("Seeker"), SerializeField]
         private SeekerGraphicsManager fpsGraphicsManager;
+
+        [SerializeField]
+        private GameObject playerGraphics;
         
         [Header("Hider"), SerializeField]
         
@@ -74,6 +77,8 @@ namespace Networking
         private void OwnerSeekerInitialisation()
         {
             //nothing as of now.
+            if(playerGraphics != null)
+                playerGraphics.transform.localRotation = Quaternion.identity;
             StartCoroutine(Delayed(() =>
             {
                 var fpsCam = GetComponentInChildren<CinemachineCamera>();
@@ -84,7 +89,7 @@ namespace Networking
                 camTrf.localRotation = Quaternion.identity;
                 
                 GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(camTrf);
-                if(fpsGraphicsManager != null)
+                if (fpsGraphicsManager != null)
                     fpsGraphicsManager.SetRendererEnabled(false);
             }));
             
