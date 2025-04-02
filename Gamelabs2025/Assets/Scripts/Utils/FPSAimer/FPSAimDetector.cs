@@ -41,7 +41,7 @@ namespace Utils
             if(cam == null)
                 return;
             
-            var ray = cam.ScreenPointToRay(screenCenter);
+            var ray = new Ray(cam.transform.position, cam.transform.forward);
             if (Physics.Raycast(ray, out RaycastHit hit, maxTraceDistance,mask))
             {
                 if (DetectionTest == null || !DetectionTest(hit.collider))

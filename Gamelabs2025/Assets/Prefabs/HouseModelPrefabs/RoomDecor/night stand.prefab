@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1178005462107229845}
+  - component: {fileID: 544451146552208898}
   m_Layer: 0
   m_Name: night stand
   m_TagString: Untagged
@@ -33,6 +34,27 @@ Transform:
   - {fileID: 9101891981134351737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &544451146552208898
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6613827946768536818}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.006940415, y: 0.0062522553, z: 0.0051026684}
+  m_Center: {x: 0.024807047, y: -0.0007122296, z: 0.0031956588}
 --- !u!1 &7768236733434518697
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,18 +150,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1178005462107229845}
     m_Modifications:
     - target: {fileID: 5121257308742224147, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2623495
-      objectReference: {fileID: 0}
-    - target: {fileID: 5121257308742224147, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.26234952
-      objectReference: {fileID: 0}
-    - target: {fileID: 5121257308742224147, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.26234943
-      objectReference: {fileID: 0}
-    - target: {fileID: 5121257308742224147, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.024861539
       objectReference: {fileID: 0}
@@ -179,18 +189,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5720839601755005305, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -1535692349932380675, guid: 53f7542084cab894bae2a3fea24f7c29, type: 3}
-    - target: {fileID: 7078676397092418408, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: a50c57e07a8919643b0d4ce2943f639f, type: 2}
-    - target: {fileID: 7078676397092418408, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 9e0e1c02b6ffb424f8a0123889634b9e, type: 2}
     - target: {fileID: 8536420562764500454, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
       propertyPath: m_Name
       value: Ornate Candle Stand

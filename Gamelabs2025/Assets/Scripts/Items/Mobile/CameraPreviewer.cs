@@ -1,5 +1,8 @@
 using System;
+using Networking;
+using StateManagement;
 using UnityEngine;
+using Utils;
 
 namespace Items
 {
@@ -14,6 +17,8 @@ namespace Items
         
         private void Start()
         {
+            inputReader = InputReader.Instance;
+            
             mainCamera = Camera.main;
             mainCamera.gameObject.SetActive(false);
             inputReader.OnCCTVCameraSwitchEvent += InputReaderOnOnCCTVCameraSwitchEvent;
@@ -23,6 +28,8 @@ namespace Items
             Debug.Log("Enabling UI Inputs ONLY!!");
             inputReader.SetToUIInputs();
             CycleCamera(1);
+            
+            GameLookupMemory.LocalPlayer.GetComponent<SeekerGraphicsManager>().SetRendererEnabled(true);
         }
         
         private void OnDestroy()
@@ -32,6 +39,7 @@ namespace Items
             
             //Move this to appropriate location later
             Debug.Log("Enabling UI Game Inputs ONLY!!");
+            GameLookupMemory.LocalPlayer.GetComponent<SeekerGraphicsManager>().SetRendererEnabled(false);
             inputReader.SetToGameplayInputs();
         }
 
@@ -56,6 +64,9 @@ namespace Items
         {
             if (previewCamera)
                 previewCamera.ActivateCamera(false);
+            
+            if(CCTVCamera.CameraList == null || CCTVCamera.CameraList.Count == 0)
+                return;
             
             if (dir > 0)
                 id = (id + 1) % CCTVCamera.CameraList.Count;

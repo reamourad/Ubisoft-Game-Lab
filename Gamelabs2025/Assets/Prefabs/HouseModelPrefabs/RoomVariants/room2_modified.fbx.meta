@@ -3,7 +3,112 @@ guid: 53f7542084cab894bae2a3fea24f7c29
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base
+    second: {fileID: 2100000, guid: 1853928f0c0e4584e9ecd0fa5fab9f1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 744317561ace14f4294807db44a4c537, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Knob
+    second: {fileID: 2100000, guid: 48525bde23ec89c468867b8eb0fff202, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lamp Bulb
+    second: {fileID: 2100000, guid: 7a086f4442cefef4ca420c43bfb133df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 18befc8cd5ca3ff4d8e3b478d90d081d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal Chrome
+    second: {fileID: 2100000, guid: 69de865244494494ab8013b4e6affa9e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Newspaper2_Baked
+    second: {fileID: 2100000, guid: 2ce7d6bdd39fa7942b658b6d00a544a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic Black Insulator
+    second: {fileID: 2100000, guid: c9f455f1d47707d4d9c59185b89a82c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic Rubbery
+    second: {fileID: 2100000, guid: c006689894afb1c44905bc3c5b1e6e83, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Super dark
+    second: {fileID: 2100000, guid: bb2ce0eaa6d109c4c97d953b4f9b8af3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dark blue
+    second: {fileID: 2100000, guid: 4bbdad5e9db5d124dbc9eb75b8dd5448, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floorold
+    second: {fileID: 2100000, guid: ac211482c29099540b895573a4749f11, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floorold.001
+    second: {fileID: 2100000, guid: fb7066bf2dc0d394a8e965b7b3f45544, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floorwood
+    second: {fileID: 2100000, guid: da919429c0acf4c40af17833130b323e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: 2738e4e9967e41143815ade8503e1e94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: image
+    second: {fileID: 2100000, guid: dcf748c1db0e84d4d90505c2c1208aae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light purple
+    second: {fileID: 2100000, guid: 38f2147ce648a1140867d95330a16e1a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat18
+    second: {fileID: 2100000, guid: ea890ee6bda21004a8ce2d7224d0dbf3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: purple
+    second: {fileID: 2100000, guid: a912f713c83a18e44b572234beef24e8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sheets
+    second: {fileID: 2100000, guid: f3a974552d452a541ae2c97c404d592c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wallpaper
+    second: {fileID: 2100000, guid: bec53cc1fb32d1f4fa7d5bdb1cd3d425, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -111,12 +111,10 @@ namespace Networking
         private void ConnectTwoObjects(NetworkObject objectToConnectTo,NetworkObject secondObject, bool firstIsTrigger)
         {
             //connected two items together 
-            if (!IsServerInitialized)
-            {
-                currentRope.SetEndPoint(objectToConnectTo.transform);
-                objectToConnectTo.GetComponent<IConnectable>().rope = currentRope;
-            }
 
+            currentRope.SetEndPoint(secondObject.transform);
+            secondObject.GetComponent<IConnectable>().rope = currentRope;
+            
             ITriggerItem trigger = null;
             IReactionItem reaction = null; 
             // subscribe to the trigger's event
@@ -185,11 +183,6 @@ namespace Networking
         private void RPC_InformServerOnRopeCreate(NetworkObject objectToConnectTo,bool creation)
         {
             Debug.Log("Received rope creation request from client");
-        
-            // Server creates the rope
-            //CreateNewRopeAndDestroyOldOne(objectToConnectTo);
-        
-            // Tell all other clients to create the rope as well
             BroadcastRopeCreateToClients(objectToConnectTo,creation);
         }
         

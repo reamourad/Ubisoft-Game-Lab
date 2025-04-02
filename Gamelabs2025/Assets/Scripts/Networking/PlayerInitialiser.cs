@@ -2,16 +2,21 @@ using System.Collections;
 using System.Threading;
 using FishNet.Object;
 using Player;
+using StateManagement;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Utils;
 
 namespace Networking
 {
     public class PlayerInitialiser : NetworkBehaviour
     {
         [Header("Seeker"), SerializeField]
-        private GameObject fpsGraphicsObject;
+        private SeekerGraphicsManager fpsGraphicsManager;
+
+        [SerializeField]
+        private GameObject playerGraphics;
         
         [Header("Hider"), SerializeField]
         
@@ -57,6 +62,7 @@ namespace Networking
         
         private void OwnerIntialisation(PlayerRole.RoleType playerRole)
         {
+            GameLookupMemory.LocalPlayer = this.gameObject;
             switch (playerRole)
             {
                 case PlayerRole.RoleType.Seeker:
@@ -71,6 +77,8 @@ namespace Networking
         private void OwnerSeekerInitialisation()
         {
             //nothing as of now.
+            if(playerGraphics != null)
+                playerGraphics.transform.localRotation = Quaternion.identity;
             StartCoroutine(Delayed(() =>
             {
                 var fpsCam = GetComponentInChildren<CinemachineCamera>();
@@ -81,8 +89,8 @@ namespace Networking
                 camTrf.localRotation = Quaternion.identity;
                 
                 GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(camTrf);
-                if(fpsGraphicsObject != null)
-                    fpsGraphicsObject.SetActive(false);
+                if (fpsGraphicsManager != null)
+                    fpsGraphicsManager.SetRendererEnabled(false);
             }));
             
         }
