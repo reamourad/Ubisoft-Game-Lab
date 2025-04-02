@@ -36,6 +36,8 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts.InputSystem
 
         public Action onWalkToggled;
 
+        public Action onInteractPerformed; 
+
         /// <inheritdoc cref="OnEnable" />
         private void OnEnable()
         {
@@ -164,5 +166,23 @@ namespace Synty.AnimationBaseLocomotion.Samples.Scripts.InputSystem
             onLockOnToggled?.Invoke();
             onSprintDeactivated?.Invoke();
         }
+
+
+        /// <summary>
+        /// Defines the action to perform when the OnInteract callback is called.
+        /// </summary>
+        /// <param name="context">The context of the callback.</param>
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if (!context.performed)
+            {
+                return;
+            }
+
+            onInteractPerformed?.Invoke();
+        }
+
     }
+
+
 }
