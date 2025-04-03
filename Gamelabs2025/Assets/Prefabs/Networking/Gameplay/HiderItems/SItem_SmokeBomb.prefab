@@ -205,6 +205,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &3849173357816161738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7346136985049104902}
+  m_Layer: 6
+  m_Name: RayTestPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7346136985049104902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3849173357816161738}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7508717820883553044}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6804486914120733191
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +269,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 307951432965635627}
+  - {fileID: 7346136985049104902}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7894167957661820338
@@ -307,11 +339,14 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 7894167957661820338}
   _networkObjectCache: {fileID: 7894167957661820338}
+  stationaryLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   effects: 6
   range: 5
   SmokeFx: {fileID: 5837352466476978006, guid: e98fb25bff18cf7429d7376b46cbb690, type: 3}
   fxKillTime: 10
-  fxDestroyTime: 10
+  losSrcTrf: {fileID: 7346136985049104902}
   showBounds: 0
   targetAlignTest: {fileID: 0}
 --- !u!65 &5026000319524095067

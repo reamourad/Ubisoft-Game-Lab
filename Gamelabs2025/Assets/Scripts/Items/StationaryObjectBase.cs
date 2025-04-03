@@ -13,6 +13,7 @@ namespace Player.Items
         {
             if ((supportedEffects & effects) != 0)
             {
+                Debug.Log($"StationaryObjectBase:: Applying stationary effect: {effects}");
                 OnServerActivateStationaryObject();
                 RPC_ActivateStationaryObjectOnClients();
             }

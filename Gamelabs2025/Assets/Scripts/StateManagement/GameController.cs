@@ -68,6 +68,10 @@ namespace StateManagement
         
         private IEnumerator Start()
         {
+            //we start from the next frame
+            //loading is already heavy
+            yield return new WaitForEndOfFrame();
+            
             GameWinner.OnChange += GameWinnerOnOnChange;
             if (IsClientStarted)
             {

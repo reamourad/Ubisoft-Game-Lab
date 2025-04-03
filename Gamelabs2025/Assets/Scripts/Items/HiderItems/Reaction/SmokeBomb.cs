@@ -10,10 +10,12 @@ namespace Player.Items.HiderItems.Reaction
 {
     public class SmokeBomb : NetworkBehaviour, IReactionItem, IHiderGrabableItem
     {
+        [SerializeField] private LayerMask stationaryLayerMask;
         [SerializeField] private StationaryEffect effects;
         [SerializeField] private float range;
         [SerializeField] private GameObject SmokeFx;
         [SerializeField] private float fxKillTime = 5;
+        [SerializeField] private Transform losSrcTrf;
         
         [Header("Tests")]
         [SerializeField] private bool showBounds;
@@ -29,18 +31,18 @@ namespace Player.Items.HiderItems.Reaction
         [Server]
         private void OnServerExplode()
         {
-            RPC_OnClientExplode();
             ApplySmokeEffect();
+            RPC_OnClientExplode();
             StartCoroutine(DelayedDespawn());
         }
 
         [Server]
         private void ApplySmokeEffect()
         {
-            var colliders = Physics.OverlapSphere(transform.position, range);
-            foreach (var collider in colliders)
+            var colliders = Physics.OverlapSphere(transform.position, range, stationaryLayerMask);
+            foreach (var col in colliders)
             {
-                if (ValidCollider(collider, out StationaryObjectBase stationaryObject))
+                if (ValidCollider(col, out StationaryObjectBase stationaryObject))
                 {
                     stationaryObject.ApplyStationaryEffect(effects);
                 }
@@ -57,14 +59,17 @@ namespace Player.Items.HiderItems.Reaction
             
             var dir = (stationary.transform.position - transform.position).normalized;
             var up = Vector3.up;
-            var aligned = Vector3.Dot(dir, up) > 0;
+            var aligned = Vector3.Dot(dir, up) > 0; //everything above ground
             if (!aligned)
                 return false;
-
+            
             //if not in line of sight (ie; assuming a wall is in the )
-            if (Physics.Raycast(transform.position, dir, out RaycastHit hit, range))
+            if (Physics.Raycast(losSrcTrf.position, dir, out RaycastHit hit, range))
             {
-                return false;
+                if (hit.collider != collider)
+                {
+                    return false;
+                }
             }
 
             stationaryObject = stationary;
