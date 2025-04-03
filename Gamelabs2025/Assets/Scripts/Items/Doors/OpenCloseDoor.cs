@@ -7,6 +7,11 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
     [SerializeField] private bool isOpen = false;  // Current state of the door (open or closed)
     public bool isPlayerNear = false;             // Whether the player is close enough to interact
 
+    private float doorSpeed = 2f;
+    private float targetAngle = 0f;
+    private float currentAngle = 0f;
+
+
     private void OnEnable()
     {
         // Subscribe to input events for door interaction using OnInteract
@@ -19,92 +24,60 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         InputReader.Instance.OnInteractEvent -= HandleInteractInput;
     }
 
+
     private void Update()
     {
+        if (!NetworkObject || !NetworkObject.IsSpawned) return; 
 
-        if (!NetworkObject || !NetworkObject.IsSpawned) return; // Avoid null reference
-
-        if (!IsOwner)
-            return;
-
-        // Check if the player is close enough to interact
+     
         if (isPlayerNear)
         {
-            // Show the input prompt only when the player is near the door
-            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab, isOpen ? "Close" : "Open");
+           
+            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Interact, isOpen ? "Close" : "Open");
         }
         else
         {
-            // Remove the prompt when the player is not near
-            InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab);
+            
+            InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Interact);
+        }
+
+        
+        if (door != null)
+        {
+            currentAngle = Mathf.Lerp(currentAngle, targetAngle, Time.deltaTime * doorSpeed);
+            door.transform.localRotation = Quaternion.Euler(-90, 0, currentAngle);
         }
     }
 
     private void HandleInteractInput()
     {
-        if (isPlayerNear && IsOwner)
+        if (isPlayerNear)
         {
-            // Trigger the door action on the server when the player interacts
+            
             ToggleDoorState();
+            Debug.Log("INTERACT DOOR");
         }
     }
 
-    [ServerRpc(RequireOwnership = false)] // Ensures the server processes this RPC
+    [ServerRpc(RequireOwnership = false)] 
     private void ToggleDoorState()
     {
         isOpen = !isOpen;
-
-        // Synchronize door state across the network
-        UpdateDoorState(isOpen);
-
-        // Perform the door open/close logic (e.g., animate the door)
-        if (isOpen)
-        {
-            OpenDoor();
-        }
-        else
-        {
-            CloseDoor();
-        }
+        UpdateDoorState(isOpen); 
     }
 
     [ObserversRpc]
     private void UpdateDoorState(bool state)
     {
         isOpen = state;
-
-        // Make sure all clients reflect the correct state of the door
-        if (isOpen)
-        {
-            OpenDoor();
-        }
-        else
-        {
-            CloseDoor();
-        }
-    }
-
-    private void OpenDoor()
-    {
-        if (door != null)
-        {
-            door.transform.Rotate(0, 90, 0); // Rotate the door 90 degrees around Y-axis to open it
-        }
-    }
-
-    private void CloseDoor()
-    {
-        if (door != null)
-        {
-            door.transform.Rotate(0, -90, 0); // Rotate the door -90 degrees around Y-axis to close it
-        }
+        targetAngle = isOpen ? 90f : 0f;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!NetworkObject || !NetworkObject.IsSpawned) return; // Prevent null errors
+        if (!NetworkObject || !NetworkObject.IsSpawned) return;
 
-        if (other.CompareTag("Player") && IsOwner)
+        if (other.CompareTag("Player"))
         {
             isPlayerNear = true;
         }
@@ -112,13 +85,13 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!NetworkObject || !NetworkObject.IsSpawned) return; // Prevent null errors
+        if (!NetworkObject || !NetworkObject.IsSpawned) return;
 
-        // Check if the player exits the door's interaction range
-        if (other.CompareTag("Player") && IsOwner)
+     
+        if (other.CompareTag("Player"))
         {
             isPlayerNear = false;
-            InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab); // Remove prompt
+            InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Interact); 
         }
     }
 }

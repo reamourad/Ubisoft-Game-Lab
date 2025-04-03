@@ -210,6 +210,10 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        OnInteractEvent?.Invoke();
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnInteractEvent?.Invoke();
+        }
+          
     }
 }

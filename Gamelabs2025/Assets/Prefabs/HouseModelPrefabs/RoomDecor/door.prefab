@@ -69,7 +69,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6529036560625244994}
   _networkObjectCache: {fileID: 0}
-  door: {fileID: 192498202296625156}
+  door: {fileID: 4283333118440597124}
   isOpen: 0
   isPlayerNear: 0
 --- !u!1001 &5934056164481155825
@@ -166,6 +166,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5832694488909703925, guid: 355515cb9f3e9b440aa8b2a19dcc19fa, type: 3}
       propertyPath: m_Name
+      value: NotDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578278765227975797, guid: 355515cb9f3e9b440aa8b2a19dcc19fa, type: 3}
+      propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 8782598687730811025, guid: 355515cb9f3e9b440aa8b2a19dcc19fa, type: 3}
@@ -232,6 +236,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0010000403, y: 0.009300009, z: 0.019200027}
   m_Center: {x: 0.00000692447, y: 0.0022264514, z: -0.0013600787}
+--- !u!1 &4283333118440597124 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7578278765227975797, guid: 355515cb9f3e9b440aa8b2a19dcc19fa, type: 3}
+  m_PrefabInstance: {fileID: 5934056164481155825}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6183646631106225434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 355515cb9f3e9b440aa8b2a19dcc19fa, type: 3}
