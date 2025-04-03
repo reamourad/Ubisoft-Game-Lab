@@ -72,6 +72,40 @@ public class COMP476HiderMovement : MonoBehaviour
         }
     }
 
+    // Add these new methods:
+    public void MoveToward(Vector3 worldPosition, float arrivalThreshold = 0.5f)
+    {
+        Vector3 direction = worldPosition - transform.position;
+
+        // Convert to local space inputs
+        Vector3 localDirection = transform.InverseTransformDirection(direction.normalized);
+
+        SetVerticalInput(localDirection.z);
+        SetHorizontalInput(localDirection.x);
+
+        // Handle vertical movement
+        float verticalDiff = direction.y;
+        SetAscendInput(Mathf.Clamp(verticalDiff, -1f, 1f));
+
+        // Auto-stop when close
+        if (direction.magnitude < arrivalThreshold)
+        {
+            Stop();
+        }
+    }
+
+    public void Stop()
+    {
+        SetVerticalInput(0f);
+        SetHorizontalInput(0f);
+        SetAscendInput(0f);
+    }
+
+    public bool HasArrived(Vector3 position, float threshold)
+    {
+        return Vector3.Distance(transform.position, position) < threshold;
+    }
+
     // Optional: Add these for easy input debugging
     private void OnGUI()
     {

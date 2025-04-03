@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(COMP476HiderMovement))]
 public class GhostBehaviorTree : MonoBehaviour
@@ -35,7 +36,7 @@ public class GhostBehaviorTree : MonoBehaviour
     {
         // Create blackboard and populate initial data
         var blackboard = new BTBlackboard();
-        blackboard.Set("Self", this);
+        blackboard.Set("Self", transform);
         blackboard.Set("Movement", _movement);
         blackboard.Set("Player", _player);
         blackboard.Set("AllGhosts", _allGhosts);
@@ -45,17 +46,16 @@ public class GhostBehaviorTree : MonoBehaviour
         blackboard.Set("WaypointThreshold", _waypointThreshold);
 
         // Initialize behavior tree with your root node
-        _bt = new BehaviorTree(blackboard, CreateRootNode());
+        _bt = new BehaviorTree(blackboard, CreateRootNode(blackboard));
     }
 
-    private IBTNode CreateRootNode()
+    private IBTNode CreateRootNode(BTBlackboard bt)
     {
-        // This is where you'll build your behavior tree structure
-        // Example:
-        return new BTSelector(
-            // Add your behavior branches here
-        // new ChaseBehavior(), etc.
-        );
+
+        return new BTRepeat(new BTSequence(
+            new ChooseRandomNode(bt, false),
+            new MoveToNode(bt)
+        ));
     }
 
     private void Update()
