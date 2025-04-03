@@ -1,23 +1,44 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class ChooseRandomNode : BTAction
 {
-    bool avoidPlayer;
+    private readonly float _dangerRadius;
+    private readonly bool _avoidPlayer;
 
-    public ChooseRandomNode(BTBlackboard blackboard, bool avoidPlayer) : base(blackboard)
+    public ChooseRandomNode(BTBlackboard bb, bool avoidPlayer, float dangerRadius = 14f) : base(bb)
     {
-        this.avoidPlayer = avoidPlayer;
+        _avoidPlayer = avoidPlayer;
+        _dangerRadius = dangerRadius;
     }
 
     public override BTStatus Update()
     {
-        // Get all valid nodes
         var pathfinder = bb.Get<Pathfinder>("Pathfinder");
-        var allNodes = pathfinder.graph.GetComponentsInChildren<NavigationNode>();
+        var playerPos = bb.Get<Transform>("Player").position;
 
-        // Select random node
-        var randomNode = allNodes[Random.Range(0, allNodes.Length)];
+        // Get all nodes and filter if needed
+        var allNodes = pathfinder.graph.GetComponentsInChildren<NavigationNode>();
+        var validNodes = new List<NavigationNode>();
+
+        foreach (var node in allNodes)
+        {
+            if (!_avoidPlayer || Vector3.Distance(node.transform.position, playerPos) > _dangerRadius)
+            {
+                validNodes.Add(node);
+            }
+        }
+
+        // Fallback if all nodes are in danger zone
+        if (validNodes.Count == 0)
+        {
+            Debug.LogWarning("No safe nodes available - using fallback");
+            validNodes = new List<NavigationNode>(allNodes);
+        }
+
+        // Select random node from valid candidates
+        var randomNode = validNodes[Random.Range(0, validNodes.Count)];
         bb.Set("TargetNode", randomNode);
 
         return BTStatus.Success;
@@ -29,11 +50,13 @@ public class MoveToNode : BTAction
     private readonly float _waypointThreshold;
     private readonly float _repathDistance;
     private NavigationNode _currentAccessPoint;
+    private bool _alertPlayer;
 
-    public MoveToNode(BTBlackboard bb, float waypointThreshold = 0.5f, float repathDistance = 2f) : base(bb)
+    public MoveToNode(BTBlackboard bb, bool alertPlayer = false, float waypointThreshold = 0.5f, float repathDistance = 2f) : base(bb)
     {
         _waypointThreshold = waypointThreshold;
         _repathDistance = repathDistance;
+        _alertPlayer = alertPlayer;
     }
 
     public override BTStatus Update()
@@ -74,5 +97,85 @@ public class MoveToNode : BTAction
     {
         bb.Get<COMP476HiderMovement>("Movement").Stop();
         _currentAccessPoint = null;
+    }
+}
+
+public class PlayerDetectionNode : BTCondition
+{
+    private readonly float _minDetectionRange;
+    private readonly float _maxDetectionRange;
+    private readonly float _detectionAngle;
+    private readonly LayerMask _obstructionMask;
+    private readonly float _cooldownDuration = 5f;
+
+    private float _lastDetectionTime;
+    private bool _isInCooldown;
+
+    public PlayerDetectionNode(BTBlackboard bb,
+                             float minDetectionRange = 5f,
+                             float maxDetectionRange = 15f,
+                             float detectionAngle = 90f) : base(bb)
+    {
+        _minDetectionRange = minDetectionRange;
+        _maxDetectionRange = maxDetectionRange;
+        _detectionAngle = detectionAngle;
+        _obstructionMask = bb.Get<LayerMask>("ObstructionMask");
+    }
+
+    public override bool Check()
+    {
+        // Check cooldown first
+        if (_isInCooldown)
+        {
+            if (Time.time - _lastDetectionTime >= _cooldownDuration)
+            {
+                _isInCooldown = false;
+            }
+            else
+            {
+                bb.Set("DebugColor", new Color(1, 0.5f, 0)); // Orange during cooldown
+                return false;
+            }
+        }
+
+        Transform self = bb.Get<Transform>("Self");
+        Transform player = bb.Get<Transform>("Player");
+        Vector3 toPlayer = player.position - self.position;
+        float distance = toPlayer.magnitude;
+
+        // Always detect if very close (bypasses cooldown)
+        if (distance <= _minDetectionRange)
+        {
+            UpdateDetectionState(true);
+            return true;
+        }
+
+        // Check if within max range
+        if (distance <= _maxDetectionRange)
+        {
+            float angleToPlayer = Vector3.Angle(self.forward, toPlayer.normalized);
+            float detectionProbability = Mathf.Clamp01(1 - (angleToPlayer / _detectionAngle));
+            float effectiveRange = Mathf.Lerp(_minDetectionRange, _maxDetectionRange, detectionProbability);
+
+            if (distance <= effectiveRange && !Physics.Linecast(self.position, player.position, _obstructionMask))
+            {
+                UpdateDetectionState(true);
+                bb.Set("DebugColor", Color.Lerp(Color.yellow, Color.red, detectionProbability));
+                return true;
+            }
+        }
+
+        UpdateDetectionState(false);
+        bb.Set("DebugColor", Color.cyan);
+        return false;
+    }
+
+    private void UpdateDetectionState(bool detected)
+    {
+        if (detected)
+        {
+            _lastDetectionTime = Time.time;
+            _isInCooldown = true;
+        }
     }
 }

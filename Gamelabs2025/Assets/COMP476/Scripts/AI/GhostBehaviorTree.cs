@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
+using UnityEditor;
 
 [RequireComponent(typeof(COMP476HiderMovement))]
 public class GhostBehaviorTree : MonoBehaviour
@@ -13,6 +14,10 @@ public class GhostBehaviorTree : MonoBehaviour
     [SerializeField] private float _sightRange = 10f;
     [SerializeField] private float _waypointThreshold = 0.5f;
 
+    [Header("Debug")]
+    [SerializeField] private bool _enableDebug = true;
+    [SerializeField] private Color _debugColor = Color.cyan;
+
     private BehaviorTree _bt;
     private COMP476HiderMovement _movement;
     private Transform _player;
@@ -21,7 +26,7 @@ public class GhostBehaviorTree : MonoBehaviour
     private void Awake()
     {
         _movement = GetComponent<COMP476HiderMovement>();
-        _player = GameObject.FindGameObjectWithTag("Player").transform;
+        _player = FindFirstObjectByType<COMP476CharacterController>().transform;
         _allGhosts = new List<GhostBehaviorTree>(FindObjectsByType<GhostBehaviorTree>(FindObjectsSortMode.None));
 
         if(_pathfinder == null)
@@ -52,10 +57,24 @@ public class GhostBehaviorTree : MonoBehaviour
     private IBTNode CreateRootNode(BTBlackboard bt)
     {
 
-        return new BTRepeat(new BTSequence(
-            new ChooseRandomNode(bt, false),
-            new MoveToNode(bt)
-        ));
+        return new BTRepeat(
+            new BTSelector(
+                new BTSequence(
+                    new ChooseRandomNode(bt, true),
+                    new MonitoredActionNode(
+                        new MoveToNode(bt, true),
+                        new PlayerDetectionNode(bt)
+                    )
+                ),
+                new BTSequence(
+                    new ChooseRandomNode(bt, false),
+                    new MonitoredActionNode(
+                        new MoveToNode(bt),
+                        new BTConditionInverter(bt, new PlayerDetectionNode(bt))
+                    )
+                )
+            )
+        );
     }
 
     private void Update()
@@ -67,6 +86,32 @@ public class GhostBehaviorTree : MonoBehaviour
         // Run behavior tree
         _bt.Update();
     }
+
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        if (!_enableDebug) return;
+
+        // Draw debug sphere
+        Gizmos.color = _bt?.Blackboard.Get<Color>("DebugColor") ?? _debugColor;
+        Gizmos.DrawSphere(transform.position, 0.5f);
+
+        // Draw line to current target if available
+        if (_bt?.Blackboard.Has("TargetNode") ?? false)
+        {
+            var targetNode = _bt.Blackboard.Get<NavigationNode>("TargetNode");
+            if (targetNode != null)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawLine(transform.position, targetNode.transform.position);
+            }
+        }
+
+        // Draw sight range
+        //Handles.color = new Color(0, 1, 1, 0.1f);
+        //Handles.DrawSolidDisc(transform.position, Vector3.up, _sightRange);
+    }
+#endif
 }
 
 // Modified BehaviorTree class to manage execution

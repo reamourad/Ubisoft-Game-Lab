@@ -47,6 +47,35 @@ public abstract class BTCondition : IBTNode
     public void OnExit() { }
 }
 
+public class BTConditionInverter : BTCondition
+{
+    private readonly BTCondition _condition;
+    private bool _isRunning;
+
+    public BTConditionInverter(BTBlackboard bb, BTCondition condition) : base(bb)
+    {
+        _condition = condition;
+    }
+
+    public override bool Check()
+    {
+        if (!_isRunning)
+        {
+            _condition.OnEnter();
+            _isRunning = true;
+        }
+
+        bool result = !_condition.Check(); // Inversion happens here
+
+        if (!_isRunning) // Condition completed
+        {
+            _condition.OnExit();
+        }
+
+        return result;
+    }
+}
+
 public class BTSequence : IBTNode
 {
     private List<IBTNode> children = new List<IBTNode>();

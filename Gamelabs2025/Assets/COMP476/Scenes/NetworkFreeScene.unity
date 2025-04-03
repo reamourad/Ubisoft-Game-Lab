@@ -224,6 +224,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4acc4ca2ca7b89b439b37a8172308e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &77309396 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8429881023617595796, guid: ec6b2ed77fd87264c9a3a83d8e83f065, type: 3}
+  m_PrefabInstance: {fileID: 2007073275}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &77309397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77309396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d41d246fa8cbfd4e94c67197cf8b67f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pathfinder: {fileID: 1377020367}
+  _obstructionMask:
+    serializedVersion: 2
+    m_Bits: 1
+  _sightRange: 10
+  _waypointThreshold: 0.5
+  _enableDebug: 1
+  _debugColor: {r: 0, g: 1, b: 1, a: 1}
+--- !u!4 &77309401 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2345969991160950087, guid: ec6b2ed77fd87264c9a3a83d8e83f065, type: 3}
+  m_PrefabInstance: {fileID: 2007073275}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &82668149
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1406,7 +1436,7 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 1
-  testTransform: {fileID: 1882985460}
+  testTransform: {fileID: 77309401}
   pathColor: {r: 0.3225131, g: 0, b: 1, a: 1}
   accessibleColor: {r: 1, g: 0, b: 0.8835864, a: 0}
   blockedColor: {r: 1, g: 0, b: 0, a: 0}
@@ -1842,10 +1872,14 @@ PrefabInstance:
       propertyPath: _pathfinder
       value: 
       objectReference: {fileID: 1377020367}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9073488957944278291, guid: ec6b2ed77fd87264c9a3a83d8e83f065, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8429881023617595796, guid: ec6b2ed77fd87264c9a3a83d8e83f065, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 77309397}
   m_SourcePrefab: {fileID: 100100000, guid: ec6b2ed77fd87264c9a3a83d8e83f065, type: 3}
 --- !u!1001 &2045557243
 PrefabInstance:
