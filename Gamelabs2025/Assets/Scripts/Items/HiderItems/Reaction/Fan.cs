@@ -54,7 +54,7 @@ namespace Player.Items.HiderItems.Reaction
             effect.transform.SetParent(transform);
             effect.transform.rotation = new Quaternion(-90f, 0f, 0f,0);
             isSpinning = true;
-            // Destroy(go,fxKillTime);
+            Destroy(effect,3);
         }
 
         private void Update()
