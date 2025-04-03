@@ -53,6 +53,17 @@ namespace Networking
             timerRoutine = StartCoroutine(TimerCoroutine());
         }
 
+        public void ApplyPenalty(int penalty)
+        {
+            timer.Value -= penalty;
+            if (timer.Value <= 0)
+            {
+                StopActiveTimer();
+                onComplete?.Invoke();
+                isStarted = false;
+            }
+        }
+
         public void StopActiveTimer()
         {
             if(timerRoutine != null)
