@@ -55,11 +55,11 @@ namespace Player.Audio
         
         public void PlaySFX(AudioClip audioClip)
         {
-            var go = Instantiate(sfSourceReference.gameObject, sfSourceReference.transform);
+            var go = Instantiate(sfSourceReference.gameObject, this.transform);
+            go.gameObject.SetActive(true);
             var sfx = go.GetComponent<AudioSource>();
-            sfx.gameObject.SetActive(true);
-            Destroy(sfx.gameObject, audioClip.length);
             sfx.PlayOneShot(audioClip);
+            Destroy(sfx.gameObject, audioClip.length + 1);
         }
 
         public void PlayAmbience(AudioClip audioClip)
