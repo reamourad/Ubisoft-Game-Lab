@@ -39,7 +39,6 @@ public class NoiseManager : NetworkBehaviour
 
         // 🔹 Fire the event so all listeners respond
         OnNoiseGenerated?.Invoke(position, strength, dissipation);
-
         RPC_NotifyClientsNoise(position, strength, dissipation);
     }
 
@@ -47,5 +46,6 @@ public class NoiseManager : NetworkBehaviour
     private void RPC_NotifyClientsNoise(Vector3 position, float strength, float dissipation)
     {
         Debug.Log($"Client received noise notification at {position} with strength {strength}");
+        OnNoiseGenerated?.Invoke(position, strength, dissipation);
     }
 }
