@@ -42,8 +42,14 @@ namespace StateManagement
         [SerializeField] private AudioClip mainSeekerBGM;
         [SerializeField] private AudioClip mainHiderBGM;
         [SerializeField] private AudioClip chaseBGM;
+
+        [SerializeField] private float angyDelay = 0.5f;
+        [SerializeField] private int timePenalty = 30;
         
         [SerializeField] private AudioClip ambiance;
+        
+        [SerializeField] private AudioClip houseAngySFX;
+        [SerializeField] private GameObject cameraShakeObj;
         
         
         private GameStage currentStage = GameStage.None;
@@ -73,6 +79,8 @@ namespace StateManagement
             yield return new WaitForEndOfFrame();
             
             GameWinner.OnChange += GameWinnerOnOnChange;
+            NoiseManager.OnNoiseGenerated += OnServerNoiseGenerated;
+            
             if (IsClientStarted)
             {
                 yield return new WaitUntil(() => GameWinner.Value == PlayerRole.RoleType.None);
@@ -346,6 +354,36 @@ namespace StateManagement
         public NetworkObject GetPlayer(int clientId)
         {
             return players.Find(a => a.LocalConnection.ClientId == clientId);
+        }
+
+        [Server]
+        private void OnServerNoiseGenerated(Vector3 position, float strength, float dissipation)
+        {
+            if(!IsServerStarted)
+                return;
+            
+            StartCoroutine(DelayedInvoke(ServerDoTimePenalty, angyDelay));
+            RPC_InvokeHouseAngy(angyDelay);
+        }
+
+        [Server]
+        private void ServerDoTimePenalty()
+        {
+            Networking.TimeManager.Instance.ApplyPenalty(timePenalty);
+        }
+        
+        [ObserversRpc]
+        private void RPC_InvokeHouseAngy(float delay)
+        {
+            StartCoroutine(DelayedInvoke(ClientHouseAngy, delay));
+        }
+
+        [Client]
+        private void ClientHouseAngy()
+        {
+            var go = Instantiate(cameraShakeObj);
+            Destroy(go, houseAngySFX.length);
+            AudioManager.Instance.PlayMonsterSFX(houseAngySFX);
         }
     }
 }
