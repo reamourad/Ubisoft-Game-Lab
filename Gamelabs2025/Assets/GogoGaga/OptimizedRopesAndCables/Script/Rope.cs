@@ -98,6 +98,8 @@ namespace GogoGaga.OptimizedRopesAndCables
         private float prevDampness;
         private float prevRopeLength;
         private bool prevUseNavMeshCollision;
+        private Collider ropeCollider;
+
         
         // Cache for NavMesh adjusted points
         private List<Vector3> navMeshAdjustedPoints = new List<Vector3>();
@@ -115,6 +117,8 @@ namespace GogoGaga.OptimizedRopesAndCables
                 navMeshPath = new NavMeshPath(); // Add this line
                 SetSplinePoint();
             }
+            ropeCollider = GetComponent<Collider>();
+
         }
 
         private void OnValidate()
@@ -201,6 +205,57 @@ namespace GogoGaga.OptimizedRopesAndCables
                 prevRopeLength = ropeLength;
                 prevUseNavMeshCollision = useNavMeshCollision;
                 prevUseNavMeshPathfinding = useNavMeshPathfinding;
+                if (ropeCollider != null)
+                {
+                    UpdateCollider();
+                }
+            }
+        }
+
+        private void UpdateCollider()
+        {
+            if (ropeCollider != null)
+            {
+                // For BoxCollider or CapsuleCollider
+                if (ropeCollider is BoxCollider boxCollider)
+                {
+                    // Adjust box collider to match rope path
+                    Vector3 startPos = StartPoint.position;
+                    Vector3 endPos = EndPoint.position;
+                    Vector3 center = (startPos + endPos) / 2f;
+
+                    // Set the center of the collider relative to the GameObject
+                    boxCollider.center = transform.InverseTransformPoint(center);
+
+                    // Calculate direction and length
+                    Vector3 direction = endPos - startPos;
+                    float length = direction.magnitude;
+
+                    // Set the size (adjust width/height as needed)
+                    boxCollider.size = new Vector3(0.2f, 0.2f, length);
+
+                    // Rotate the GameObject to align with the rope direction
+                    transform.rotation = Quaternion.LookRotation(direction);
+                }
+                else if (ropeCollider is CapsuleCollider capsuleCollider)
+                {
+                    // Similar approach for capsule collider
+                    Vector3 startPos = StartPoint.position;
+                    Vector3 endPos = EndPoint.position;
+                    Vector3 center = (startPos + endPos) / 2f;
+
+                    capsuleCollider.center = transform.InverseTransformPoint(center);
+
+                    Vector3 direction = endPos - startPos;
+                    float length = direction.magnitude;
+
+                    // Set capsule direction along rope (usually Z-axis for a capsule)
+                    capsuleCollider.direction = 2; // 0 = X, 1 = Y, 2 = Z
+                    capsuleCollider.height = length;
+                    capsuleCollider.radius = 0.1f; // Adjust as needed
+
+                    transform.rotation = Quaternion.LookRotation(direction);
+                }
             }
         }
 
