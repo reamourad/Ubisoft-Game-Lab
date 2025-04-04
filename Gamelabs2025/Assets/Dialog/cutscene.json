@@ -1,0 +1,32 @@
+{
+    "start": {
+        "Name": "Seeker",
+        "Text": "(into recorder) Contract ID 734-B. Target: One ghost. Timer: 10 minutes. Rumors say the house gets... weird after that.",
+        "CamToActivate": "vCam1",
+        "Next": "1"
+    },
+    "1": {
+        "Name": "Seeker",
+        "Text": "Get in. Tag the ghost. Get out. Easy money. Unless the house eats me. Ha. Just kidding. Mostly.",
+        "CamToActivate": "vCam2",
+        "Next": "2"
+    },
+    "2": {
+        "Name": "Ghost",
+        "Text": "Okay okay okay—ten minutes. I just have to stay hidden for ten minutes. No pressure.",
+        "CamToActivate": "vCam3",
+        "Next": "3"
+    },
+    "3": {
+        "Name": "Ghost",
+        "Text": "Hey House, remember our deal? No sudden wall shifting, no trap tantrums, and *definitely* no hallway illusions.",
+        "CamToActivate": "vCam4",
+        "Next": "4"
+    },
+    "4": {
+        "Name": "Ghost",
+        "Text": "(whispers) I cut one wrong wire and now I’m the one getting hunted? Rude.",
+        "CamToActivate": "vCam5",
+        "Next": "end"
+    }
+}

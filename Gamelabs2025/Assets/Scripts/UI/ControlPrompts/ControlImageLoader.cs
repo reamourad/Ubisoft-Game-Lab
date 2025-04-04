@@ -30,8 +30,6 @@ namespace Player.UI.ControlPrompts
             }
 
             strKey = Reformat(strKey);
-                
-            Debug.Log(strKey);
             if(images.ContainsKey(strKey))
                 return images[strKey];
             

@@ -22,6 +22,9 @@ namespace Player.Items.HiderItems
         [Server]
         private void OnTriggerEnter(Collider other)
         {
+            if(activationRoutine != null)
+                return;
+            
             Debug.Log($"PressurePlate:: {other.name} entered");
             var role = other.GetComponentInParent<PlayerRole>();
             if(role == null)
@@ -48,9 +51,11 @@ namespace Player.Items.HiderItems
             var role = other.GetComponentInParent<PlayerRole>();
             if(role == null)
                 return;
+            
             if (role.Role == PlayerRole.RoleType.Seeker)
             {
-                StopCoroutine(activationRoutine);
+                if(activationRoutine != null)
+                    StopCoroutine(activationRoutine);
                 Debug.Log("PressurePlate::RELEASED");
             }
             animator.SetBool("pressed", false);
@@ -61,6 +66,7 @@ namespace Player.Items.HiderItems
            yield return new WaitForSeconds(activationDelay);
            OnTriggerActivated?.Invoke(this);
            Debug.Log($"PressurePlate::ACTIVATED CONNECTION {OnTriggerActivated != null}");
+           activationRoutine = null;
         }
         
     }

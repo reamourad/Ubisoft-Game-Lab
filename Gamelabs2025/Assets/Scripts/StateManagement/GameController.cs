@@ -33,7 +33,6 @@ namespace StateManagement
         [Header("Game Variables")] 
         [SerializeField] private int prepTimeSeconds = 30;
         [SerializeField] private int gameTimeSeconds = 480;
-        [SerializeField] private NetworkAnimator doorAnimator;
         
         [Header("Particles")]
         [SerializeField] private GameObject vacuumedSuckedParticles;
@@ -42,11 +41,20 @@ namespace StateManagement
         [SerializeField] private AudioClip mainSeekerBGM;
         [SerializeField] private AudioClip mainHiderBGM;
         [SerializeField] private AudioClip chaseBGM;
+
+        [SerializeField] private float angyDelay = 0.5f;
+        [SerializeField] private int timePenalty = 30;
         
         [SerializeField] private AudioClip ambiance;
         
+        [SerializeField] private AudioClip houseAngySFX;
+        [SerializeField] private GameObject cameraShakeObj;
+        
         
         private GameStage currentStage = GameStage.None;
+        public GameStage CurrentGameStage =>currentStage;
+        
+        
         private List<NetworkObject> players;
         private readonly SyncVar<PlayerRole.RoleType> GameWinner = new SyncVar<PlayerRole.RoleType>(PlayerRole.RoleType.None);
 
@@ -68,7 +76,13 @@ namespace StateManagement
         
         private IEnumerator Start()
         {
+            //we start from the next frame
+            //loading is already heavy
+            yield return new WaitForEndOfFrame();
+            
             GameWinner.OnChange += GameWinnerOnOnChange;
+            NoiseManager.OnNoiseGenerated += OnServerNoiseGenerated;
+            
             if (IsClientStarted)
             {
                 yield return new WaitUntil(() => GameWinner.Value == PlayerRole.RoleType.None);
@@ -260,13 +274,7 @@ namespace StateManagement
         
         private void ServerGamePlayStage()
         {
-            OpenDoor();
             Networking.TimeManager.Instance.Initialize(gameTimeSeconds, ServerGameTimeRanOut);
-        }
-        
-        private void OpenDoor()
-        {
-            doorAnimator?.SetTrigger("Open");
         }
         
         private void ServerGamePostStage()
@@ -342,6 +350,36 @@ namespace StateManagement
         public NetworkObject GetPlayer(int clientId)
         {
             return players.Find(a => a.LocalConnection.ClientId == clientId);
+        }
+
+        [Server]
+        private void OnServerNoiseGenerated(Vector3 position, float strength, float dissipation)
+        {
+            if(!IsServerStarted)
+                return;
+            
+            StartCoroutine(DelayedInvoke(ServerDoTimePenalty, angyDelay));
+            RPC_InvokeHouseAngy(angyDelay);
+        }
+
+        [Server]
+        private void ServerDoTimePenalty()
+        {
+            Networking.TimeManager.Instance.ApplyPenalty(timePenalty);
+        }
+        
+        [ObserversRpc]
+        private void RPC_InvokeHouseAngy(float delay)
+        {
+            StartCoroutine(DelayedInvoke(ClientHouseAngy, delay));
+        }
+
+        [Client]
+        private void ClientHouseAngy()
+        {
+            var go = Instantiate(cameraShakeObj);
+            Destroy(go, houseAngySFX.length);
+            AudioManager.Instance.PlayMonsterSFX(houseAngySFX);
         }
     }
 }
