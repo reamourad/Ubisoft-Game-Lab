@@ -21,7 +21,6 @@ namespace Player.Items.HiderItems.Reaction
 
         public void OnTrigger(ITriggerItem triggerItem)
         {
-            Debug.Log("Wind Triggered");
             OnServerBlow();
         }
 
@@ -52,7 +51,7 @@ namespace Player.Items.HiderItems.Reaction
         {
             var effect = Instantiate(windFx, transform.position, Quaternion.identity);
             effect.transform.SetParent(transform);
-            effect.transform.rotation = new Quaternion(-90f, 0f, 0f,0);
+            effect.transform.forward = Vector3.up;
             isSpinning = true;
             Destroy(effect,3);
         }
