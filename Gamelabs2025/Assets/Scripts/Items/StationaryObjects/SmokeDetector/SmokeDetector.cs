@@ -41,13 +41,11 @@ namespace Player.Items.StationaryObjects.SmokeDetector
         protected override void OnServerActivateStationaryObject()
         {
             //we don't care about the dissipation system
-            Debug.Log($"SMOKE DETECTOR:: SMOKE SMOKE SMOKE!!!");
             NoiseManager.Instance.GenerateNoise(transform.position, 1,1);
         }
 
         protected override void OnClientActivateStationaryObject()
         {
-            Debug.Log($"SMOKE DETECTOR:: SMOKE SMOKE SMOKE!!!");
             PlaySmokeDetectorAudio();
         }
 

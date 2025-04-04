@@ -359,6 +359,9 @@ namespace StateManagement
         [Server]
         private void OnServerNoiseGenerated(Vector3 position, float strength, float dissipation)
         {
+            if(!IsServerStarted)
+                return;
+            
             StartCoroutine(DelayedInvoke(ServerDoTimePenalty, angyDelay));
             RPC_InvokeHouseAngy(angyDelay);
         }
@@ -372,7 +375,7 @@ namespace StateManagement
         [ObserversRpc]
         private void RPC_InvokeHouseAngy(float delay)
         {
-            StartCoroutine(DelayedInvoke(ClientHouseAngy, angyDelay));
+            StartCoroutine(DelayedInvoke(ClientHouseAngy, delay));
         }
 
         [Client]
@@ -380,7 +383,7 @@ namespace StateManagement
         {
             var go = Instantiate(cameraShakeObj);
             Destroy(go, houseAngySFX.length);
-            AudioManager.Instance.PlaySFX(houseAngySFX);
+            AudioManager.Instance.PlayMonsterSFX(houseAngySFX);
         }
     }
 }

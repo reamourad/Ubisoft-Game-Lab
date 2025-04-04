@@ -14,6 +14,39 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &-7799269792242750632
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SFX_Monster
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 8b3ee2ed153185b4a8797bb484817895
+  m_Children: []
+  m_Volume: 749b260b953409648a8beaeb73624b0c
+  m_Pitch: 7f336dcfd09536348a7dd686dda83a96
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -7701969402266864478}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &-7701969402266864478
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Attenuation
+  m_EffectID: 27ad5149f2e96244a86e3c6d545172e8
+  m_EffectName: Attenuation
+  m_MixLevel: ffcb00a6001d8a94a8242c0dd6a18e5f
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-7496210663824674490
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -127,6 +160,7 @@ AudioMixerController:
     - 2ba2d91cd60c12e46846d7e363e2695d
     - 85611bb3f34884145920d327ca1d2bac
     - 5b5f1260eac695041aa9c95badb2627f
+    - 8b3ee2ed153185b4a8797bb484817895
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -144,6 +178,7 @@ AudioMixerGroupController:
   - {fileID: -6514415395754020008}
   - {fileID: -3275405848803691759}
   - {fileID: -7496210663824674490}
+  - {fileID: -7799269792242750632}
   m_Volume: 8036f3b2b522fd242bde7830fc4a8f9e
   m_Pitch: 9450cb1821ea48d4cad0dc75672699c4
   m_Send: 00000000000000000000000000000000
@@ -180,6 +215,7 @@ AudioMixerSnapshotController:
     e63db2c230606ab4cabe08b600f31d64: -27.16953
     ab1d6de8014df0244896e4a17cd2917f: -31.129898
     9599a02adf558a245a290c3784a8e31e: -16.660433
+    749b260b953409648a8beaeb73624b0c: -5.3230715
     75cc58ad102655940936da5dfee9748f: -42.441025
   m_TransitionOverrides: {}
 --- !u!244 &2638088667324963978
