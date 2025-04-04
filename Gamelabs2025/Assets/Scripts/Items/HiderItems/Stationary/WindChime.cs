@@ -16,7 +16,6 @@ namespace Items.HiderItems.Stationary
         protected override void OnServerActivateStationaryObject()
         {
             NoiseManager.Instance.GenerateNoise(transform.position, 5f, 0.5f);
-            Networking.TimeManager.Instance.IncreaseTime(-10);
         }
 
         protected override void OnClientActivateStationaryObject()

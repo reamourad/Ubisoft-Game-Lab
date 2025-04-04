@@ -79,23 +79,9 @@ namespace Player.Items.HiderItems.Reaction
         {
             //Check if above the object
             stationaryObject = null;
-            var stationary = collider.GetComponentInParent<StationaryObjectBase>();
-            if (stationary == null)
+            stationaryObject = collider.GetComponentInParent<StationaryObjectBase>();
+            if (stationaryObject == null)
                 return false;
-
-            var dir = (stationary.transform.position - transform.position).normalized;
-            var up = Vector3.up;
-            var aligned = Vector3.Dot(dir, up) > 0;
-            if (!aligned)
-                return false;
-
-            //if not in line of sight (ie; assuming a wall is in the )
-            if (Physics.Raycast(transform.position, dir, out RaycastHit hit, range))
-            {
-                return false;
-            }
-
-            stationaryObject = stationary;
             return true;
         }
 
