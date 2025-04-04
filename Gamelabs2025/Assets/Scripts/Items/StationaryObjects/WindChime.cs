@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Player.Items;
 using UnityEngine;
 
-namespace Items.HiderItems.Stationary
+namespace Items.StationaryObjects
 {
     public class WindChime : StationaryObjectBase
     {
@@ -12,10 +11,14 @@ namespace Items.HiderItems.Stationary
         [SerializeField] private Transform fxSpawnPoint;
         [SerializeField] private GameObject windChimeFx;
         [SerializeField] private List<Transform> pivots;
+        [SerializeField] private AudioClip clip;
 
+        private bool isTriggered;
         protected override void OnServerActivateStationaryObject()
         {
-            NoiseManager.Instance.GenerateNoise(transform.position, 5f, 0.5f);
+            if (isTriggered) return;
+            NoiseManager.Instance?.GenerateNoise(transform.position, 5f, 0.5f);
+            isTriggered = true;
         }
 
         protected override void OnClientActivateStationaryObject()
@@ -42,7 +45,7 @@ namespace Items.HiderItems.Stationary
 
         private void PlaySound()
         {
-            audioSource.Play();
+            audioSource.PlayOneShot(clip);
         }
     }
 }

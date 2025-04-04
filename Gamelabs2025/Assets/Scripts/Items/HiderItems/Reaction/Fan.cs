@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using FishNet.Object;
 using GogoGaga.OptimizedRopesAndCables;
 using Player.Data;
@@ -11,11 +12,14 @@ namespace Player.Items.HiderItems.Reaction
     {
         [SerializeField] private StationaryEffect effects;
         [SerializeField] private Transform spinTransform;
+        [SerializeField] private AudioSource audioSource;
         [SerializeField] private float rotationSpeed = 5;
         [SerializeField] private GameObject windFx;
+        [SerializeField] private AudioClip clip;
         [SerializeField] private float radius;
         [SerializeField] private float range;
 
+        private bool isTriggered;
         private bool isSpinning;
         public Rope rope { get; set; }
 
@@ -27,9 +31,10 @@ namespace Player.Items.HiderItems.Reaction
         [Server]
         private void OnServerBlow()
         {
+            if (isTriggered) return;
             RPC_OnClientBlow();
             ApplyWindEffect();
-            // StartCoroutine(DelayedDespawn());
+            isTriggered = true;
         }
 
         [Server]
@@ -41,11 +46,11 @@ namespace Player.Items.HiderItems.Reaction
             {
                 if (ValidCollider(collider, out var stationaryObject))
                 {
-                    stationaryObject.ApplyStationaryEffect(effects);
+                    DOVirtual.DelayedCall(1, () => { stationaryObject.ApplyStationaryEffect(effects); });
                 }
             }
         }
-        
+
         [ObserversRpc]
         private void RPC_OnClientBlow()
         {
@@ -53,20 +58,19 @@ namespace Player.Items.HiderItems.Reaction
             effect.transform.SetParent(transform);
             effect.transform.forward = Vector3.up;
             isSpinning = true;
-            Destroy(effect,3);
+            PlaySound();
+            Destroy(effect, 3);
+        }
+
+        private void PlaySound()
+        {
+            audioSource.PlayOneShot(clip);
         }
 
         private void Update()
         {
-            if(!isSpinning) return;
+            if (!isSpinning) return;
             SpinFan();
-        }
-
-        [Server]
-        IEnumerator DelayedDespawn()
-        {
-            yield return new WaitForSeconds(0.15f);
-            Despawn();
         }
 
         private void SpinFan()
@@ -76,12 +80,9 @@ namespace Player.Items.HiderItems.Reaction
 
         private bool ValidCollider(Collider collider, out StationaryObjectBase stationaryObject)
         {
-            //Check if above the object
             stationaryObject = null;
             stationaryObject = collider.GetComponentInParent<StationaryObjectBase>();
-            if (stationaryObject == null)
-                return false;
-            return true;
+            return stationaryObject != null;
         }
 
         private void OnDrawGizmos()

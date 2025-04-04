@@ -620,6 +620,7 @@ MonoBehaviour:
   - {fileID: 722158454176032520}
   - {fileID: 6113036603284024789}
   - {fileID: 8606733853491837489}
+  clip: {fileID: 8300000, guid: 7cef2ce0254398b438595a842b97270e, type: 3}
 --- !u!114 &2377176820102971185
 MonoBehaviour:
   m_ObjectHideFlags: 0
