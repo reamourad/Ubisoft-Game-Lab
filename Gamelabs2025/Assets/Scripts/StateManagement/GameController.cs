@@ -33,7 +33,6 @@ namespace StateManagement
         [Header("Game Variables")] 
         [SerializeField] private int prepTimeSeconds = 30;
         [SerializeField] private int gameTimeSeconds = 480;
-        [SerializeField] private NetworkAnimator doorAnimator;
         
         [Header("Particles")]
         [SerializeField] private GameObject vacuumedSuckedParticles;
@@ -53,6 +52,9 @@ namespace StateManagement
         
         
         private GameStage currentStage = GameStage.None;
+        public GameStage CurrentGameStage =>currentStage;
+        
+        
         private List<NetworkObject> players;
         private readonly SyncVar<PlayerRole.RoleType> GameWinner = new SyncVar<PlayerRole.RoleType>(PlayerRole.RoleType.None);
 
@@ -272,13 +274,7 @@ namespace StateManagement
         
         private void ServerGamePlayStage()
         {
-            OpenDoor();
             Networking.TimeManager.Instance.Initialize(gameTimeSeconds, ServerGameTimeRanOut);
-        }
-        
-        private void OpenDoor()
-        {
-            doorAnimator?.SetTrigger("Open");
         }
         
         private void ServerGamePostStage()

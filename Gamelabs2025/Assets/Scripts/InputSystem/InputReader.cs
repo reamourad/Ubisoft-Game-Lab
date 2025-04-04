@@ -46,7 +46,8 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action OnSprintDeactivated;
 
     public event Action OnWalkToggled;
-    
+
+    public event Action OnInteractEvent;
 
     private static InputReader _instance = null;
 
@@ -206,5 +207,13 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     {
         OnCloseUIEvent?.Invoke();
     }
-    
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnInteractEvent?.Invoke();
+        }
+          
+    }
 }
