@@ -47,8 +47,11 @@ namespace Networking
             //get the rope endpoint and delete its rope reference 
             Rope rope = connectable.rope;
             if (rope == null) return;
-            rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
-            rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
+            if (rope.EndPoint != null) 
+                rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
+            
+            if (rope.StartPoint != null) 
+                rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
         }
         public void CreateNewRopeAndDestroyOldOne(NetworkObject objectToConnectTo)
         {

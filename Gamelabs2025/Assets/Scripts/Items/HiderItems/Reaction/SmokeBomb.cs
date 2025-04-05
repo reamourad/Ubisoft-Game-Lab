@@ -91,6 +91,14 @@ namespace Player.Items.HiderItems.Reaction
             Destroy(go,fxKillTime);
         }
 
+        private void OnDisable()
+        {
+            if (rope != null)
+            {
+                rope.gameObject.SetActive(false);
+            }
+        }
+
         private void OnDrawGizmos()
         {
             if(!showBounds)
