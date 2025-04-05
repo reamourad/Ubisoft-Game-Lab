@@ -33,6 +33,22 @@ namespace Networking
             hiderLookManager = GetComponent<HiderLookManager>();
         }
 
+        void DestroyRope(NetworkObject objectToConnectTo)
+        {
+            if(objectToConnectTo == null) return;
+            
+            var connectable = objectToConnectTo.GetComponent<IConnectable>();
+            
+            if (connectable == null || connectable.rope == null) return; 
+            
+            //Destroy the rope 
+            Destroy(connectable.rope.gameObject);
+                
+            //get the rope endpoint and delete its rope reference 
+            Rope rope = connectable.rope;
+            rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
+            rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
+        }
         public void CreateNewRopeAndDestroyOldOne(NetworkObject objectToConnectTo)
         {
             if (objectToConnectTo == null)
@@ -44,13 +60,7 @@ namespace Networking
             //remove any previous rope 
             if (objectToConnectTo.GetComponent<IConnectable>().rope != null)
             {
-                //Destroy the rope 
-                Destroy(objectToConnectTo.GetComponent<IConnectable>().rope.gameObject);
-                
-                //get the rope endpoint and delete its rope reference 
-                Rope rope = objectToConnectTo.GetComponent<IConnectable>().rope;
-                rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
-                rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
+                DestroyRope(objectToConnectTo);
             }
                 
             //we want to create a rope from the object to the ghost 
@@ -60,18 +70,38 @@ namespace Networking
             connectedToObjectIsATrigger = lookingAtObjectIsATrigger; 
             Debug.Log("You are now in connection mode");
         }
-        
+
+        private void TripWireConnectionCondition()
+        {
+            if (lookingAtObject == null) return;
+            
+            TripWirePole tripWirePole = lookingAtObject.GetComponent<TripWirePole>();
+            if (tripWirePole != null && tripWirePole.isConnectedToAnotherPole)
+            {
+                //check if you have a connected pole 
+                TripWirePole connectedPole = tripWirePole.connectedPole;
+                if (connectedPole.GetComponent<IConnectable>().rope != null)
+                {
+                    DestroyRope(connectedPole.GetComponent<NetworkObject>());
+                    RPC_InformServerOnRopeCreate(connectedPole.GetComponent<NetworkObject>(), false);
+                }
+            }
+        }
         
         public void OnConnectButtonPressed()
         {
-            
             Debug.Log("Pressed Connect Button");
             //this is the first object you connect to, connect the rope from the object to you 
             if (!isInConnectionMode)
             {
-               CreateNewRopeAndDestroyOldOne(lookingAtObject); 
-               connectedToObject = lookingAtObject;
-               RPC_InformServerOnRopeCreate(lookingAtObject,true);
+                //hack for trip wire 
+                TripWireConnectionCondition();
+                if (lookingAtObject)
+                {
+                    CreateNewRopeAndDestroyOldOne(lookingAtObject); 
+                    connectedToObject = lookingAtObject;
+                    RPC_InformServerOnRopeCreate(lookingAtObject,true);
+                }
             }
             else
             {
@@ -180,7 +210,7 @@ namespace Networking
         
         
         [ServerRpc]
-        private void RPC_InformServerOnRopeCreate(NetworkObject objectToConnectTo,bool creation)
+        private void RPC_InformServerOnRopeCreate(NetworkObject objectToConnectTo, bool creation)
         {
             Debug.Log("Received rope creation request from client");
             BroadcastRopeCreateToClients(objectToConnectTo,creation);
@@ -193,7 +223,7 @@ namespace Networking
             if(creation)
                 CreateNewRopeAndDestroyOldOne(objectToConnectTo);
             else
-                DestroyRope();
+                DestroyRope(objectToConnectTo);
         }
 
         [ServerRpc]

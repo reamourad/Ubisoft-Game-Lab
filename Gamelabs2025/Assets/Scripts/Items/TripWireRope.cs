@@ -20,14 +20,17 @@ public class TripWireRope : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.GetComponent<PlayerRole>().Role);
-        if (other.gameObject.GetComponent<PlayerRole>() == null ||
-            other.gameObject.GetComponent<PlayerRole>().Role == PlayerRole.RoleType.Hider)
+        var playerRole = other.GetComponent<PlayerRole>();
+        if (playerRole == null || playerRole.Role == PlayerRole.RoleType.Hider)
             return;
         
         foreach (var pole in connectedPoles)
         {
-            pole.OnRopeTriggered();
+            if (pole != null)
+            {
+                pole.OnRopeTriggered();
+            }
+           
         }
     }
     
@@ -44,7 +47,4 @@ public class TripWireRope : MonoBehaviour
         if (!connectedPoles.Contains(pole2))
             connectedPoles.Add(pole2);
     }
-
-
-
 }

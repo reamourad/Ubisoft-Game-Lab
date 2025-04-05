@@ -214,7 +214,7 @@ namespace Networking
             void PickupObject(NetworkObject networkObject)
             {
                 //nothing happens if youre not currently looking at something
-                if (networkObject.gameObject == null) { return; }
+                if (networkObject == null) { return; }
                 
                 hiderLookManager.SetActive(false); 
                 // Move to object to grab placement and parent with the player

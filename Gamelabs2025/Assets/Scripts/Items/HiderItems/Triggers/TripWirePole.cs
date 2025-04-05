@@ -10,10 +10,10 @@ public class TripWirePole :NetworkBehaviour, ITriggerItem, IHiderGrabableItem
     [SerializeField] private GameObject ropePrefab; 
     [SerializeField] private Transform ropeAttachPoint; 
     
-    private TripWirePole connectedPole;
+    public TripWirePole connectedPole;
     private Rope ropeInstance;
-    private bool isConnectedToAnotherPole = false;
-    private bool isConnectedToAReactionItem = false;
+    public bool isConnectedToAnotherPole = false;
+    public bool isConnectedToAReactionItem = false;
     
 
     // Update is called once per frame
