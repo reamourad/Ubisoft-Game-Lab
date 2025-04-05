@@ -18,7 +18,8 @@ namespace StateManagement
 
         private void OnDestroy()
         {
-            GameController.Instance.OnStageChanged -= StageChanged;
+            if(GameController.Instance != null)
+                GameController.Instance.OnStageChanged -= StageChanged;
         }
 
         private void StageChanged(GameController.GameStage state)
