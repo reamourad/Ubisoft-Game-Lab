@@ -330,7 +330,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8981088226120704391}
   - component: {fileID: 705436985982604043}
-  - component: {fileID: 7335657092390857317}
   - component: {fileID: 3036544047104886012}
   - component: {fileID: -7145403475669568214}
   - component: {fileID: 7890313567811964382}
@@ -370,27 +369,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6302525577933857997}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &7335657092390857317
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6302525577933857997}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3036544047104886012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,8 +524,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: 0, y: 1.18, z: 0}
+  m_Size: {x: 1, y: 0.71317047, z: 1}
+  m_Center: {x: 0, y: 0.036585454, z: 0}
 --- !u!114 &2399090979770474948
 MonoBehaviour:
   m_ObjectHideFlags: 0
