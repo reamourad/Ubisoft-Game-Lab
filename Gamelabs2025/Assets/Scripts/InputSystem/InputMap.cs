@@ -479,6 +479,51 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MainMenu_NavigationUpDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""178f74f5-d00e-49e7-9fc2-9cc5d477cbbb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MainMenu_NavigationLeftRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""6949d509-1a59-4a45-a1f0-432c66e4c404"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MainMenu_Start"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e68d0cc-3315-4d49-92e1-d3651111f587"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MainMenu_Accept"",
+                    ""type"": ""Button"",
+                    ""id"": ""82296d8a-74cc-40f1-a4f4-2642eff365b6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MainMenu_Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b84ecf9-e21d-47af-b33c-9abf0dadecb6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -569,6 +614,204 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""Close"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""998638a9-a2c9-4eaf-a339-23c9dbfe8f1e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationUpDown"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""e47f7be2-7ba0-49b8-b236-d4dbd95a5b06"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cd9e46f7-662e-4fc4-ae58-dcb11de1ddb7"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""12bdb55c-2f97-436e-8b9b-30c2affc199b"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationUpDown"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1b455400-e85e-4bf2-aec0-e4915949991f"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""995dd501-0bee-4d4f-99ac-82e54d4d51f0"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationUpDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""72f736ce-4947-4dc8-922a-1182b78c06a8"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationLeftRight"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""73899ed9-acdc-45fc-b48d-284d7a44714f"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationLeftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""f9c77091-1dd8-4cfa-83f0-294a2225bb97"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationLeftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""id"": ""b2bb7817-9d17-4be3-b5b1-1be04957380d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationLeftRight"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b702dafe-48aa-479f-b59d-9cf2829f62cf"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationLeftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""32952435-551e-4429-846d-fed2c7dc37c5"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_NavigationLeftRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1dba79d1-167a-4aba-acab-4d761574cb1d"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe58de33-9f8c-4fa6-b7e1-43ff5926dd7b"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_Start"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d134e39-a828-4c6d-86d5-9914fd98dc5f"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2f27c9e-c321-47ef-bb90-3ccf4956ceb2"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_Accept"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b4d6cdd-f905-4dd4-889b-91483947fcb2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5252b24-38e2-4c2b-b195-b8c5fb0fe304"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MainMenu_Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -592,6 +835,11 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CCTVSwitchCameras = m_UI.FindAction("CCTVSwitchCameras", throwIfNotFound: true);
         m_UI_Close = m_UI.FindAction("Close", throwIfNotFound: true);
+        m_UI_MainMenu_NavigationUpDown = m_UI.FindAction("MainMenu_NavigationUpDown", throwIfNotFound: true);
+        m_UI_MainMenu_NavigationLeftRight = m_UI.FindAction("MainMenu_NavigationLeftRight", throwIfNotFound: true);
+        m_UI_MainMenu_Start = m_UI.FindAction("MainMenu_Start", throwIfNotFound: true);
+        m_UI_MainMenu_Accept = m_UI.FindAction("MainMenu_Accept", throwIfNotFound: true);
+        m_UI_MainMenu_Back = m_UI.FindAction("MainMenu_Back", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -881,6 +1129,11 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
     private readonly InputAction m_UI_CCTVSwitchCameras;
     private readonly InputAction m_UI_Close;
+    private readonly InputAction m_UI_MainMenu_NavigationUpDown;
+    private readonly InputAction m_UI_MainMenu_NavigationLeftRight;
+    private readonly InputAction m_UI_MainMenu_Start;
+    private readonly InputAction m_UI_MainMenu_Accept;
+    private readonly InputAction m_UI_MainMenu_Back;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -900,6 +1153,26 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/Close".
         /// </summary>
         public InputAction @Close => m_Wrapper.m_UI_Close;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/MainMenu_NavigationUpDown".
+        /// </summary>
+        public InputAction @MainMenu_NavigationUpDown => m_Wrapper.m_UI_MainMenu_NavigationUpDown;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/MainMenu_NavigationLeftRight".
+        /// </summary>
+        public InputAction @MainMenu_NavigationLeftRight => m_Wrapper.m_UI_MainMenu_NavigationLeftRight;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/MainMenu_Start".
+        /// </summary>
+        public InputAction @MainMenu_Start => m_Wrapper.m_UI_MainMenu_Start;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/MainMenu_Accept".
+        /// </summary>
+        public InputAction @MainMenu_Accept => m_Wrapper.m_UI_MainMenu_Accept;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/MainMenu_Back".
+        /// </summary>
+        public InputAction @MainMenu_Back => m_Wrapper.m_UI_MainMenu_Back;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -932,6 +1205,21 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Close.started += instance.OnClose;
             @Close.performed += instance.OnClose;
             @Close.canceled += instance.OnClose;
+            @MainMenu_NavigationUpDown.started += instance.OnMainMenu_NavigationUpDown;
+            @MainMenu_NavigationUpDown.performed += instance.OnMainMenu_NavigationUpDown;
+            @MainMenu_NavigationUpDown.canceled += instance.OnMainMenu_NavigationUpDown;
+            @MainMenu_NavigationLeftRight.started += instance.OnMainMenu_NavigationLeftRight;
+            @MainMenu_NavigationLeftRight.performed += instance.OnMainMenu_NavigationLeftRight;
+            @MainMenu_NavigationLeftRight.canceled += instance.OnMainMenu_NavigationLeftRight;
+            @MainMenu_Start.started += instance.OnMainMenu_Start;
+            @MainMenu_Start.performed += instance.OnMainMenu_Start;
+            @MainMenu_Start.canceled += instance.OnMainMenu_Start;
+            @MainMenu_Accept.started += instance.OnMainMenu_Accept;
+            @MainMenu_Accept.performed += instance.OnMainMenu_Accept;
+            @MainMenu_Accept.canceled += instance.OnMainMenu_Accept;
+            @MainMenu_Back.started += instance.OnMainMenu_Back;
+            @MainMenu_Back.performed += instance.OnMainMenu_Back;
+            @MainMenu_Back.canceled += instance.OnMainMenu_Back;
         }
 
         /// <summary>
@@ -949,6 +1237,21 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Close.started -= instance.OnClose;
             @Close.performed -= instance.OnClose;
             @Close.canceled -= instance.OnClose;
+            @MainMenu_NavigationUpDown.started -= instance.OnMainMenu_NavigationUpDown;
+            @MainMenu_NavigationUpDown.performed -= instance.OnMainMenu_NavigationUpDown;
+            @MainMenu_NavigationUpDown.canceled -= instance.OnMainMenu_NavigationUpDown;
+            @MainMenu_NavigationLeftRight.started -= instance.OnMainMenu_NavigationLeftRight;
+            @MainMenu_NavigationLeftRight.performed -= instance.OnMainMenu_NavigationLeftRight;
+            @MainMenu_NavigationLeftRight.canceled -= instance.OnMainMenu_NavigationLeftRight;
+            @MainMenu_Start.started -= instance.OnMainMenu_Start;
+            @MainMenu_Start.performed -= instance.OnMainMenu_Start;
+            @MainMenu_Start.canceled -= instance.OnMainMenu_Start;
+            @MainMenu_Accept.started -= instance.OnMainMenu_Accept;
+            @MainMenu_Accept.performed -= instance.OnMainMenu_Accept;
+            @MainMenu_Accept.canceled -= instance.OnMainMenu_Accept;
+            @MainMenu_Back.started -= instance.OnMainMenu_Back;
+            @MainMenu_Back.performed -= instance.OnMainMenu_Back;
+            @MainMenu_Back.canceled -= instance.OnMainMenu_Back;
         }
 
         /// <summary>
@@ -1088,5 +1391,40 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnClose(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MainMenu_NavigationUpDown" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMainMenu_NavigationUpDown(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MainMenu_NavigationLeftRight" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMainMenu_NavigationLeftRight(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MainMenu_Start" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMainMenu_Start(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MainMenu_Accept" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMainMenu_Accept(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MainMenu_Back" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMainMenu_Back(InputAction.CallbackContext context);
     }
 }
