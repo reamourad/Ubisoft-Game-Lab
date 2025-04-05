@@ -46,6 +46,7 @@ namespace Networking
                 
             //get the rope endpoint and delete its rope reference 
             Rope rope = connectable.rope;
+            if (rope == null) return;
             rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
             rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
         }
@@ -185,10 +186,8 @@ namespace Networking
                     if ((connectedToObjectIsATrigger && !lookingAtObjectIsATrigger) ||
                         (!connectedToObjectIsATrigger && lookingAtObjectIsATrigger))
                     {
-                        InScreenUI.Instance.SetToolTipText("Press " +
-                                                           InputReader.GetCurrentBindingText(InputReader.Instance
-                                                               .inputMap.Gameplay.ConnectItems)
-                                                           + " to connect");
+                        InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
+
                     }
                     else
                     {
@@ -201,9 +200,8 @@ namespace Networking
                 lookingAtObject = null;
                 if (isInConnectionMode)
                 {
-                    InScreenUI.Instance.SetToolTipText("Press " + 
-                                                       InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.ConnectItems) 
-                                                       + " to cancel connection");
+                    InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Cancel Connection");
+
                 }
             }
         }

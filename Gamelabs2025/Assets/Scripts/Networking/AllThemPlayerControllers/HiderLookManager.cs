@@ -1,3 +1,4 @@
+using System.ComponentModel.Design.Serialization;
 using FishNet.Object;
 using Items.Interfaces;
 using Networking;
@@ -52,15 +53,14 @@ public class HiderLookManager : NetworkBehaviour
         }
         else
         {
-            InScreenUI.Instance?.SetToolTipText("");
+            InScreenUI.Instance.ClearInputPrompts();
             // Check if the object has the IGrabbable interface
             if (grabable != null)
             {
                 if(InScreenUI.Instance != null)
                 {
-                    InScreenUI.Instance.SetToolTipText("Press " + 
-                                                       InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.Grab) 
-                                                       + " to grab  " + grabable.gameObject.name);
+                    InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab, "Grab");
+
                 }
             }
 
@@ -68,9 +68,7 @@ public class HiderLookManager : NetworkBehaviour
             {
                 if(InScreenUI.Instance != null)
                 {
-                    InScreenUI.Instance.AddToolTipText("Press " + 
-                                                       InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.ConnectItems) 
-                                                       + " to connect  " + grabable.gameObject.name);
+                    InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
                 }
             }
         }
@@ -84,7 +82,8 @@ public class HiderLookManager : NetworkBehaviour
         isActive = active; 
         if (active == false)
         {
-            InScreenUI.Instance?.SetToolTipText("");
+            if(IsOwner)
+                InScreenUI.Instance.ClearInputPrompts();
         }
     }
     
