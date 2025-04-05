@@ -49,6 +49,7 @@ public class InScreenUI : SingletonBehaviour<InScreenUI>
     {
         inputPrompts.RemoveInputPrompt(action);
     }
+    
 
     public void ClearInputPrompts()
     {

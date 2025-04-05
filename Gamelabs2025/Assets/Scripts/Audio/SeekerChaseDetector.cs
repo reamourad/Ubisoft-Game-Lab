@@ -67,9 +67,15 @@ namespace Player.Audio
         {
             if (roles == null)
                 roles = FindObjectsByType<PlayerRole>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-            
+            if (roles == null) return false;
+
             if (hider == null)
-                hider = roles.SingleOrDefault(a => a.Role == PlayerRole.RoleType.Hider)?.gameObject;
+            {
+                var role = roles.SingleOrDefault(a => a != null && a.Role == PlayerRole.RoleType.Hider);
+                if(role == null) return false;
+                hider = role.gameObject;
+            }
+                
             
             var dir = (hider.transform.position - transform.position).normalized;
             var dot = Vector3.Dot(dir, transform.forward);
