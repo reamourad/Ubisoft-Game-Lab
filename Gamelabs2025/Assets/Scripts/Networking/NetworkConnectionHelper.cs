@@ -79,6 +79,12 @@ namespace Networking
             tugBoat.StartConnection(false);
         }
 
+        public static void ClientDisconnectFromServer()
+        {
+            var tugBoat = InstanceFinder.NetworkManager.GetComponent<Tugboat>();
+            tugBoat.StopConnection(false);
+        }
+        
         private static void OnClientConnectionStateChanged(ClientConnectionStateArgs args)
         {
             Debug.Log($"<color=cyan>NetworkConnectionHelper::Client connection state changed: {args.ConnectionState}</color>");

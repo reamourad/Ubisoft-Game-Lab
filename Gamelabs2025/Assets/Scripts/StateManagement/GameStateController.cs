@@ -33,6 +33,11 @@ namespace StateManagement
             InstanceFinder.NetworkManager.ClientManager.OnClientConnectionState += Client_OnClientConnectionStateChanged;
         }
 
+        public void ClientDisconnectFromServer()
+        {
+            NetworkConnectionHelper.ClientDisconnectFromServer();
+        }
+        
         public void ServerChangeState(GameStates newState)
         {
             if(!NetworkUtility.IsServer)
