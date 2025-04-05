@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2897273447190380008}
   - component: {fileID: 8396373366534179850}
   - component: {fileID: 13874595656019133}
+  - component: {fileID: -4343139599379768167}
   m_Layer: 0
   m_Name: TripWireRope
   m_TagString: Untagged
@@ -69,7 +70,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 84a53081139c2a345a118d37b69c8e7e, type: 2}
+  - {fileID: 2100000, guid: a50c57e07a8919643b0d4ce2943f639f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,9 +258,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OverallDivision: 25
-  ropeWidth: 0.1
+  ropeWidth: 0.05
   radialDivision: 20
-  material: {fileID: 2100000, guid: 5528aac2b29c64e4ab80acfd83cedcbe, type: 2}
+  material: {fileID: 2100000, guid: a50c57e07a8919643b0d4ce2943f639f, type: 2}
   tilingPerMeter: 1
 --- !u!114 &8396373366534179850
 MonoBehaviour:
@@ -293,7 +294,27 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.10000229
-  m_Height: 1.0984013
-  m_Direction: 1
-  m_Center: {x: -1.8225315, y: 3.878726, z: 6.257292}
+  m_Radius: 0.1
+  m_Height: 0
+  m_Direction: 2
+  m_Center: {x: -1.8225315, y: 4.427925, z: 6.257292}
+--- !u!114 &-4343139599379768167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3187836456931121904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

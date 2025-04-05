@@ -165,6 +165,7 @@ GameObject:
   - component: {fileID: 5534824505464472058}
   - component: {fileID: 5184397272292389414}
   - component: {fileID: 7258070135086048295}
+  - component: {fileID: 4722405360293476715}
   m_Layer: 6
   m_Name: SItem_Fan
   m_TagString: Untagged
@@ -200,9 +201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6f5fa2545f46faa14311abfa40023e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6936758570789124854}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 6936758570789124854}
   effects: 1
   spinTransform: {fileID: 1646277630228660811}
   audioSource: {fileID: 5184397272292389414}
@@ -227,7 +228,8 @@ MonoBehaviour:
   <ComponentIndex>k__BackingField: 0
   <PredictedSpawn>k__BackingField: {fileID: 0}
   <PredictedOwner>k__BackingField: {fileID: 0}
-  NetworkBehaviours: []
+  NetworkBehaviours:
+  - {fileID: 7583716320852791766}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects: []
   RuntimeParentNetworkBehaviour: {fileID: 0}
@@ -238,7 +240,7 @@ MonoBehaviour:
   _initializeOrder: 0
   _preventDespawnOnDisconnect: 0
   _defaultDespawnType: 0
-  _initializedValusSet: 0
+  _initializedValusSet: 1
   NetworkObserver: {fileID: 0}
   _enablePrediction: 0
   _predictionType: 0
@@ -253,15 +255,15 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 65535
+  <PrefabId>k__BackingField: 3
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 1733217615432885850
   <SceneId>k__BackingField: 0
   SerializedTransformProperties:
     Position: {x: 0, y: 0, z: 0}
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
-    Scale: {x: 0, y: 0, z: 0}
-    IsValid: 0
+    Rotation: {x: 0, y: 0, z: 0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+    IsValid: 1
 --- !u!65 &5534824505464472058
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -392,6 +394,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7609f942a55440aa9e932be0149bf02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4722405360293476715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6926467103201658078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &7091906039908289230
 GameObject:
   m_ObjectHideFlags: 0

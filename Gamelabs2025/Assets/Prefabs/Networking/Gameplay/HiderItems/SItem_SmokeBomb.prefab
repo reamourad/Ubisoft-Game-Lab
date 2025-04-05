@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 7894167957661820338}
   - component: {fileID: 8922286568000192601}
   - component: {fileID: 5026000319524095067}
+  - component: {fileID: 900769035522762682}
   m_Layer: 6
   m_Name: SItem_SmokeBomb
   m_TagString: Untagged
@@ -315,7 +316,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 1
+  <PrefabId>k__BackingField: 2
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 1472425559985563034
   <SceneId>k__BackingField: 0
@@ -370,6 +371,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7093955, y: 0.41472855, z: 1.0228784}
   m_Center: {x: -0.008993566, y: 0.1798713, z: 0.039828643}
+--- !u!114 &900769035522762682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804486914120733191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &9031681860809247073
 GameObject:
   m_ObjectHideFlags: 0
