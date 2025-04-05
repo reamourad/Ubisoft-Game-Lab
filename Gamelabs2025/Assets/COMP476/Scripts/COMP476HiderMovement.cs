@@ -1,3 +1,4 @@
+using FishNet.Demo.Prediction.Rigidbodies;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,12 +9,15 @@ public class COMP476HiderMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 120f;
     [SerializeField] private float maxSpeed = 8f;
     [SerializeField] private float verticalMoveForce = 7f;
+    [SerializeField] private float boostFactor = 1.5f;
 
     // Input storage variables
     private float _horizontalInput;
     private float _verticalInput;
     private float _ascendInput;
     private Rigidbody _rb;
+
+    private bool boost = false;
 
     private void Awake()
     {
@@ -46,19 +50,19 @@ public class COMP476HiderMovement : MonoBehaviour
     {
         // Horizontal movement (forward/back and rotation)
         Vector3 moveDirection = transform.forward * _verticalInput;
-        _rb.AddForce(moveDirection * moveForce, ForceMode.Force);
+        _rb.AddForce(moveDirection * moveForce * (boost ? boostFactor : 1f), ForceMode.Force);
 
         // Rotation
         if (_horizontalInput != 0)
         {
-            Quaternion deltaRotation = Quaternion.Euler(Vector3.up * (_horizontalInput * rotationSpeed * Time.fixedDeltaTime));
+            Quaternion deltaRotation = Quaternion.Euler(Vector3.up * (_horizontalInput * rotationSpeed * Time.fixedDeltaTime * (boost ? boostFactor : 1f)));
             _rb.MoveRotation(_rb.rotation * deltaRotation);
         }
 
         // Vertical movement (up/down)
         if (_ascendInput != 0)
         {
-            _rb.AddForce(Vector3.up * (_ascendInput * verticalMoveForce), ForceMode.Force);
+            _rb.AddForce(Vector3.up * (_ascendInput * verticalMoveForce * (boost ? boostFactor : 1f)), ForceMode.Force);
         }
     }
 
@@ -67,7 +71,7 @@ public class COMP476HiderMovement : MonoBehaviour
         Vector3 horizontalVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
         if (horizontalVelocity.magnitude > maxSpeed)
         {
-            Vector3 limitedVelocity = horizontalVelocity.normalized * maxSpeed;
+            Vector3 limitedVelocity = horizontalVelocity.normalized * maxSpeed * (boost ? boostFactor : 1f);
             _rb.linearVelocity = new Vector3(limitedVelocity.x, _rb.linearVelocity.y, limitedVelocity.z);
         }
     }
@@ -75,6 +79,7 @@ public class COMP476HiderMovement : MonoBehaviour
     // Add these new methods:
     public void MoveToward(Vector3 worldPosition, float arrivalThreshold = 0.5f)
     {
+
         Vector3 direction = worldPosition - transform.position;
 
         // Convert to local space inputs
@@ -112,5 +117,10 @@ public class COMP476HiderMovement : MonoBehaviour
         GUI.Label(new Rect(10, 10, 300, 20), $"Horizontal Input: {_horizontalInput}");
         GUI.Label(new Rect(10, 30, 300, 20), $"Vertical Input: {_verticalInput}");
         GUI.Label(new Rect(10, 50, 300, 20), $"Ascend Input: {_ascendInput}");
+    }
+
+    public void SetBoost(bool boost)
+    {
+        this.boost = boost;
     }
 }

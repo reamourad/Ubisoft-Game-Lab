@@ -23,14 +23,11 @@ public class Pathfinder : MonoBehaviour
     public float pathNodeSizeMultiplier = 1.5f;
     public bool drawPathGizmo = true;
 
-    private List<NavigationNode> accessibleNodes = new List<NavigationNode>();
     private NavigationNode optimalAccessPoint;
     private List<NavigationNode> currentPath = new List<NavigationNode>();
 
-    /// <summary>
-    /// Finds all accessible nodes from transform, then returns the one with shortest path to destination
-    /// </summary>
-    public NavigationNode FindOptimalAccessPoint(Transform transform, NavigationNode destination)
+    public NavigationNode FindOptimalAccessPoint(Transform transform, NavigationNode destination,
+                                       Transform avoidTransform = null, float avoidRadius = 5f)
     {
         if (graph == null || transform == null || destination == null)
         {
@@ -38,23 +35,22 @@ public class Pathfinder : MonoBehaviour
             return null;
         }
 
-        accessibleNodes.Clear();
-        optimalAccessPoint = null;
+        var localAccessibleNodes = new List<NavigationNode>();
         float shortestPathLength = Mathf.Infinity;
 
-        // Get all accessible nodes
+        // Get all accessible nodes (not in danger zone and not approaching danger)
         foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
         {
-            if (!Physics.Linecast(transform.position, node.transform.position, obstructionMask))
+            if (!Physics.Linecast(transform.position, node.transform.position, obstructionMask) && !IsNodeApproachingDanger(transform, node, avoidTransform))
             {
-                accessibleNodes.Add(node);
+                localAccessibleNodes.Add(node);
             }
         }
 
-        // Find the accessible node with shortest path to destination
-        foreach (var node in accessibleNodes)
+        // Find the accessible node with shortest safe path
+        foreach (var node in localAccessibleNodes)
         {
-            var path = FindShortestPath(node, destination);
+            var path = FindShortestPath(node, destination, avoidTransform, avoidRadius);
             if (path != null)
             {
                 float pathLength = CalculatePathLength(path);
@@ -71,61 +67,9 @@ public class Pathfinder : MonoBehaviour
         return optimalAccessPoint;
     }
 
-    private float CalculatePathLength(List<NavigationNode> path)
+    public List<NavigationNode> FindShortestPath(NavigationNode start, NavigationNode end, Transform avoidTransform = null, float avoidRadius = 5f)
     {
-        float length = 0f;
-        for (int i = 0; i < path.Count - 1; i++)
-        {
-            length += Vector3.Distance(path[i].transform.position, path[i + 1].transform.position);
-        }
-        return length;
-    }
-
-    private void HighlightAccessibility()
-    {
-        // Reset all nodes first
-        foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
-        {
-            node.nodeColor = Color.white;
-#if UNITY_EDITOR
-            EditorUtility.SetDirty(node);
-#endif
-        }
-
-        // Highlight accessible nodes
-        foreach (var node in accessibleNodes)
-        {
-            node.nodeColor = accessibleColor;
-#if UNITY_EDITOR
-            EditorUtility.SetDirty(node);
-#endif
-        }
-
-        // Highlight optimal access point
-        if (optimalAccessPoint != null)
-        {
-            optimalAccessPoint.nodeColor = Color.yellow;
-#if UNITY_EDITOR
-            EditorUtility.SetDirty(optimalAccessPoint);
-#endif
-        }
-    }
-
-    public void FindAndShowPath()
-    {
-        if (graph == null || startNode == null || endNode == null)
-        {
-            Debug.LogWarning("Pathfinder missing references");
-            return;
-        }
-
-        currentPath = FindShortestPath(startNode, endNode);
-        HighlightPath(currentPath);
-    }
-
-    public List<NavigationNode> FindShortestPath(NavigationNode start, NavigationNode end)
-    {
-        // A* Pathfinding implementation
+        // A* Pathfinding with avoidance
         var openSet = new List<NavigationNode> { start };
         var closedSet = new HashSet<NavigationNode>();
         var cameFrom = new Dictionary<NavigationNode, NavigationNode>();
@@ -156,20 +100,94 @@ public class Pathfinder : MonoBehaviour
 
             foreach (var connection in graph.connections)
             {
+                NavigationNode neighbor = null;
                 if (connection.fromNode == current)
                 {
-                    var neighbor = connection.toNode;
-                    ProcessNeighbor(current, neighbor, gScore, fScore, cameFrom, openSet, closedSet, end);
+                    neighbor = connection.toNode;
                 }
                 else if (connection.toNode == current)
                 {
-                    var neighbor = connection.fromNode;
+                    neighbor = connection.fromNode;
+                }
+
+                if (neighbor != null &&
+                    !IsNodeApproachingDanger(current.transform, neighbor, avoidTransform))
+                {
                     ProcessNeighbor(current, neighbor, gScore, fScore, cameFrom, openSet, closedSet, end);
                 }
             }
         }
 
-        return null; // No path found
+        // Fallback - try without avoidance if no path found
+        if (avoidTransform != null)
+        {
+            Debug.LogWarning("Couldn't find safe path - attempting without avoidance");
+            return FindShortestPath(start, end);
+        }
+
+        return null;
+    }
+
+    private float CalculatePathLength(List<NavigationNode> path)
+    {
+        float length = 0f;
+        for (int i = 0; i < path.Count - 1; i++)
+        {
+            length += Vector3.Distance(path[i].transform.position, path[i + 1].transform.position);
+        }
+        return length;
+    }
+
+    private void HighlightAccessibility()
+    {
+        // Reset all nodes first
+        foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
+        {
+            node.nodeColor = Color.white;
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(node);
+#endif
+        }
+
+        /*// Highlight accessible nodes
+        foreach (var node in accessibleNodes)
+        {
+            node.nodeColor = accessibleColor;
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(node);
+#endif
+        }*/
+
+        // Highlight optimal access point
+        if (optimalAccessPoint != null)
+        {
+            optimalAccessPoint.nodeColor = Color.yellow;
+#if UNITY_EDITOR
+            EditorUtility.SetDirty(optimalAccessPoint);
+#endif
+        }
+    }
+
+    public void FindAndShowPath()
+    {
+        if (graph == null || startNode == null || endNode == null)
+        {
+            Debug.LogWarning("Pathfinder missing references");
+            return;
+        }
+
+        currentPath = FindShortestPath(startNode, endNode);
+        HighlightPath(currentPath);
+    }
+
+    private bool IsNodeApproachingDanger(Transform userTransform, NavigationNode node, Transform dangerTransform)
+    {
+        if (dangerTransform == null || userTransform == null) return false;
+
+        float userDistance = GetSafeDistance(userTransform, node);
+        float dangerDistance = GetSafeDistance(dangerTransform, node);
+
+        return dangerDistance < userDistance;
     }
 
     private void ProcessNeighbor(NavigationNode current, NavigationNode neighbor,
@@ -257,12 +275,32 @@ public class Pathfinder : MonoBehaviour
         }
     }
 
+    public float GetSafeDistance(Transform userTransform, NavigationNode node)
+    {
+        if (graph == null || userTransform == null || node == null) return Mathf.Infinity;
+
+        // Find the closest accessible node to the user
+        var accessPoint = FindOptimalAccessPoint(userTransform, node);
+
+        if (accessPoint == null) return Mathf.Infinity;
+
+        // Calculate path length from access point to target node
+        var path = FindShortestPath(accessPoint, node);
+        float pathLength = path != null ? CalculatePathLength(path) : Mathf.Infinity;
+
+        // Calculate direct distance from user to access point
+        float accessDistance = Vector3.Distance(userTransform.position, accessPoint.transform.position);
+
+        // Return the combined distance
+        return pathLength + accessDistance;
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!drawPathGizmo) return;
 
-        // Draw accessibility lines
+        /*// Draw accessibility lines
         if (testTransform != null)
         {
             foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
@@ -277,7 +315,7 @@ public class Pathfinder : MonoBehaviour
                 Handles.color = color;
                 Handles.DrawAAPolyLine(width, testTransform.position, node.transform.position);
             }
-        }
+        }*/
 
         // Draw path if available
         if (currentPath != null && currentPath.Count > 1)
@@ -318,7 +356,7 @@ public class Pathfinder : MonoBehaviour
             if (GUILayout.Button("Clear All", GUILayout.Height(30)))
             {
                 Undo.RecordObject(pathfinder, "Clear All");
-                pathfinder.accessibleNodes.Clear();
+                //pathfinder.accessibleNodes.Clear();
                 pathfinder.currentPath.Clear();
                 pathfinder.HighlightAccessibility();
                 EditorUtility.SetDirty(pathfinder);

@@ -24,7 +24,7 @@ public class ChooseRandomNode : BTAction
 
         foreach (var node in allNodes)
         {
-            if (!_avoidPlayer || Vector3.Distance(node.transform.position, playerPos) > _dangerRadius)
+            if (!_avoidPlayer || pathfinder.GetSafeDistance(bb.Get<Transform>("Self"), node) < pathfinder.GetSafeDistance(bb.Get<Transform>("Player"), node))
             {
                 validNodes.Add(node);
             }
@@ -77,7 +77,7 @@ public class MoveToNode : BTAction
         if (_currentAccessPoint == null ||
             Vector3.Distance(transform.position, _currentAccessPoint.transform.position) <= _repathDistance)
         {
-            _currentAccessPoint = pathfinder.FindOptimalAccessPoint(transform, targetNode);
+            _currentAccessPoint = pathfinder.FindOptimalAccessPoint(transform, targetNode, _alertPlayer ? bb.Get<Transform>("Player") : null, 14f);
             if (_currentAccessPoint == null) return BTStatus.Failure;
         }
 
@@ -91,12 +91,18 @@ public class MoveToNode : BTAction
     {
         // Reset pathfinding on start
         _currentAccessPoint = null;
+
+        bb.Set("DebugColor", _alertPlayer ? Color.red : Color.cyan);
+        bb.Get<COMP476HiderMovement>("Movement").SetBoost(_alertPlayer);
     }
 
     public override void OnExit()
     {
         bb.Get<COMP476HiderMovement>("Movement").Stop();
         _currentAccessPoint = null;
+
+        bb.Set("DebugColor", Color.black);
+        bb.Get<COMP476HiderMovement>("Movement").SetBoost(false);
     }
 }
 
@@ -133,8 +139,7 @@ public class PlayerDetectionNode : BTCondition
             }
             else
             {
-                bb.Set("DebugColor", new Color(1, 0.5f, 0)); // Orange during cooldown
-                return false;
+                return true;
             }
         }
 
@@ -160,13 +165,11 @@ public class PlayerDetectionNode : BTCondition
             if (distance <= effectiveRange && !Physics.Linecast(self.position, player.position, _obstructionMask))
             {
                 UpdateDetectionState(true);
-                bb.Set("DebugColor", Color.Lerp(Color.yellow, Color.red, detectionProbability));
                 return true;
             }
         }
 
         UpdateDetectionState(false);
-        bb.Set("DebugColor", Color.cyan);
         return false;
     }
 
