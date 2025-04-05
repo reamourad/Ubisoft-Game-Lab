@@ -47,14 +47,45 @@ namespace Networking
             //get the rope endpoint and delete its rope reference 
             Rope rope = connectable.rope;
             if (rope == null) return;
-            if (rope.EndPoint != null || rope.EndPoint.GetComponent<IConnectable>() == null) 
-                rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
-            
-            if (rope.StartPoint != null|| rope.StartPoint.GetComponent<IConnectable>() == null) 
-                rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
+            if (rope.EndPoint != null)
+            {
+                var eConnectable = rope.EndPoint.gameObject.GetComponent<IConnectable>();
+                if (eConnectable != null)
+                {
+                    eConnectable.rope = null;
+                }
+            }
+
+            if (rope.StartPoint != null)
+            {
+                var sConnectable = rope.StartPoint.gameObject.GetComponent<IConnectable>();
+                if (sConnectable != null)
+                {
+                    sConnectable.rope = null;
+                }
+            }
         }
         public void CreateNewRopeAndDestroyOldOne(NetworkObject objectToConnectTo)
         {
+            // First Clear the Connections
+            if (connectedToObject != null)
+            {
+                ITriggerItem trigger = null;
+                IReactionItem reaction = null; 
+                if (connectedToObjectIsATrigger)
+                {
+                    trigger = connectedToObject.GetComponent<ITriggerItem>();
+                    reaction = objectToConnectTo.GetComponent<IReactionItem>();
+                }
+                else
+                {
+                    trigger = objectToConnectTo.GetComponent<ITriggerItem>();
+                    reaction = connectedToObject.GetComponent<IReactionItem>();
+                }
+                
+                ClearTriggerReactionEvents(trigger, reaction);
+            }
+            
             if (objectToConnectTo == null)
             {
                 Debug.Log("No object to connect to");
@@ -137,7 +168,7 @@ namespace Networking
                         reaction = connectedToObject.GetComponent<IReactionItem>();
                     }
                     
-                    trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
+                    MakeConnection(trigger, reaction);
                 }
             }
         }
@@ -165,7 +196,10 @@ namespace Networking
                     
             Debug.Log($"{objectToConnectTo.name} is connected to {secondObject.name} {firstIsTrigger}");
             Debug.Log($"{trigger == null} is connected to {reaction==null}");
-            trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
+            if (trigger != null && reaction != null)
+            {
+                MakeConnection(trigger, reaction);
+            }
         }
 
         public void Update()
@@ -243,6 +277,41 @@ namespace Networking
         private void DestroyRope()
         {
             Destroy(currentRope.gameObject); 
+        }
+        
+        private static void ClearTriggerReactionEvents(ITriggerItem trigger, IReactionItem reaction)
+        {
+            if (trigger != null)
+            {
+                var connectedReaction = ConnectionDictionary.GetConnectedReactions(trigger);
+                if (connectedReaction != null)
+                {
+                    trigger.OnTriggerActivated -= connectedReaction.OnTrigger;
+                }
+                ConnectionDictionary.RemoveConnections(trigger);
+            }
+
+            if (reaction != null) {
+                var connectedTriggers = ConnectionDictionary.GetConnectedTriggers(reaction);
+                if (connectedTriggers != null)
+                {
+                    foreach (var connectedTrigger in connectedTriggers)
+                    {
+                        connectedTrigger.OnTriggerActivated -= reaction.OnTrigger;
+                        ConnectionDictionary.RemoveConnections(trigger);
+                    }
+                }
+            }
+        }
+        
+        private static void MakeConnection(ITriggerItem trigger, IReactionItem reaction)
+        {
+            if (trigger != null && reaction != null)
+            {
+                ClearTriggerReactionEvents(trigger, reaction);
+                ConnectionDictionary.AddConnections(trigger, reaction);
+                trigger.OnTriggerActivated += reaction.OnTrigger;
+            }
         }
     }
 }

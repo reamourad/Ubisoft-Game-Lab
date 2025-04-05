@@ -110,7 +110,7 @@ namespace Player
 
         private void ClientHandleConnectItems()
         {
-            playerConnectionController.OnConnectButtonPressed();
+            playerConnectionController?.OnConnectButtonPressed();
         }
     }
 }
