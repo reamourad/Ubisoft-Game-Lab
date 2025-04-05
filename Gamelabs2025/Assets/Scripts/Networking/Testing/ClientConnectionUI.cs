@@ -59,6 +59,8 @@ namespace Networking.Testing
             {
                 Debug.LogWarning("ClientConnectionUI::Remote Server and Client version mismatch, Features/Systems may break due to a different version.");
             }
+#else
+            yield break;
 #endif
         }
         

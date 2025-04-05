@@ -102,6 +102,8 @@ namespace StateManagement
             }
             
             InputReader.Instance.SetToUIInputs();
+#else
+            yield break;
 #endif
         }
         

@@ -92,6 +92,7 @@ namespace StateManagement
                 }
                 else
                 {
+                    Debug.Log("GameController:: Informing Client Ready");
                     RPC_InformClientIsReady();
                 }
 
@@ -117,7 +118,7 @@ namespace StateManagement
             }
         }
         
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         private void RPC_InformClientIsReady()
         {
             ServerOnClientReady();
@@ -127,8 +128,10 @@ namespace StateManagement
         private void ServerOnClientReady()
         {
             readyClients += 1;
-            if (readyClients >= 0)
+            Debug.Log("GameController:: Client Ready");
+            if (readyClients >= 2)
             {
+                Debug.Log("GameController:: Switching to Game");
                 GameWinner.Value = PlayerRole.RoleType.None;
                 SwitchGameStage(GameStage.Preparing);
             }
