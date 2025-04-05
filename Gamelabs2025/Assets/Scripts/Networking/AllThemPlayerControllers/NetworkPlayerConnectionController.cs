@@ -33,7 +33,7 @@ namespace Networking
             hiderLookManager = GetComponent<HiderLookManager>();
         }
 
-        void DestroyRope(NetworkObject objectToConnectTo)
+        void Client_DestroyRope(NetworkObject objectToConnectTo)
         {
             if(objectToConnectTo == null) return;
             
@@ -66,7 +66,7 @@ namespace Networking
                 }
             }
         }
-        public void CreateNewRopeAndDestroyOldOne(NetworkObject objectToConnectTo)
+        public void Client_CreateNewRopeAndDestroyOldOne(NetworkObject objectToConnectTo)
         {
             // First Clear the Connections
             if (connectedToObject != null)
@@ -97,7 +97,7 @@ namespace Networking
             //remove any previous rope 
             if (connectable != null && connectable.rope != null)
             {
-                DestroyRope(objectToConnectTo);
+                Client_DestroyRope(objectToConnectTo);
             }
                 
             //we want to create a rope from the object to the ghost 
@@ -119,7 +119,7 @@ namespace Networking
                 TripWirePole connectedPole = tripWirePole.connectedPole;
                 if(connectedPole != null &&  connectedPole.rope != null)
                 {
-                    DestroyRope(connectedPole.GetComponent<NetworkObject>());
+                    Client_DestroyRope(connectedPole.GetComponent<NetworkObject>());
                     Debug.Log($":::TripWireConnectionCondition:::");
                     RPC_InformServerOnRopeCreate(connectedPole.GetComponent<NetworkObject>(), false);
                 }
@@ -136,7 +136,7 @@ namespace Networking
                 TripWireConnectionCondition();
                 if (lookingAtObject != null)
                 {
-                    CreateNewRopeAndDestroyOldOne(lookingAtObject); 
+                    Client_CreateNewRopeAndDestroyOldOne(lookingAtObject); 
                     connectedToObject = lookingAtObject;
                     Debug.Log($":::OnConnectButtonPressed::: CONMODE: {isInConnectionMode} {connectedToObject.name}");
                     RPC_InformServerOnRopeCreate(lookingAtObject,true);
@@ -149,13 +149,17 @@ namespace Networking
                 if (!lookingAtObject)
                 {
                     //TODO: Fix NULL ERROR!!!
-                    RPC_InformServerOnRopeCreate(lookingAtObject,false);
-                    Destroy(currentRope.gameObject); 
+                    //Honestly not needed, since the cables don't appear at realtime.
+                    //RPC_InformServerOnRopeCreate(lookingAtObject,false); --- you are passing null here
+                    if(currentRope != null)
+                        Destroy(currentRope.gameObject); 
                 }
                 else
                 {
                     //connected two items together 
-                    currentRope.SetEndPoint(lookingAtObject.transform);
+                    if(currentRope)
+                        currentRope.SetEndPoint(lookingAtObject.transform);
+                    
                     RPC_InformServerOnRopeAttach(connectedToObject,lookingAtObject, connectedToObjectIsATrigger);
 
                     ITriggerItem trigger = null;
@@ -178,11 +182,11 @@ namespace Networking
             }
         }
 
-        private void ConnectTwoObjects(NetworkObject objectToConnectTo,NetworkObject secondObject, bool firstIsTrigger)
+        private void Local_ConnectTwoObjects(NetworkObject objectToConnectTo,NetworkObject secondObject, bool firstIsTrigger)
         {
             //connected two items together 
 
-            Debug.Log($"ConnectTwoObjects(Server={IsServerStarted} : {currentRope == null}");
+            Debug.Log($"Local_ConnectTwoObjects (Server={IsServerStarted} : {currentRope == null}");
             if (IsClientStarted && currentRope != null)
             {
                 currentRope.SetEndPoint(secondObject.transform);
@@ -203,8 +207,8 @@ namespace Networking
                 reaction = objectToConnectTo.GetComponent<IReactionItem>();
             }
                     
-            Debug.Log($"{objectToConnectTo.name} is connected to {secondObject.name} {firstIsTrigger}");
-            Debug.Log($"{trigger == null} is connected to {reaction==null}");
+            Debug.Log($"Local_ConnectTwoObjects {objectToConnectTo.name} is connected to {secondObject.name} {firstIsTrigger}");
+            Debug.Log($"Local_ConnectTwoObjects Trigger=Null? {trigger == null} is connected to Reacion=Null? {reaction==null}");
             if (trigger != null && reaction != null)
             {
                 MakeConnection(trigger, reaction);
@@ -257,35 +261,35 @@ namespace Networking
         private void RPC_InformServerOnRopeCreate(NetworkObject objectToConnectTo, bool creation)
         {
             Debug.Log($"RPC_InformServerOnRopeCreate {creation} {objectToConnectTo.name}");
-            BroadcastRopeCreateToClients(objectToConnectTo,creation);
+            RPC_BroadcastRopeCreateToClients(objectToConnectTo,creation);
         }
         
         [ObserversRpc(ExcludeOwner = true)]
-        void BroadcastRopeCreateToClients(NetworkObject objectToConnectTo, bool creation)
+        void RPC_BroadcastRopeCreateToClients(NetworkObject objectToConnectTo, bool creation)
         {
             // All clients except the owner will create the rope locally
             Debug.Log($"BroadcastRopeCreateToClients {creation} {objectToConnectTo.name}");
             if(creation)
-                CreateNewRopeAndDestroyOldOne(objectToConnectTo);
+                Client_CreateNewRopeAndDestroyOldOne(objectToConnectTo);
             else
-                DestroyRope(objectToConnectTo);
+                Client_DestroyRope(objectToConnectTo);
         }
 
         [ServerRpc]
         private void RPC_InformServerOnRopeAttach(NetworkObject objectToConnectTo, NetworkObject secondObject, bool connectedToObjectIsATrigger)
         {
-            Debug.Log($"RPC_InformServerOnRopeAttach {objectToConnectTo.name} {secondObject.name} {connectedToObjectIsATrigger}");
-            ConnectTwoObjects(objectToConnectTo,secondObject, connectedToObjectIsATrigger);
-            BroadcastRopeConnectToClients(objectToConnectTo, secondObject, connectedToObjectIsATrigger);
+            Debug.Log($"RPC_InformServerOnRopeAttach {objectToConnectTo.name} -- {secondObject.name} {connectedToObjectIsATrigger}");
+            Local_ConnectTwoObjects(objectToConnectTo,secondObject, connectedToObjectIsATrigger);
+            RPC_BroadcastRopeConnectToClients(objectToConnectTo, secondObject, connectedToObjectIsATrigger);
         }
         
         [ObserversRpc(ExcludeOwner = true)]
-        private void BroadcastRopeConnectToClients(NetworkObject objectToConnectTo, NetworkObject secondObject, bool connectedToObjectIsATrigger)
+        private void RPC_BroadcastRopeConnectToClients(NetworkObject objectToConnectTo, NetworkObject secondObject, bool connectedToObjectIsATrigger)
         {
-            ConnectTwoObjects(objectToConnectTo,secondObject, connectedToObjectIsATrigger);
+            Local_ConnectTwoObjects(objectToConnectTo,secondObject, connectedToObjectIsATrigger);
         }
 
-        private void DestroyRope()
+        private void Client_DestroyRope()
         {
             Destroy(currentRope.gameObject); 
         }
