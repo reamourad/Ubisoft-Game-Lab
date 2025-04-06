@@ -1623,6 +1623,8 @@ MonoBehaviour:
   ambianceSource: {fileID: 1073948290}
   sfSourceReference: {fileID: 1797253421}
   monSfSourceReference: {fileID: 219457897}
+  mixer: {fileID: 0}
+  worldSources: []
 --- !u!4 &1193172325
 Transform:
   m_ObjectHideFlags: 0

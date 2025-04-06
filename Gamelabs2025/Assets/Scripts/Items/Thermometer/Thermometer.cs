@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using FishNet;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
@@ -25,22 +26,22 @@ namespace Player.Items.Thermometer
         [Header("Attachment")]
         [SerializeField] private Transform graphicsAttachment;
         
-        [SerializeField] private float boxCastRange = 10;
+        [SerializeField] private float dotThreshold = 0.65f;
         
         [SerializeField] private NetworkObject worldDummyRef;
-        [SerializeField] private LayerMask layerMask;
-        [SerializeField] private BoxCollider detector;
         [SerializeField] private TMPro.TMP_Text readingText;
         
         [SerializeField] private AudioClip readSound;
+        [SerializeField] private Transform checkPoint;
 
         private ThermometerGui gui;
+        private PlayerRole hiderRole;
         
         public void UseItem(bool isUsing)
         {
-            var temp = ReadTemperature();
+            var reading = ReadTemperature();
             AudioManager.Instance.PlaySFX(readSound);
-            switch (temp)
+            switch (reading.temp)
             {
                 case TempType.Normal:
                     readingText.text = NORMAL_READING;
@@ -54,26 +55,25 @@ namespace Player.Items.Thermometer
             }
             
             if(gui != null)
-                gui.SetTemperatureText(readingText.text);
+                gui.SetTemperatureText(readingText.text, reading.distance);
         }
 
-        private TempType ReadTemperature()
+        private (TempType temp, float distance) ReadTemperature()
         {
-            if (Physics.BoxCast(detector.bounds.center, detector.bounds.size, detector.transform.forward,out RaycastHit hit,
-                    detector.transform.rotation,
-                    boxCastRange,layerMask))
+            hiderRole = FindObjectsByType<PlayerRole>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+                .SingleOrDefault(a => a.Role == PlayerRole.RoleType.Hider);
+
+            if (hiderRole == null)
+                return (TempType.Normal, Mathf.Infinity);
+            
+            var dir = (hiderRole.GetCentrofMassPosition() - transform.position).normalized;
+            var dot = Vector3.Dot(checkPoint.forward, dir);
+            if (dot >= dotThreshold)
             {
-                if (hit.collider == null)
-                    return TempType.Normal;
-                
-                var role = hit.collider.GetComponentInParent<PlayerRole>();
-                if (role != null && role.Role == PlayerRole.RoleType.Hider)
-                {
-                    return TempType.Low;
-                }
+                return (TempType.Low, Vector3.Distance(hiderRole.GetCentrofMassPosition(), checkPoint.position));
             }
             
-            return TempType.Normal;
+            return (TempType.Normal, Mathf.Infinity);
         }
 
         public void OnAttach(Transform parent)

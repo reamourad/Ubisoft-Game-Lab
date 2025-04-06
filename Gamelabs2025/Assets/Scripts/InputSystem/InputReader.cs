@@ -34,6 +34,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public event Action OnCloseUIEvent;
     public event Action<float> OnCCTVCameraSwitchEvent;
+    public event Action OnCCTVMarkedEvent;
     
     public event Action OnCrouchActivated;
     public event Action OnCrouchDeactivated;
@@ -211,12 +212,14 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public void OnCCTVSwitchCameras(InputAction.CallbackContext context)
     {
-        OnCCTVCameraSwitchEvent?.Invoke(context.ReadValue<float>());
+        if(context.phase == InputActionPhase.Performed)
+            OnCCTVCameraSwitchEvent?.Invoke(context.ReadValue<float>());
     }
 
     public void OnClose(InputAction.CallbackContext context)
     {
-        OnCloseUIEvent?.Invoke();
+        if(context.phase == InputActionPhase.Performed)
+            OnCloseUIEvent?.Invoke();
     }
 
     public void OnMainMenu_NavigationUpDown(InputAction.CallbackContext context)
@@ -262,6 +265,12 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         {
             OnMainMenuBack?.Invoke();
         }
+    }
+
+    public void OnMarkCCTV(InputAction.CallbackContext context)
+    {
+       if(context.phase == InputActionPhase.Performed)
+           OnCCTVMarkedEvent?.Invoke();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
