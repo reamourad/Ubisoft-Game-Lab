@@ -189,6 +189,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HiderItemScan"",
+                    ""type"": ""Button"",
+                    ""id"": ""0322a5fb-5e47-44e9-a49f-0ee2ecfeb23a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -455,6 +464,28 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42ddad20-68d0-4bfb-a502-9dcab34c43ff"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HiderItemScan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8dcd646-fe79-4155-8069-4a08227eacc3"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HiderItemScan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -520,6 +551,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""name"": ""MainMenu_Back"",
                     ""type"": ""Button"",
                     ""id"": ""5b84ecf9-e21d-47af-b33c-9abf0dadecb6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MarkCCTV"",
+                    ""type"": ""Button"",
+                    ""id"": ""dea4580d-c598-4915-b771-87da278ba19b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -812,6 +852,28 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""MainMenu_Back"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62b4fe41-f515-4d0b-8ff7-769d31668fe8"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MarkCCTV"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd959584-1418-4089-be54-8de745fe0de2"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MarkCCTV"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -831,6 +893,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Gameplay_EquipInventoryItem2 = m_Gameplay.FindAction("EquipInventoryItem2", throwIfNotFound: true);
         m_Gameplay_ToggleEquipInventoryItem = m_Gameplay.FindAction("ToggleEquipInventoryItem", throwIfNotFound: true);
         m_Gameplay_Drop = m_Gameplay.FindAction("Drop", throwIfNotFound: true);
+        m_Gameplay_HiderItemScan = m_Gameplay.FindAction("HiderItemScan", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CCTVSwitchCameras = m_UI.FindAction("CCTVSwitchCameras", throwIfNotFound: true);
@@ -840,6 +903,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_UI_MainMenu_Start = m_UI.FindAction("MainMenu_Start", throwIfNotFound: true);
         m_UI_MainMenu_Accept = m_UI.FindAction("MainMenu_Accept", throwIfNotFound: true);
         m_UI_MainMenu_Back = m_UI.FindAction("MainMenu_Back", throwIfNotFound: true);
+        m_UI_MarkCCTV = m_UI.FindAction("MarkCCTV", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -932,6 +996,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_EquipInventoryItem2;
     private readonly InputAction m_Gameplay_ToggleEquipInventoryItem;
     private readonly InputAction m_Gameplay_Drop;
+    private readonly InputAction m_Gameplay_HiderItemScan;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -987,6 +1052,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Drop".
         /// </summary>
         public InputAction @Drop => m_Wrapper.m_Gameplay_Drop;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/HiderItemScan".
+        /// </summary>
+        public InputAction @HiderItemScan => m_Wrapper.m_Gameplay_HiderItemScan;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1046,6 +1115,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
+            @HiderItemScan.started += instance.OnHiderItemScan;
+            @HiderItemScan.performed += instance.OnHiderItemScan;
+            @HiderItemScan.canceled += instance.OnHiderItemScan;
         }
 
         /// <summary>
@@ -1090,6 +1162,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
+            @HiderItemScan.started -= instance.OnHiderItemScan;
+            @HiderItemScan.performed -= instance.OnHiderItemScan;
+            @HiderItemScan.canceled -= instance.OnHiderItemScan;
         }
 
         /// <summary>
@@ -1134,6 +1209,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_MainMenu_Start;
     private readonly InputAction m_UI_MainMenu_Accept;
     private readonly InputAction m_UI_MainMenu_Back;
+    private readonly InputAction m_UI_MarkCCTV;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1173,6 +1249,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/MainMenu_Back".
         /// </summary>
         public InputAction @MainMenu_Back => m_Wrapper.m_UI_MainMenu_Back;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/MarkCCTV".
+        /// </summary>
+        public InputAction @MarkCCTV => m_Wrapper.m_UI_MarkCCTV;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1220,6 +1300,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @MainMenu_Back.started += instance.OnMainMenu_Back;
             @MainMenu_Back.performed += instance.OnMainMenu_Back;
             @MainMenu_Back.canceled += instance.OnMainMenu_Back;
+            @MarkCCTV.started += instance.OnMarkCCTV;
+            @MarkCCTV.performed += instance.OnMarkCCTV;
+            @MarkCCTV.canceled += instance.OnMarkCCTV;
         }
 
         /// <summary>
@@ -1252,6 +1335,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @MainMenu_Back.started -= instance.OnMainMenu_Back;
             @MainMenu_Back.performed -= instance.OnMainMenu_Back;
             @MainMenu_Back.canceled -= instance.OnMainMenu_Back;
+            @MarkCCTV.started -= instance.OnMarkCCTV;
+            @MarkCCTV.performed -= instance.OnMarkCCTV;
+            @MarkCCTV.canceled -= instance.OnMarkCCTV;
         }
 
         /// <summary>
@@ -1369,6 +1455,13 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDrop(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HiderItemScan" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHiderItemScan(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -1426,5 +1519,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMainMenu_Back(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "MarkCCTV" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMarkCCTV(InputAction.CallbackContext context);
     }
 }

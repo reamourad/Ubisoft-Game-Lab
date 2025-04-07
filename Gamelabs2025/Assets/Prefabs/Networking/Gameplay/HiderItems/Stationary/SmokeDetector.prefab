@@ -235,7 +235,7 @@ MonoBehaviour:
   supportedEffects: 4
   audioTime: 5
   audioDelay: 0.25
-  audioClip: {fileID: 8300000, guid: 60fc12b4fdfaa0a48900d3043b353bb2, type: 3}
+  audioClip: {fileID: 8300000, guid: b9d05f9e72e06324fa435410becaef9f, type: 3}
   audioSrc: {fileID: 7518687553577425417}
   lightEffect: {fileID: 1706456468678834964}
   regularBlinkDelay: 1

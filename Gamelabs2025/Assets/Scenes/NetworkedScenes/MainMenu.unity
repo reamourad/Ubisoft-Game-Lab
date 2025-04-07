@@ -2744,6 +2744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 1
 --- !u!1 &92209811
 GameObject:
@@ -7934,46 +7935,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 112170907312350784, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _tickRate
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 112170907312350784, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _physicsMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 112170907312350784, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _allowTickDropping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _hideTickRate
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7443408887813606049, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8014,14 +7975,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7443408887813606050, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
+      propertyPath: _spawnablePrefabs
+      value: 
+      objectReference: {fileID: 11400000, guid: 8340a17c34b7f054e9a824ec8b6c4404, type: 2}
     - target: {fileID: 7443408887813606051, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _playerPrefab
-      value: 
-      objectReference: {fileID: 2341094329731646923, guid: 16c47058c006d7541bac905d64224452, type: 3}
     m_RemovedComponents:
     - {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
     m_RemovedGameObjects: []
@@ -9753,7 +9714,7 @@ MonoBehaviour:
   - {fileID: 1682997029}
   - {fileID: 575701974}
   - {fileID: 1471120553}
-  menuMusic: {fileID: 8300000, guid: 2e6f9a18c19443c4eb001c4c0257f675, type: 3}
+  menuMusic: {fileID: 8300000, guid: 0f45b350253e59c499bbf68b85a249d8, type: 3}
   navigationSound: {fileID: 8300000, guid: e98d1a8748e212240a7a9ec81adf35c4, type: 3}
   selectSound: {fileID: 8300000, guid: 0146eb16191a06243ae82fa5e5e8f65a, type: 3}
 --- !u!1 &364790614
@@ -19165,6 +19126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 5
 --- !u!1 &704958334
 GameObject:
@@ -37760,6 +37722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 4
 --- !u!1 &1342604337
 GameObject:
@@ -39732,6 +39695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 2
 --- !u!1 &1420796439
 GameObject:
@@ -42220,6 +42184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 3
 --- !u!1 &1493036968
 GameObject:
@@ -46260,6 +46225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 6
 --- !u!1 &1616404927
 GameObject:
@@ -61555,6 +61521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 7
 --- !u!1 &2099220740
 GameObject:

@@ -24,6 +24,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<Vector2> OnLookEvent;
     public event Action OnPlacementModeEvent;
     public event Action OnConnectItemsEvent;
+    public event Action OnHiderItemScanEvent;
 
     public event Action<uint> OnEquipInventoryItemEvent;
     public event Action OnToggleEquippedItemEvent;
@@ -34,6 +35,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public event Action OnCloseUIEvent;
     public event Action<float> OnCCTVCameraSwitchEvent;
+    public event Action OnCCTVMarkedEvent;
     
     public event Action OnCrouchActivated;
     public event Action OnCrouchDeactivated;
@@ -187,6 +189,13 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
             OnDropItemEvent?.Invoke();
     }
 
+    public void OnHiderItemScan(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnHiderItemScanEvent?.Invoke();
+            
+    }
+
     public static string GetCurrentBindingText(InputAction action)
     {
         // This is a bit of a hack, it has to be called from a FixedUpdate or Update method to work properly
@@ -211,12 +220,14 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public void OnCCTVSwitchCameras(InputAction.CallbackContext context)
     {
-        OnCCTVCameraSwitchEvent?.Invoke(context.ReadValue<float>());
+        if(context.phase == InputActionPhase.Performed)
+            OnCCTVCameraSwitchEvent?.Invoke(context.ReadValue<float>());
     }
 
     public void OnClose(InputAction.CallbackContext context)
     {
-        OnCloseUIEvent?.Invoke();
+        if(context.phase == InputActionPhase.Performed)
+            OnCloseUIEvent?.Invoke();
     }
 
     public void OnMainMenu_NavigationUpDown(InputAction.CallbackContext context)
@@ -262,6 +273,12 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         {
             OnMainMenuBack?.Invoke();
         }
+    }
+
+    public void OnMarkCCTV(InputAction.CallbackContext context)
+    {
+       if(context.phase == InputActionPhase.Performed)
+           OnCCTVMarkedEvent?.Invoke();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
