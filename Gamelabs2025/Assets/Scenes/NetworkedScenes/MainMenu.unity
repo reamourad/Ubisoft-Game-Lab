@@ -2744,6 +2744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 1
 --- !u!1 &92209811
 GameObject:
@@ -9753,7 +9754,7 @@ MonoBehaviour:
   - {fileID: 1682997029}
   - {fileID: 575701974}
   - {fileID: 1471120553}
-  menuMusic: {fileID: 8300000, guid: 2e6f9a18c19443c4eb001c4c0257f675, type: 3}
+  menuMusic: {fileID: 8300000, guid: 0f45b350253e59c499bbf68b85a249d8, type: 3}
   navigationSound: {fileID: 8300000, guid: e98d1a8748e212240a7a9ec81adf35c4, type: 3}
   selectSound: {fileID: 8300000, guid: 0146eb16191a06243ae82fa5e5e8f65a, type: 3}
 --- !u!1 &364790614
@@ -19165,6 +19166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 5
 --- !u!1 &704958334
 GameObject:
@@ -37760,6 +37762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 4
 --- !u!1 &1342604337
 GameObject:
@@ -39732,6 +39735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 2
 --- !u!1 &1420796439
 GameObject:
@@ -42220,6 +42224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 3
 --- !u!1 &1493036968
 GameObject:
@@ -46260,6 +46265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 6
 --- !u!1 &1616404927
 GameObject:
@@ -61555,6 +61561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5aea7b1139140a4b38b11f868871a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingValue: {fileID: 0}
   settingType: 7
 --- !u!1 &2099220740
 GameObject:

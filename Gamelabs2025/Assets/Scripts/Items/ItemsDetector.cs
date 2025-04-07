@@ -116,18 +116,18 @@ namespace Player.Items
                     continue;
                 
                 items.Add(collider.transform);
-                //delete if we have more to reduce UI clutter.
-                if (createdItems.Count > maxMarkers)
+
+                foreach (var id in createdItems)
                 {
-                    WorldMarkerManager.Instance.DestroyMarker(createdItems[0]);
-                    createdItems.RemoveAt(0);
+                    WorldMarkerManager.Instance.DestroyMarker(id);
                 }
+                createdItems.Clear();
             }
             
             //sort with closest to player
             items.Sort((x, y) => Vector3.Distance(x.transform.position, originPoint.position)
                                                .CompareTo(Vector3.Distance(y.transform.position, originPoint.position)) );
-            //remove all other onese
+            //remove all other else
             if(items.Count > maxMarkers)
                 items.RemoveRange(maxMarkers, items.Count - maxMarkers);
             
