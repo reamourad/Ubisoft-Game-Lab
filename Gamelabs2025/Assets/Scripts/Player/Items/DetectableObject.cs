@@ -19,7 +19,7 @@ namespace Player.Items
 
         public void OnDetect()
         {
-            if (body == null) return;
+            if (!body) return;
             
             var children = body.GetComponentsInChildren<MeshRenderer>().Select(t => t.gameObject).ToList();
             var previousLayer = body.layer;
