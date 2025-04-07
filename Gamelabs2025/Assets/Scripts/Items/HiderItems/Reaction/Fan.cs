@@ -1,12 +1,11 @@
-using System;
-using System.Collections;
 using DG.Tweening;
 using FishNet.Object;
 using GogoGaga.OptimizedRopesAndCables;
 using Player.Data;
+using Player.Items;
 using UnityEngine;
 
-namespace Player.Items.HiderItems.Reaction
+namespace Items.HiderItems.Reaction
 {
     public class Fan : NetworkBehaviour, IReactionItem, IHiderGrabableItem
     {
@@ -14,6 +13,7 @@ namespace Player.Items.HiderItems.Reaction
         [SerializeField] private Transform spinTransform;
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private float rotationSpeed = 5;
+        [SerializeField] private GameObject smokeFx;
         [SerializeField] private GameObject windFx;
         [SerializeField] private AudioClip clip;
         [SerializeField] private float radius;
@@ -60,6 +60,14 @@ namespace Player.Items.HiderItems.Reaction
             isSpinning = true;
             PlaySound();
             Destroy(effect, 3);
+            DOVirtual.DelayedCall(3.5f, () =>
+            {
+                isSpinning = false;
+                var smoke = Instantiate(smokeFx, transform.position, Quaternion.identity);
+                smoke.transform.SetParent(transform);
+                smoke.transform.forward = Vector3.up;
+                Destroy(smoke, 3);
+            });
         }
 
         private void PlaySound()
