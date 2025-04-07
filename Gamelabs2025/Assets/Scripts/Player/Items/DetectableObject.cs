@@ -23,11 +23,11 @@ namespace Player.Items
             
             var children = body.GetComponentsInChildren<MeshRenderer>().Select(t => t.gameObject).ToList();
             var previousLayer = body.layer;
-            // body.layer = highlightLayer;
+            body.layer = highlightLayer;
             children.ForEach(c => c.layer = highlightLayer);
             DOVirtual.DelayedCall(5, () =>
             {
-                // body.layer = previousLayer;
+                body.layer = previousLayer;
                 children.ForEach(child => child.layer = previousLayer);
             });
         }

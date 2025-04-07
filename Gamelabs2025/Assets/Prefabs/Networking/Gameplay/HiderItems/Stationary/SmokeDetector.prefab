@@ -232,6 +232,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 3758672934147341017}
   _networkObjectCache: {fileID: 3758672934147341017}
+  body: {fileID: 1172595235651608255}
   supportedEffects: 4
   audioTime: 5
   audioDelay: 0.25
