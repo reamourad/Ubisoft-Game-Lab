@@ -41,6 +41,7 @@ namespace Player.Cutscene
         private bool animatingText;
         private void Start()
         {
+            InputReader.Instance.SetToGameplayInputs();   
             foreach (var cam in GameObject.FindObjectsByType<CinemachineVirtualCameraBase>(FindObjectsInactive.Include, FindObjectsSortMode.None))
             {
                 cameras[cam.name] = cam.gameObject;

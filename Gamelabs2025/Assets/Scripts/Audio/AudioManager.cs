@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Player.Settings;
 using UnityEngine;
+using UnityEngine.Audio;
 using Utils;
 
 namespace Player.Audio
@@ -11,20 +14,40 @@ namespace Player.Audio
         [SerializeField] private AudioSource ambianceSource;
         [SerializeField] private AudioSource sfSourceReference;
         [SerializeField] private AudioSource monSfSourceReference;
+        
+        [SerializeField] private AudioMixer mixer;
+        [SerializeField] private List<AudioSource> worldSources = new List<AudioSource>();
+        
 
         private AudioClip currentBGClip;
+        private float masterVolume=1;
         
         private void Awake()
         {
             if(Instance != null && Instance != this)
                 Destroy(gameObject);
+            
+            OnSettingsUpdated();
         }
 
         private void Start()
         {
+            GameSettings.OnUpdated += OnSettingsUpdated;
             DontDestroyOnLoad(this);
         }
 
+        private void OnDestroy()
+        {
+            GameSettings.OnUpdated -= OnSettingsUpdated;
+        }
+
+        private void OnSettingsUpdated()
+        {
+            masterVolume = GameSettings.Settings.MasterVolume;
+            bgSource.volume = masterVolume * GameSettings.Settings.MusicVolume;
+            ambianceSource.volume = masterVolume * GameSettings.Settings.AmbianceVolume;
+        }
+        
         public void PlayBG(AudioClip audioClip, float fadeDur = 0.25f)
         {
             if(currentBGClip == audioClip)
@@ -59,6 +82,7 @@ namespace Player.Audio
             var go = Instantiate(sfSourceReference.gameObject, this.transform);
             go.gameObject.SetActive(true);
             var sfx = go.GetComponent<AudioSource>();
+            sfx.volume = masterVolume * GameSettings.Settings.SfxVolume;
             sfx.PlayOneShot(audioClip);
             Destroy(sfx.gameObject, audioClip.length + 1);
         }
@@ -68,6 +92,7 @@ namespace Player.Audio
             var go = Instantiate(monSfSourceReference.gameObject, this.transform);
             go.gameObject.SetActive(true);
             var sfx = go.GetComponent<AudioSource>();
+            sfx.volume = masterVolume * GameSettings.Settings.SfxVolume;
             sfx.PlayOneShot(audioClip);
             Destroy(sfx.gameObject, audioClip.length + 1);
         }

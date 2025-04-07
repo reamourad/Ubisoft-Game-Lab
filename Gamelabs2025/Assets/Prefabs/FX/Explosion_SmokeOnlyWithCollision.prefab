@@ -14402,6 +14402,7 @@ GameObject:
   - component: {fileID: 1454610402110277393}
   - component: {fileID: 1792969204773864039}
   - component: {fileID: 4793640421818369275}
+  - component: {fileID: -140314751213212281}
   m_Layer: 0
   m_Name: Explosion_SmokeOnlyWithCollision
   m_TagString: Untagged
@@ -19423,3 +19424,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-140314751213212281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5837352466476978006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7609f942a55440aa9e932be0149bf02f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

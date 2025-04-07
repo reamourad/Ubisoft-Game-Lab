@@ -33,8 +33,59 @@ namespace Networking
             hiderLookManager = GetComponent<HiderLookManager>();
         }
 
+        void DestroyRope(NetworkObject objectToConnectTo)
+        {
+            if(objectToConnectTo == null) return;
+            
+            var connectable = objectToConnectTo.GetComponent<IConnectable>();
+            
+            if (connectable == null || connectable.rope == null) return; 
+            
+            //Destroy the rope 
+            Destroy(connectable.rope.gameObject);
+                
+            //get the rope endpoint and delete its rope reference 
+            Rope rope = connectable.rope;
+            if (rope == null) return;
+            if (rope.EndPoint != null)
+            {
+                var eConnectable = rope.EndPoint.gameObject.GetComponent<IConnectable>();
+                if (eConnectable != null)
+                {
+                    eConnectable.rope = null;
+                }
+            }
+
+            if (rope.StartPoint != null)
+            {
+                var sConnectable = rope.StartPoint.gameObject.GetComponent<IConnectable>();
+                if (sConnectable != null)
+                {
+                    sConnectable.rope = null;
+                }
+            }
+        }
         public void CreateNewRopeAndDestroyOldOne(NetworkObject objectToConnectTo)
         {
+            // First Clear the Connections
+            if (connectedToObject != null)
+            {
+                ITriggerItem trigger = null;
+                IReactionItem reaction = null; 
+                if (connectedToObjectIsATrigger)
+                {
+                    trigger = connectedToObject.GetComponent<ITriggerItem>();
+                    reaction = objectToConnectTo.GetComponent<IReactionItem>();
+                }
+                else
+                {
+                    trigger = objectToConnectTo.GetComponent<ITriggerItem>();
+                    reaction = connectedToObject.GetComponent<IReactionItem>();
+                }
+                
+                ClearTriggerReactionEvents(trigger, reaction);
+            }
+            
             if (objectToConnectTo == null)
             {
                 Debug.Log("No object to connect to");
@@ -44,13 +95,7 @@ namespace Networking
             //remove any previous rope 
             if (objectToConnectTo.GetComponent<IConnectable>().rope != null)
             {
-                //Destroy the rope 
-                Destroy(objectToConnectTo.GetComponent<IConnectable>().rope.gameObject);
-                
-                //get the rope endpoint and delete its rope reference 
-                Rope rope = objectToConnectTo.GetComponent<IConnectable>().rope;
-                rope.EndPoint.gameObject.GetComponent<IConnectable>().rope = null;
-                rope.StartPoint.gameObject.GetComponent<IConnectable>().rope = null;
+                DestroyRope(objectToConnectTo);
             }
                 
             //we want to create a rope from the object to the ghost 
@@ -60,18 +105,38 @@ namespace Networking
             connectedToObjectIsATrigger = lookingAtObjectIsATrigger; 
             Debug.Log("You are now in connection mode");
         }
-        
+
+        private void TripWireConnectionCondition()
+        {
+            if (lookingAtObject == null) return;
+            
+            TripWirePole tripWirePole = lookingAtObject.GetComponent<TripWirePole>();
+            if (tripWirePole != null && tripWirePole.isConnectedToAnotherPole)
+            {
+                //check if you have a connected pole 
+                TripWirePole connectedPole = tripWirePole.connectedPole;
+                if (connectedPole.GetComponent<IConnectable>().rope != null)
+                {
+                    DestroyRope(connectedPole.GetComponent<NetworkObject>());
+                    RPC_InformServerOnRopeCreate(connectedPole.GetComponent<NetworkObject>(), false);
+                }
+            }
+        }
         
         public void OnConnectButtonPressed()
         {
-            
             Debug.Log("Pressed Connect Button");
             //this is the first object you connect to, connect the rope from the object to you 
             if (!isInConnectionMode)
             {
-               CreateNewRopeAndDestroyOldOne(lookingAtObject); 
-               connectedToObject = lookingAtObject;
-               RPC_InformServerOnRopeCreate(lookingAtObject,true);
+                //hack for trip wire 
+                TripWireConnectionCondition();
+                if (lookingAtObject)
+                {
+                    CreateNewRopeAndDestroyOldOne(lookingAtObject); 
+                    connectedToObject = lookingAtObject;
+                    RPC_InformServerOnRopeCreate(lookingAtObject,true);
+                }
             }
             else
             {
@@ -103,7 +168,7 @@ namespace Networking
                         reaction = connectedToObject.GetComponent<IReactionItem>();
                     }
                     
-                    trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
+                    MakeConnection(trigger, reaction);
                 }
             }
         }
@@ -131,7 +196,10 @@ namespace Networking
                     
             Debug.Log($"{objectToConnectTo.name} is connected to {secondObject.name} {firstIsTrigger}");
             Debug.Log($"{trigger == null} is connected to {reaction==null}");
-            trigger.OnTriggerActivated += (t) => reaction.OnTrigger(t);
+            if (trigger != null && reaction != null)
+            {
+                MakeConnection(trigger, reaction);
+            }
         }
 
         public void Update()
@@ -155,10 +223,8 @@ namespace Networking
                     if ((connectedToObjectIsATrigger && !lookingAtObjectIsATrigger) ||
                         (!connectedToObjectIsATrigger && lookingAtObjectIsATrigger))
                     {
-                        InScreenUI.Instance.SetToolTipText("Press " +
-                                                           InputReader.GetCurrentBindingText(InputReader.Instance
-                                                               .inputMap.Gameplay.ConnectItems)
-                                                           + " to connect");
+                        InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
+
                     }
                     else
                     {
@@ -171,16 +237,15 @@ namespace Networking
                 lookingAtObject = null;
                 if (isInConnectionMode)
                 {
-                    InScreenUI.Instance.SetToolTipText("Press " + 
-                                                       InputReader.GetCurrentBindingText(InputReader.Instance.inputMap.Gameplay.ConnectItems) 
-                                                       + " to cancel connection");
+                    InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Cancel Connection");
+
                 }
             }
         }
         
         
         [ServerRpc]
-        private void RPC_InformServerOnRopeCreate(NetworkObject objectToConnectTo,bool creation)
+        private void RPC_InformServerOnRopeCreate(NetworkObject objectToConnectTo, bool creation)
         {
             Debug.Log("Received rope creation request from client");
             BroadcastRopeCreateToClients(objectToConnectTo,creation);
@@ -193,7 +258,7 @@ namespace Networking
             if(creation)
                 CreateNewRopeAndDestroyOldOne(objectToConnectTo);
             else
-                DestroyRope();
+                DestroyRope(objectToConnectTo);
         }
 
         [ServerRpc]
@@ -212,6 +277,41 @@ namespace Networking
         private void DestroyRope()
         {
             Destroy(currentRope.gameObject); 
+        }
+        
+        private static void ClearTriggerReactionEvents(ITriggerItem trigger, IReactionItem reaction)
+        {
+            if (trigger != null)
+            {
+                var connectedReaction = ConnectionDictionary.GetConnectedReactions(trigger);
+                if (connectedReaction != null)
+                {
+                    trigger.OnTriggerActivated -= connectedReaction.OnTrigger;
+                }
+                ConnectionDictionary.RemoveConnections(trigger);
+            }
+
+            if (reaction != null) {
+                var connectedTriggers = ConnectionDictionary.GetConnectedTriggers(reaction);
+                if (connectedTriggers != null)
+                {
+                    foreach (var connectedTrigger in connectedTriggers)
+                    {
+                        connectedTrigger.OnTriggerActivated -= reaction.OnTrigger;
+                        ConnectionDictionary.RemoveConnections(trigger);
+                    }
+                }
+            }
+        }
+        
+        private static void MakeConnection(ITriggerItem trigger, IReactionItem reaction)
+        {
+            if (trigger != null && reaction != null)
+            {
+                ClearTriggerReactionEvents(trigger, reaction);
+                ConnectionDictionary.AddConnections(trigger, reaction);
+                trigger.OnTriggerActivated += reaction.OnTrigger;
+            }
         }
     }
 }

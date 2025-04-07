@@ -47,6 +47,17 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public event Action OnWalkToggled;
 
+
+    /// <summary>
+    /// Main Menu Inputs
+    /// </summary>
+    public event Action OnMainMenuStart;
+    public event Action<float> OnMainMenuNavigationUpDown;
+    public event Action<float, bool> OnMainMenuNavigationLeftRight;
+    public event Action OnMainMenuAccept;
+    public event Action OnMainMenuBack;
+    
+
     public event Action OnInteractEvent;
 
     private static InputReader _instance = null;
@@ -206,6 +217,51 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public void OnClose(InputAction.CallbackContext context)
     {
         OnCloseUIEvent?.Invoke();
+    }
+
+    public void OnMainMenu_NavigationUpDown(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnMainMenuNavigationUpDown?.Invoke(context.ReadValue<float>());
+        }
+    }
+
+    public void OnMainMenu_NavigationLeftRight(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            OnMainMenuNavigationLeftRight?.Invoke(context.ReadValue<float>(), true);
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            OnMainMenuNavigationLeftRight?.Invoke(context.ReadValue<float>(), false);
+        }
+        
+    }
+
+    public void OnMainMenu_Start(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnMainMenuStart?.Invoke();
+        }
+    }
+    
+    public void OnMainMenu_Accept(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnMainMenuAccept?.Invoke();
+        }
+    }
+
+    public void OnMainMenu_Back(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnMainMenuBack?.Invoke();
+        }
     }
 
     public void OnInteract(InputAction.CallbackContext context)
