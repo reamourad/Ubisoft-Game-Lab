@@ -340,6 +340,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 7894167957661820338}
   _networkObjectCache: {fileID: 7894167957661820338}
+  body: {fileID: 9031681860809247073}
   stationaryLayerMask:
     serializedVersion: 2
     m_Bits: 8192

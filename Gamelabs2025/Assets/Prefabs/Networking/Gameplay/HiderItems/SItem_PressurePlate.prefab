@@ -384,6 +384,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 4682854888429254139}
   _networkObjectCache: {fileID: 4682854888429254139}
+  body: {fileID: 8514848682108159585}
   animator: {fileID: 3771168013440845878}
   activationDelay: 0.25
   pressSFX: {fileID: 8300000, guid: 99c022831cfd9cf4383a2ab4287a188e, type: 3}

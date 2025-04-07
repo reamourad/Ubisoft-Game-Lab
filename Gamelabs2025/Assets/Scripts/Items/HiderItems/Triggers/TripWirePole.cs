@@ -1,10 +1,11 @@
 using System;
 using FishNet.Object;
 using GogoGaga.OptimizedRopesAndCables;
+using Player.Items;
 using UnityEngine;
 
 //should always spawn in pairs 
-public class TripWirePole :NetworkBehaviour, ITriggerItem, IHiderGrabableItem
+public class TripWirePole :DetectableObject, ITriggerItem, IHiderGrabableItem
 {
     [SerializeField] private float connectionRange = 5f; 
     [SerializeField] private GameObject ropePrefab; 
