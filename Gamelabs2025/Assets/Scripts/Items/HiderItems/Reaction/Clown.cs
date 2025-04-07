@@ -19,7 +19,15 @@ namespace Items.HiderItems.Reaction
         public Rope rope { get; set; }
         public void OnTrigger(ITriggerItem triggerItem)
         {
-            throw new System.NotImplementedException();
+            OnServerTrigger();
+        }
+        
+        [Server]
+        private void OnServerTrigger()
+        {
+            if (triggered) return;
+            RPC_OnClientTrigger();
+            triggered = true;
         }
 
         private void Update()
@@ -60,7 +68,8 @@ namespace Items.HiderItems.Reaction
 
         private void PlaySound()
         {
-            
+            if(!clip) return;
+            audioSource.PlayOneShot(clip);
         }
     }
 }

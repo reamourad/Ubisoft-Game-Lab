@@ -283,8 +283,9 @@ MonoBehaviour:
   clown: {fileID: 4933271555880072381}
   door: {fileID: 2529025002662305443}
   handle: {fileID: 3502638852539343303}
+  audioSource: {fileID: 5013349949644580601}
   confettiFx: {fileID: 3909882206432518598, guid: 29b0a500b1197a348903e719db5de469, type: 3}
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 8e56ac2dc6b0f784ba06a42b924b3a9e, type: 3}
 --- !u!114 &6335353050778088892
 MonoBehaviour:
   m_ObjectHideFlags: 0
