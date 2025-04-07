@@ -5,6 +5,7 @@ using FishNet.Object;
 using Player.Audio;
 using Player.WorldMarker;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player.Items
 {
@@ -84,6 +85,11 @@ namespace Player.Items
             float timeElapsed = 0f;
             float duration = 1f;
 
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.SetMotorSpeeds(0.15f, 0.25f);
+            }
+            
             while (timeElapsed <= duration)
             {
                 float t = timeElapsed / duration;
@@ -98,6 +104,11 @@ namespace Player.Items
                 yield return null;
             }
 
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.ResetHaptics();
+            }
+            
             // Final update after loop
             mesh.transform.localScale = maxScale;
             material.color = new Color(baseColor.r, baseColor.g, baseColor.b, 0f);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5202063375571058369}
   - component: {fileID: 3686261805320139949}
   - component: {fileID: 920992232718299040}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: NotDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4801905348064054866}
   - component: {fileID: 3853143500733504456}
   - component: {fileID: 5808432910445109787}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 7793370646803856466}
   - component: {fileID: 3367085467648579472}
   - component: {fileID: 3641083508897993333}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: door_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 2
+  <PrefabId>k__BackingField: 11
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 5648927678583611675
   <SceneId>k__BackingField: 0
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 4902939809442766657}
   - component: {fileID: 2914683200363145688}
   - component: {fileID: 8652474172623235770}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 8904647841347483329}
   - component: {fileID: 8343611531422282251}
   - component: {fileID: 2657708316422301890}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PlayerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
