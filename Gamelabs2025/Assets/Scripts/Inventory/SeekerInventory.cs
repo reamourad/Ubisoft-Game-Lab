@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FishNet;
@@ -17,6 +18,8 @@ namespace Player.Inventory
 
       public Action<NetworkObject> OnAttachableSpawned;
       private SeekerInventoryGui guiRef;
+
+      private Coroutine delayedToggleRoutine;
 
       public bool HasStorage
       {
@@ -56,7 +59,7 @@ namespace Player.Inventory
          if (availableItems.Count >= items.Count)
          {
             var id = 1 + (selectedItem + 1) % items.Count;
-            Equip(id);
+            DelayedEquip(id);
             return;
          }
 
@@ -65,9 +68,24 @@ namespace Player.Inventory
          
          converted = (converted + 1) % availableItems.Count;
          var convertedItem = availableItems[converted];
-         Equip(items.IndexOf(convertedItem) + 1);
+
+         DelayedEquip(items.IndexOf(convertedItem) + 1);
       }
 
+      private void DelayedEquip(int id)
+      {
+         if(delayedToggleRoutine != null)
+            StopCoroutine(delayedToggleRoutine);
+
+         delayedToggleRoutine = StartCoroutine(DelayedEquipRoutine(id));
+      }
+      
+      private IEnumerator DelayedEquipRoutine(int id)
+      {
+         yield return new WaitForSeconds(0.15f);
+         Equip(id);
+      }
+      
       private void OnDestroy()
       {
          InputReader.Instance.OnEquipInventoryItemEvent -= Equip;

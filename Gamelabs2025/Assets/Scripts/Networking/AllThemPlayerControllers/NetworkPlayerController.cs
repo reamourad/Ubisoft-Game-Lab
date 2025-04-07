@@ -4,6 +4,7 @@ using FishNet.Object;
 using FishNet.Object.Prediction;
 using FishNet.Transporting;
 using Items.Interfaces;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace Networking
@@ -47,6 +48,9 @@ namespace Networking
         
         private PlayerInputData playerInputData;
         private Rigidbody rb;
+
+        private CinemachineBrain cineBrain;
+        
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -60,6 +64,7 @@ namespace Networking
         public override void OnStartClient()
         {
             base.OnStartClient();
+            cineBrain = CinemachineBrain.GetActiveBrain(0);
             name = $"Player [{(IsOwner ? "LOCAL_PLAYER" : "REMOTE_PLAYER")}]";
         }
         
@@ -81,6 +86,10 @@ namespace Networking
 
             UpdateFirstPersonView(playerInputData, Time.deltaTime);
             UpdatePlayerMovement(playerInputData, Time.deltaTime);
+            
+            //Update camera after
+            if(cineBrain.UpdateMethod == CinemachineBrain.UpdateMethods.ManualUpdate)
+                cineBrain.ManualUpdate();
         }
 
         private void FixedUpdate()

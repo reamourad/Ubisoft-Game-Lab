@@ -111,6 +111,13 @@ namespace Networking
                 cineCam.Target.LookAtTarget = hiderCameraTargetTransform;
                 Debug.Log("Loading TPS Camera!! Done");
                 Instantiate(Resources.Load<GameObject>("HiderCanvas"), hiderCameraTargetTransform);
+                
+                //Set to manual update.
+                var brain = CinemachineBrain.GetActiveBrain(0);
+                if (brain != null)
+                {
+                    brain.UpdateMethod = CinemachineBrain.UpdateMethods.ManualUpdate;
+                }
             }));
         }
 

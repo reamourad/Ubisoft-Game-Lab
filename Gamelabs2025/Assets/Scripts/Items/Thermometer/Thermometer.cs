@@ -29,6 +29,7 @@ namespace Player.Items.Thermometer
         [SerializeField] private float dotThreshold = 0.65f;
         
         [SerializeField] private NetworkObject worldDummyRef;
+        [SerializeField] private GameObject displayGui;
         [SerializeField] private TMPro.TMP_Text readingText;
         
         [SerializeField] private AudioClip readSound;
@@ -37,10 +38,21 @@ namespace Player.Items.Thermometer
         private ThermometerGui gui;
         private PlayerRole hiderRole;
         
+        private bool isUsing = false;
+        
         public void UseItem(bool isUsing)
         {
-            var reading = ReadTemperature();
+            this.isUsing = isUsing;
             AudioManager.Instance.PlaySFX(readSound);
+            displayGui.SetActive(isUsing);
+        }
+
+        private void LateUpdate()
+        {
+            if(!isUsing)
+                return;
+            
+            var reading = ReadTemperature();
             switch (reading.temp)
             {
                 case TempType.Normal:
