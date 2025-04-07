@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "HiderItemScan",
+                    "type": "Button",
+                    "id": "0322a5fb-5e47-44e9-a49f-0ee2ecfeb23a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -369,6 +378,28 @@
                     "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "42ddad20-68d0-4bfb-a502-9dcab34c43ff",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HiderItemScan",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8dcd646-fe79-4155-8069-4a08227eacc3",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HiderItemScan",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -434,6 +465,15 @@
                     "name": "MainMenu_Back",
                     "type": "Button",
                     "id": "5b84ecf9-e21d-47af-b33c-9abf0dadecb6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MarkCCTV",
+                    "type": "Button",
+                    "id": "dea4580d-c598-4915-b771-87da278ba19b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -724,6 +764,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "MainMenu_Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62b4fe41-f515-4d0b-8ff7-769d31668fe8",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MarkCCTV",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd959584-1418-4089-be54-8de745fe0de2",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MarkCCTV",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

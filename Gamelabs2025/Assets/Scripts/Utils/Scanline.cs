@@ -6,7 +6,7 @@ public class Scanline : MonoBehaviour
 {
     [SerializeField] private float scrollSpeed = 10;
     
-    private static readonly int DetailTex = Shader.PropertyToID("_DetailTex");
+    private static readonly int DetailTex = Shader.PropertyToID("_MainTex");
     private Image targetImage;
     private Material material;
 

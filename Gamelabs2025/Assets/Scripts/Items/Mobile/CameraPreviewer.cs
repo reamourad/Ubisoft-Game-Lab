@@ -1,7 +1,10 @@
 using System;
 using Networking;
+using Player.Audio;
+using Player.WorldMarker;
 using StateManagement;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utils;
 
 namespace Items
@@ -9,10 +12,16 @@ namespace Items
     public class CameraPreviewer : MonoBehaviour
     {
         [SerializeField] InputReader inputReader;
+        [SerializeField] private TMPro.TMP_Text cameraName;
+        [FormerlySerializedAs("icon")] 
+        [SerializeField] private Sprite worldMarkerIcon;
         
-        private int id = -1;
+        [SerializeField] private AudioClip markerSound;
+        
+        private static int id = -1;
         CCTVCamera previewCamera;
         
+        private static string currentWorldMarker = "";
         Camera mainCamera;
         
         private void Start()
@@ -23,6 +32,7 @@ namespace Items
             mainCamera.gameObject.SetActive(false);
             inputReader.OnCCTVCameraSwitchEvent += InputReaderOnOnCCTVCameraSwitchEvent;
             inputReader.OnCloseUIEvent += InputReaderOnOnCloseUIEvent;
+            inputReader.OnCCTVMarkedEvent += OnCameraMarked;
             
             //Move this to appropriate location later
             Debug.Log("Enabling UI Inputs ONLY!!");
@@ -31,11 +41,25 @@ namespace Items
             
             GameLookupMemory.LocalPlayer.GetComponent<SeekerGraphicsManager>().SetRendererEnabled(true);
         }
-        
+
+        private void OnCameraMarked()
+        {
+            if(previewCamera == null)
+                return;
+            
+            if(!string.IsNullOrEmpty(currentWorldMarker))
+                WorldMarkerManager.Instance.DestroyMarker(currentWorldMarker);
+            
+            currentWorldMarker = WorldMarkerManager.Instance.AddWorldMarker(previewCamera.transform, worldMarkerIcon, true);
+            AudioManager.Instance.PlaySFX(markerSound);
+            Close();
+        }
+
         private void OnDestroy()
         {
             inputReader.OnCCTVCameraSwitchEvent -= InputReaderOnOnCCTVCameraSwitchEvent;
             inputReader.OnCloseUIEvent -= InputReaderOnOnCloseUIEvent;
+            inputReader.OnCCTVMarkedEvent -= OnCameraMarked;
             
             //Move this to appropriate location later
             Debug.Log("Enabling UI Game Inputs ONLY!!");
@@ -79,6 +103,7 @@ namespace Items
             
             previewCamera = CCTVCamera.CameraList[id];
             previewCamera.ActivateCamera(true);
+            cameraName.text = previewCamera.CameraName;
         }
         
         public void Open()

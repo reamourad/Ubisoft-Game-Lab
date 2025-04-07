@@ -21,6 +21,8 @@ namespace Player
 
         [SerializeField] private GameObject seekerGraphicHack;
 
+        private Rigidbody rb;
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
@@ -39,6 +41,14 @@ namespace Player
         {
             if(seekerGraphicHack != null && seekerGraphicHack.transform.localRotation != Quaternion.identity)
                 seekerGraphicHack.transform.localRotation = Quaternion.identity;
+        }
+
+        public Vector3 GetCentrofMassPosition()
+        {
+            if(rb == null)
+                rb = GetComponent<Rigidbody>();
+            
+            return transform.position + rb.centerOfMass; 
         }
     }
     
