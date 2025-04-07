@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Player.Items.HiderItems
 {
-    public class PressurePlates : NetworkBehaviour, ITriggerItem, IHiderGrabableItem
+    public class PressurePlates : DetectableObject, ITriggerItem, IHiderGrabableItem
     {
         
         [SerializeField] private Animator animator;

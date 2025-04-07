@@ -609,6 +609,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 2377176820102971185}
   _networkObjectCache: {fileID: 2377176820102971185}
+  body: {fileID: 6609322882127479451}
   supportedEffects: 1
   audioSource: {fileID: 4476111986626139426}
   fxSpawnPoint: {fileID: 7346498401059303327}

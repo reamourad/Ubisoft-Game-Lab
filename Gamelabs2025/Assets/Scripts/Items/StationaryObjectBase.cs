@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player.Items
 {
-    public abstract class StationaryObjectBase : NetworkBehaviour
+    public abstract class StationaryObjectBase : DetectableObject
     {
         [SerializeField] private StationaryEffect supportedEffects;
         
