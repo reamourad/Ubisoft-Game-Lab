@@ -24,6 +24,9 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
     private float targetAngle = 0f;
     private float currentAngle = 0f;
 
+    private bool isScaring;
+    private GameObject shakeObj=null;
+
     Coroutine doorCoroutine;
     
     private void OnEnable()
@@ -91,7 +94,7 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         UpdateDoor();
         RPC_UpdateDoorState(isOpen);
 
-        if (Random.value <= 0.1f)
+        if (Random.value <= 0.05f)
         {
             RPC_TriggerScareEffects();
         }
@@ -109,15 +112,29 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
     [ObserversRpc]
     private void RPC_TriggerScareEffects()
     {
-        // Play global monster SFX
-        AudioManager.Instance.PlayMonsterSFX(rumblingClip);
+  
 
-        // Instantiate camera shake effect
-        if (cameraShakePrefab != null)
+        if(shakeObj==null)
         {
-            GameObject shakeObj = Instantiate(cameraShakePrefab);
-            Destroy(shakeObj, 3f);
+            isScaring = false;
         }
+
+        if (!isScaring)
+        {
+            isScaring = true;
+            // Play global monster SFX
+            AudioManager.Instance.PlayMonsterSFX(rumblingClip);
+
+            // Instantiate camera shake effect
+            if (cameraShakePrefab != null)
+            {
+                shakeObj = Instantiate(cameraShakePrefab);
+                Destroy(shakeObj, 3f);
+            }
+          
+        }
+        
+    
     }
 
     private void OnTriggerEnter(Collider other)

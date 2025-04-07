@@ -545,4 +545,4 @@ MonoBehaviour:
   closeClip: {fileID: 8300000, guid: 09a2c35a6777a8e44b7941c2d4c06986, type: 3}
   lookedClip: {fileID: 8300000, guid: c36747ede7413a644b80ba92a8290eaf, type: 3}
   rumblingClip: {fileID: 8300000, guid: f0e6bc66b1e1b594abe55854006943ec, type: 3}
-  cameraShakePrefab: {fileID: 2110324343466382509, guid: db4ec2ca0bf04ca409868ba9177c9ead, type: 3}
+  cameraShakePrefab: {fileID: 2110324343466382509, guid: ba92d837cba3be44cb3c25a4ae143a6f, type: 3}
