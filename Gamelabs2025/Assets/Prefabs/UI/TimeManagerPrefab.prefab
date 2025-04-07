@@ -99,7 +99,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 8159141735133728980}
   _networkObjectCache: {fileID: 0}
-  ui: {fileID: 8522719287731785720}
+  ui: {fileID: 5671397481155793478}
 --- !u!1 &7240552949044355882
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,9 +235,9 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2970276616330072845, guid: 0635ba4b48a19ed4da12f47c4f6ebc30, type: 3}
   m_PrefabInstance: {fileID: 4393123471070146999}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8522719287731785720 stripped
+--- !u!114 &5671397481155793478 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5382164995277504079, guid: 0635ba4b48a19ed4da12f47c4f6ebc30, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8233525083038491633, guid: 0635ba4b48a19ed4da12f47c4f6ebc30, type: 3}
   m_PrefabInstance: {fileID: 4393123471070146999}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
