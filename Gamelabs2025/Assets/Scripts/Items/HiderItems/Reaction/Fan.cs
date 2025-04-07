@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Items.HiderItems.Reaction
 {
-    public class Fan : NetworkBehaviour, IReactionItem, IHiderGrabableItem
+    public class Fan : DetectableObject, IReactionItem, IHiderGrabableItem
     {
         [SerializeField] private StationaryEffect effects;
         [SerializeField] private Transform spinTransform;

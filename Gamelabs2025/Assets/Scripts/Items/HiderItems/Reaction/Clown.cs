@@ -4,11 +4,12 @@ using System.Linq;
 using DG.Tweening;
 using FishNet.Object;
 using GogoGaga.OptimizedRopesAndCables;
+using Player.Items;
 using UnityEngine;
 
 namespace Items.HiderItems.Reaction
 {
-    public class Clown : NetworkBehaviour, IReactionItem, IHiderGrabableItem
+    public class Clown : DetectableObject, IReactionItem, IHiderGrabableItem
     {
         [SerializeField] private Transform clown, door, handle;
         [SerializeField] private AudioSource audioSource;
