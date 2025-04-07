@@ -92,25 +92,20 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         isOpen = !isOpen;
         targetAngle = isOpen ? 90f : 0f;
         UpdateDoor();
-        RPC_UpdateDoorState(isOpen);
-
-        if (Random.value <= 0.05f)
-        {
-            RPC_TriggerScareEffects();
-        }
-
+        RPC_UpdateDoorState(isOpen, Random.value <= 0.10f);
     }
 
     [ObserversRpc]
-    private void RPC_UpdateDoorState(bool state)
+    private void RPC_UpdateDoorState(bool state, bool houseAngy)
     {
         isOpen = state;
         targetAngle = isOpen ? 90f : 0f;
         UpdateDoor();
+        if (houseAngy)
+            TriggerScareEffects();
     }
-
-    [ObserversRpc]
-    private void RPC_TriggerScareEffects()
+    
+    private void TriggerScareEffects()
     {
   
 
