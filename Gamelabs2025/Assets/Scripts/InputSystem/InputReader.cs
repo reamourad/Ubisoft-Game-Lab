@@ -26,7 +26,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action OnConnectItemsEvent;
     public event Action OnHiderItemScanEvent;
 
-    public event Action<uint> OnEquipInventoryItemEvent;
+    public event Action<int> OnEquipInventoryItemEvent;
     public event Action OnToggleEquippedItemEvent;
     
     public event Action OnDropItemEvent;

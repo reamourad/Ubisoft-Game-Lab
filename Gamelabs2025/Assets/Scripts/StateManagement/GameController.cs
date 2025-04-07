@@ -10,6 +10,7 @@ using Networking;
 using Player;
 using Player.Audio;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace StateManagement
@@ -371,15 +372,29 @@ namespace StateManagement
         [ObserversRpc]
         private void RPC_InvokeHouseAngy(float delay)
         {
-            StartCoroutine(DelayedInvoke(ClientHouseAngy, delay));
+            StartCoroutine(ClientHouseAngy(delay));
         }
 
         [Client]
-        private void ClientHouseAngy()
+        private IEnumerator ClientHouseAngy(float delay)
         {
-            var go = Instantiate(cameraShakeObj);
-            Destroy(go, houseAngySFX.length);
+            yield return new WaitForSeconds(delay);
             AudioManager.Instance.PlayMonsterSFX(houseAngySFX);
+            var go = Instantiate(cameraShakeObj);
+
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.SetMotorSpeeds(0.5f, 0.75f);
+            }
+            
+            yield return new WaitForSeconds(houseAngySFX.length);
+            
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.ResetHaptics();
+            }
+            
+            Destroy(go, houseAngySFX.length);
         }
     }
 }
