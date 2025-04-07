@@ -62,6 +62,7 @@ namespace Items.HiderItems.Reaction
             Destroy(effect, 3);
             DOVirtual.DelayedCall(3.5f, () =>
             {
+                isSpinning = false;
                 var smoke = Instantiate(smokeFx, transform.position, Quaternion.identity);
                 smoke.transform.SetParent(transform);
                 smoke.transform.forward = Vector3.up;
