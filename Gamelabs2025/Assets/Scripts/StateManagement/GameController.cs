@@ -118,7 +118,7 @@ namespace StateManagement
             }
         }
         
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         private void RPC_InformClientIsReady()
         {
             ServerOnClientReady();
