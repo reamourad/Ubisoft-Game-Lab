@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FishNet.Object;
 using Player;
+using Player.Audio;
 using StateManagement;
 using UnityEngine;
 
@@ -15,10 +16,16 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
     [SerializeField] private AudioClip openClip;
     [SerializeField] private AudioClip closeClip;
     [SerializeField] private AudioClip lookedClip;
-    
+
+    [SerializeField] private AudioClip rumblingClip;
+    [SerializeField] private GameObject cameraShakePrefab;
+
     private float doorSpeed = 2f;
     private float targetAngle = 0f;
     private float currentAngle = 0f;
+
+    private bool isScaring;
+    private GameObject shakeObj=null;
 
     Coroutine doorCoroutine;
     
@@ -85,7 +92,13 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         isOpen = !isOpen;
         targetAngle = isOpen ? 90f : 0f;
         UpdateDoor();
-        RPC_UpdateDoorState(isOpen); 
+        RPC_UpdateDoorState(isOpen);
+
+        if (Random.value <= 0.05f)
+        {
+            RPC_TriggerScareEffects();
+        }
+
     }
 
     [ObserversRpc]
@@ -94,6 +107,34 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         isOpen = state;
         targetAngle = isOpen ? 90f : 0f;
         UpdateDoor();
+    }
+
+    [ObserversRpc]
+    private void RPC_TriggerScareEffects()
+    {
+  
+
+        if(shakeObj==null)
+        {
+            isScaring = false;
+        }
+
+        if (!isScaring)
+        {
+            isScaring = true;
+            // Play global monster SFX
+            AudioManager.Instance.PlayMonsterSFX(rumblingClip);
+
+            // Instantiate camera shake effect
+            if (cameraShakePrefab != null)
+            {
+                shakeObj = Instantiate(cameraShakePrefab);
+                Destroy(shakeObj, 3f);
+            }
+          
+        }
+        
+    
     }
 
     private void OnTriggerEnter(Collider other)

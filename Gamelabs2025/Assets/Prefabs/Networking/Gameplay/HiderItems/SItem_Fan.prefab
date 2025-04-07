@@ -208,6 +208,7 @@ MonoBehaviour:
   spinTransform: {fileID: 1646277630228660811}
   audioSource: {fileID: 5184397272292389414}
   rotationSpeed: 5
+  smokeFx: {fileID: 8055981779988460889, guid: 2e7ad24a58209ce4384a1f765cd1e062, type: 3}
   windFx: {fileID: 1695191526168693321, guid: fda397297325f5840b9f8f8baaf9da4a, type: 3}
   clip: {fileID: 8300000, guid: c53a216e7f45f4e4b86bc1ff0492e4b2, type: 3}
   radius: 0.4
