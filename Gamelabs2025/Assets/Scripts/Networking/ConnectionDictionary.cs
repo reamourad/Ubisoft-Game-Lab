@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using GogoGaga.OptimizedRopesAndCables;
+using UnityEngine;
 
 public static class ConnectionDictionary
 {
@@ -40,5 +42,59 @@ public static class ConnectionDictionary
             }
         }
         return connectedTriggers; // Return the array of connected triggers
+    }
+    
+    public static void ClearTriggerReactionEvents(ITriggerItem trigger, IReactionItem reaction)
+    {
+        if (trigger != null)
+        {
+            if (trigger.rope != null)
+            {
+                GameObject.Destroy(trigger.rope.gameObject);
+            }
+            var connectedReaction = GetConnectedReactions(trigger);
+            if (connectedReaction != null && connectedReaction.rope != null)
+            {
+                GameObject.Destroy(connectedReaction.rope.gameObject);
+            }
+            if (connectedReaction != null)
+            {
+                trigger.OnTriggerActivated -= connectedReaction.OnTrigger;
+            }
+            RemoveConnections(trigger);
+        }
+
+        if (reaction != null) {
+            var connectedTriggers = GetConnectedTriggers(reaction);
+            if (connectedTriggers != null)
+            {
+                foreach (var connectedTrigger in connectedTriggers)
+                {
+                    if (connectedTrigger != null && connectedTrigger.rope != null)
+                    {
+                        GameObject.Destroy(connectedTrigger.rope.gameObject);
+                    }
+                    connectedTrigger.OnTriggerActivated -= reaction.OnTrigger;
+                    RemoveConnections(trigger);
+                }
+            }
+        }
+    }
+        
+    public static void MakeConnection(ITriggerItem trigger, IReactionItem reaction, Transform triggerTransform, Transform reactionTransform)
+    {
+        if (trigger != null && reaction != null)
+        {
+            ClearTriggerReactionEvents(trigger, reaction);
+            var prefab = Resources.Load<GameObject>("RopePrefab");
+            Debug.Log(prefab);
+            var currentRope = Rope.CreateRope(prefab, triggerTransform, reactionTransform);
+            Debug.Log(currentRope);
+            trigger.rope = currentRope;
+            reaction.rope = currentRope;
+            
+            AddConnections(trigger, reaction);
+            trigger.OnTriggerActivated += reaction.OnTrigger;
+        }
     }
 }

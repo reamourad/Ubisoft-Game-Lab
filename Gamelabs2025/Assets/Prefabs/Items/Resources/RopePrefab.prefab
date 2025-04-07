@@ -236,7 +236,7 @@ MonoBehaviour:
   ropeWidth: 0.1
   midPointWeight: 1
   midPointPosition: 0.5
-  useNavMeshCollision: 0
+  useNavMeshCollision: 1
   navMeshSampleCount: 10
   navMeshRaycastDistance: 20
   navMeshOffset: 0.1

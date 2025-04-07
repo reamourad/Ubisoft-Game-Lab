@@ -227,6 +227,14 @@ namespace Networking
 
                 grabbedObject.transform.position = grabPlacement.position;
                 grabbedObject.transform.SetParent(this.transform);
+                
+                //grab function helper 
+                var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
+                if (reactionHelper != null)
+                {
+                    if(IsOwner)
+                        reactionHelper.OnGrabbed();
+                }
             }
 
             void EnterBlueprintMode()
@@ -303,12 +311,19 @@ namespace Networking
                     //inform server 
                     RPC_InformServerOnPlace(grabbedObject.transform.position, grabbedObject.transform.rotation);
                     
+                    
+                    //placed a reaction item down
+                    var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
+                    Debug.Log(grabbedObject.name);
+                    if (reactionHelper != null)
+                    {
+                        Debug.Log("OnReleased");
+                        reactionHelper.OnReleased();
+                    }
                     //Reset variables
                     grabbedObject = null;
                     isBlueprintMode = false;
-
-                    // Update UI
-                    InScreenUI.Instance.SetToolTipText("");
+                    
                 }
             }
 
@@ -330,6 +345,8 @@ namespace Networking
                 grabbedObject.transform.rotation = rotation;
                 
                 grabbedObject = null;
+                
+               
             }
     }
 }
