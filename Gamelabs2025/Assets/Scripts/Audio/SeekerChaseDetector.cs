@@ -89,8 +89,6 @@ namespace Player.Audio
 
                 if (Physics.Raycast(eye.position, dir, out RaycastHit hit, threshDist, layerMask))
                 {
-                    Debug.DrawRay(eye.position, dir * threshDist, Color.yellow);
-                    Debug.Log($"HIT: {hit.collider.gameObject.name}");
                     var playerRole = hit.collider.GetComponentInParent<PlayerRole>();
                     return playerRole && playerRole.Role == PlayerRole.RoleType.Hider;
                 }

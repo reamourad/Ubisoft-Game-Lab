@@ -80,6 +80,7 @@ namespace Networking
                 return;
 
             UpdateFirstPersonView(playerInputData, Time.deltaTime);
+            UpdatePlayerMovement(playerInputData, Time.deltaTime);
         }
 
         private void FixedUpdate()
@@ -87,7 +88,7 @@ namespace Networking
             if(!IsOwner)
                 return;
             
-            UpdatePlayerMovement(playerInputData, Time.fixedDeltaTime);
+            //UpdatePlayerMovement(playerInputData, Time.fixedDeltaTime);
         }
 
         private void UpdatePlayerMovement(PlayerInputData inputData, float deltaTime)

@@ -78,8 +78,9 @@ namespace Player.Items.MotionDetector
         [ObserversRpc(ExcludeOwner = false)]
         private void RPC_OnPlayerEntered()
         {
-            if(localSFXSource != null)
+            if(localActivationRoutine != null)
                 StopCoroutine(localActivationRoutine);
+            
             localActivationRoutine =  StartCoroutine(ClientActivationRoutine());
         }
 
