@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using FishNet.Object;
 using GogoGaga.OptimizedRopesAndCables;
@@ -18,12 +20,6 @@ namespace Items.HiderItems.Reaction
         public void OnTrigger(ITriggerItem triggerItem)
         {
             throw new System.NotImplementedException();
-        }
-
-        private void Start()
-        {
-            Debug.Log("Start");
-            DOVirtual.DelayedCall(3f, RPC_OnClientTrigger);
         }
 
         private void Update()
@@ -57,8 +53,8 @@ namespace Items.HiderItems.Reaction
         {
             door.DORotate(new Vector3(-90,0,0), 0.5f).OnComplete(() =>
             {
-                clown.DOMove(transform.position + Vector3.up * 2, 0.5f);
-                clown.DOPunchPosition(Vector3.up * 3, 3, 5, 1, true);
+                // clown.DOPunchPosition(Vector3.up , 1f, 3, 10, true);
+                clown.DOMove(transform.position + Vector3.up * .3f, .25f);
             });
         }
 
