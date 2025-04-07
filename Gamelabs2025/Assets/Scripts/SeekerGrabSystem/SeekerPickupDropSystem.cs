@@ -52,7 +52,7 @@ namespace SeekerGrabSystem
                 if (ctxDummy != null)
                     ctxDummy.Highlight(false);
                 ctxDummy = null;
-                InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab);
+                InScreenUI.Instance?.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab);
                 return;
             }
             ctxDummy = obj.GetComponentInParent<SeekerWorldDummy>();

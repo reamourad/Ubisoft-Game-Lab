@@ -4214,43 +4214,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 112170907312350784, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _tickRate
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 112170907312350784, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _physicsMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 112170907312350784, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _allowTickDropping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _hideTickRate
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7443408887813606049, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4296,10 +4260,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
-      propertyPath: _playerPrefab
-      value: 
-      objectReference: {fileID: 2341094329731646923, guid: 16c47058c006d7541bac905d64224452, type: 3}
     m_RemovedComponents:
     - {fileID: 7443408887813606060, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
     m_RemovedGameObjects: []

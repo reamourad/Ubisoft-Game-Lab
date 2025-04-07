@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Player.Items.HiderItems.Reaction
 {
-    public class SmokeBomb : NetworkBehaviour, IReactionItem, IHiderGrabableItem
+    public class SmokeBomb : DetectableObject, IReactionItem, IHiderGrabableItem
     {
         [SerializeField] private LayerMask stationaryLayerMask;
         [SerializeField] private StationaryEffect effects;

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Player.Items.HiderItems
 {
-    public class PressurePlates : NetworkBehaviour, ITriggerItem, IHiderGrabableItem
+    public class PressurePlates : DetectableObject, ITriggerItem, IHiderGrabableItem
     {
         
         [SerializeField] private Animator animator;
@@ -25,7 +25,6 @@ namespace Player.Items.HiderItems
             if(activationRoutine != null)
                 return;
             
-            Debug.Log($"PressurePlate:: {other.name} entered");
             var role = other.GetComponentInParent<PlayerRole>();
             if(role == null)
                 return;
@@ -33,7 +32,6 @@ namespace Player.Items.HiderItems
             {
                 activationRoutine = StartCoroutine(DelayedActivation());
                 RPC_OnPlayerEntered();
-                Debug.Log("PressurePlate::PRESSED");
             }
             animator.SetBool("pressed", true);
         }
@@ -47,7 +45,6 @@ namespace Player.Items.HiderItems
         [Server]
         private void OnTriggerExit(Collider other)
         {
-            Debug.Log($"PressurePlate:: {other.name} exited");
             var role = other.GetComponentInParent<PlayerRole>();
             if(role == null)
                 return;
@@ -56,7 +53,7 @@ namespace Player.Items.HiderItems
             {
                 if(activationRoutine != null)
                     StopCoroutine(activationRoutine);
-                Debug.Log("PressurePlate::RELEASED");
+                activationRoutine = null;
             }
             animator.SetBool("pressed", false);
         }
@@ -65,7 +62,6 @@ namespace Player.Items.HiderItems
         {
            yield return new WaitForSeconds(activationDelay);
            OnTriggerActivated?.Invoke(this);
-           Debug.Log($"PressurePlate::ACTIVATED CONNECTION {OnTriggerActivated != null}");
            activationRoutine = null;
         }
         

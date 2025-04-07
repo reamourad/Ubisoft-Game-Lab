@@ -11,6 +11,7 @@ using Player.IK;
 using Player.Inventory;
 using StateManagement;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 namespace Items
@@ -169,11 +170,21 @@ namespace Items
 
             if (use)
             {
+                if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+                {
+                    Gamepad.current.SetMotorSpeeds(0.15f, 0.25f);
+                }
+                
                 particles.Play();
                 vacuumStartSFXCoroutine = StartCoroutine(AudioSFXStart());
             }
             else
             {
+                if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+                {
+                    Gamepad.current.ResetHaptics();
+                }
+                
                 particles.Stop();
                 audioSource.clip = endClip;
                 audioSource.loop = false;

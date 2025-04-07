@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using FishNet;
 using FishNet.Object;
 using UnityEngine;
@@ -8,7 +10,7 @@ namespace Player.Inventory
    public class SeekerInventory : NetworkBehaviour
    {
       [SerializeField] private GameObject inventoryGuiPrefab;
-      [SerializeField] private InventoryItemContainer[] items = new InventoryItemContainer[3];
+      [SerializeField] private List<InventoryItemContainer> items = new List<InventoryItemContainer>(3);
       
       private int selectedItem = -1;
       private ISeekerAttachable activeItem;
@@ -20,8 +22,7 @@ namespace Player.Inventory
       {
          get
          {
-            uint id = 0;
-            return GetEmptySlot(out id);
+            return GetEmptySlot(out int id);
          }
       }
 
@@ -47,8 +48,24 @@ namespace Player.Inventory
 
       private void ToggleEquippedItem()
       {
-         var newId = 1 + (selectedItem + 1) % items.Length;
-         Equip((uint)newId);
+         
+         var availableItems = items.FindAll(a => !a.IsSlotEmpty);
+         if(availableItems.Count < 2)
+            return;
+
+         if (availableItems.Count >= items.Count)
+         {
+            var id = 1 + (selectedItem + 1) % items.Count;
+            Equip(id);
+            return;
+         }
+
+         var selectedSlot = items[selectedItem];
+         var converted = availableItems.IndexOf(selectedSlot);
+         
+         converted = (converted + 1) % availableItems.Count;
+         var convertedItem = availableItems[converted];
+         Equip(items.IndexOf(convertedItem) + 1);
       }
 
       private void OnDestroy()
@@ -56,9 +73,9 @@ namespace Player.Inventory
          InputReader.Instance.OnEquipInventoryItemEvent -= Equip;
       }
       
-      private bool GetEmptySlot(out uint availableSlotId)
+      private bool GetEmptySlot(out int availableSlotId)
       {
-         for (uint i = 0; i < items.Length; i++)
+         for (int i = 0; i < items.Count; i++)
          {
             if (items[i] != null && items[i].IsSlotEmpty)
             {
@@ -78,7 +95,7 @@ namespace Player.Inventory
       public void AddToInventory(NetworkObject item, Sprite icon)
       {
          Debug.Log("SeekerInventory::::AddToInventory");
-         if (GetEmptySlot(out uint availableSlotId)) //availableSlotId is zero-indexed
+         if (GetEmptySlot(out int availableSlotId)) //availableSlotId is zero-indexed
          {
             Debug.Log($"SeekerInventory::::AddToInventory At Slot {availableSlotId}");
             items[availableSlotId] = new InventoryItemContainer()
@@ -117,12 +134,12 @@ namespace Player.Inventory
          selectedItem = -1;
          
          //Equip other inventory item.
-         for (int i = 0; i < items.Length; i++)
+         for (int i = 0; i < items.Count; i++)
          {
             if (items[i] != null && !items[i].IsSlotEmpty)
             {
-               Debug.Log("SeekerInventory:::Equip-ing other item in inventory");
-               Equip((uint)i);
+               Debug.Log($"SeekerInventory:::Equip-ing other item in inventory {i}");
+               Equip(i+1);
                break;
             }
          }
@@ -132,10 +149,10 @@ namespace Player.Inventory
       /// Equips Item.
       /// </summary>
       /// <param name="id">Starts from 1</param>
-      private void Equip(uint id)
+      private void Equip(int id)
       {
          //don't go past the max limit
-         if (id - 1 > items.Length)
+         if (id - 1 > items.Count)
             return;
 
          if(id - 1 == selectedItem)

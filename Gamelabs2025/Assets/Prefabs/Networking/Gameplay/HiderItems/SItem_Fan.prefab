@@ -292,6 +292,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 6936758570789124854}
   _networkObjectCache: {fileID: 6936758570789124854}
+  body: {fileID: 4388610077684413637}
   effects: 1
   spinTransform: {fileID: 1646277630228660811}
   audioSource: {fileID: 5184397272292389414}

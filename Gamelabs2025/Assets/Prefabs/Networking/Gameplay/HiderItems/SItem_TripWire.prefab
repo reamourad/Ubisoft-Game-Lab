@@ -147,6 +147,7 @@ MonoBehaviour:
   _componentIndexCache: 0
   _addedNetworkObject: {fileID: 1728842423337675490}
   _networkObjectCache: {fileID: 1728842423337675490}
+  body: {fileID: 7717709355404654489}
   connectionRange: 5
   ropePrefab: {fileID: 3187836456931121904, guid: 358e7ba10ed90f345803e98f87921f94, type: 3}
   ropeAttachPoint: {fileID: 1167607243304336803}
@@ -269,5 +270,10 @@ PrefabInstance:
 --- !u!4 &6940363033804418339 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c28c3e579716e6b489ec96b076a6d33c, type: 3}
+  m_PrefabInstance: {fileID: 7483757815544629960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7717709355404654489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c28c3e579716e6b489ec96b076a6d33c, type: 3}
   m_PrefabInstance: {fileID: 7483757815544629960}
   m_PrefabAsset: {fileID: 0}

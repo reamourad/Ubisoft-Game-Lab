@@ -5,6 +5,7 @@ using FishNet.Object;
 using Player.Audio;
 using Player.WorldMarker;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Player.Items
 {
@@ -84,6 +85,11 @@ namespace Player.Items
             float timeElapsed = 0f;
             float duration = 1f;
 
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.SetMotorSpeeds(0.15f, 0.25f);
+            }
+            
             while (timeElapsed <= duration)
             {
                 float t = timeElapsed / duration;
@@ -98,6 +104,11 @@ namespace Player.Items
                 yield return null;
             }
 
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.ResetHaptics();
+            }
+            
             // Final update after loop
             mesh.transform.localScale = maxScale;
             material.color = new Color(baseColor.r, baseColor.g, baseColor.b, 0f);
@@ -130,7 +141,7 @@ namespace Player.Items
             //remove all other else
             if(items.Count > maxMarkers)
                 items.RemoveRange(maxMarkers, items.Count - maxMarkers);
-            
+
             foreach (var collider in items)
             {
                 var reaction = collider.GetComponentInParent<IReactionItem>();
@@ -149,6 +160,12 @@ namespace Player.Items
                 {
                     createdItems.Add(WorldMarkerManager.Instance.AddWorldMarker(collider.transform, stationaryIcon, true));
                 }
+                
+                if(collider.gameObject.TryGetComponent<DetectableObject>(out var detectableObject))
+                    detectableObject.OnDetect();
+                
+                if(collider.transform.parent.TryGetComponent<DetectableObject>(out var parentObject))
+                    parentObject.OnDetect();
                 
                 yield return new WaitForSeconds(0.1f);
                 AudioManager.Instance.PlaySFX(hiderScanSFX);

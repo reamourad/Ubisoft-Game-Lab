@@ -144,7 +144,7 @@ namespace Networking
                 //not looking at a relevant object, cancel the connection
                 if (!lookingAtObject)
                 {
-                    RPC_InformServerOnRopeCreate(lookingAtObject,false);
+                    //RPC_InformServerOnRopeCreate(lookingAtObject,false);
                     Destroy(currentRope.gameObject); 
                 }
                 else
@@ -177,9 +177,12 @@ namespace Networking
         {
             //connected two items together 
 
-            currentRope.SetEndPoint(secondObject.transform);
-            secondObject.GetComponent<IConnectable>().rope = currentRope;
-            
+            if (currentRope != null)
+            {
+                currentRope.SetEndPoint(secondObject.transform);
+                secondObject.GetComponent<IConnectable>().rope = currentRope;
+            }
+
             ITriggerItem trigger = null;
             IReactionItem reaction = null; 
             // subscribe to the trigger's event

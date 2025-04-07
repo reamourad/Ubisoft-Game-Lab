@@ -10,6 +10,7 @@ using Networking;
 using Player;
 using Player.Audio;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
 
 namespace StateManagement
@@ -51,8 +52,8 @@ namespace StateManagement
         [SerializeField] private GameObject cameraShakeObj;
         
         
-        private GameStage currentStage = GameStage.None;
-        public GameStage CurrentGameStage =>currentStage;
+        private readonly SyncVar<GameStage> currentStage = new SyncVar<GameStage>(GameStage.None);
+        public GameStage CurrentGameStage =>currentStage.Value;
         
         
         private List<NetworkObject> players;
@@ -117,7 +118,7 @@ namespace StateManagement
             }
         }
         
-        [ServerRpc]
+        [ServerRpc(RequireOwnership = false)]
         private void RPC_InformClientIsReady()
         {
             ServerOnClientReady();
@@ -233,10 +234,10 @@ namespace StateManagement
             if(!IsServerStarted)
                 return;
             
-            if(currentStage == stage)
+            if(currentStage.Value == stage)
                 return;
             
-            Debug.Log($"GameController:: Switching Game Stage {currentStage} --> {stage}");
+            Debug.Log($"GameController:: Switching Game Stage {currentStage.Value} --> {stage}");
             switch (stage)
             {
                 case GameStage.Preparing:
@@ -250,17 +251,17 @@ namespace StateManagement
                     ServerGamePostStage();
                     break;
             }
-            currentStage = stage;
-            OnStageChanged?.Invoke(currentStage);
-            RPC_InformClientsOfGameStageChange(currentStage);
-            Debug.Log($"GameController:: Switched Game Stage {currentStage} --> {stage}");
+            currentStage.Value = stage;
+            OnStageChanged?.Invoke(currentStage.Value);
+            RPC_InformClientsOfGameStageChange(currentStage.Value);
+            Debug.Log($"GameController:: Switched Game Stage {currentStage.Value} --> {stage}");
         }
 
         [ObserversRpc]
         void RPC_InformClientsOfGameStageChange(GameStage stage)
         {
-            currentStage = stage;
-            OnStageChanged?.Invoke(currentStage);
+            currentStage.Value = stage;
+            OnStageChanged?.Invoke(currentStage.Value);
         }
         
         private void ServerGamePrepareStage()
@@ -311,7 +312,7 @@ namespace StateManagement
                 return;
             }
                 
-            if(currentStage != GameStage.Game)
+            if(currentStage.Value != GameStage.Game)
                 return;
 
             var hider = players.Find(a => a.GetComponent<PlayerRole>().Role == PlayerRole.RoleType.Hider);
@@ -371,15 +372,29 @@ namespace StateManagement
         [ObserversRpc]
         private void RPC_InvokeHouseAngy(float delay)
         {
-            StartCoroutine(DelayedInvoke(ClientHouseAngy, delay));
+            StartCoroutine(ClientHouseAngy(delay));
         }
 
         [Client]
-        private void ClientHouseAngy()
+        private IEnumerator ClientHouseAngy(float delay)
         {
-            var go = Instantiate(cameraShakeObj);
-            Destroy(go, houseAngySFX.length);
+            yield return new WaitForSeconds(delay);
             AudioManager.Instance.PlayMonsterSFX(houseAngySFX);
+            var go = Instantiate(cameraShakeObj);
+
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.SetMotorSpeeds(0.5f, 0.75f);
+            }
+            
+            yield return new WaitForSeconds(houseAngySFX.length);
+            
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.ResetHaptics();
+            }
+            
+            Destroy(go, houseAngySFX.length);
         }
     }
 }

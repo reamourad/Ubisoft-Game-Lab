@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Items.HiderItems.Reaction
 {
-    public class Fan : NetworkBehaviour, IReactionItem, IHiderGrabableItem
+    public class Fan : DetectableObject, IReactionItem, IHiderGrabableItem
     {
         [SerializeField] private StationaryEffect effects;
         [SerializeField] private Transform spinTransform;
@@ -31,7 +31,7 @@ namespace Items.HiderItems.Reaction
         [Server]
         private void OnServerBlow()
         {
-            if (isTriggered) return;
+            //if (isTriggered) return;
             RPC_OnClientBlow();
             ApplyWindEffect();
             isTriggered = true;
@@ -63,10 +63,10 @@ namespace Items.HiderItems.Reaction
             DOVirtual.DelayedCall(3.5f, () =>
             {
                 isSpinning = false;
-                var smoke = Instantiate(smokeFx, transform.position, Quaternion.identity);
+                /*var smoke = Instantiate(smokeFx, transform.position, Quaternion.identity);
                 smoke.transform.SetParent(transform);
                 smoke.transform.forward = Vector3.up;
-                Destroy(smoke, 3);
+                Destroy(smoke, 3);*/
             });
         }
 
