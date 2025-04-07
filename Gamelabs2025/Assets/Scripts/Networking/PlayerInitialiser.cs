@@ -110,6 +110,7 @@ namespace Networking
                 cineCam.Target.TrackingTarget = hiderCameraTargetTransform;
                 cineCam.Target.LookAtTarget = hiderCameraTargetTransform;
                 Debug.Log("Loading TPS Camera!! Done");
+                Instantiate(Resources.Load<GameObject>("HiderCanvas"), hiderCameraTargetTransform);
             }));
         }
 
