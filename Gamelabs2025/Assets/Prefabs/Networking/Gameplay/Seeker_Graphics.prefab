@@ -481,6 +481,7 @@ MonoBehaviour:
   - ShuffleDirectionZ
   - ShuffleDirectionX
   - StrafeDirectionX
+  - MovementInputTapped
   _animator: {fileID: 4230597750424887417}
   _synchronizeWhenDisabled: 1
   _smoothFloats: 1

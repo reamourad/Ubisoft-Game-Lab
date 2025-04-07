@@ -38,7 +38,6 @@ namespace Animation
 
         #region Animation Variable Hashes
 
-        private readonly int _movementInputTappedHash = Animator.StringToHash("MovementInputTapped");
         private readonly int _movementInputPressedHash = Animator.StringToHash("MovementInputPressed");
         private readonly int _movementInputHeldHash = Animator.StringToHash("MovementInputHeld");
         private readonly int _shuffleDirectionXHash = Animator.StringToHash("ShuffleDirectionX");
@@ -295,7 +294,6 @@ namespace Animation
         private bool _isWalking;
         private bool _movementInputHeld;
         private bool _movementInputPressed;
-        private bool _movementInputTapped;
         private float _currentMaxSpeed;
         private float _locomotionStartDirection;
         private float _locomotionStartTimer;
@@ -594,7 +592,6 @@ namespace Animation
 
             animator.SetBool(_movementInputHeldHash, _movementInputHeld);
             animator.SetBool(_movementInputPressedHash, _movementInputPressed);
-            animator.SetBool(_movementInputTappedHash, _movementInputTapped);
             animator.SetFloat(_shuffleDirectionXHash, _shuffleDirectionX);
             animator.SetFloat(_shuffleDirectionZHash, _shuffleDirectionZ);
 
@@ -632,19 +629,14 @@ namespace Animation
         {
             if (inputReader.movementInputDetected)
             {
-                if (inputReader.movementInputDuration == 0)
+
+                if (inputReader.movementInputDuration > 0 && inputReader.movementInputDuration < _buttonHoldThreshold)
                 {
-                    _movementInputTapped = true;
-                }
-                else if (inputReader.movementInputDuration > 0 && inputReader.movementInputDuration < _buttonHoldThreshold)
-                {
-                    _movementInputTapped = false;
                     _movementInputPressed = true;
                     _movementInputHeld = false;
                 }
                 else
                 {
-                    _movementInputTapped = false;
                     _movementInputPressed = false;
                     _movementInputHeld = true;
                 }
@@ -654,7 +646,6 @@ namespace Animation
             else
             {
                 inputReader.movementInputDuration = 0;
-                _movementInputTapped = false;
                 _movementInputPressed = false;
                 _movementInputHeld = false;
             }
