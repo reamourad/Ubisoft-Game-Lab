@@ -1623,6 +1623,8 @@ MonoBehaviour:
   ambianceSource: {fileID: 1073948290}
   sfSourceReference: {fileID: 1797253421}
   monSfSourceReference: {fileID: 219457897}
+  mixer: {fileID: 0}
+  worldSources: []
 --- !u!4 &1193172325
 Transform:
   m_ObjectHideFlags: 0
@@ -4224,27 +4226,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 619592155659768573, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1330507996810180165, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _hideTickRate

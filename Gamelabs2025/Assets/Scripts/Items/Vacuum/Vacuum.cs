@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using FishNet;
 using FishNet.Component.Transforming;
@@ -50,6 +51,12 @@ namespace Items
         [SerializeField] private float vacuumSuctionPlayer = 10;
         [SerializeField] private ParticleSystem particles;
         
+        [Header("Audio")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip startClip;
+        [SerializeField] private AudioClip midClip;
+        [SerializeField] private AudioClip endClip;
+        
         private Dictionary<Collider, VacuumCacheStruct> vacuumCache = new Dictionary<Collider, VacuumCacheStruct>();
         
         private bool localUsingFlag = false;
@@ -59,6 +66,7 @@ namespace Items
         private bool suckedPlayer = false;
         
         private VacuumGui vacuumGui;
+        private Coroutine vacuumStartSFXCoroutine;
         
         private void Start()
         {
@@ -156,14 +164,33 @@ namespace Items
         void ClientVacuumActivation(bool use)
         {
             //Animate Visuals only here.
-            if(use)
+            if(vacuumStartSFXCoroutine != null)
+                StopCoroutine(vacuumStartSFXCoroutine);
+
+            if (use)
+            {
                 particles.Play();
+                vacuumStartSFXCoroutine = StartCoroutine(AudioSFXStart());
+            }
             else
             {
                 particles.Stop();
+                audioSource.clip = endClip;
+                audioSource.loop = false;
+                audioSource.Play();
             }
         }
 
+        IEnumerator AudioSFXStart()
+        {
+            audioSource.PlayOneShot(startClip);
+            yield return new WaitForSeconds(startClip.length);
+            audioSource.clip = midClip;
+            audioSource.loop = true;
+            audioSource.Play();
+            
+        }
+        
         private void Update()
         {
             if(vacuumGui == null) return;

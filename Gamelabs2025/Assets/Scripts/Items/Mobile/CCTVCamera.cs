@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using FishNet.Component.Animating;
 using FishNet.Object;
 using UnityEngine;
 
@@ -14,8 +13,12 @@ namespace Items
         public bool Active { get; private set; }
         
         [SerializeField] private float fps = 24;
+        [SerializeField] private string cameraName;
+        
         private Camera cam;
         private float elapsed;
+        
+        public string CameraName => cameraName;
         
         private void Start()
         {
