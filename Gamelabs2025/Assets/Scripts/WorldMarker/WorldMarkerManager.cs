@@ -43,14 +43,17 @@ namespace Player.WorldMarker
             var go = Instantiate(worldMarkerReference, transform);
             go.SetActive(true);
             var marker = go.GetComponent<WorldMarker>();
-            marker.Set(markerTransform, worldMarkerIcon, animate);
             var id = Guid.NewGuid().ToString();
+            marker.Set(id, markerTransform, worldMarkerIcon, animate);
             worldMarkers.Add(id, marker);
             return id;
         }
         
         public void DestroyMarker(string id)
         {
+            if(string.IsNullOrEmpty(id))
+                return;
+            
             if (!worldMarkers.ContainsKey(id))
             {
                 Debug.Log($"Destroy KEY NOT FOUND {id}");

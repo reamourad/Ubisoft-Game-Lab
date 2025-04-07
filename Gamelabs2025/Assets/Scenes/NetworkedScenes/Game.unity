@@ -13524,7 +13524,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4682854888429254139, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
       propertyPath: <SceneId>k__BackingField
-      value: 3971995631
+      value: 4126660071
       objectReference: {fileID: 0}
     - target: {fileID: 6302525577933857997, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
       propertyPath: m_Name
@@ -36567,6 +36567,10 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 3263125335
       objectReference: {fileID: 0}
+    - target: {fileID: 4519815275854527208, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.008
+      objectReference: {fileID: 0}
     - target: {fileID: 4577317231556003048, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3967270351
@@ -38957,7 +38961,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.164713
+      value: -14.109
       objectReference: {fileID: 0}
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalPosition.y
@@ -38965,7 +38969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 17.883263
+      value: 17.428
       objectReference: {fileID: 0}
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalRotation.w
@@ -46267,6 +46271,14 @@ PrefabInstance:
     - target: {fileID: 829144947764239406, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
       propertyPath: m_Name
       value: SmokeDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475507041165697809, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3475507041165697809, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
+      propertyPath: m_Size.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3758672934147341017, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
       propertyPath: <SceneId>k__BackingField

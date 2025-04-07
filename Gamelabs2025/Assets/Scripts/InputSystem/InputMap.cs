@@ -189,6 +189,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HiderItemScan"",
+                    ""type"": ""Button"",
+                    ""id"": ""0322a5fb-5e47-44e9-a49f-0ee2ecfeb23a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -453,6 +462,28 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42ddad20-68d0-4bfb-a502-9dcab34c43ff"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HiderItemScan"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8dcd646-fe79-4155-8069-4a08227eacc3"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HiderItemScan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -862,6 +893,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Gameplay_EquipInventoryItem2 = m_Gameplay.FindAction("EquipInventoryItem2", throwIfNotFound: true);
         m_Gameplay_ToggleEquipInventoryItem = m_Gameplay.FindAction("ToggleEquipInventoryItem", throwIfNotFound: true);
         m_Gameplay_Drop = m_Gameplay.FindAction("Drop", throwIfNotFound: true);
+        m_Gameplay_HiderItemScan = m_Gameplay.FindAction("HiderItemScan", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CCTVSwitchCameras = m_UI.FindAction("CCTVSwitchCameras", throwIfNotFound: true);
@@ -964,6 +996,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_EquipInventoryItem2;
     private readonly InputAction m_Gameplay_ToggleEquipInventoryItem;
     private readonly InputAction m_Gameplay_Drop;
+    private readonly InputAction m_Gameplay_HiderItemScan;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -1019,6 +1052,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Drop".
         /// </summary>
         public InputAction @Drop => m_Wrapper.m_Gameplay_Drop;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/HiderItemScan".
+        /// </summary>
+        public InputAction @HiderItemScan => m_Wrapper.m_Gameplay_HiderItemScan;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1078,6 +1115,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
+            @HiderItemScan.started += instance.OnHiderItemScan;
+            @HiderItemScan.performed += instance.OnHiderItemScan;
+            @HiderItemScan.canceled += instance.OnHiderItemScan;
         }
 
         /// <summary>
@@ -1122,6 +1162,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
+            @HiderItemScan.started -= instance.OnHiderItemScan;
+            @HiderItemScan.performed -= instance.OnHiderItemScan;
+            @HiderItemScan.canceled -= instance.OnHiderItemScan;
         }
 
         /// <summary>
@@ -1412,6 +1455,13 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDrop(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HiderItemScan" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHiderItemScan(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

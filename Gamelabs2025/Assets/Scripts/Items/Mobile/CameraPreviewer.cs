@@ -1,5 +1,6 @@
 using System;
 using Networking;
+using Player.Audio;
 using Player.WorldMarker;
 using StateManagement;
 using UnityEngine;
@@ -12,7 +13,11 @@ namespace Items
     {
         [SerializeField] InputReader inputReader;
         [SerializeField] private TMPro.TMP_Text cameraName;
-        [FormerlySerializedAs("icon")] [SerializeField] private Sprite worldMarkerIcon;
+        [FormerlySerializedAs("icon")] 
+        [SerializeField] private Sprite worldMarkerIcon;
+        
+        [SerializeField] private AudioClip markerSound;
+        
         private static int id = -1;
         CCTVCamera previewCamera;
         
@@ -46,6 +51,7 @@ namespace Items
                 WorldMarkerManager.Instance.DestroyMarker(currentWorldMarker);
             
             currentWorldMarker = WorldMarkerManager.Instance.AddWorldMarker(previewCamera.transform, worldMarkerIcon, true);
+            AudioManager.Instance.PlaySFX(markerSound);
             Close();
         }
 

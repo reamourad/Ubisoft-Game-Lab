@@ -8,7 +8,7 @@ namespace Player.Inventory
    public class SeekerInventory : NetworkBehaviour
    {
       [SerializeField] private GameObject inventoryGuiPrefab;
-      [SerializeField] private InventoryItemContainer[] items = new InventoryItemContainer[2];
+      [SerializeField] private InventoryItemContainer[] items = new InventoryItemContainer[3];
       
       private int selectedItem = -1;
       private ISeekerAttachable activeItem;

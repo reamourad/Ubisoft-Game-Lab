@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using StateManagement;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +16,15 @@ namespace Player.WorldMarker
         RectTransform rectTransform;
 
         private bool ready = false;
-        public void Set(Transform target, Sprite sprite, bool animate)
+        private string myId;
+        private CanvasGroup canvasGroup;
+        
+        private Coroutine coroutine;
+        
+        public void Set(string id, Transform target, Sprite sprite, bool animate)
         {
+            myId = id;
+            canvasGroup = transform.AddComponent<CanvasGroup>();
             rectTransform = GetComponent<RectTransform>();
             markerIcon.sprite = sprite;
             this.target = target;
@@ -24,6 +32,29 @@ namespace Player.WorldMarker
             ready = !animate;
             if(animate)
                 StartCoroutine(Prepare());
+            
+            coroutine = StartCoroutine(KillRoutine());
+        }
+
+        private IEnumerator KillRoutine()
+        {
+            yield return new WaitForSeconds(5f);
+            float timeStep = 0;
+            while (timeStep <= 1)
+            {
+                timeStep += Time.deltaTime/0.25f;
+                canvasGroup.alpha = Mathf.Lerp(1f,0f, timeStep);
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForEndOfFrame();
+            coroutine = null;
+            WorldMarkerManager.Instance.DestroyMarker(myId);
+        }
+
+        private void OnDestroy()
+        {
+            if(coroutine != null)
+                StopCoroutine(coroutine);
         }
 
         IEnumerator Prepare()
@@ -62,7 +93,7 @@ namespace Player.WorldMarker
             }
             
             rectTransform.position = GetScreenPosition(activeCam);
-            distText.text = ComputeDistanceFromLocal().ToString();
+            distText.text = $"{ComputeDistanceFromLocal()}m";
             markerIcon.enabled = true;
         }
 

@@ -24,6 +24,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<Vector2> OnLookEvent;
     public event Action OnPlacementModeEvent;
     public event Action OnConnectItemsEvent;
+    public event Action OnHiderItemScanEvent;
 
     public event Action<uint> OnEquipInventoryItemEvent;
     public event Action OnToggleEquippedItemEvent;
@@ -186,6 +187,13 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     {
         if(context.phase == InputActionPhase.Performed)
             OnDropItemEvent?.Invoke();
+    }
+
+    public void OnHiderItemScan(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnHiderItemScanEvent?.Invoke();
+            
     }
 
     public static string GetCurrentBindingText(InputAction action)
