@@ -75,6 +75,8 @@ namespace StateManagement
             AudioManager.Instance.PlayBG(menuMusic);
             SwitchMenu(MainMenuState.MenuStart);
             UpdateSelection();
+            
+            Application.targetFrameRate = 60;
         }
 
         IEnumerator Initialise()
