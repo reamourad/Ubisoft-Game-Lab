@@ -228,12 +228,19 @@ namespace Networking
                 grabbedObject.transform.position = grabPlacement.position;
                 grabbedObject.transform.SetParent(this.transform);
                 
-                //grab function helper 
+                //grab function helpers 
                 var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
                 if (reactionHelper != null)
                 {
                     if(IsOwner)
                         reactionHelper.OnGrabbed();
+                }
+                
+                var triggerHelper = grabbedObject.GetComponent<TriggerHelper>();
+                if (triggerHelper != null)
+                {
+                    if(IsOwner)
+                        triggerHelper.OnGrabbed();
                 }
             }
 
@@ -317,8 +324,15 @@ namespace Networking
                     Debug.Log(grabbedObject.name);
                     if (reactionHelper != null)
                     {
-                        Debug.Log("OnReleased");
                         reactionHelper.OnReleased();
+                    }
+                    
+                    //placed a trigger item down
+                    var triggerHelper = grabbedObject.GetComponent<TriggerHelper>();
+                    Debug.Log(grabbedObject.name);
+                    if (triggerHelper != null)
+                    {
+                        triggerHelper.OnReleased();
                     }
                     //Reset variables
                     grabbedObject = null;

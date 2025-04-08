@@ -16,6 +16,7 @@ public class ReactionHelper : NetworkBehaviour
     private List<Collider> collidersCache = new List<Collider>();
     public bool isConnectedToTrigger = false;
     private TriggerHelper connectedTriggerHelper;
+    public Transform reactionAnchor; //where the wire should come from
     
     private void Start()
     {
@@ -72,14 +73,16 @@ public class ReactionHelper : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void RPC_OnServerConnectToTrigger(NetworkObject trigger, NetworkObject reaction)
     {
-        ConnectionDictionary.MakeConnection(trigger.GetComponent<ITriggerItem>(), GetComponent<IReactionItem>(), trigger.transform, transform);
+        ConnectionDictionary.MakeConnection(trigger.GetComponent<ITriggerItem>(), GetComponent<IReactionItem>(), 
+            trigger.GetComponent<TriggerHelper>().triggerAnchor, reactionAnchor);
         RPC_OnClientConnectToTrigger(trigger, reaction);
     }
 
     [ObserversRpc]
     private void RPC_OnClientConnectToTrigger(NetworkObject trigger, NetworkObject reaction)
     {
-        ConnectionDictionary.MakeConnection(trigger.GetComponent<ITriggerItem>(), GetComponent<IReactionItem>(), trigger.transform, transform);
+        ConnectionDictionary.MakeConnection(trigger.GetComponent<ITriggerItem>(), GetComponent<IReactionItem>(), 
+            trigger.GetComponent<TriggerHelper>().triggerAnchor, reactionAnchor);
     }
     
     [ServerRpc(RequireOwnership = false)]
@@ -138,12 +141,5 @@ public class ReactionHelper : NetworkBehaviour
     public void HideReactionArea()
     {
         reactionArea.SetActive(false);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        // Draw the overlap box area in the Scene view
-        Gizmos.DrawWireCube(transform.position, detectionAreaBoxHalfExtent * 2);
     }
 }
