@@ -67,7 +67,7 @@ PrefabInstance:
     - target: {fileID: -1315685348205790216, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: e4aa7fe03a2edba418aa85b478c76fb1, type: 2}
+      objectReference: {fileID: 2100000, guid: 43f77c912fb9796488eadfb77fc1ad65, type: 2}
     - target: {fileID: 919132149155446097, guid: a0b4395067dafcb4aa3d1d5cef254261, type: 3}
       propertyPath: m_Name
       value: bookshelf2_prefab
