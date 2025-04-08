@@ -215,7 +215,7 @@ MonoBehaviour:
   smokeFx: {fileID: 8055981779988460889, guid: 2e7ad24a58209ce4384a1f765cd1e062, type: 3}
   windFx: {fileID: 1695191526168693321, guid: fda397297325f5840b9f8f8baaf9da4a, type: 3}
   clip: {fileID: 8300000, guid: c53a216e7f45f4e4b86bc1ff0492e4b2, type: 3}
-  radius: 0.4
+  radius: 1
   range: 4.5
 --- !u!114 &6936758570789124854
 MonoBehaviour:
@@ -441,6 +441,7 @@ MonoBehaviour:
     m_Bits: 64
   reactionArea: {fileID: 7172736304675815029}
   isConnectedToTrigger: 0
+  connectedTriggerHelper: {fileID: 0}
   reactionAnchor: {fileID: 5315747007666002748}
 --- !u!1 &7091906039908289230
 GameObject:
@@ -572,6 +573,10 @@ PrefabInstance:
     - target: {fileID: 2855385598794459072, guid: 5ec7b2b9bd28cbb41b0508c68bd67b31, type: 3}
       propertyPath: m_Name
       value: Area
+      objectReference: {fileID: 0}
+    - target: {fileID: 2855385598794459072, guid: 5ec7b2b9bd28cbb41b0508c68bd67b31, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7633520231179428733, guid: 5ec7b2b9bd28cbb41b0508c68bd67b31, type: 3}
       propertyPath: m_LocalPosition.x

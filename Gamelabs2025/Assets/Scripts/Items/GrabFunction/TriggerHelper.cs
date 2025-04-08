@@ -22,6 +22,16 @@ public class TriggerHelper : NetworkBehaviour
         detectionAreaBoxHalfExtent = triggerArea.GetComponent<Renderer>().bounds.extents;
         detectionAreaBoxHalfExtent.y = 5f;
     }
+
+    private void EnableCollision(bool enable)
+    {
+        Collider collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = enable;
+        }
+    }
+    
     public void OnGrabbed()
     {
         Debug.Log("Trigger item Grabbed");
@@ -76,6 +86,7 @@ public class TriggerHelper : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void RPC_OnServerConnectToTrigger(NetworkObject trigger, NetworkObject reaction)
     {
+        EnableCollision(true);
         ConnectionDictionary.MakeConnection(GetComponent<ITriggerItem>(), reaction.GetComponent<IReactionItem>(), 
             triggerAnchor, reaction.GetComponent<ReactionHelper>().reactionAnchor);
         RPC_OnClientConnectToTrigger(trigger, reaction);
@@ -84,6 +95,7 @@ public class TriggerHelper : NetworkBehaviour
     [ObserversRpc]
     private void RPC_OnClientConnectToTrigger(NetworkObject trigger, NetworkObject reaction)
     {
+        EnableCollision(true);
         ConnectionDictionary.MakeConnection(GetComponent<ITriggerItem>(), reaction.GetComponent<IReactionItem>(), 
             triggerAnchor, reaction.GetComponent<ReactionHelper>().reactionAnchor);
     }
@@ -91,6 +103,7 @@ public class TriggerHelper : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void RPC_OnServerGrab()
     {
+        EnableCollision(false);
         ConnectionDictionary.ClearTriggerReactionEvents(GetComponent<ITriggerItem>(), null);
         RPC_OnClientGrab();
     }
@@ -98,6 +111,7 @@ public class TriggerHelper : NetworkBehaviour
     [ObserversRpc]
     private void RPC_OnClientGrab()
     {
+        EnableCollision(false);
         ConnectionDictionary.ClearTriggerReactionEvents(GetComponent<ITriggerItem>(), null);
     }
     

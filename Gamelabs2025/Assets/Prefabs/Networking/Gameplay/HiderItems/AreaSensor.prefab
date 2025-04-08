@@ -192,6 +192,7 @@ MonoBehaviour:
   _componentIndexCache: 255
   _addedNetworkObject: {fileID: 2240632873256390548}
   _networkObjectCache: {fileID: 0}
+  body: {fileID: 2229105504477420592}
   rayCastPoint: {fileID: 5625518763464118970}
   activationDelay: 0.25
   triggeredClip: {fileID: 8300000, guid: 8c316d5fa8b8d0c4f8c5d0127d08ade5, type: 3}
@@ -258,8 +259,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.23423862, y: 0.66041344, z: 0.23423958}
-  m_Center: {x: 0, y: 0.33020672, z: 0.0029916763}
+  m_Size: {x: 0.35, y: 0.75648844, z: 0.35}
+  m_Center: {x: 0, y: 0.37824422, z: 0.0029916763}
 --- !u!114 &4447893488461532016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +283,7 @@ MonoBehaviour:
     m_Bits: 64
   triggerArea: {fileID: 5131980441820230550}
   isConnectedToReaction: 0
+  connectedReactionHelper: {fileID: 0}
   triggerAnchor: {fileID: 109659279326404741}
 --- !u!1 &4495028786202417892
 GameObject:
@@ -680,6 +682,11 @@ PrefabInstance:
 --- !u!4 &1559528644014950026 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c28c3e579716e6b489ec96b076a6d33c, type: 3}
+  m_PrefabInstance: {fileID: 1310044415690252641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2229105504477420592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c28c3e579716e6b489ec96b076a6d33c, type: 3}
   m_PrefabInstance: {fileID: 1310044415690252641}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &3495191497624096570 stripped

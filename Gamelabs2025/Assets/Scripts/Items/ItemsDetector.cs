@@ -162,7 +162,9 @@ namespace Player.Items
                 }
 
                 var detectable = collider.GetComponentInParent<DetectableObject>();
-                detectable.OnDetect();
+                if(detectable != null)
+                    detectable.OnDetect();
+               
                 
                 yield return new WaitForSeconds(0.1f);
                 AudioManager.Instance.PlaySFX(hiderScanSFX);

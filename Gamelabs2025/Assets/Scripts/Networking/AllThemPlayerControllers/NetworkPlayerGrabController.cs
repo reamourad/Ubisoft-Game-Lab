@@ -226,13 +226,6 @@ namespace Networking
                 grabbedObject.transform.position = grabPlacement.position;
                 grabbedObject.transform.SetParent(this.transform);
                 
-                //set the collision off 
-                Collider collider = grabbedObject.GetComponent<Collider>();
-                if (collider != null)
-                {
-                    collider.enabled = false;
-                }
-                
                 //grab function helpers 
                 var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
                 if (reactionHelper != null)

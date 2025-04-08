@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Player.Items.MotionDetector
 {
-    public class AreaDetector : NetworkBehaviour, ITriggerItem
+    public class AreaDetector : DetectableObject, ITriggerItem, IHiderGrabableItem
     {
         [SerializeField] private Transform rayCastPoint;
         [SerializeField] private float activationDelay=0.25f;
