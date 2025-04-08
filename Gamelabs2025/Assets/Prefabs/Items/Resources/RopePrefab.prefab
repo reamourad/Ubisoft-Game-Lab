@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 84a53081139c2a345a118d37b69c8e7e, type: 2}
+  - {fileID: 2100000, guid: 89fc6191e3d09f840951b1e1e9794525, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,7 +154,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.1
+        value: 0.03
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -163,7 +163,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.1
+        value: 0.03
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -233,10 +233,10 @@ MonoBehaviour:
   stiffness: 350
   damping: 15
   ropeLength: 2
-  ropeWidth: 0.1
+  ropeWidth: 0.03
   midPointWeight: 1
   midPointPosition: 0.5
-  useNavMeshCollision: 0
+  useNavMeshCollision: 1
   navMeshSampleCount: 10
   navMeshRaycastDistance: 20
   navMeshOffset: 0.1
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OverallDivision: 25
-  ropeWidth: 0.05
+  ropeWidth: 0.02
   radialDivision: 20
   material: {fileID: 2100000, guid: 89fc6191e3d09f840951b1e1e9794525, type: 2}
   tilingPerMeter: 1

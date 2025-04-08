@@ -1,7 +1,9 @@
 using System.ComponentModel.Design.Serialization;
+using System.Runtime.InteropServices.WindowsRuntime;
 using FishNet.Object;
 using Items.Interfaces;
 using Networking;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utils;
 
@@ -46,13 +48,7 @@ public class HiderLookManager : NetworkBehaviour
         var grabable = currentLookTarget?.GetComponent<IHiderGrabableItem>();
         var connectable = currentLookTarget?.GetComponent<IConnectable>();
         
-        //if its in connection mode we want to override grabable and it has control over the tooltip 
-        if (playerConnectionController.isInConnectionMode)
-        {
-            grabable = null;
-        }
-        else
-        {
+            if (InScreenUI.Instance == null) return; 
             InScreenUI.Instance.ClearInputPrompts();
             // Check if the object has the IGrabbable interface
             if (grabable != null)
@@ -71,10 +67,7 @@ public class HiderLookManager : NetworkBehaviour
                     InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
                 }
             }
-        }
-        
-        
-    }
+    }           
 
 
     public void SetActive(bool active)

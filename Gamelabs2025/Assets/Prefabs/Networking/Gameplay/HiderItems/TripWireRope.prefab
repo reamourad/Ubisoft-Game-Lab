@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OverallDivision: 25
-  ropeWidth: 0.05
+  ropeWidth: 0.02
   radialDivision: 20
   material: {fileID: 2100000, guid: a50c57e07a8919643b0d4ce2943f639f, type: 2}
   tilingPerMeter: 1

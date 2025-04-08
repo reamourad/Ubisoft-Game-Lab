@@ -227,6 +227,21 @@ namespace Networking
 
                 grabbedObject.transform.position = grabPlacement.position;
                 grabbedObject.transform.SetParent(this.transform);
+                
+                //grab function helpers 
+                var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
+                if (reactionHelper != null)
+                {
+                    if(IsOwner)
+                        reactionHelper.OnGrabbed();
+                }
+                
+                var triggerHelper = grabbedObject.GetComponent<TriggerHelper>();
+                if (triggerHelper != null)
+                {
+                    if(IsOwner)
+                        triggerHelper.OnGrabbed();
+                }
             }
 
             void EnterBlueprintMode()
@@ -303,12 +318,26 @@ namespace Networking
                     //inform server 
                     RPC_InformServerOnPlace(grabbedObject.transform.position, grabbedObject.transform.rotation);
                     
+                    
+                    //placed a reaction item down
+                    var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
+                    Debug.Log(grabbedObject.name);
+                    if (reactionHelper != null)
+                    {
+                        reactionHelper.OnReleased();
+                    }
+                    
+                    //placed a trigger item down
+                    var triggerHelper = grabbedObject.GetComponent<TriggerHelper>();
+                    Debug.Log(grabbedObject.name);
+                    if (triggerHelper != null)
+                    {
+                        triggerHelper.OnReleased();
+                    }
                     //Reset variables
                     grabbedObject = null;
                     isBlueprintMode = false;
-
-                    // Update UI
-                    InScreenUI.Instance.SetToolTipText("");
+                    
                 }
             }
 
@@ -330,6 +359,8 @@ namespace Networking
                 grabbedObject.transform.rotation = rotation;
                 
                 grabbedObject = null;
+                
+               
             }
     }
 }
