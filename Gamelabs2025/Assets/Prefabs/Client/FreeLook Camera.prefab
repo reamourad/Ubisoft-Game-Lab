@@ -31,13 +31,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5977199986633930315}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.15204576, y: 0.000000032932615, z: -0.000000005066166, w: 0.9883735}
+  m_LocalRotation: {x: 0.15204574, y: 0, z: 0, w: 0.98837346}
   m_LocalPosition: {x: 10.7, y: 4.86, z: 10.560001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.491, y: 0, z: 0}
 --- !u!114 &7328000725020934534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   Target:
     TrackingTarget: {fileID: 0}
     LookAtTarget: {fileID: 0}
-    CustomLookAtTarget: 0
+    CustomLookAtTarget: 1
   Lens:
     FieldOfView: 60.000004
     OrthographicSize: 5
@@ -167,7 +167,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  Damping: {x: 0, y: 0}
   Lookahead:
     Enabled: 0
     Time: 0

@@ -49,8 +49,6 @@ namespace Networking
         private PlayerInputData playerInputData;
         private Rigidbody rb;
 
-        private CinemachineBrain cineBrain;
-        
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
@@ -64,7 +62,6 @@ namespace Networking
         public override void OnStartClient()
         {
             base.OnStartClient();
-            cineBrain = CinemachineBrain.GetActiveBrain(0);
             name = $"Player [{(IsOwner ? "LOCAL_PLAYER" : "REMOTE_PLAYER")}]";
         }
         
@@ -84,12 +81,9 @@ namespace Networking
             if(!IsOwner)
                 return;
 
-            UpdateFirstPersonView(playerInputData, Time.deltaTime);
-            UpdatePlayerMovement(playerInputData, Time.deltaTime);
-            
             //Update camera after
-            if(cineBrain.UpdateMethod == CinemachineBrain.UpdateMethods.ManualUpdate)
-                cineBrain.ManualUpdate();
+            UpdateFirstPersonView(playerInputData, Time.deltaTime);
+            
         }
 
         private void FixedUpdate()
@@ -97,7 +91,7 @@ namespace Networking
             if(!IsOwner)
                 return;
             
-            //UpdatePlayerMovement(playerInputData, Time.fixedDeltaTime);
+            UpdatePlayerMovement(playerInputData, Time.fixedDeltaTime);
         }
 
         private void UpdatePlayerMovement(PlayerInputData inputData, float deltaTime)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading;
 using FishNet.Object;
@@ -26,6 +27,7 @@ namespace Networking
         private Transform hiderCameraTargetTransform;
         
         private GameObject hiderPlayerCamera;
+        private CinemachineBrain cineBrain;
         
         public override void OnStartClient()
         {
@@ -113,12 +115,21 @@ namespace Networking
                 Instantiate(Resources.Load<GameObject>("HiderCanvas"), hiderCameraTargetTransform);
                 
                 //Set to manual update.
-                var brain = CinemachineBrain.GetActiveBrain(0);
-                if (brain != null)
+                cineBrain = CinemachineBrain.GetActiveBrain(0);
+                if (cineBrain != null)
                 {
-                    brain.UpdateMethod = CinemachineBrain.UpdateMethods.ManualUpdate;
+                    cineBrain.UpdateMethod = CinemachineBrain.UpdateMethods.ManualUpdate;
                 }
             }));
+        }
+
+        private void Update()
+        {
+            if(!IsOwner)
+                return;
+            
+            if(cineBrain != null)
+                cineBrain.ManualUpdate();
         }
 
         IEnumerator Delayed(System.Action callback)
