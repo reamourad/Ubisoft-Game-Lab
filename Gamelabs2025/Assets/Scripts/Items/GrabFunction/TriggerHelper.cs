@@ -24,6 +24,7 @@ public class TriggerHelper : NetworkBehaviour
     }
     public void OnGrabbed()
     {
+        Debug.Log("Trigger item Grabbed");
         isGrabbed = true;
         //undo the connection 
         isConnectedToReaction = false;
@@ -37,6 +38,7 @@ public class TriggerHelper : NetworkBehaviour
     
     public void OnReleased()
     {
+        Debug.Log("Trigger item Released");
         isGrabbed = false;
         // Hide trigger areas when released
         foreach (Collider col in collidersCache)
@@ -106,6 +108,7 @@ public class TriggerHelper : NetworkBehaviour
         if (!isGrabbed) return;
         foreach (Collider col in collidersCache)
         {
+            Debug.Log(col.gameObject.name);
             var reactionHelper = col.GetComponent<ReactionHelper>();
             if (reactionHelper == null) continue; 
             if(reactionHelper.isConnectedToTrigger) continue;
