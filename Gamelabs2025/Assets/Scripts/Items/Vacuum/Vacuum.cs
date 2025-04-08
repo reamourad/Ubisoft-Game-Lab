@@ -125,7 +125,6 @@ namespace Items
         //Only called by player controller, which will only happen locally
         public void UseItem(bool isUsing)
         {
-            Debug.Log($"Vacuum {isUsing} (IsOwner = {IsOwner})");
             if(localUsingFlag == isUsing) return;
             if(isUsing && !VacuumPowerManager.Instance.HasPower)
                 return;
@@ -260,7 +259,6 @@ namespace Items
                 
                 // distance check to if they can be considered as vacuumed.
                 var dist = Vector3.Distance(rbPos, suctionPoint.position);
-                Debug.Log($"Vacumm Suction::Distance To {rb.name} = {dist}m");
                 if (dist <= suctionCompleteDetectionRadius)
                 {
                     Capture(rb);
@@ -285,7 +283,6 @@ namespace Items
                 if(playerRole.Role != PlayerRole.RoleType.Hider)
                     return;
                 
-                Debug.Log($"<color=cyan>VACUUM SUCKK!!: Player:{playerRole.Role}, Owner: {playerRole.IsOwner}, Server:{IsServerStarted}</color>");
                 if (!suckedPlayer)
                 {
                     GameController.Instance.ServerHiderCaptured();

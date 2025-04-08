@@ -14,6 +14,8 @@ namespace StateManagement
 
         [SerializeField] private bool test;
         [SerializeField] PlayerRole.RoleType testWinner;
+
+        private bool disconnected = false;
         
         private IEnumerator Start()
         {
@@ -48,7 +50,11 @@ namespace StateManagement
 
         private void OnContinue()
         {
-            GameStateController.Instance?.ClientDisconnectFromServer();
+            if(disconnected)
+                return;
+            disconnected = true;
+            if (GameStateController.Instance != null)
+                GameStateController.Instance.ClientDisconnectFromServer();
         }
     }
 }
