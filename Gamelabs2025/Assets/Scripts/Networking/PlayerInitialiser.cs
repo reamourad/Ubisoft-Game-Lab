@@ -29,9 +29,12 @@ namespace Networking
         private GameObject hiderPlayerCamera;
         private CinemachineBrain cineBrain;
         
+        private Vector3 startingPosition;
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
+            startingPosition = transform.position;
             var playerRole = GetComponent<PlayerRole>().Role;
             if (!IsOwner)
                 NonOwnerIntialisation(playerRole);
@@ -137,6 +140,14 @@ namespace Networking
             yield return new WaitUntil(()=>IsClientInitialized);
             yield return new WaitWhile(() => Camera.main == null);
             callback?.Invoke();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(!IsOwner) return;
+            
+            if(other.CompareTag("Respawn"))
+                transform.position = startingPosition;
         }
     }
 }

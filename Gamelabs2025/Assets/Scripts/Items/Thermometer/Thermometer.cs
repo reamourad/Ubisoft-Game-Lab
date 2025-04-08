@@ -34,11 +34,14 @@ namespace Player.Items.Thermometer
         
         [SerializeField] private AudioClip readSound;
         [SerializeField] private Transform checkPoint;
+        
+        [SerializeField] private float nextUseDelay = 0.15f;
 
         private ThermometerGui gui;
         private PlayerRole hiderRole;
         
         private bool isUsing = false;
+        private float nextTime = 0;
         
         public void UseItem(bool isUsing)
         {
@@ -51,6 +54,9 @@ namespace Player.Items.Thermometer
         {
             if(!isUsing)
                 return;
+            
+            if(Time.time > nextTime)
+                nextTime = Time.time + nextUseDelay;
             
             var reading = ReadTemperature();
             switch (reading.temp)
