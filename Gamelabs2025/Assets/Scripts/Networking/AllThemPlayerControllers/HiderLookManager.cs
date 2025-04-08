@@ -67,7 +67,7 @@ public class HiderLookManager : NetworkBehaviour
                     InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
                 }
             }
-    }
+    }           
 
 
     public void SetActive(bool active)

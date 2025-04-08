@@ -12,6 +12,7 @@ public class TriggerHelper : NetworkBehaviour
     public GameObject triggerArea;
     public LayerMask detectionLayerMask;
     private List<Collider> collidersCache = new List<Collider>();
+    public bool isConnectedToReaction = false;
 
     public void ShowTriggerArea()
     {

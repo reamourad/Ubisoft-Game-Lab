@@ -160,12 +160,16 @@ namespace Player.Items
                 {
                     createdItems.Add(WorldMarkerManager.Instance.AddWorldMarker(collider.transform, stationaryIcon, true));
                 }
+
+                if (collider != null)
+                {
+                    if(collider.gameObject.TryGetComponent<DetectableObject>(out var detectableObject))
+                        detectableObject.OnDetect();
                 
-                if(collider.gameObject.TryGetComponent<DetectableObject>(out var detectableObject))
-                    detectableObject.OnDetect();
+                    if(collider.transform.parent.TryGetComponent<DetectableObject>(out var parentObject))
+                        parentObject.OnDetect();
+                }
                 
-                if(collider.transform.parent.TryGetComponent<DetectableObject>(out var parentObject))
-                    parentObject.OnDetect();
                 
                 yield return new WaitForSeconds(0.1f);
                 AudioManager.Instance.PlaySFX(hiderScanSFX);
