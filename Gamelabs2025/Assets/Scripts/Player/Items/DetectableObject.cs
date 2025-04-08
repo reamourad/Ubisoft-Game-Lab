@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using DG.Tweening;
 using FishNet.Object;
@@ -11,25 +12,41 @@ namespace Player.Items
         [SerializeField] private GameObject body;
 
         private LayerMask highlightLayer;
+        private LayerMask ogLayer;
+        private MeshRenderer[] meshRenderers;
 
-        private void Awake()
+        private Coroutine coroutine;
+        
+        public override void OnStartClient()
         {
+            base.OnStartClient();
+            ogLayer = body.layer;
             highlightLayer = LayerMask.NameToLayer("Highlight");
+            meshRenderers = body.GetComponentsInChildren<MeshRenderer>();
         }
-
+        
         public void OnDetect()
         {
             if (!body) return;
-            
-            var children = body.GetComponentsInChildren<MeshRenderer>().Select(t => t.gameObject).ToList();
-            var previousLayer = body.layer;
             body.layer = highlightLayer;
-            children.ForEach(c => c.layer = highlightLayer);
-            DOVirtual.DelayedCall(5, () =>
+            
+            if(coroutine != null)
+                StopCoroutine(coroutine);
+            coroutine = StartCoroutine(AnimateDetection());
+        }
+
+        IEnumerator AnimateDetection()
+        {
+            yield return new WaitForEndOfFrame();
+            foreach (var meshRenderer in meshRenderers)
             {
-                body.layer = previousLayer;
-                children.ForEach(child => child.layer = previousLayer);
-            });
+                meshRenderer.gameObject.layer = highlightLayer;
+            }
+            yield return new WaitForSeconds(5);
+            foreach (var meshRenderer in meshRenderers)
+            {
+                meshRenderer.gameObject.layer = ogLayer;
+            }
         }
     }
 }

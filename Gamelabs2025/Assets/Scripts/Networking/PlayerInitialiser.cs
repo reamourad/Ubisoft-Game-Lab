@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Threading;
 using FishNet.Object;
@@ -26,6 +27,7 @@ namespace Networking
         private Transform hiderCameraTargetTransform;
         
         private GameObject hiderPlayerCamera;
+        private CinemachineBrain cineBrain;
         
         public override void OnStartClient()
         {
@@ -111,7 +113,23 @@ namespace Networking
                 cineCam.Target.LookAtTarget = hiderCameraTargetTransform;
                 Debug.Log("Loading TPS Camera!! Done");
                 Instantiate(Resources.Load<GameObject>("HiderCanvas"), hiderCameraTargetTransform);
+                
+                //Set to manual update.
+                cineBrain = CinemachineBrain.GetActiveBrain(0);
+                if (cineBrain != null)
+                {
+                    cineBrain.UpdateMethod = CinemachineBrain.UpdateMethods.ManualUpdate;
+                }
             }));
+        }
+
+        private void Update()
+        {
+            if(!IsOwner)
+                return;
+            
+            if(cineBrain != null)
+                cineBrain.ManualUpdate();
         }
 
         IEnumerator Delayed(System.Action callback)

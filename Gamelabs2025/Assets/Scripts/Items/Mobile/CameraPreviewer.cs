@@ -35,7 +35,6 @@ namespace Items
             inputReader.OnCCTVMarkedEvent += OnCameraMarked;
             
             //Move this to appropriate location later
-            Debug.Log("Enabling UI Inputs ONLY!!");
             inputReader.SetToUIInputs();
             CycleCamera(1);
             
@@ -62,7 +61,6 @@ namespace Items
             inputReader.OnCCTVMarkedEvent -= OnCameraMarked;
             
             //Move this to appropriate location later
-            Debug.Log("Enabling UI Game Inputs ONLY!!");
             GameLookupMemory.LocalPlayer.GetComponent<SeekerGraphicsManager>().SetRendererEnabled(false);
             inputReader.SetToGameplayInputs();
         }
