@@ -12,7 +12,6 @@ namespace Player.Items.Thermometer
         {
             tempReading.text = tempText;
             tempDistReading.text = distance is float.PositiveInfinity ? "" : $" ( Dist: {(int)distance}m )";
-            Debug.Log($"Distance: {distance}");
         }
     }
 }

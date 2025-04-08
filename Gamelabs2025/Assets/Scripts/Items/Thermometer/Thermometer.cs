@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using FishNet;
 using FishNet.Object;
@@ -42,14 +43,23 @@ namespace Player.Items.Thermometer
         
         private bool isUsing = false;
         private float nextTime = 0;
+        private TempType prevTemp = TempType.None;
         
         public void UseItem(bool isUsing)
         {
-            this.isUsing = isUsing;
-            AudioManager.Instance.PlaySFX(readSound);
-            displayGui.SetActive(isUsing);
+            if (isUsing)
+            {
+                ToggleUsing();
+            }
         }
 
+        private void ToggleUsing()
+        {
+            this.isUsing = !this.isUsing;
+            AudioManager.Instance.PlaySFX(readSound);
+            displayGui.SetActive(this.isUsing);
+        }
+        
         private void LateUpdate()
         {
             if(!isUsing)
@@ -59,6 +69,16 @@ namespace Player.Items.Thermometer
                 nextTime = Time.time + nextUseDelay;
             
             var reading = ReadTemperature();
+
+            if (reading.temp != prevTemp)
+            {
+                prevTemp = reading.temp;
+                if (reading.temp == TempType.Low)
+                {
+                    StartCoroutine(DetectSFX());
+                }
+            }
+            
             switch (reading.temp)
             {
                 case TempType.Normal:
@@ -76,6 +96,13 @@ namespace Player.Items.Thermometer
                 gui.SetTemperatureText(readingText.text, reading.distance);
         }
 
+        IEnumerator DetectSFX()
+        {
+            AudioManager.Instance.PlaySFX(readSound);
+            yield return new WaitForSeconds(0.15f);
+            AudioManager.Instance.PlaySFX(readSound);
+        }
+        
         private (TempType temp, float distance) ReadTemperature()
         {
             hiderRole = FindObjectsByType<PlayerRole>(FindObjectsInactive.Include, FindObjectsSortMode.None)
