@@ -33,8 +33,8 @@ public class ChooseRandomNode : BTAction
         // Fallback if all nodes are in danger zone
         if (validNodes.Count == 0)
         {
-            Debug.LogWarning("No safe nodes available - using fallback");
-            validNodes = new List<NavigationNode>(allNodes);
+            Debug.LogWarning("No safe nodes available - ghost is cornered");
+            return BTStatus.Failure;
         }
 
         // Select random node from valid candidates
@@ -93,6 +93,7 @@ public class MoveToNode : BTAction
         _currentAccessPoint = null;
 
         bb.Set("DebugColor", _alertPlayer ? Color.red : Color.cyan);
+        bb.Get<Collider>("Collider").enabled = _alertPlayer;
         bb.Get<COMP476HiderMovement>("Movement").SetBoost(_alertPlayer);
     }
 
@@ -180,5 +181,96 @@ public class PlayerDetectionNode : BTCondition
             _lastDetectionTime = Time.time;
             _isInCooldown = true;
         }
+    }
+}
+
+public class CorneredCondition : BTCondition
+{
+    public CorneredCondition(BTBlackboard blackboard) : base(blackboard)
+    {
+    }
+
+    public override bool Check()
+    {
+        var pathfinder = bb.Get<Pathfinder>("Pathfinder");
+
+        // Get all nodes and filter if needed
+        var allNodes = pathfinder.graph.GetComponentsInChildren<NavigationNode>();
+        var validNodes = new List<NavigationNode>();
+
+        foreach (var node in allNodes)
+        {
+            if (pathfinder.GetSafeDistance(bb.Get<Transform>("Self"), node) < pathfinder.GetSafeDistance(bb.Get<Transform>("Player"), node))
+            {
+                validNodes.Add(node);
+            }
+        }
+
+        // Fallback if all nodes are in danger zone
+        if (validNodes.Count == 0)
+        {
+            Debug.LogWarning("No safe nodes available - ghost is cornered");
+            return true;
+        }
+
+        // Select random node from valid candidates
+        var randomNode = validNodes[Random.Range(0, validNodes.Count)];
+        bb.Set("TargetNode", randomNode);
+
+        return false;
+    }
+}
+
+public class PanicRunNode : BTAction
+{
+    private readonly float _panicSpeedMultiplier;
+    private readonly float _minSafeDistance;
+    private readonly float _panicDuration;
+    private float _panicEndTime;
+
+    public PanicRunNode(BTBlackboard bb, float panicSpeedMultiplier = 2f, float minSafeDistance = 20f, float panicDuration = 5f)
+        : base(bb)
+    {
+        _panicSpeedMultiplier = panicSpeedMultiplier;
+        _minSafeDistance = minSafeDistance;
+        _panicDuration = panicDuration;
+    }
+
+    public override BTStatus Update()
+    {
+        var self = bb.Get<Transform>("Self");
+        var player = bb.Get<Transform>("Player");
+        var movement = bb.Get<COMP476HiderMovement>("Movement");
+
+        // Calculate direct flee direction (ignore nodes/paths)
+        Vector3 fleeDirection = (self.position - player.position).normalized;
+        Vector3 targetPosition = self.position + fleeDirection * _minSafeDistance;
+
+        // Move directly away at boosted speed
+        movement.SetBoost(true);
+        movement.MoveToward(targetPosition, 0.1f);
+
+        // Check panic duration
+        if (Time.time >= _panicEndTime && _panicDuration != -1)
+        {
+            return BTStatus.Success;
+        }
+
+        return BTStatus.Running;
+    }
+
+    public override void OnEnter()
+    {
+        _panicEndTime = Time.time + _panicDuration;
+        bb.Get<COMP476HiderMovement>("Movement").SetBoost(true);
+        bb.Set("DebugColor", Color.magenta); // Distinct panic color
+        Debug.Log("PANIC MODE ACTIVATED!");
+    }
+
+    public override void OnExit()
+    {
+        bb.Get<COMP476HiderMovement>("Movement").Stop();
+        bb.Get<COMP476HiderMovement>("Movement").SetBoost(false);
+        bb.Set("DebugColor", Color.black);
     }
 }

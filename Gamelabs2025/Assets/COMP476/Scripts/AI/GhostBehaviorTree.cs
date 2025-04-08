@@ -9,6 +9,7 @@ public class GhostBehaviorTree : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private Pathfinder _pathfinder;
     [SerializeField] private LayerMask _obstructionMask;
+    [SerializeField] private Collider _collider;
 
     [Header("Behavior Settings")]
     [SerializeField] private float _sightRange = 10f;
@@ -49,6 +50,7 @@ public class GhostBehaviorTree : MonoBehaviour
         blackboard.Set("ObstructionMask", _obstructionMask);
         blackboard.Set("SightRange", _sightRange);
         blackboard.Set("WaypointThreshold", _waypointThreshold);
+        blackboard.Set("Collider", _collider);
 
         // Initialize behavior tree with your root node
         _bt = new BehaviorTree(blackboard, CreateRootNode(blackboard));
@@ -56,9 +58,14 @@ public class GhostBehaviorTree : MonoBehaviour
 
     private IBTNode CreateRootNode(BTBlackboard bt)
     {
-
         return new BTRepeat(
             new BTSelector(
+                new BTInverter(
+                    new BTSelector(
+                        new ChooseRandomNode(bt, true),
+                        new PanicRunNode(bt)
+                    )
+                ),
                 new BTSequence(
                     new ChooseRandomNode(bt, true),
                     new MonitoredActionNode(

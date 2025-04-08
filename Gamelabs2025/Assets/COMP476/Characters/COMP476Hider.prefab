@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 1950416566188362663}
   - component: {fileID: 3103410747490951761}
   - component: {fileID: 8961156396258915770}
-  - component: {fileID: 9073488957944278291}
+  - component: {fileID: 3971127192850773701}
   m_Layer: 7
   m_Name: COMP476Hider
   m_TagString: Untagged
@@ -234,7 +234,8 @@ MonoBehaviour:
   rotationSpeed: 120
   maxSpeed: 8
   verticalMoveForce: 7
---- !u!114 &9073488957944278291
+  boostFactor: 2
+--- !u!114 &3971127192850773701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,16 +244,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8429881023617595796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b2332931498c1443953283d1e845586, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d41d246fa8cbfd4e94c67197cf8b67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _pathfinder: {fileID: 0}
-  _navigationMode: 0
+  _obstructionMask:
+    serializedVersion: 2
+    m_Bits: 1
+  _collider: {fileID: 1950416566188362663}
+  _sightRange: 10
   _waypointThreshold: 0.5
-  _repathInterval: 1
-  _accessCheckRadius: 3
-  _movementController: {fileID: 8961156396258915770}
-  _movementPrediction: 0.5
+  _enableDebug: 1
+  _debugColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &8815787860643524411
 GameObject:
   m_ObjectHideFlags: 0

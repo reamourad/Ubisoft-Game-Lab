@@ -23,6 +23,9 @@ public class Pathfinder : MonoBehaviour
     public float pathNodeSizeMultiplier = 1.5f;
     public bool drawPathGizmo = true;
 
+    public Color lastPathColor = new Color(1f, 0.5f, 0f); // Orange color
+    private List<NavigationNode> _lastPath = new List<NavigationNode>();
+
     private NavigationNode optimalAccessPoint;
     private List<NavigationNode> currentPath = new List<NavigationNode>();
 
@@ -61,6 +64,13 @@ public class Pathfinder : MonoBehaviour
                     currentPath = path;
                 }
             }
+        }
+
+        // Store the last found path
+        if (currentPath != null && currentPath.Count > 0)
+        {
+            _lastPath = new List<NavigationNode>(currentPath);
+            HighlightLastPath();
         }
 
         HighlightAccessibility();
@@ -295,6 +305,23 @@ public class Pathfinder : MonoBehaviour
         return pathLength + accessDistance;
     }
 
+    private void HighlightLastPath()
+    {
+        if (_lastPath != null && _lastPath.Count > 0)
+        {
+            foreach (var node in _lastPath)
+            {
+                if (node != null)
+                {
+                    node.nodeColor = lastPathColor;
+#if UNITY_EDITOR
+                    EditorUtility.SetDirty(node);
+#endif
+                }
+            }
+        }
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -318,7 +345,7 @@ public class Pathfinder : MonoBehaviour
         }*/
 
         // Draw path if available
-        if (currentPath != null && currentPath.Count > 1)
+        /*if (currentPath != null && currentPath.Count > 1)
         {
             Handles.color = pathColor;
             for (int i = 0; i < currentPath.Count - 1; i++)
@@ -328,6 +355,21 @@ public class Pathfinder : MonoBehaviour
                     Handles.DrawAAPolyLine(4f,
                         currentPath[i].transform.position,
                         currentPath[i + 1].transform.position);
+                }
+            }
+        }*/
+
+        // Draw last path in a different color
+        if (_lastPath != null && _lastPath.Count > 1)
+        {
+            Handles.color = lastPathColor;
+            for (int i = 0; i < _lastPath.Count - 1; i++)
+            {
+                if (_lastPath[i] != null && _lastPath[i + 1] != null)
+                {
+                    Handles.DrawAAPolyLine(2f, // Thinner line for last path
+                        _lastPath[i].transform.position,
+                        _lastPath[i + 1].transform.position);
                 }
             }
         }
