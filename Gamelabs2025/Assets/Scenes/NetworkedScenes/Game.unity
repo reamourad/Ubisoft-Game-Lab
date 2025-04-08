@@ -31171,6 +31171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmokeDetector (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1706456468678834964, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3758672934147341017, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3757544799
@@ -36727,6 +36731,10 @@ PrefabInstance:
     - target: {fileID: 8927726656739790198, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: m_Name
       value: House
+      objectReference: {fileID: 0}
+    - target: {fileID: 8927726656739790198, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8953105117987460655, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -46297,6 +46305,10 @@ PrefabInstance:
     - target: {fileID: 829144947764239406, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
       propertyPath: m_Name
       value: SmokeDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706456468678834964, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3475507041165697809, guid: 93a37ca47b26f984cbc272695106b58d, type: 3}
       propertyPath: m_Size.x
