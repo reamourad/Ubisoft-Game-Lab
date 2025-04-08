@@ -14,7 +14,7 @@ public class TriggerHelper : NetworkBehaviour
     public GameObject triggerArea;
     private List<Collider> collidersCache = new List<Collider>();
     public bool isConnectedToReaction = false;
-    private ReactionHelper connectedReactionHelper;
+    public ReactionHelper connectedReactionHelper;
     public Transform triggerAnchor; //where the wire should come from
     
     private void Start()
@@ -30,6 +30,7 @@ public class TriggerHelper : NetworkBehaviour
         isConnectedToReaction = false;
         if (connectedReactionHelper != null)
         {
+            Debug.Log("isConnectedToTrigger = false");
             connectedReactionHelper.isConnectedToTrigger = false;
             connectedReactionHelper = null;
         }       
@@ -65,6 +66,7 @@ public class TriggerHelper : NetworkBehaviour
                 reactionHelper.isConnectedToTrigger = true;
                 isConnectedToReaction = true;
                 connectedReactionHelper = reactionHelper;
+                reactionHelper.connectedTriggerHelper = this;
                 RPC_OnServerConnectToTrigger(GetComponent<NetworkObject>(), col.GetComponent<NetworkObject>());
                 return; 
             }

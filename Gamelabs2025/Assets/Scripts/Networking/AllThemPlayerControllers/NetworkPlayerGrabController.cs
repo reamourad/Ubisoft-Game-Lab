@@ -198,7 +198,6 @@ namespace Networking
                 //grab mechanic
                 if (grabbedObject == null)
                 {
-                   
                     PickupObject(lookingAtObject);
                     //inform server 
                     RPC_InformServerOnGrab(grabbedObject);
@@ -207,7 +206,6 @@ namespace Networking
                 else if (!isBlueprintMode)
                 {
                    EnterBlueprintMode();
-                  
                 }
             }
 
@@ -227,6 +225,13 @@ namespace Networking
 
                 grabbedObject.transform.position = grabPlacement.position;
                 grabbedObject.transform.SetParent(this.transform);
+                
+                //set the collision off 
+                Collider collider = grabbedObject.GetComponent<Collider>();
+                if (collider != null)
+                {
+                    collider.enabled = false;
+                }
                 
                 //grab function helpers 
                 var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
@@ -315,6 +320,14 @@ namespace Networking
                     {
                         renderer.material = originalMaterial;
                     }
+                    //turn collision back on 
+                    //set the collision off 
+                    Collider collider = grabbedObject.GetComponent<Collider>();
+                    if (collider != null)
+                    {
+                        collider.enabled = true;
+                    }
+                    
                     //inform server 
                     RPC_InformServerOnPlace(grabbedObject.transform.position, grabbedObject.transform.rotation);
                     
