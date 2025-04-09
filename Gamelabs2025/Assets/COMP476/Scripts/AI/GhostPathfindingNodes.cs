@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using static COMP476HiderMovement;
 
 public class ChooseRandomNode : BTAction
 {
@@ -16,34 +17,33 @@ public class ChooseRandomNode : BTAction
     public override BTStatus Update()
     {
         var pathfinder = bb.Get<Pathfinder>("Pathfinder");
-        var playerPos = bb.Get<Transform>("Player").position;
+        var ghost = bb.Get<Transform>("Self");
+        var player = bb.Get<Transform>("Player");
 
-        // Get all nodes and filter if needed
-        var allNodes = pathfinder.graph.GetComponentsInChildren<NavigationNode>();
-        var validNodes = new List<NavigationNode>();
-
-        foreach (var node in allNodes)
+        if (pathfinder == null || ghost == null)
         {
-            if (!_avoidPlayer || pathfinder.GetSafeDistance(bb.Get<Transform>("Self"), node) < pathfinder.GetSafeDistance(bb.Get<Transform>("Player"), node))
-            {
-                validNodes.Add(node);
-            }
-        }
-
-        // Fallback if all nodes are in danger zone
-        if (validNodes.Count == 0)
-        {
-            Debug.LogWarning("No safe nodes available - ghost is cornered");
+            Debug.LogWarning("Missing pathfinder or ghost reference.");
             return BTStatus.Failure;
         }
 
-        // Select random node from valid candidates
-        var randomNode = validNodes[Random.Range(0, validNodes.Count)];
-        bb.Set("TargetNode", randomNode);
+        // Use the new random wander method
+        NavigationNode targetNode = pathfinder.FindRandomWanderTarget(
+            ghost,
+            maxSteps: 10, // adjust as needed
+            avoidTransform: _avoidPlayer ? player : null
+        );
 
+        if (targetNode == null)
+        {
+            Debug.LogWarning("Could not find a valid wander target.");
+            return BTStatus.Failure;
+        }
+
+        bb.Set("TargetNode", targetNode);
         return BTStatus.Success;
     }
 }
+
 
 public class MoveToNode : BTAction
 {
@@ -52,7 +52,7 @@ public class MoveToNode : BTAction
     private NavigationNode _currentAccessPoint;
     private bool _alertPlayer;
 
-    public MoveToNode(BTBlackboard bb, bool alertPlayer = false, float waypointThreshold = 0.5f, float repathDistance = 2f) : base(bb)
+    public MoveToNode(BTBlackboard bb, bool alertPlayer = false, float waypointThreshold = 0.7f, float repathDistance = 4f) : base(bb)
     {
         _waypointThreshold = waypointThreshold;
         _repathDistance = repathDistance;
@@ -67,6 +67,11 @@ public class MoveToNode : BTAction
         var transform = bb.Get<Transform>("Self");
         var pathfinder = bb.Get<Pathfinder>("Pathfinder");
 
+        if (targetNode == null || movement == null || transform == null || pathfinder == null)
+        {
+            return BTStatus.Failure;
+        }
+
         // Check if reached final destination
         if (Vector3.Distance(transform.position, targetNode.transform.position) <= _waypointThreshold)
         {
@@ -74,15 +79,23 @@ public class MoveToNode : BTAction
         }
 
         // Repath if needed (no current access point or close to it)
-        if (_currentAccessPoint == null ||
-            Vector3.Distance(transform.position, _currentAccessPoint.transform.position) <= _repathDistance)
+        if ((_currentAccessPoint == null ||
+             Vector3.Distance(transform.position, _currentAccessPoint.transform.position) <= _repathDistance)
+            )
         {
-            _currentAccessPoint = pathfinder.FindOptimalAccessPoint(transform, targetNode, _alertPlayer ? bb.Get<Transform>("Player") : null, 14f);
-            if (_currentAccessPoint == null) return BTStatus.Failure;
+            Debug.Log("repath");
+            _currentAccessPoint = pathfinder.FindOptimalAccessPoint(transform, targetNode,
+                _alertPlayer ? bb.Get<Transform>("Player") : null, 14f);
+
+            if (_currentAccessPoint == null)
+                return BTStatus.Failure;
         }
 
-        // Move toward current access point
-        movement.MoveToward(_currentAccessPoint.transform.position, _waypointThreshold);
+        // Move toward access point
+        if (_currentAccessPoint != null)
+        {
+            movement.MoveToward(_currentAccessPoint.transform.position, _waypointThreshold);
+        }
 
         return BTStatus.Running;
     }
@@ -93,8 +106,14 @@ public class MoveToNode : BTAction
         _currentAccessPoint = null;
 
         bb.Set("DebugColor", _alertPlayer ? Color.red : Color.cyan);
-        bb.Get<Collider>("Collider").enabled = _alertPlayer;
+
+        var collider = bb.Get<Collider>("Collider");
+        if (_alertPlayer)
+            GhostColliderHelper.EnableColliderForSeconds(bb.Get<MonoBehaviour>("SelfMono"), collider, 5f);
+
         bb.Get<COMP476HiderMovement>("Movement").SetBoost(_alertPlayer);
+
+        bb.Set("NodeInfo", $"MoveToNode : alertPlayer = {_alertPlayer}");
     }
 
     public override void OnExit()
@@ -104,6 +123,7 @@ public class MoveToNode : BTAction
 
         bb.Set("DebugColor", Color.black);
         bb.Get<COMP476HiderMovement>("Movement").SetBoost(false);
+        bb.Set("NodeInfo", $"MoveToNode : done");
     }
 }
 
@@ -263,8 +283,14 @@ public class PanicRunNode : BTAction
     {
         _panicEndTime = Time.time + _panicDuration;
         bb.Get<COMP476HiderMovement>("Movement").SetBoost(true);
+
+        var collider = bb.Get<Collider>("Collider");
+        GhostColliderHelper.EnableColliderForSeconds(bb.Get<MonoBehaviour>("SelfMono"), collider, 5f);
+
         bb.Set("DebugColor", Color.magenta); // Distinct panic color
         Debug.Log("PANIC MODE ACTIVATED!");
+
+        bb.Set("NodeInfo", $"Panic run");
     }
 
     public override void OnExit()
@@ -272,5 +298,62 @@ public class PanicRunNode : BTAction
         bb.Get<COMP476HiderMovement>("Movement").Stop();
         bb.Get<COMP476HiderMovement>("Movement").SetBoost(false);
         bb.Set("DebugColor", Color.black);
+        bb.Set("NodeInfo", $"Panic run : done");
+    }
+}
+
+public class TeleportToClosestNode : BTAction
+{
+    private readonly bool _avoidPlayer;
+    private readonly float _dangerRadius;
+
+    public TeleportToClosestNode(BTBlackboard bb, bool avoidPlayer = true, float dangerRadius = 14f) : base(bb)
+    {
+        _avoidPlayer = avoidPlayer;
+        _dangerRadius = dangerRadius;
+    }
+
+    public override BTStatus Update()
+    {
+        var pathfinder = bb.Get<Pathfinder>("Pathfinder");
+        var ghost = bb.Get<Transform>("Self");
+        var player = bb.Get<Transform>("Player");
+
+        if (pathfinder == null || ghost == null)
+        {
+            Debug.LogWarning("Missing pathfinder or ghost reference.");
+            return BTStatus.Failure;
+        }
+
+        NavigationNode closestNode = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var node in pathfinder.graph.GetComponentsInChildren<NavigationNode>())
+        {
+            if (Physics.Linecast(ghost.position, node.transform.position, pathfinder.obstructionMask))
+                continue;
+
+            if (_avoidPlayer && pathfinder.GetSafeDistance(player, node) < _dangerRadius)
+                continue;
+
+            float dist = Vector3.Distance(ghost.position, node.transform.position);
+            if (dist < closestDistance)
+            {
+                closestDistance = dist;
+                closestNode = node;
+            }
+        }
+
+        if (closestNode == null)
+        {
+            Debug.LogWarning("No valid node found to teleport to.");
+            return BTStatus.Failure;
+        }
+
+        ghost.position = closestNode.transform.position;
+        bb.Set("TargetNode", closestNode);
+
+        Debug.Log($"Ghost teleported to node: {closestNode.name}");
+        return BTStatus.Success;
     }
 }

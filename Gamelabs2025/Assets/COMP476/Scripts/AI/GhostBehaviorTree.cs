@@ -19,6 +19,8 @@ public class GhostBehaviorTree : MonoBehaviour
     [SerializeField] private bool _enableDebug = true;
     [SerializeField] private Color _debugColor = Color.cyan;
 
+    [SerializeField] private string nodeInfo;
+
     private BehaviorTree _bt;
     private COMP476HiderMovement _movement;
     private Transform _player;
@@ -51,6 +53,8 @@ public class GhostBehaviorTree : MonoBehaviour
         blackboard.Set("SightRange", _sightRange);
         blackboard.Set("WaypointThreshold", _waypointThreshold);
         blackboard.Set("Collider", _collider);
+        blackboard.Set("NodeInfo", "node");
+        blackboard.Set("SelfMono", GetComponent<MonoBehaviour>());
 
         // Initialize behavior tree with your root node
         _bt = new BehaviorTree(blackboard, CreateRootNode(blackboard));
@@ -60,6 +64,13 @@ public class GhostBehaviorTree : MonoBehaviour
     {
         return new BTRepeat(
             new BTSelector(
+                new BTInverter(
+                    new BTSelector(
+                        new ChooseRandomNode(bt, true),
+                        new PlayerDetectionNode(bt),
+                        new TeleportToClosestNode(bt)
+                    )
+                ),
                 new BTInverter(
                     new BTSelector(
                         new ChooseRandomNode(bt, true),
@@ -92,6 +103,10 @@ public class GhostBehaviorTree : MonoBehaviour
 
         // Run behavior tree
         _bt.Update();
+
+        nodeInfo = _bt.Blackboard.Get<string>("NodeInfo");
+
+        _movement.SetSpeedMultiplier(GroupAIGhost.GetCohesionFactor());
     }
 
 #if UNITY_EDITOR

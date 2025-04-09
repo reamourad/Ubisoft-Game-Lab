@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using FishNet.Demo.Prediction.Rigidbodies;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class COMP476HiderMovement : MonoBehaviour
     [SerializeField] private float maxSpeed = 8f;
     [SerializeField] private float verticalMoveForce = 7f;
     [SerializeField] private float boostFactor = 1.5f;
+
+    private float speedMultiplier = 1f;
 
     // Input storage variables
     private float _horizontalInput;
@@ -62,7 +65,7 @@ public class COMP476HiderMovement : MonoBehaviour
         // Vertical movement (up/down)
         if (_ascendInput != 0)
         {
-            _rb.AddForce(Vector3.up * (_ascendInput * verticalMoveForce * (boost ? boostFactor : 1f)), ForceMode.Force);
+            _rb.AddForce(Vector3.up * (_ascendInput * verticalMoveForce * (boost ? boostFactor : 1f) * speedMultiplier), ForceMode.Force);
         }
     }
 
@@ -71,7 +74,7 @@ public class COMP476HiderMovement : MonoBehaviour
         Vector3 horizontalVelocity = new Vector3(_rb.linearVelocity.x, 0f, _rb.linearVelocity.z);
         if (horizontalVelocity.magnitude > maxSpeed)
         {
-            Vector3 limitedVelocity = horizontalVelocity.normalized * maxSpeed * (boost ? boostFactor : 1f);
+            Vector3 limitedVelocity = horizontalVelocity.normalized * maxSpeed * (boost ? boostFactor : 1f) * speedMultiplier;
             _rb.linearVelocity = new Vector3(limitedVelocity.x, _rb.linearVelocity.y, limitedVelocity.z);
         }
     }
@@ -123,4 +126,33 @@ public class COMP476HiderMovement : MonoBehaviour
     {
         this.boost = boost;
     }
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        this.speedMultiplier = multiplier;
+    }
+
+    public static class GhostColliderHelper
+    {
+        private static readonly int DefaultLayerMask = 1 << LayerMask.NameToLayer("Default");
+
+        public static void EnableColliderForSeconds(MonoBehaviour host, Collider collider, float duration)
+        {
+            if (collider == null || host == null) return;
+
+            // Remove Default from excludeLayers → re-enable collision with walls
+            collider.excludeLayers &= ~DefaultLayerMask;
+
+            host.StartCoroutine(ReexcludeDefaultAfterDelay(collider, duration));
+        }
+
+        private static IEnumerator ReexcludeDefaultAfterDelay(Collider collider, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+
+            // Add Default layer back to excluded layers → ghost phases again
+            collider.excludeLayers |= DefaultLayerMask;
+        }
+    }
+
 }

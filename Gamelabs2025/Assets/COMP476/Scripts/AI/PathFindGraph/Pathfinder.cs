@@ -1,5 +1,7 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -29,53 +31,192 @@ public class Pathfinder : MonoBehaviour
     private NavigationNode optimalAccessPoint;
     private List<NavigationNode> currentPath = new List<NavigationNode>();
 
-    public NavigationNode FindOptimalAccessPoint(Transform transform, NavigationNode destination,
-                                       Transform avoidTransform = null, float avoidRadius = 5f)
+    private Dictionary<Transform, GhostPathCache> _ghostPathCache = new();
+
+    public NavigationNode FindOptimalAccessPoint(Transform ghost, NavigationNode destination,
+                                             Transform avoidTransform = null, float avoidRadius = 5f)
     {
-        if (graph == null || transform == null || destination == null)
+        if (graph == null || ghost == null || destination == null)
         {
             Debug.LogWarning("Missing references in FindOptimalAccessPoint");
             return null;
         }
 
-        var localAccessibleNodes = new List<NavigationNode>();
-        float shortestPathLength = Mathf.Infinity;
-
-        // Get all accessible nodes (not in danger zone and not approaching danger)
-        foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
+        if (!_ghostPathCache.TryGetValue(ghost, out var cache))
         {
-            if (!Physics.Linecast(transform.position, node.transform.position, obstructionMask) && !IsNodeApproachingDanger(transform, node, avoidTransform))
-            {
-                localAccessibleNodes.Add(node);
-            }
+            cache = new GhostPathCache();
+            _ghostPathCache[ghost] = cache;
         }
 
-        // Find the accessible node with shortest safe path
-        foreach (var node in localAccessibleNodes)
+        bool sameQuery = cache.lastDestination == destination &&
+                         cache.lastAvoidTransform == avoidTransform &&
+                         cache.path != null && cache.path.Count > 0;
+
+        if (sameQuery)
         {
-            var path = FindShortestPath(node, destination, avoidTransform, avoidRadius);
-            if (path != null)
+            for (int i = cache.path.Count - 1; i >= 0; i--)
             {
-                float pathLength = CalculatePathLength(path);
-                if (pathLength < shortestPathLength)
+                var node = cache.path[i];
+                if (!Physics.Linecast(ghost.position, node.transform.position, obstructionMask))
                 {
-                    shortestPathLength = pathLength;
-                    optimalAccessPoint = node;
-                    currentPath = path;
+                    cache.accessPoint = node;
+                    return node;
                 }
             }
         }
 
-        // Store the last found path
-        if (currentPath != null && currentPath.Count > 0)
+        // Update cached query
+        cache.lastDestination = destination;
+        cache.lastAvoidTransform = avoidTransform;
+
+        // Step 1: Pre-filter accessible nodes
+        var accessibleNodes = new List<NavigationNode>();
+
+        foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
         {
-            _lastPath = new List<NavigationNode>(currentPath);
-            HighlightLastPath();
+            if (!Physics.Linecast(ghost.position, node.transform.position, obstructionMask) &&
+                !IsNodeApproachingDanger(ghost, node, avoidTransform))
+            {
+                accessibleNodes.Add(node);
+            }
         }
 
-        HighlightAccessibility();
-        return optimalAccessPoint;
+        if (accessibleNodes.Count == 0)
+        {
+            Debug.LogWarning("No accessible nodes found");
+            return null;
+        }
+
+        // Step 2: Rank nodes by estimated value
+        var ranked = accessibleNodes
+            .OrderBy(n =>
+                Vector3.Distance(n.transform.position, destination.transform.position) + // closeness to goal
+                Vector3.Distance(n.transform.position, ghost.position) * 0.5f             // closer to ghost is good
+            )
+            .Take(2) // Only try the best one or two
+            .ToList();
+
+        foreach (var candidate in ranked)
+        {
+            Debug.Log($"[A* RUN] Trying path from {candidate.name}");
+            var path = FindShortestPath(candidate, destination, avoidTransform, avoidRadius);
+
+            if (path != null && path.Count > 0)
+            {
+                for (int i = path.Count - 1; i >= 0; i--)
+                {
+                    var node = path[i];
+                    if (!Physics.Linecast(ghost.position, node.transform.position, obstructionMask))
+                    {
+                        cache.path = path;
+                        cache.accessPoint = node;
+
+                        _lastPath = new List<NavigationNode>(path);
+                        HighlightLastPath();
+                        HighlightAccessibility();
+
+                        return node;
+                    }
+                }
+            }
+        }
+
+        Debug.LogWarning("[A* GAVE UP] Could not find a viable path (0–2 attempts max)");
+        return null;
     }
+
+
+    public NavigationNode FindRandomWanderTarget(Transform ghost, int maxSteps = 10, Transform avoidTransform = null, float avoidRadius = 14f)
+    {
+        if (ghost == null || graph == null)
+            return null;
+
+        if (!_ghostPathCache.TryGetValue(ghost, out var cache))
+        {
+            cache = new GhostPathCache();
+            _ghostPathCache[ghost] = cache;
+        }
+
+        // ✅ Step 1: Start from visible node
+        NavigationNode startNode = null;
+        float minDist = Mathf.Infinity;
+
+        foreach (var node in graph.GetComponentsInChildren<NavigationNode>())
+        {
+            if (!Physics.Linecast(ghost.position, node.transform.position, obstructionMask) &&
+                !IsNodeApproachingDanger(ghost, node, avoidTransform))
+            {
+                float dist = Vector3.Distance(ghost.position, node.transform.position);
+                if (dist < minDist)
+                {
+                    minDist = dist;
+                    startNode = node;
+                }
+            }
+        }
+
+        if (startNode == null)
+        {
+            Debug.LogWarning("No safe start node found for wandering");
+            return null;
+        }
+
+        // ✅ Step 2: Random walk avoiding danger
+        var path = new List<NavigationNode> { startNode };
+        var visited = new HashSet<NavigationNode> { startNode };
+        var current = startNode;
+
+        for (int i = 0; i < maxSteps; i++)
+        {
+            var neighbors = GetConnectedNodes(current)
+                .Where(n => !visited.Contains(n) && !IsNodeApproachingDanger(ghost, n, avoidTransform))
+                .ToList();
+
+            if (neighbors.Count == 0) break;
+
+            var next = neighbors[Random.Range(0, neighbors.Count)];
+            path.Add(next);
+            visited.Add(next);
+            current = next;
+        }
+
+        if (path.Count < 2)
+        {
+            Debug.LogWarning("Random wander path was too short or too close to danger");
+            return null;
+        }
+
+        // ✅ Step 3: Cache result
+        cache.path = path;
+        cache.lastDestination = path[^1]; // final node in path
+        cache.accessPoint = path[1]; // first movement step
+
+        _lastPath = new List<NavigationNode>(path);
+        HighlightLastPath();
+        HighlightAccessibility();
+
+        return cache.lastDestination;
+    }
+
+    private List<NavigationNode> GetConnectedNodes(NavigationNode node)
+    {
+        var neighbors = new List<NavigationNode>();
+
+        foreach (var connection in graph.connections)
+        {
+            if (connection.fromNode == node && connection.toNode != null)
+            {
+                neighbors.Add(connection.toNode);
+            }
+            else if (connection.toNode == node && connection.fromNode != null)
+            {
+                neighbors.Add(connection.fromNode);
+            }
+        }
+
+        return neighbors;
+    }
+
 
     public List<NavigationNode> FindShortestPath(NavigationNode start, NavigationNode end, Transform avoidTransform = null, float avoidRadius = 5f)
     {
@@ -190,14 +331,42 @@ public class Pathfinder : MonoBehaviour
         HighlightPath(currentPath);
     }
 
-    private bool IsNodeApproachingDanger(Transform userTransform, NavigationNode node, Transform dangerTransform)
+    private bool IsNodeApproachingDanger(Transform ghost, NavigationNode node, Transform dangerTransform)
     {
-        if (dangerTransform == null || userTransform == null) return false;
+        if (dangerTransform == null || ghost == null || node == null)
+            return false;
 
-        float userDistance = GetSafeDistance(userTransform, node);
-        float dangerDistance = GetSafeDistance(dangerTransform, node);
+        Vector3 ghostPos = ghost.position;
+        Vector3 nodePos = node.transform.position;
+        Vector3 playerPos = dangerTransform.position;
 
-        return dangerDistance < userDistance;
+        // ✅ Condition 1: Is node closer to player than ghost is?
+        float ghostToPlayer = Vector3.Distance(ghostPos, playerPos);
+        float nodeToPlayer = Vector3.Distance(nodePos, playerPos);
+        bool gettingCloser = nodeToPlayer < ghostToPlayer;
+
+        if (!gettingCloser) return false;
+
+        // ✅ Condition 2: Is the line from ghost to node close to the player?
+        float lineToPlayerDistance = DistanceFromPointToLine(playerPos, ghostPos, nodePos);
+
+        const float proximityThreshold = 3.5f; // tweakable danger radius along path
+
+        return lineToPlayerDistance < proximityThreshold;
+    }
+
+    private float DistanceFromPointToLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+    {
+        Vector3 lineDir = lineEnd - lineStart;
+        Vector3 pointDir = point - lineStart;
+
+        float lineLength = lineDir.magnitude;
+        if (lineLength == 0f) return Vector3.Distance(point, lineStart);
+
+        float t = Mathf.Clamp01(Vector3.Dot(pointDir, lineDir.normalized) / lineLength);
+        Vector3 closestPoint = lineStart + lineDir * t;
+
+        return Vector3.Distance(point, closestPoint);
     }
 
     private void ProcessNeighbor(NavigationNode current, NavigationNode neighbor,
@@ -242,7 +411,14 @@ public class Pathfinder : MonoBehaviour
 
     private float Heuristic(NavigationNode a, NavigationNode b)
     {
-        return Vector3.Distance(a.transform.position, b.transform.position);
+        Vector3 diff = b.transform.position - a.transform.position;
+
+        float horizontalDistance = new Vector2(diff.x, diff.z).magnitude;
+        float verticalDifference = Mathf.Abs(diff.y);
+
+        float verticalPenalty = verticalDifference > 3f ? verticalDifference * 10f : 0f;
+
+        return horizontalDistance + verticalPenalty;
     }
 
     private List<NavigationNode> ReconstructPath(Dictionary<NavigationNode, NavigationNode> cameFrom, NavigationNode current)
@@ -320,6 +496,14 @@ public class Pathfinder : MonoBehaviour
                 }
             }
         }
+    }
+
+    private class GhostPathCache
+    {
+        public NavigationNode lastDestination;
+        public Transform lastAvoidTransform;
+        public List<NavigationNode> path;
+        public NavigationNode accessPoint;
     }
 
 #if UNITY_EDITOR
@@ -407,3 +591,4 @@ public class Pathfinder : MonoBehaviour
     }
 #endif
 }
+
