@@ -49,6 +49,11 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
 
     public event Action OnWalkToggled;
 
+    public event Action OnTutorialNextEvent;
+
+    public event Action OnTutorialBackEvent;
+    
+
 
     /// <summary>
     /// Main Menu Inputs
@@ -279,6 +284,18 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     {
        if(context.phase == InputActionPhase.Performed)
            OnCCTVMarkedEvent?.Invoke();
+    }
+
+    public void OnTutorialNext(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnTutorialNextEvent?.Invoke();
+    }
+    
+    public void OnTutorialBack(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnTutorialBackEvent?.Invoke();
     }
 
     public void OnInteract(InputAction.CallbackContext context)

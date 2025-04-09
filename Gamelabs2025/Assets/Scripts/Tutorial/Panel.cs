@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,11 +9,11 @@ namespace Tutorial
 {
     public class Panel : MonoBehaviour
     {
-        [SerializeField] private GameObject confirmButton;
         [SerializeField] private GameObject rightButton;
         [SerializeField] private Transform circleParent;
         [SerializeField] private GameObject leftButton;
         [SerializeField] private Circle circlePrefab;
+        [SerializeField] private TMP_Text rightText;
         [SerializeField] private Transform pages;
 
 
@@ -24,14 +25,26 @@ namespace Tutorial
         private void Start()
         {
             basePosition = pages.localPosition;
+            BindKeys();
             SetPageCount();
             CreateCircles();
-            ToggleButton(rightButton, false);
+            ToggleButton(leftButton, false);
         }
 
         private void BindKeys()
         {
-            // Bind input reader events to MoveLeft,MoveRight and Destroy panel here
+            InputReader.Instance.SetToUIInputs();
+            InputReader.Instance.OnTutorialNextEvent += DestroyPanel;
+            InputReader.Instance.OnTutorialNextEvent += MoveRight;
+            InputReader.Instance.OnTutorialBackEvent += MoveLeft;
+        }
+
+        private void UnBindKeys()
+        {
+            InputReader.Instance.SetToGameplayInputs();
+            InputReader.Instance.OnTutorialNextEvent -= DestroyPanel;
+            InputReader.Instance.OnTutorialNextEvent -= MoveRight;
+            InputReader.Instance.OnTutorialBackEvent -= MoveLeft;
         }
 
         private void SetPageCount()
@@ -44,36 +57,46 @@ namespace Tutorial
             for (var i = 0; i < pageCount; i++)
             {
                 circles.Add(Instantiate(circlePrefab));
-                circles[i].transform.SetParent(circleParent,false);
+                circles[i].transform.SetParent(circleParent, false);
                 circles[i].transform.SetAsFirstSibling();
             }
 
+            circles.Reverse();
             circles.First().FillCircle();
         }
 
-        public void MoveLeft()
+        private void MoveLeft()
         {
+            if (!leftButton.activeSelf) return;
             UpdateCircles(-1);
             MovePage();
-            ToggleButton(leftButton, true);
-            ToggleButton(confirmButton, false);
+            ToggleButton(rightButton, true);
+            ChangeRightButtonText("Next");
             if (counter == 0)
-                ToggleButton(rightButton, false);
+                ToggleButton(leftButton, false);
         }
 
-        public void MoveRight()
+        private void ChangeRightButtonText(string newName)
         {
-            UpdateCircles(1);
-            MovePage();
-            ToggleButton(rightButton, true);
-            if (counter != pageCount - 1) return;
-            ToggleButton(leftButton, false);
-            ToggleButton(confirmButton, true);
+            rightText.text = newName;
+        }
+
+        private void MoveRight()
+        {
+            if (counter != pageCount - 1)
+            {
+                UpdateCircles(1);
+                MovePage();
+                ToggleButton(leftButton, true);
+            }
+
+            if (counter == pageCount - 1) 
+                ChangeRightButtonText("Close");
         }
 
         private void MovePage()
         {
-            pages.DOLocalMove(basePosition + Vector3.left * 500 * counter, 1f);
+            pages.DOLocalMove(basePosition + Vector3.left * 1500 * counter, 1f);
         }
 
         private void UpdateCircles(int direction)
@@ -88,8 +111,10 @@ namespace Tutorial
             button.gameObject.SetActive(state);
         }
 
-        public void DestroyPanel()
+        private void DestroyPanel()
         {
+            if (counter != pageCount - 1) return;
+            UnBindKeys();
             Destroy(gameObject);
         }
     }
