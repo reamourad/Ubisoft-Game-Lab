@@ -58,7 +58,8 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<float, bool> OnMainMenuNavigationLeftRight;
     public event Action OnMainMenuAccept;
     public event Action OnMainMenuBack;
-    
+
+    public event Action<float> OnSettingsTabSwitchEvent;
 
     public event Action OnInteractEvent;
 
@@ -279,6 +280,14 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     {
        if(context.phase == InputActionPhase.Performed)
            OnCCTVMarkedEvent?.Invoke();
+    }
+
+    void InputMap.IUIActions.OnSettingsTabSwitch(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            OnSettingsTabSwitchEvent?.Invoke(context.ReadValue<float>());
+        }
     }
 
     public void OnInteract(InputAction.CallbackContext context)

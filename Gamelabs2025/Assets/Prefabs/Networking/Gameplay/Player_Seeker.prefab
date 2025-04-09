@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 3692733822115490328}
   - component: {fileID: 7403228643818951496}
   - component: {fileID: 2323332267490243018}
+  - component: {fileID: 6142693297574420528}
   m_Layer: 0
   m_Name: FPSCamera
   m_TagString: Untagged
@@ -265,6 +266,20 @@ MonoBehaviour:
         DecelTime: 0.2
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &6142693297574420528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031909574079614480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ca956f895d54bdfa6472b180c8b6650, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axisController: {fileID: 0}
+  role: 1
 --- !u!1 &6197334997823422946
 GameObject:
   m_ObjectHideFlags: 0

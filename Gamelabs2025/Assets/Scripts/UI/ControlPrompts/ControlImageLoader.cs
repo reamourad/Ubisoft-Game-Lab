@@ -77,8 +77,6 @@ namespace Player.UI.ControlPrompts
             {
                 str = action.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
             }
-            
-            Debug.Log($"Detected : {str}");
             var split = str.Split('/');
             return showPositive ? split[1] : split[0];
         }

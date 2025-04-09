@@ -564,6 +564,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SettingsTabSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""577bd3b5-5862-47c5-98c8-9c962d0758b3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -874,6 +883,72 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""MarkCCTV"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""b8edd155-9439-480c-97eb-f0d90697bbff"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingsTabSwitch"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""21742450-b2d7-4cd7-a270-e7b72b7145ee"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingsTabSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""4d7ff481-8d5e-47d3-81c3-4cfc7fb0e464"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingsTabSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""8725081c-d247-474a-96ed-8c338938038e"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingsTabSwitch"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""ff589c16-0d87-427d-8bef-087f96900840"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingsTabSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""cd126535-9b58-4f48-b89a-539b6d37ba87"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SettingsTabSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -904,6 +979,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_UI_MainMenu_Accept = m_UI.FindAction("MainMenu_Accept", throwIfNotFound: true);
         m_UI_MainMenu_Back = m_UI.FindAction("MainMenu_Back", throwIfNotFound: true);
         m_UI_MarkCCTV = m_UI.FindAction("MarkCCTV", throwIfNotFound: true);
+        m_UI_SettingsTabSwitch = m_UI.FindAction("SettingsTabSwitch", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -1210,6 +1286,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_MainMenu_Accept;
     private readonly InputAction m_UI_MainMenu_Back;
     private readonly InputAction m_UI_MarkCCTV;
+    private readonly InputAction m_UI_SettingsTabSwitch;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1253,6 +1330,10 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/MarkCCTV".
         /// </summary>
         public InputAction @MarkCCTV => m_Wrapper.m_UI_MarkCCTV;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/SettingsTabSwitch".
+        /// </summary>
+        public InputAction @SettingsTabSwitch => m_Wrapper.m_UI_SettingsTabSwitch;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1303,6 +1384,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @MarkCCTV.started += instance.OnMarkCCTV;
             @MarkCCTV.performed += instance.OnMarkCCTV;
             @MarkCCTV.canceled += instance.OnMarkCCTV;
+            @SettingsTabSwitch.started += instance.OnSettingsTabSwitch;
+            @SettingsTabSwitch.performed += instance.OnSettingsTabSwitch;
+            @SettingsTabSwitch.canceled += instance.OnSettingsTabSwitch;
         }
 
         /// <summary>
@@ -1338,6 +1422,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @MarkCCTV.started -= instance.OnMarkCCTV;
             @MarkCCTV.performed -= instance.OnMarkCCTV;
             @MarkCCTV.canceled -= instance.OnMarkCCTV;
+            @SettingsTabSwitch.started -= instance.OnSettingsTabSwitch;
+            @SettingsTabSwitch.performed -= instance.OnSettingsTabSwitch;
+            @SettingsTabSwitch.canceled -= instance.OnSettingsTabSwitch;
         }
 
         /// <summary>
@@ -1526,5 +1613,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMarkCCTV(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SettingsTabSwitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSettingsTabSwitch(InputAction.CallbackContext context);
     }
 }
