@@ -9,6 +9,7 @@ public class GhostBehaviorTree : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private Pathfinder _pathfinder;
     [SerializeField] private LayerMask _obstructionMask;
+    [SerializeField] private Collider _collider;
 
     [Header("Behavior Settings")]
     [SerializeField] private float _sightRange = 10f;
@@ -17,6 +18,8 @@ public class GhostBehaviorTree : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool _enableDebug = true;
     [SerializeField] private Color _debugColor = Color.cyan;
+
+    [SerializeField] private string nodeInfo;
 
     private BehaviorTree _bt;
     private COMP476HiderMovement _movement;
@@ -49,6 +52,9 @@ public class GhostBehaviorTree : MonoBehaviour
         blackboard.Set("ObstructionMask", _obstructionMask);
         blackboard.Set("SightRange", _sightRange);
         blackboard.Set("WaypointThreshold", _waypointThreshold);
+        blackboard.Set("Collider", _collider);
+        blackboard.Set("NodeInfo", "node");
+        blackboard.Set("SelfMono", GetComponent<MonoBehaviour>());
 
         // Initialize behavior tree with your root node
         _bt = new BehaviorTree(blackboard, CreateRootNode(blackboard));
@@ -56,9 +62,21 @@ public class GhostBehaviorTree : MonoBehaviour
 
     private IBTNode CreateRootNode(BTBlackboard bt)
     {
-
         return new BTRepeat(
             new BTSelector(
+                new BTInverter(
+                    new BTSelector(
+                        new ChooseRandomNode(bt, true),
+                        new PlayerDetectionNode(bt),
+                        new TeleportToClosestNode(bt)
+                    )
+                ),
+                new BTInverter(
+                    new BTSelector(
+                        new ChooseRandomNode(bt, true),
+                        new PanicRunNode(bt)
+                    )
+                ),
                 new BTSequence(
                     new ChooseRandomNode(bt, true),
                     new MonitoredActionNode(
@@ -85,6 +103,10 @@ public class GhostBehaviorTree : MonoBehaviour
 
         // Run behavior tree
         _bt.Update();
+
+        nodeInfo = _bt.Blackboard.Get<string>("NodeInfo");
+
+        _movement.SetSpeedMultiplier(GroupAIGhost.GetCohesionFactor());
     }
 
 #if UNITY_EDITOR
