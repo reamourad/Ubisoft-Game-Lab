@@ -564,6 +564,24 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TutorialNext"",
+                    ""type"": ""Button"",
+                    ""id"": ""97af8f62-e513-4182-aa95-77ddc4144518"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TutorialBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""714d6909-020c-4b23-b21c-73b82aa9c3e0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -632,6 +650,28 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""CCTVSwitchCameras"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d7a535b-6594-42c9-8183-88d9df35445f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TutorialBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8cb8596c-b383-441a-bc3e-4060931beaac"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TutorialBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -874,6 +914,28 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""MarkCCTV"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d83de69b-7d53-47fd-80ec-40b20be2ba85"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TutorialNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b275b989-75a6-484f-b3f8-420dabbf85d9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TutorialNext"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -904,6 +966,8 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_UI_MainMenu_Accept = m_UI.FindAction("MainMenu_Accept", throwIfNotFound: true);
         m_UI_MainMenu_Back = m_UI.FindAction("MainMenu_Back", throwIfNotFound: true);
         m_UI_MarkCCTV = m_UI.FindAction("MarkCCTV", throwIfNotFound: true);
+        m_UI_TutorialNext = m_UI.FindAction("TutorialNext", throwIfNotFound: true);
+        m_UI_TutorialBack = m_UI.FindAction("TutorialBack", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -1210,6 +1274,8 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_MainMenu_Accept;
     private readonly InputAction m_UI_MainMenu_Back;
     private readonly InputAction m_UI_MarkCCTV;
+    private readonly InputAction m_UI_TutorialNext;
+    private readonly InputAction m_UI_TutorialBack;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1253,6 +1319,14 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "UI/MarkCCTV".
         /// </summary>
         public InputAction @MarkCCTV => m_Wrapper.m_UI_MarkCCTV;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/TutorialNext".
+        /// </summary>
+        public InputAction @TutorialNext => m_Wrapper.m_UI_TutorialNext;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/TutorialBack".
+        /// </summary>
+        public InputAction @TutorialBack => m_Wrapper.m_UI_TutorialBack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1303,6 +1377,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @MarkCCTV.started += instance.OnMarkCCTV;
             @MarkCCTV.performed += instance.OnMarkCCTV;
             @MarkCCTV.canceled += instance.OnMarkCCTV;
+            @TutorialNext.started += instance.OnTutorialNext;
+            @TutorialNext.performed += instance.OnTutorialNext;
+            @TutorialNext.canceled += instance.OnTutorialNext;
+            @TutorialBack.started += instance.OnTutorialBack;
+            @TutorialBack.performed += instance.OnTutorialBack;
+            @TutorialBack.canceled += instance.OnTutorialBack;
         }
 
         /// <summary>
@@ -1338,6 +1418,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @MarkCCTV.started -= instance.OnMarkCCTV;
             @MarkCCTV.performed -= instance.OnMarkCCTV;
             @MarkCCTV.canceled -= instance.OnMarkCCTV;
+            @TutorialNext.started -= instance.OnTutorialNext;
+            @TutorialNext.performed -= instance.OnTutorialNext;
+            @TutorialNext.canceled -= instance.OnTutorialNext;
+            @TutorialBack.started -= instance.OnTutorialBack;
+            @TutorialBack.performed -= instance.OnTutorialBack;
+            @TutorialBack.canceled -= instance.OnTutorialBack;
         }
 
         /// <summary>
@@ -1526,5 +1612,19 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMarkCCTV(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TutorialNext" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTutorialNext(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TutorialBack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTutorialBack(InputAction.CallbackContext context);
     }
 }
