@@ -198,15 +198,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""a12eee63-2f35-4947-8f1f-88929518be2e"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -301,7 +292,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4e826282-71e2-43af-a9e5-aa434b095371"",
-                    ""path"": ""<Keyboard>/f"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -495,28 +486,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""HiderItemScan"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""0296882b-a7a1-466f-9556-8dcd0fb94929"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7825c93b-b416-4e39-b3a6-508b906fb681"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -597,9 +566,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SettingsTabSwitch"",
+                    ""name"": ""TutorialNext"",
                     ""type"": ""Button"",
-                    ""id"": ""577bd3b5-5862-47c5-98c8-9c962d0758b3"",
+                    ""id"": ""97af8f62-e513-4182-aa95-77ddc4144518"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TutorialBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""714d6909-020c-4b23-b21c-73b82aa9c3e0"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -672,6 +650,28 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""CCTVSwitchCameras"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d7a535b-6594-42c9-8183-88d9df35445f"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TutorialBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8cb8596c-b383-441a-bc3e-4060931beaac"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TutorialBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -916,70 +916,26 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Keyboard"",
-                    ""id"": ""b8edd155-9439-480c-97eb-f0d90697bbff"",
-                    ""path"": ""1DAxis"",
+                    ""name"": """",
+                    ""id"": ""d83de69b-7d53-47fd-80ec-40b20be2ba85"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SettingsTabSwitch"",
-                    ""isComposite"": true,
+                    ""action"": ""TutorialNext"",
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""negative"",
-                    ""id"": ""21742450-b2d7-4cd7-a270-e7b72b7145ee"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""name"": """",
+                    ""id"": ""b275b989-75a6-484f-b3f8-420dabbf85d9"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SettingsTabSwitch"",
+                    ""action"": ""TutorialNext"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""4d7ff481-8d5e-47d3-81c3-4cfc7fb0e464"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SettingsTabSwitch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""8725081c-d247-474a-96ed-8c338938038e"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SettingsTabSwitch"",
-                    ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""ff589c16-0d87-427d-8bef-087f96900840"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SettingsTabSwitch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""cd126535-9b58-4f48-b89a-539b6d37ba87"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SettingsTabSwitch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -1000,7 +956,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_Gameplay_ToggleEquipInventoryItem = m_Gameplay.FindAction("ToggleEquipInventoryItem", throwIfNotFound: true);
         m_Gameplay_Drop = m_Gameplay.FindAction("Drop", throwIfNotFound: true);
         m_Gameplay_HiderItemScan = m_Gameplay.FindAction("HiderItemScan", throwIfNotFound: true);
-        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_CCTVSwitchCameras = m_UI.FindAction("CCTVSwitchCameras", throwIfNotFound: true);
@@ -1011,7 +966,8 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_UI_MainMenu_Accept = m_UI.FindAction("MainMenu_Accept", throwIfNotFound: true);
         m_UI_MainMenu_Back = m_UI.FindAction("MainMenu_Back", throwIfNotFound: true);
         m_UI_MarkCCTV = m_UI.FindAction("MarkCCTV", throwIfNotFound: true);
-        m_UI_SettingsTabSwitch = m_UI.FindAction("SettingsTabSwitch", throwIfNotFound: true);
+        m_UI_TutorialNext = m_UI.FindAction("TutorialNext", throwIfNotFound: true);
+        m_UI_TutorialBack = m_UI.FindAction("TutorialBack", throwIfNotFound: true);
     }
 
     ~@InputMap()
@@ -1105,7 +1061,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_ToggleEquipInventoryItem;
     private readonly InputAction m_Gameplay_Drop;
     private readonly InputAction m_Gameplay_HiderItemScan;
-    private readonly InputAction m_Gameplay_Pause;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -1165,10 +1120,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/HiderItemScan".
         /// </summary>
         public InputAction @HiderItemScan => m_Wrapper.m_Gameplay_HiderItemScan;
-        /// <summary>
-        /// Provides access to the underlying input action "Gameplay/Pause".
-        /// </summary>
-        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1231,9 +1182,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @HiderItemScan.started += instance.OnHiderItemScan;
             @HiderItemScan.performed += instance.OnHiderItemScan;
             @HiderItemScan.canceled += instance.OnHiderItemScan;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
         }
 
         /// <summary>
@@ -1281,9 +1229,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @HiderItemScan.started -= instance.OnHiderItemScan;
             @HiderItemScan.performed -= instance.OnHiderItemScan;
             @HiderItemScan.canceled -= instance.OnHiderItemScan;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
         }
 
         /// <summary>
@@ -1329,7 +1274,8 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_MainMenu_Accept;
     private readonly InputAction m_UI_MainMenu_Back;
     private readonly InputAction m_UI_MarkCCTV;
-    private readonly InputAction m_UI_SettingsTabSwitch;
+    private readonly InputAction m_UI_TutorialNext;
+    private readonly InputAction m_UI_TutorialBack;
     /// <summary>
     /// Provides access to input actions defined in input action map "UI".
     /// </summary>
@@ -1374,9 +1320,13 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @MarkCCTV => m_Wrapper.m_UI_MarkCCTV;
         /// <summary>
-        /// Provides access to the underlying input action "UI/SettingsTabSwitch".
+        /// Provides access to the underlying input action "UI/TutorialNext".
         /// </summary>
-        public InputAction @SettingsTabSwitch => m_Wrapper.m_UI_SettingsTabSwitch;
+        public InputAction @TutorialNext => m_Wrapper.m_UI_TutorialNext;
+        /// <summary>
+        /// Provides access to the underlying input action "UI/TutorialBack".
+        /// </summary>
+        public InputAction @TutorialBack => m_Wrapper.m_UI_TutorialBack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1427,9 +1377,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @MarkCCTV.started += instance.OnMarkCCTV;
             @MarkCCTV.performed += instance.OnMarkCCTV;
             @MarkCCTV.canceled += instance.OnMarkCCTV;
-            @SettingsTabSwitch.started += instance.OnSettingsTabSwitch;
-            @SettingsTabSwitch.performed += instance.OnSettingsTabSwitch;
-            @SettingsTabSwitch.canceled += instance.OnSettingsTabSwitch;
+            @TutorialNext.started += instance.OnTutorialNext;
+            @TutorialNext.performed += instance.OnTutorialNext;
+            @TutorialNext.canceled += instance.OnTutorialNext;
+            @TutorialBack.started += instance.OnTutorialBack;
+            @TutorialBack.performed += instance.OnTutorialBack;
+            @TutorialBack.canceled += instance.OnTutorialBack;
         }
 
         /// <summary>
@@ -1465,9 +1418,12 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @MarkCCTV.started -= instance.OnMarkCCTV;
             @MarkCCTV.performed -= instance.OnMarkCCTV;
             @MarkCCTV.canceled -= instance.OnMarkCCTV;
-            @SettingsTabSwitch.started -= instance.OnSettingsTabSwitch;
-            @SettingsTabSwitch.performed -= instance.OnSettingsTabSwitch;
-            @SettingsTabSwitch.canceled -= instance.OnSettingsTabSwitch;
+            @TutorialNext.started -= instance.OnTutorialNext;
+            @TutorialNext.performed -= instance.OnTutorialNext;
+            @TutorialNext.canceled -= instance.OnTutorialNext;
+            @TutorialBack.started -= instance.OnTutorialBack;
+            @TutorialBack.performed -= instance.OnTutorialBack;
+            @TutorialBack.canceled -= instance.OnTutorialBack;
         }
 
         /// <summary>
@@ -1592,13 +1548,6 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHiderItemScan(InputAction.CallbackContext context);
-        /// <summary>
-        /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnPause(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
@@ -1664,11 +1613,18 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMarkCCTV(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "SettingsTabSwitch" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "TutorialNext" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSettingsTabSwitch(InputAction.CallbackContext context);
+        void OnTutorialNext(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "TutorialBack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTutorialBack(InputAction.CallbackContext context);
     }
 }

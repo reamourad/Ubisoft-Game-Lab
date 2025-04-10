@@ -30,7 +30,6 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action OnToggleEquippedItemEvent;
     
     public event Action OnDropItemEvent;
-    public event Action OnPauseEvent;
     
     private static bool isGamepad = false;
 
@@ -49,7 +48,13 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action OnSprintDeactivated;
 
     public event Action OnWalkToggled;
+
+    public event Action OnTutorialNextEvent;
+
+    public event Action OnTutorialBackEvent;
     
+
+
     /// <summary>
     /// Main Menu Inputs
     /// </summary>
@@ -58,8 +63,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action<float, bool> OnMainMenuNavigationLeftRight;
     public event Action OnMainMenuAccept;
     public event Action OnMainMenuBack;
-
-    public event Action<float> OnSettingsTabSwitchEvent;
+    
 
     public event Action OnInteractEvent;
 
@@ -197,12 +201,6 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
             
     }
 
-    public void OnPause(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Performed)
-            OnPauseEvent?.Invoke();
-    }
-
     public static string GetCurrentBindingText(InputAction action)
     {
         // This is a bit of a hack, it has to be called from a FixedUpdate or Update method to work properly
@@ -288,12 +286,16 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
            OnCCTVMarkedEvent?.Invoke();
     }
 
-    void InputMap.IUIActions.OnSettingsTabSwitch(InputAction.CallbackContext context)
+    public void OnTutorialNext(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
-        {
-            OnSettingsTabSwitchEvent?.Invoke(context.ReadValue<float>());
-        }
+        if(context.phase == InputActionPhase.Performed)
+            OnTutorialNextEvent?.Invoke();
+    }
+    
+    public void OnTutorialBack(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnTutorialBackEvent?.Invoke();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
