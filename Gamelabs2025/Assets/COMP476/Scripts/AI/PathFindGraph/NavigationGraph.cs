@@ -71,9 +71,10 @@ public class NavigationGraph : MonoBehaviour
                 Color lineColor = isAccessible ? accessibleColor : blockedColor;
                 float lineWidth = isAccessible ? 2f : 1f;
 
+#if UNITY_EDITOR
                 Handles.color = lineColor;
                 Handles.DrawAAPolyLine(lineWidth, testTransform.position, node.transform.position);
-
+#endif
                 // Draw small indicator at node position
                 Gizmos.color = isAccessible ? accessibleColor : blockedColor;
                 Gizmos.DrawSphere(node.transform.position, 0.2f);

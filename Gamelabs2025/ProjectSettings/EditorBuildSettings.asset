@@ -6,20 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/NetworkedScenes/MainMenu.unity
-    guid: 64256d751dd029d43ba84a2e72505f77
-  - enabled: 1
-    path: Assets/Scenes/NetworkedScenes/CutScene.unity
-    guid: e16927057f2861846bcfb6f5322312a3
-  - enabled: 1
-    path: Assets/Scenes/NetworkedScenes/Game.unity
-    guid: 4e714880e1877ef4da93359252aa7da9
-  - enabled: 1
-    path: Assets/Scenes/NetworkedScenes/GameOver.unity
-    guid: bc96a349d8c0dcf4494092f3ccb1b00b
-  - enabled: 1
-    path: Assets/Scenes/NetworkedScenes/Game_SkyeTriesStuff.unity
-    guid: e64a64d17ab508f4e89203ddbaa915af
+    path: Assets/COMP476/Scenes/NetworkFreeScene.unity
+    guid: b373f3591a4f61647928c68a72a22600
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 208cadece189b8048b50a3852d9c3cb9, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
