@@ -1378,9 +1378,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2673,7 +2681,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 4682854888429254139, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -3217,13 +3225,41 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5707542516516145548, guid: 51af507bc88090248932a0b2f3560ca2, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6613827946768536818, guid: 51af507bc88090248932a0b2f3560ca2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 76753574}
   m_SourcePrefab: {fileID: 100100000, guid: 51af507bc88090248932a0b2f3560ca2, type: 3}
 --- !u!4 &76753572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1178005462107229845, guid: 51af507bc88090248932a0b2f3560ca2, type: 3}
   m_PrefabInstance: {fileID: 76753571}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &76753573 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6613827946768536818, guid: 51af507bc88090248932a0b2f3560ca2, type: 3}
+  m_PrefabInstance: {fileID: 76753571}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &76753574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76753573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &76972165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3883,6 +3919,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1322571640}
     m_Modifications:
+    - target: {fileID: 723881506306706255, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153062749655287193, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825065296529087445, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2508599863693828825, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3149081310923448751, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 236910591
@@ -3895,9 +3947,29 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 1856962301
       objectReference: {fileID: 0}
+    - target: {fileID: 4269645341654418804, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5503670553770174140, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5692664304914557304, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4270782459
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192575572893843729, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7431120333223585361, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7958929077342795805, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8747958533593972337, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -3941,6 +4013,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932471862698213399, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9019472559307745415, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9093330186149713930, guid: 25fe5c5c5aa006c4a91f9feb26e6d829, type: 3}
@@ -5872,6 +5948,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4541885344106796510, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_CastShadows
       value: 1
@@ -5883,6 +5963,10 @@ PrefabInstance:
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -5954,9 +6038,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (51)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8161,6 +8253,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1639403902532895124, guid: 0a13f4b554781084c9ba21234aa046fb, type: 3}
   m_PrefabInstance: {fileID: 213842269}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &214428441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 214428442}
+  m_Layer: 0
+  m_Name: HiderItems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &214428442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214428441}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 734558240}
+  - {fileID: 416316495}
+  - {fileID: 517640136}
+  - {fileID: 1471425405}
+  - {fileID: 1681090297}
+  - {fileID: 563743275}
+  - {fileID: 395408235}
+  - {fileID: 1024214588}
+  - {fileID: 1406178979}
+  - {fileID: 845227005}
+  - {fileID: 2011204115}
+  - {fileID: 1285723690}
+  - {fileID: 237431995}
+  - {fileID: 65716146}
+  - {fileID: 1225045474}
+  m_Father: {fileID: 1322571640}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &217854655
 GameObject:
   m_ObjectHideFlags: 0
@@ -8594,9 +8732,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (56)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8741,7 +8887,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 6804486914120733191, guid: d3f788bb893eeb74db3384699331f229, type: 3}
       propertyPath: m_Name
@@ -14111,7 +14257,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 1873524707586704065, guid: eb45ccf972860324297a6e0e82b23229, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14487,9 +14633,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14985,7 +15139,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 4682854888429254139, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -15777,9 +15931,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (71)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17894,6 +18056,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1322571640}
     m_Modifications:
+    - target: {fileID: 264111774984434522, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790732491957988630, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221039617899324352, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430092926400146939, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047022191800470102, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4538386003583512877, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3486447339
@@ -18905,7 +19087,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 4682854888429254139, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -19213,6 +19395,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1322571640}
     m_Modifications:
+    - target: {fileID: 264111774984434522, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790732491957988630, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221039617899324352, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430092926400146939, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047022191800470102, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4538386003583512877, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3201302521
@@ -19461,6 +19663,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 531988453}
+  - component: {fileID: 531988454}
   m_Layer: 0
   m_Name: Stairs (1)
   m_TagString: Untagged
@@ -19486,6 +19689,26 @@ Transform:
   - {fileID: 1633928680}
   m_Father: {fileID: 1322571640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531988454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531988452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &532227450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20229,7 +20452,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 1873524707586704065, guid: eb45ccf972860324297a6e0e82b23229, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20384,6 +20607,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4541885344106796510, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_CastShadows
       value: 1
@@ -20395,6 +20622,10 @@ PrefabInstance:
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -21202,6 +21433,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4541885344106796510, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_CastShadows
       value: 1
@@ -21213,6 +21448,10 @@ PrefabInstance:
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -22202,9 +22441,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -22533,9 +22780,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -23216,6 +23471,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1322571640}
     m_Modifications:
+    - target: {fileID: 264111774984434522, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790732491957988630, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221039617899324352, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430092926400146939, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047022191800470102, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4538386003583512877, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 2385510139
@@ -24706,9 +24981,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25452,9 +25735,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -25584,9 +25875,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (53)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25904,9 +26203,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26329,9 +26636,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26389,7 +26704,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27072,9 +27387,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (47)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29607,7 +29930,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 109659279326404741, guid: 150864c38da12274b89a321a30cb5c2a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33150,9 +33473,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (42)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33606,9 +33937,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (68)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33986,13 +34325,41 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7466310656930577521, guid: 42460a4dc59cc4d41acdbd257c3be565, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 954930610}
   m_SourcePrefab: {fileID: 100100000, guid: 42460a4dc59cc4d41acdbd257c3be565, type: 3}
 --- !u!4 &954930608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4020586301480351067, guid: 42460a4dc59cc4d41acdbd257c3be565, type: 3}
   m_PrefabInstance: {fileID: 954930607}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &954930609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7466310656930577521, guid: 42460a4dc59cc4d41acdbd257c3be565, type: 3}
+  m_PrefabInstance: {fileID: 954930607}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &954930610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954930609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &955785608
 GameObject:
   m_ObjectHideFlags: 0
@@ -35991,7 +36358,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 1873524707586704065, guid: eb45ccf972860324297a6e0e82b23229, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37242,9 +37609,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38241,9 +38616,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (59)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38453,9 +38836,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38515,9 +38906,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -38665,9 +39064,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -39692,6 +40099,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02, y: 0.020000007, z: 0.0036853466}
   m_Center: {x: 0.00000095362594, y: 0.0000019077113, z: 0.0032457535}
+--- !u!1 &1132848456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1132848457}
+  m_Layer: 0
+  m_Name: StaticItems
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1132848457
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132848456}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1322571640}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1136769632
 GameObject:
   m_ObjectHideFlags: 0
@@ -41216,9 +41654,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (65)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41387,6 +41833,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4541885344106796510, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_CastShadows
       value: 1
@@ -41398,6 +41848,10 @@ PrefabInstance:
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -42970,9 +43424,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -43760,7 +44222,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 109659279326404741, guid: 150864c38da12274b89a321a30cb5c2a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -45320,7 +45782,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 2129992539388684939, guid: 74841250483b4bc46a04e02fbe6ca250, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -46024,9 +46486,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46372,24 +46842,11 @@ Transform:
   - {fileID: 1254997084}
   - {fileID: 467050494}
   - {fileID: 546514641}
-  - {fileID: 1406178979}
-  - {fileID: 845227005}
-  - {fileID: 2011204115}
-  - {fileID: 1285723690}
-  - {fileID: 237431995}
   - {fileID: 1879772052}
   - {fileID: 1426959568}
   - {fileID: 793436218}
-  - {fileID: 65716146}
-  - {fileID: 1225045474}
-  - {fileID: 734558240}
-  - {fileID: 416316495}
-  - {fileID: 517640136}
-  - {fileID: 1471425405}
-  - {fileID: 1681090297}
-  - {fileID: 563743275}
-  - {fileID: 395408235}
-  - {fileID: 1024214588}
+  - {fileID: 214428442}
+  - {fileID: 1132848457}
   m_Father: {fileID: 731927909}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1324596140
@@ -46871,9 +47328,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (70)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -47021,9 +47486,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48135,9 +48608,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48197,9 +48678,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (62)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48610,9 +49099,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -49454,7 +49951,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52015,7 +52512,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 829144947764239406, guid: 96901a5daca917c4fb178ef6d1b8456c, type: 3}
       propertyPath: m_Name
@@ -53808,9 +54305,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 731927909}
     m_Modifications:
+    - target: {fileID: 14576602238565353, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 49672173704176825, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 61289638525328152, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 68269776380344077, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212180412909345238, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 239904769328607926, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4055873383
+      objectReference: {fileID: 0}
+    - target: {fileID: 362681565235538067, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 373629558147537958, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53852,37 +54373,149 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 378869588134742161, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 397897181483691513, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 463612485414195537, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 470393265035822037, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3640121319
+      objectReference: {fileID: 0}
+    - target: {fileID: 475066530172431985, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 555977731247392355, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 574385594627614927, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 612325157160303139, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 694088423500785985, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 712439372664404725, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 712536530474161121, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4231994751
       objectReference: {fileID: 0}
+    - target: {fileID: 757711946909948965, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 769070376382298765, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3347046255
+      objectReference: {fileID: 0}
+    - target: {fileID: 838443275570628506, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 874152900429990887, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4059559895
       objectReference: {fileID: 0}
+    - target: {fileID: 890568924234544863, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 900216715006837238, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1008970010590839048, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1040381243217974947, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1057167125045802627, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097886931808587549, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1283107866058194536, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3896466759
+      objectReference: {fileID: 0}
+    - target: {fileID: 1292515387232345486, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1330540682784600407, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3761747791
       objectReference: {fileID: 0}
+    - target: {fileID: 1374559519602244488, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1434442414209856547, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1475794372509177973, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1508542734047631097, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1580398211564889691, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1647697555520650595, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1674653920076834549, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3237969407
       objectReference: {fileID: 0}
+    - target: {fileID: 1697876270964860581, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1768889322889617611, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3250009431
+      objectReference: {fileID: 0}
+    - target: {fileID: 1800013669440116480, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822052395460345013, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1847404721196817476, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1899940978227676490, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -53892,13 +54525,49 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 3443504623
       objectReference: {fileID: 0}
+    - target: {fileID: 1943783643585001947, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2045807453833928583, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2046847372905530904, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3786923503
       objectReference: {fileID: 0}
+    - target: {fileID: 2076870245001113404, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101066013253305913, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2142592874789062837, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158243144887690777, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2234839732479649349, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235830386590222812, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2249600511833596755, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3715596279
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273934580369351471, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2283915760811860216, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -53908,33 +54577,125 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 4097277391
       objectReference: {fileID: 0}
+    - target: {fileID: 2432995651091815624, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495913877283224088, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2506959626117973433, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539812328851241678, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2586055132200837684, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3967776111
+      objectReference: {fileID: 0}
+    - target: {fileID: 2640761366908545120, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2727437013752743602, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4172748247
       objectReference: {fileID: 0}
+    - target: {fileID: 2786537498729135925, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2799968813716121758, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2876509535869971752, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3694600015
+      objectReference: {fileID: 0}
+    - target: {fileID: 2923069146920370820, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2947642765250695807, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3004326810969643323, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3026780832602034449, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3820467655
       objectReference: {fileID: 0}
+    - target: {fileID: 3056913470095615106, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3141803068873513973, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148818064767547360, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3217054522519602313, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3912718199
+      objectReference: {fileID: 0}
+    - target: {fileID: 3222592717077325858, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3255898839018262972, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3269179354072237167, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285916681545376007, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3292557768555242181, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3758088055
       objectReference: {fileID: 0}
+    - target: {fileID: 3335147870938769534, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336092345549998055, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3417338080606416885, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468060647741324950, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3533682981627671720, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4118281543
+      objectReference: {fileID: 0}
+    - target: {fileID: 3572149648516879651, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3612551836074741837, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3625561949781663864, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -53944,49 +54705,273 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 3405755847
       objectReference: {fileID: 0}
+    - target: {fileID: 3666809059280297129, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3725735992187002728, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3388471151
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766997494282242353, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800971185503385105, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805243531847705538, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3814588443862461238, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3888068087
       objectReference: {fileID: 0}
+    - target: {fileID: 3830441884459814799, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855975869614405636, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962137949898999896, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4004498163096907729, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4024061686289944531, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4034538253662566650, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4082159047608482891, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3686774655
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121928116392653848, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4265966488995356085, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301060965314855653, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4307836754619486750, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4382075959716226632, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4401282385149745021, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4444998230924135762, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3321837559
       objectReference: {fileID: 0}
+    - target: {fileID: 4516794230445319862, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522100685611364765, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4556306429197736088, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4577317231556003048, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3967270351
+      objectReference: {fileID: 0}
+    - target: {fileID: 4627668309958643634, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639197544685644132, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4651737945176166350, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3279902167
       objectReference: {fileID: 0}
+    - target: {fileID: 4662053790307929113, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4808978735185257556, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3846149471
+      objectReference: {fileID: 0}
+    - target: {fileID: 4856908616356326137, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4867540508419482082, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4910190789858739194, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998179958241241515, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5026927085879246689, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048586539255483508, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070919585039405185, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5094629655202943519, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3665802695
       objectReference: {fileID: 0}
+    - target: {fileID: 5155692518273911850, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160286244798745797, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5184983415664767844, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5190948110386728211, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5251691970406044398, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3782735687
+      objectReference: {fileID: 0}
+    - target: {fileID: 5290507517902246398, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323710477600248405, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5327606076830769502, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5346999704469238965, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348961755578476169, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5439217337836516500, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3656875871
       objectReference: {fileID: 0}
+    - target: {fileID: 5480446926241413095, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5517002781345259821, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541122789560635463, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5541862204971577814, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582193886356233654, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5635055633502972309, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678594645288964745, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5683503448468296294, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5800618839495608051, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5824468368522637688, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879860892902943422, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6029143396013130020, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108382672893041759, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6127102403645325339, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158250588639573994, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6261015321032589056, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6261128993939117588, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4210546647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304144272539800416, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314953395931500088, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6410954160651060270, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -53996,33 +54981,125 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 3997155311
       objectReference: {fileID: 0}
+    - target: {fileID: 6443536937056822319, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6444648221242736048, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3375857479
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451340902193983284, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6481022978539441865, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6487550189530268786, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3833009511
       objectReference: {fileID: 0}
+    - target: {fileID: 6499813411041853796, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6537484120262689487, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6653145331058531927, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739510487186768636, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6769253863104705847, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4244053463
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801639866382390473, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6842278842533352505, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4139195759
       objectReference: {fileID: 0}
+    - target: {fileID: 6869718018107156349, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881688438354127833, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6895282619615732044, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901772605771854263, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6913696748061957100, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3875487599
+      objectReference: {fileID: 0}
+    - target: {fileID: 6976669423027659909, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7038572183814146647, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3875534679
       objectReference: {fileID: 0}
+    - target: {fileID: 7110944286634615219, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124901651740430111, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7192436269859736233, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 4101446999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206623980098196181, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220200930083133504, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7317848126447194724, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7343117082009644485, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7365562856245828955, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7415270329937854467, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468752099368734890, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7505080555591248404, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7518215768773362284, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -54032,9 +55109,41 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 3883390847
       objectReference: {fileID: 0}
+    - target: {fileID: 7546438390349594866, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7730420183993476560, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3632242159
+      objectReference: {fileID: 0}
+    - target: {fileID: 7734671090501830772, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744102733789794143, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7778458312384154868, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7781174961326079999, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7833045447206482825, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839888032300649671, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7876933265689578649, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7877025484896557878, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -54044,9 +55153,53 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 3892313975
       objectReference: {fileID: 0}
+    - target: {fileID: 7934579035558177094, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7963323096781946764, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7963611343912368407, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7995359622005362406, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8169445291783812496, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3703543655
+      objectReference: {fileID: 0}
+    - target: {fileID: 8194267196257717689, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8194560240255344517, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8242193176860912473, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264505163154853412, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8270746338790911961, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8279887645908855026, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8325548993463727135, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8326621360443609105, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -54060,13 +55213,57 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 4164401023
       objectReference: {fileID: 0}
+    - target: {fileID: 8456745496876886890, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480282777438130329, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8556750532615159135, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580463071388964897, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8580742447125765818, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8600541586628018767, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614766022824693483, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8693099792758320997, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8706720413392719567, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3652654439
       objectReference: {fileID: 0}
+    - target: {fileID: 8713201247228232137, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8751979270792675725, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3330219351
+      objectReference: {fileID: 0}
+    - target: {fileID: 8852148270142990931, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8926702810197135464, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8927726656739790198, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: m_Name
@@ -54074,11 +55271,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8927726656739790198, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8943794269806818761, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8953105117987460655, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3635879759
+      objectReference: {fileID: 0}
+    - target: {fileID: 8999154132176735957, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053303856622616557, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9056009211669978748, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9110908763392875351, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -54087,6 +55300,10 @@ PrefabInstance:
     - target: {fileID: 9134237753384366121, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3329736023
+      objectReference: {fileID: 0}
+    - target: {fileID: 9198384524000426742, guid: 71bcb86794283144bbe499615ff9bbca, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -57174,9 +58391,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57647,7 +58872,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2043930424}
   - {fileID: 791245069}
   - {fileID: 124629915}
   - {fileID: 566579578}
@@ -57963,6 +59187,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1322571640}
     m_Modifications:
+    - target: {fileID: 264111774984434522, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790732491957988630, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221039617899324352, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430092926400146939, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047022191800470102, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4538386003583512877, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 1048573935
@@ -59460,9 +60704,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -59791,7 +61043,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 829144947764239406, guid: 96901a5daca917c4fb178ef6d1b8456c, type: 3}
       propertyPath: m_Name
@@ -60767,9 +62019,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (50)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62085,9 +63345,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62213,9 +63481,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -62910,9 +64186,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67355,9 +68639,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -69161,9 +70453,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -69706,6 +71006,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1322571640}
     m_Modifications:
+    - target: {fileID: 264111774984434522, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790732491957988630, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221039617899324352, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430092926400146939, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047022191800470102, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4538386003583512877, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 803143679
@@ -69929,9 +71249,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -70576,9 +71904,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1322571640}
     m_Modifications:
+    - target: {fileID: 389601865831806938, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 881381254057552278, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598907092710418240, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2218174446409901413, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
       propertyPath: m_Name
       value: Room2_LShaped
+      objectReference: {fileID: 0}
+    - target: {fileID: 2844894199370688891, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3117025960501259626, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -70624,9 +71968,33 @@ PrefabInstance:
       propertyPath: <SceneId>k__BackingField
       value: 4280219391
       objectReference: {fileID: 0}
+    - target: {fileID: 4533890805163216598, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4768360597594923015, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5997567531454547319, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 515833597
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610188224062785450, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935440440303402662, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7596672157826654442, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8315882448425135676, guid: 42e829dabc6a31c4586259697896b5b0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -71464,7 +72832,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1322571640}
+    m_TransformParent: {fileID: 214428442}
     m_Modifications:
     - target: {fileID: 4682854888429254139, guid: 6b27fc8b44e5ef44d92f8e1f45da16d2, type: 3}
       propertyPath: <SceneId>k__BackingField
@@ -71860,9 +73228,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71922,9 +73298,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
@@ -72771,115 +74155,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2043930423
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2043930424}
-  - component: {fileID: 2043930427}
-  - component: {fileID: 2043930426}
-  - component: {fileID: 2043930425}
-  m_Layer: 0
-  m_Name: Rail
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
---- !u!4 &2043930424
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043930423}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.862, y: 3.862, z: 19.008}
-  m_LocalScale: {x: 1.4, y: 1.7, z: 1.7}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1633928680}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &2043930425
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043930423}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -1612642054138157647, guid: c0da883327a8b6048b12bb56521a8594, type: 3}
---- !u!23 &2043930426
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043930423}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: dac33589c1584494092117ba4048b883, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &2043930427
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2043930423}
-  m_Mesh: {fileID: -1612642054138157647, guid: c0da883327a8b6048b12bb56521a8594, type: 3}
 --- !u!1001 &2044247301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -75372,6 +76647,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1322571640}
     m_Modifications:
+    - target: {fileID: 264111774984434522, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 790732491957988630, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1221039617899324352, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430092926400146939, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047022191800470102, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4538386003583512877, guid: 7f053053747fb7d45aeb8c2dfa96a3df, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 2385510377
@@ -76302,9 +77597,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -77043,6 +78346,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1224680994}
     m_Modifications:
+    - target: {fileID: 539991265338274909, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 4541885344106796510, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_CastShadows
       value: 1
@@ -77054,6 +78361,10 @@ PrefabInstance:
     - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_Name
       value: Wall Gas Lamp (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924196715244476535, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6115907036868430368, guid: 8c66338355dd3c5458cfe701bb092b18, type: 3}
       propertyPath: m_LocalScale.x
