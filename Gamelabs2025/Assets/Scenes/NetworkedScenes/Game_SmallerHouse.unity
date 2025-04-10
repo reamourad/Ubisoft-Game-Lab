@@ -16326,6 +16326,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076105985}
     m_Modifications:
+    - target: {fileID: 345244383615110846, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2404030352503049464, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.8271172
@@ -16366,6 +16370,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.69
       objectReference: {fileID: 0}
+    - target: {fileID: 2426233576770440658, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771537588064597342, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165448816868351784, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219930030590269706, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139049383544009410, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268747468484266746, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7383493576932192312, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3923243005
@@ -16374,9 +16402,21 @@ PrefabInstance:
       propertyPath: cameraName
       value: Second Floor Hallway
       objectReference: {fileID: 0}
+    - target: {fileID: 7739133784530095186, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_Name
       value: CCTVCam_SecondFloor_Hallway
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779519105748200569, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31099,6 +31139,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076105985}
     m_Modifications:
+    - target: {fileID: 345244383615110846, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2404030352503049464, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.389
@@ -31139,6 +31183,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2426233576770440658, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771537588064597342, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165448816868351784, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219930030590269706, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139049383544009410, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268747468484266746, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7383493576932192312, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3956715359
@@ -31147,9 +31215,21 @@ PrefabInstance:
       propertyPath: cameraName
       value: Second Floor Library
       objectReference: {fileID: 0}
+    - target: {fileID: 7739133784530095186, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_Name
       value: CCTVCam_SecondFloor_Library
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779519105748200569, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -52165,6 +52245,10 @@ PrefabInstance:
       propertyPath: m_RenderPostProcessing
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 345244383615110846, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2404030352503049464, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.961412
@@ -52205,6 +52289,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -2.07
       objectReference: {fileID: 0}
+    - target: {fileID: 2426233576770440658, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771537588064597342, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165448816868351784, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219930030590269706, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139049383544009410, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268747468484266746, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7383493576932192312, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3388976980
@@ -52213,9 +52321,21 @@ PrefabInstance:
       propertyPath: cameraName
       value: Staircase
       objectReference: {fileID: 0}
+    - target: {fileID: 7739133784530095186, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_Name
       value: CCTVCam_Staircase
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779519105748200569, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -54678,13 +54798,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076105985}
     m_Modifications:
+    - target: {fileID: 345244383615110846, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2404030352503049464, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.47
       objectReference: {fileID: 0}
     - target: {fileID: 2404030352503049464, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.39
+      value: 3.837
       objectReference: {fileID: 0}
     - target: {fileID: 2404030352503049464, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54718,6 +54842,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.949
       objectReference: {fileID: 0}
+    - target: {fileID: 2426233576770440658, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771537588064597342, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165448816868351784, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219930030590269706, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139049383544009410, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268747468484266746, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7383493576932192312, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3218534388
@@ -54726,9 +54874,21 @@ PrefabInstance:
       propertyPath: cameraName
       value: First Floor Living Room
       objectReference: {fileID: 0}
+    - target: {fileID: 7739133784530095186, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_Name
       value: CCTVCam_FirstFloor_LivingRoom (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779519105748200569, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -76019,6 +76179,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2076105985}
     m_Modifications:
+    - target: {fileID: 345244383615110846, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2404030352503049464, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.1522517
@@ -76059,6 +76223,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.949
       objectReference: {fileID: 0}
+    - target: {fileID: 2426233576770440658, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2771537588064597342, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165448816868351784, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5219930030590269706, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6139049383544009410, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268747468484266746, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 7383493576932192312, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 2850009077
@@ -76067,9 +76255,21 @@ PrefabInstance:
       propertyPath: cameraName
       value: First Floor Living Room
       objectReference: {fileID: 0}
+    - target: {fileID: 7739133784530095186, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
       propertyPath: m_Name
       value: CCTVCam_FirstFloor_LivingRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201488589180783086, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779519105748200569, guid: 697e767c55fcc7041b4ef69df8a653a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -85639,7 +85839,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2076105985
 Transform:
