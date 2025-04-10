@@ -115,6 +115,7 @@ namespace Tutorial
         {
             if (counter != pageCount - 1) return;
             UnBindKeys();
+            Destroy(this);
             Destroy(gameObject);
         }
     }

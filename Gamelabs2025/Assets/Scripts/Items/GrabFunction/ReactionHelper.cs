@@ -21,7 +21,7 @@ public class ReactionHelper : NetworkBehaviour
     private void Start()
     {
         detectionAreaBoxHalfExtent = reactionArea.GetComponent<Renderer>().bounds.extents;
-        detectionAreaBoxHalfExtent.y = 5f;
+        detectionAreaBoxHalfExtent.y = 1f;
     }
     
     private void EnableCollision(bool enable)
