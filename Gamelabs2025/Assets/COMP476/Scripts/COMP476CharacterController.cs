@@ -8,8 +8,6 @@ public class COMP476CharacterController : MonoBehaviour
     public float rotationSpeed = 200f;
     public Transform cameraTransform;
 
-    public bool isPlaying = false;
-
     float mouseX;
     float mouseY;
     float verticalLookRotation = 0f;
@@ -49,8 +47,6 @@ public class COMP476CharacterController : MonoBehaviour
 
             if (cameraTransform != null)
                 cameraTransform.localEulerAngles = new Vector3(verticalLookRotation, 0f, 0f);
-            // Apply movement
-            transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
             
             // Activate Vacuum
             usableItem?.UseItem(Input.GetMouseButton(0));
