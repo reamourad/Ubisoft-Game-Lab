@@ -396,7 +396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3156642662725309647, guid: df5fe118af050dc4499a238ed6aaf0dc, type: 3}
       propertyPath: GameSceneName
-      value: Game
+      value: Game_Smaller_House
       objectReference: {fileID: 0}
     - target: {fileID: 3156642662725309647, guid: df5fe118af050dc4499a238ed6aaf0dc, type: 3}
       propertyPath: GameOverSceneName
@@ -53671,6 +53671,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 606180695}
     m_Modifications:
+    - target: {fileID: 439557155869546743, guid: 8123b3526a42ce749bac07cc6dc6887b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 63.999817
+      objectReference: {fileID: 0}
     - target: {fileID: 599958489236136932, guid: 8123b3526a42ce749bac07cc6dc6887b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

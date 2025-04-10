@@ -298,82 +298,154 @@ namespace GogoGaga.OptimizedRopesAndCables
             }
         }
         
+        
         private void CalculateNavMeshPath()
         {
-            navMeshPathPoints.Clear();
-            navMeshPath.ClearCorners();
-            
-            // Get NavMesh positions for start and end points
-            NavMeshHit startHit, endHit;
-            Vector3 startNavPos = startPoint.position;
-            Vector3 endNavPos = endPoint.position;
-            
-            bool foundStartPos = NavMesh.SamplePosition(startPoint.position, out startHit, navMeshRaycastDistance, navMeshAreaMask);
-            bool foundEndPos = NavMesh.SamplePosition(endPoint.position, out endHit, navMeshRaycastDistance, navMeshAreaMask);
-            
-            if (foundStartPos && foundEndPos)
+            if (!useNavMeshPathfinding)
             {
-                startNavPos = startHit.position + Vector3.up * navMeshOffset;
-                endNavPos = endHit.position + Vector3.up * navMeshOffset;
-                
-                // Calculate path between the two points
-                if (NavMesh.CalculatePath(startNavPos, endNavPos, navMeshAreaMask, navMeshPath))
+                // If not using pathfinding, just use direct points
+                return;
+            }
+
+            if (navMeshPath == null)
+                navMeshPath = new NavMeshPath();
+
+            navMeshPathPoints.Clear();
+
+            Vector3 startPos = startPoint.position;
+            Vector3 endPos = endPoint.position;
+
+            // Check if start point is on NavMesh
+            NavMeshHit hitStart;
+            bool startOnNavMesh =
+                NavMesh.SamplePosition(startPos, out hitStart, navMeshRaycastDistance, navMeshAreaMask);
+
+            // Check if end point is on NavMesh
+            NavMeshHit hitEnd;
+            bool endOnNavMesh = NavMesh.SamplePosition(endPos, out hitEnd, navMeshRaycastDistance, navMeshAreaMask);
+
+            // If both points are off NavMesh, just use direct line
+            if (!startOnNavMesh && !endOnNavMesh)
+            {
+                // Use direct line or your fallback solution
+                return;
+            }
+
+            // If start is off NavMesh, use nearest NavMesh point as start
+            Vector3 validStartPos = startOnNavMesh ? startPos : hitStart.position;
+
+            // If end is off NavMesh, use nearest NavMesh point as end
+            Vector3 validEndPos = endOnNavMesh ? endPos : hitEnd.position;
+
+            // Calculate path using valid NavMesh points
+            bool pathFound = NavMesh.CalculatePath(validStartPos, validEndPos, navMeshAreaMask, navMeshPath);
+
+            if (pathFound && navMeshPath.status != NavMeshPathStatus.PathInvalid)
+            {
+                // Add original start point if it was off mesh
+                if (!startOnNavMesh)
+                    navMeshPathPoints.Add(startPos);
+
+                // Add all path corners from NavMesh path
+                navMeshPathPoints.AddRange(navMeshPath.corners);
+
+                // Add original end point if it was off mesh
+                if (!endOnNavMesh)
+                    navMeshPathPoints.Add(endPos);
+            }
+            else
+            {
+                // Path finding failed completely - use direct line with closest NavMesh points
+                navMeshPathPoints.Add(startPos);
+
+                // If we found valid NavMesh positions, use them as intermediate points
+                if (startOnNavMesh || endOnNavMesh)
                 {
-                    // Convert corners to path points
-                    navMeshPathPoints.AddRange(navMeshPath.corners);
-                    
-                    // If we need more points for a smoother path, interpolate between corners
-                    if (linePoints + 1 > navMeshPathPoints.Count && navMeshPathPoints.Count > 1)
-                    {
-                        List<Vector3> interpolatedPoints = new List<Vector3>();
-                        
-                        // Calculate total path length
-                        float totalLength = 0;
-                        for (int i = 0; i < navMeshPathPoints.Count - 1; i++)
-                        {
-                            totalLength += Vector3.Distance(navMeshPathPoints[i], navMeshPathPoints[i + 1]);
-                        }
-                        
-                        // Create evenly spaced points along the path
-                        for (int i = 0; i <= linePoints; i++)
-                        {
-                            float t = i / (float)linePoints;
-                            float targetDistance = t * totalLength;
-                            float currentDistance = 0;
-                            
-                            if (i == 0)
-                            {
-                                interpolatedPoints.Add(navMeshPathPoints[0]);
-                                continue;
-                            }
-                            
-                            if (i == linePoints)
-                            {
-                                interpolatedPoints.Add(navMeshPathPoints[navMeshPathPoints.Count - 1]);
-                                continue;
-                            }
-                            
-                            for (int j = 0; j < navMeshPathPoints.Count - 1; j++)
-                            {
-                                float segmentLength = Vector3.Distance(navMeshPathPoints[j], navMeshPathPoints[j + 1]);
-                                
-                                if (currentDistance + segmentLength >= targetDistance)
-                                {
-                                    float segmentT = (targetDistance - currentDistance) / segmentLength;
-                                    Vector3 point = Vector3.Lerp(navMeshPathPoints[j], navMeshPathPoints[j + 1], segmentT);
-                                    interpolatedPoints.Add(point);
-                                    break;
-                                }
-                                
-                                currentDistance += segmentLength;
-                            }
-                        }
-                        
-                        navMeshPathPoints = interpolatedPoints;
-                    }
+                    if (startOnNavMesh)
+                        navMeshPathPoints.Add(validStartPos);
+                    if (endOnNavMesh)
+                        navMeshPathPoints.Add(validEndPos);
                 }
+
+                navMeshPathPoints.Add(endPos);
             }
         }
+        // private void CalculateNavMeshPath()
+        // {
+        //     navMeshPathPoints.Clear();
+        //     navMeshPath.ClearCorners();
+        //     
+        //     // Get NavMesh positions for start and end points
+        //     NavMeshHit startHit, endHit;
+        //     Vector3 startNavPos = startPoint.position;
+        //     Vector3 endNavPos = endPoint.position;
+        //     
+        //     bool foundStartPos = NavMesh.SamplePosition(startPoint.position, out startHit, navMeshRaycastDistance, navMeshAreaMask);
+        //     bool foundEndPos = NavMesh.SamplePosition(endPoint.position, out endHit, navMeshRaycastDistance, navMeshAreaMask);
+        //     
+        //     if (foundStartPos && foundEndPos)
+        //     {
+        //         startNavPos = startHit.position + Vector3.up * navMeshOffset;
+        //         endNavPos = endHit.position + Vector3.up * navMeshOffset;
+        //         
+        //         // Calculate path between the two points
+        //         if (NavMesh.CalculatePath(startNavPos, endNavPos, navMeshAreaMask, navMeshPath))
+        //         {
+        //             // Convert corners to path points
+        //             navMeshPathPoints.AddRange(navMeshPath.corners);
+        //             
+        //             // If we need more points for a smoother path, interpolate between corners
+        //             if (linePoints + 1 > navMeshPathPoints.Count && navMeshPathPoints.Count > 1)
+        //             {
+        //                 List<Vector3> interpolatedPoints = new List<Vector3>();
+        //                 
+        //                 // Calculate total path length
+        //                 float totalLength = 0;
+        //                 for (int i = 0; i < navMeshPathPoints.Count - 1; i++)
+        //                 {
+        //                     totalLength += Vector3.Distance(navMeshPathPoints[i], navMeshPathPoints[i + 1]);
+        //                 }
+        //                 
+        //                 // Create evenly spaced points along the path
+        //                 for (int i = 0; i <= linePoints; i++)
+        //                 {
+        //                     float t = i / (float)linePoints;
+        //                     float targetDistance = t * totalLength;
+        //                     float currentDistance = 0;
+        //                     
+        //                     if (i == 0)
+        //                     {
+        //                         interpolatedPoints.Add(navMeshPathPoints[0]);
+        //                         continue;
+        //                     }
+        //                     
+        //                     if (i == linePoints)
+        //                     {
+        //                         interpolatedPoints.Add(navMeshPathPoints[navMeshPathPoints.Count - 1]);
+        //                         continue;
+        //                     }
+        //                     
+        //                     for (int j = 0; j < navMeshPathPoints.Count - 1; j++)
+        //                     {
+        //                         float segmentLength = Vector3.Distance(navMeshPathPoints[j], navMeshPathPoints[j + 1]);
+        //                         
+        //                         if (currentDistance + segmentLength >= targetDistance)
+        //                         {
+        //                             float segmentT = (targetDistance - currentDistance) / segmentLength;
+        //                             Vector3 point = Vector3.Lerp(navMeshPathPoints[j], navMeshPathPoints[j + 1], segmentT);
+        //                             interpolatedPoints.Add(point);
+        //                             break;
+        //                         }
+        //                         
+        //                         currentDistance += segmentLength;
+        //                     }
+        //                 }
+        //                 
+        //                 navMeshPathPoints = interpolatedPoints;
+        //             }
+        //         }
+        //     }
+        // }
 
         private void SetRopePointsFromPath()
         {

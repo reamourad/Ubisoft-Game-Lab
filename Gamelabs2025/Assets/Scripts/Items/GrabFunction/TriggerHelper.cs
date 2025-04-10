@@ -2,11 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using FishNet.Object;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TriggerHelper : NetworkBehaviour
 {
 
-     public ITriggerItem triggerItem;
+    public ITriggerItem triggerItem;
     private bool isGrabbed = false;
     public float radius = 5f;
     public Vector3 detectionAreaBoxHalfExtent = new Vector3(5f, 5f, 5f);
@@ -15,14 +16,13 @@ public class TriggerHelper : NetworkBehaviour
     private List<Collider> collidersCache = new List<Collider>();
     public bool isConnectedToReaction = false;
     public ReactionHelper connectedReactionHelper;
-    public Transform triggerAnchor; //where the wire should come from
     
     private void Start()
     {
         detectionAreaBoxHalfExtent = triggerArea.GetComponent<Renderer>().bounds.extents;
-        detectionAreaBoxHalfExtent.y = 5f;
+        detectionAreaBoxHalfExtent.y = 1f;
     }
-
+    
     private void EnableCollision(bool enable)
     {
         Collider collider = GetComponent<Collider>();
@@ -34,13 +34,12 @@ public class TriggerHelper : NetworkBehaviour
     
     public void OnGrabbed()
     {
-        Debug.Log("Trigger item Grabbed");
         isGrabbed = true;
         //undo the connection 
         isConnectedToReaction = false;
         if (connectedReactionHelper != null)
         {
-            Debug.Log("isConnectedToTrigger = false");
+            Debug.Log("isConnectedToReaction = false");
             connectedReactionHelper.isConnectedToTrigger = false;
             connectedReactionHelper = null;
         }       
@@ -49,7 +48,6 @@ public class TriggerHelper : NetworkBehaviour
     
     public void OnReleased()
     {
-        Debug.Log("Trigger item Released");
         isGrabbed = false;
         // Hide trigger areas when released
         foreach (Collider col in collidersCache)
@@ -64,23 +62,60 @@ public class TriggerHelper : NetworkBehaviour
         
         //check if trigger item is around
         Collider[] colliders= Physics.OverlapBox(gameObject.transform.position, detectionAreaBoxHalfExtent, Quaternion.identity,detectionLayerMask);
+        var closestCollider = FindClosestTrigger(colliders);
+        if(closestCollider == null) return;
+        var rHelper = closestCollider.GetComponent<ReactionHelper>();
+        //check if there is a trigger item nearby
+        if (rHelper != null)
+        {
+            if (rHelper.isConnectedToTrigger) return;
+            //change variable for check of connection 
+            rHelper.isConnectedToTrigger = true;
+            isConnectedToReaction = true;
+            connectedReactionHelper = rHelper;
+            rHelper.connectedTriggerHelper = this;
+            RPC_OnServerConnectToTrigger(GetComponent<NetworkObject>(), closestCollider.GetComponent<NetworkObject>());
+        }
+    }
+
+
+    private Collider FindClosestTrigger(Collider[] colliders)
+    {
+        float minDistance = float.MaxValue;
+        Collider closestCollider = null;
         foreach (Collider col in colliders)
         {
-            if(col.gameObject == this.gameObject) continue;
-            var reactionHelper = col.GetComponent<ReactionHelper>();
-            //check if there is a trigger item nearby
-            if (reactionHelper != null)
+            if(col.gameObject == gameObject) continue;
+            if(col.gameObject.GetComponent<ReactionHelper>() == null) continue;
+
+            if (Mathf.Abs(transform.position.y - col.transform.position.y) > 2f) continue; 
+            float currentDistance = GetPathDistance(col.gameObject.transform.position, transform.position);
+            if (currentDistance < minDistance)
             {
-                if (reactionHelper.isConnectedToTrigger) continue;
-                //change variable for check of connection 
-                reactionHelper.isConnectedToTrigger = true;
-                isConnectedToReaction = true;
-                connectedReactionHelper = reactionHelper;
-                reactionHelper.connectedTriggerHelper = this;
-                RPC_OnServerConnectToTrigger(GetComponent<NetworkObject>(), col.GetComponent<NetworkObject>());
-                return; 
+                minDistance = currentDistance;
+                closestCollider = col;
             }
         }
+
+        return closestCollider; 
+    }
+    
+    float GetPathDistance(Vector3 start, Vector3 end)
+    {
+        NavMeshPath path = new NavMeshPath();
+        if (NavMesh.CalculatePath(start, end, NavMesh.AllAreas, path))
+        {
+            if (path.status != NavMeshPathStatus.PathComplete)
+                return -1f; // No valid path
+
+            float distance = 0f;
+            for (int i = 1; i < path.corners.Length; i++)
+            {
+                distance += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+            }
+            return distance;
+        }
+        return -1f;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -88,16 +123,17 @@ public class TriggerHelper : NetworkBehaviour
     {
         EnableCollision(true);
         ConnectionDictionary.MakeConnection(GetComponent<ITriggerItem>(), reaction.GetComponent<IReactionItem>(), 
-            triggerAnchor, reaction.GetComponent<ReactionHelper>().reactionAnchor);
+            transform, reaction.transform);
         RPC_OnClientConnectToTrigger(trigger, reaction);
     }
 
     [ObserversRpc]
     private void RPC_OnClientConnectToTrigger(NetworkObject trigger, NetworkObject reaction)
     {
+        
         EnableCollision(true);
         ConnectionDictionary.MakeConnection(GetComponent<ITriggerItem>(), reaction.GetComponent<IReactionItem>(), 
-            triggerAnchor, reaction.GetComponent<ReactionHelper>().reactionAnchor);
+            transform, reaction.transform);
     }
     
     [ServerRpc(RequireOwnership = false)]
@@ -124,7 +160,6 @@ public class TriggerHelper : NetworkBehaviour
         if (!isGrabbed) return;
         foreach (Collider col in collidersCache)
         {
-            Debug.Log(col.gameObject.name);
             var reactionHelper = col.GetComponent<ReactionHelper>();
             if (reactionHelper == null) continue; 
             if(reactionHelper.isConnectedToTrigger) continue;

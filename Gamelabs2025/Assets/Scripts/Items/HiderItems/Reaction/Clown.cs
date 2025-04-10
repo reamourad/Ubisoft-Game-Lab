@@ -28,7 +28,6 @@ namespace Items.HiderItems.Reaction
         {
             if (triggered) return;
             RPC_OnClientTrigger();
-            triggered = true;
         }
 
         private void Update()
