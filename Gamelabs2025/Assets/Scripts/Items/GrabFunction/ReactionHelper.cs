@@ -4,6 +4,7 @@ using System.Linq;
 using FishNet.Object;
 using NUnit.Framework.Constraints;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ReactionHelper : NetworkBehaviour
 {
@@ -16,7 +17,6 @@ public class ReactionHelper : NetworkBehaviour
     private List<Collider> collidersCache = new List<Collider>();
     public bool isConnectedToTrigger = false;
     public TriggerHelper connectedTriggerHelper;
-    public Transform reactionAnchor; //where the wire should come from
     
     private void Start()
     {
@@ -63,23 +63,60 @@ public class ReactionHelper : NetworkBehaviour
         
         //check if trigger item is around
         Collider[] colliders= Physics.OverlapBox(gameObject.transform.position, detectionAreaBoxHalfExtent, Quaternion.identity,detectionLayerMask);
+        var closestCollider = FindClosestTrigger(colliders);
+        if(closestCollider == null) return;
+        var tHelper = closestCollider.GetComponent<TriggerHelper>();
+        //check if there is a trigger item nearby
+        if (tHelper != null)
+        {
+            if (tHelper.isConnectedToReaction) return;
+            //change variable for check of connection 
+            tHelper.isConnectedToReaction = true;
+            isConnectedToTrigger = true;
+            connectedTriggerHelper = tHelper;
+            tHelper.connectedReactionHelper = this;
+            RPC_OnServerConnectToTrigger(closestCollider.GetComponent<NetworkObject>(), GetComponent<NetworkObject>());
+        }
+    }
+
+
+    private Collider FindClosestTrigger(Collider[] colliders)
+    {
+        float minDistance = float.MaxValue;
+        Collider closestCollider = null;
         foreach (Collider col in colliders)
         {
-            if(col.gameObject == this.gameObject) continue;
-            var triggerHelper = col.GetComponent<TriggerHelper>();
-            //check if there is a trigger item nearby
-            if (triggerHelper != null)
+            if(col.gameObject == gameObject) continue;
+            if(col.gameObject.GetComponent<TriggerHelper>() == null) continue;
+
+            if (Mathf.Abs(transform.position.y - col.transform.position.y) > 2f) continue; 
+            float currentDistance = GetPathDistance(col.gameObject.transform.position, transform.position);
+            if (currentDistance < minDistance)
             {
-                if (triggerHelper.isConnectedToReaction) continue;
-                //change variable for check of connection 
-                triggerHelper.isConnectedToReaction = true;
-                isConnectedToTrigger = true;
-                connectedTriggerHelper = triggerHelper;
-                triggerHelper.connectedReactionHelper = this;
-                RPC_OnServerConnectToTrigger(col.GetComponent<NetworkObject>(), GetComponent<NetworkObject>());
-                return; 
+                minDistance = currentDistance;
+                closestCollider = col;
             }
         }
+
+        return closestCollider; 
+    }
+    
+    float GetPathDistance(Vector3 start, Vector3 end)
+    {
+        NavMeshPath path = new NavMeshPath();
+        if (NavMesh.CalculatePath(start, end, NavMesh.AllAreas, path))
+        {
+            if (path.status != NavMeshPathStatus.PathComplete)
+                return -1f; // No valid path
+
+            float distance = 0f;
+            for (int i = 1; i < path.corners.Length; i++)
+            {
+                distance += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+            }
+            return distance;
+        }
+        return -1f;
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -87,7 +124,7 @@ public class ReactionHelper : NetworkBehaviour
     {
         EnableCollision(true);
         ConnectionDictionary.MakeConnection(trigger.GetComponent<ITriggerItem>(), GetComponent<IReactionItem>(), 
-            trigger.GetComponent<TriggerHelper>().triggerAnchor, reactionAnchor);
+            trigger.transform, transform);
         RPC_OnClientConnectToTrigger(trigger, reaction);
     }
 
@@ -97,7 +134,7 @@ public class ReactionHelper : NetworkBehaviour
         
         EnableCollision(true);
         ConnectionDictionary.MakeConnection(trigger.GetComponent<ITriggerItem>(), GetComponent<IReactionItem>(), 
-            trigger.GetComponent<TriggerHelper>().triggerAnchor, reactionAnchor);
+            trigger.transform, transform);
     }
     
     [ServerRpc(RequireOwnership = false)]
