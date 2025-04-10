@@ -20,6 +20,10 @@ namespace Player.Settings
             public float MusicVolume=1;
             public float SfxVolume=1;
             public float AmbianceVolume=1;
+            
+            //Gameplay
+            public float SeekerLook = 1;
+            public float HiderLook = 1;
         }
         
         public static Action OnUpdated;

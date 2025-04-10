@@ -64,6 +64,10 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action OnMainMenuAccept;
     public event Action OnMainMenuBack;
     
+    // Menu Inputs
+    public event Action<float> OnSettingsTabSwitchEvent;
+    public event Action OnPauseEvent;
+    
 
     public event Action OnInteractEvent;
 
@@ -201,6 +205,12 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
             
     }
 
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnPauseEvent?.Invoke();
+    }
+
     public static string GetCurrentBindingText(InputAction action)
     {
         // This is a bit of a hack, it has to be called from a FixedUpdate or Update method to work properly
@@ -296,6 +306,12 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     {
         if(context.phase == InputActionPhase.Performed)
             OnTutorialBackEvent?.Invoke();
+    }
+
+    public void OnSettingsTabSwitch(InputAction.CallbackContext context)
+    {
+        if(context.phase == InputActionPhase.Performed)
+            OnSettingsTabSwitchEvent?.Invoke(context.ReadValue<float>());
     }
 
     public void OnInteract(InputAction.CallbackContext context)

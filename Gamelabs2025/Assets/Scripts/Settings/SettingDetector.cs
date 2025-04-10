@@ -16,16 +16,25 @@ namespace Player.Settings
             MusicVolume,
             SfxVolume,
             AmbienceVolume,
+            //Gameplay
+            SeekerLook,
+            HiderLook
         }
 
         [SerializeField] private TMPro.TextMeshProUGUI settingValue;
         [SerializeField] SettingType settingType = SettingType.None;
-
+        public float sliderChange = 1;
+        
+        private Slider slider;
+        private Toggle toggle;
+        
         private void Start()
         {
+            slider = GetComponentInChildren<Slider>();
+            toggle = GetComponentInChildren<Toggle>();
             ReadData();
-            GetComponentInChildren<Slider>()?.onValueChanged.AddListener(UpdateSliderValue);
-            GetComponentInChildren<Toggle>()?.onValueChanged.AddListener(UpdateToggleValue);
+            slider?.onValueChanged.AddListener(UpdateSliderValue);
+            toggle?.onValueChanged.AddListener(UpdateToggleValue);
         }
 
         private void ReadData()
@@ -33,27 +42,44 @@ namespace Player.Settings
             switch (settingType)
             {
                 case SettingType.Bloom:
-                    GetComponentInChildren<Toggle>().isOn = GameSettings.Settings.BloomEnabled;
+                    toggle.isOn = GameSettings.Settings.BloomEnabled;
                     break;
                 case SettingType.Fog:
-                    GetComponentInChildren<Toggle>().isOn = GameSettings.Settings.VolumetricFog;
+                    toggle.isOn = GameSettings.Settings.VolumetricFog;
                     break;
                 case SettingType.DepthOfField:
-                    GetComponentInChildren<Toggle>().isOn = GameSettings.Settings.DepthOfFieldEnabled;
+                    toggle.isOn = GameSettings.Settings.DepthOfFieldEnabled;
                     break;
                 case SettingType.MasterVolume:
-                    GetComponentInChildren<Slider>().value = GameSettings.Settings.MasterVolume*100;
+                    slider.value = GameSettings.Settings.MasterVolume*100;
                     break;
                 case SettingType.MusicVolume:
-                    GetComponentInChildren<Slider>().value = GameSettings.Settings.MusicVolume*100;
+                    slider.value = GameSettings.Settings.MusicVolume*100;
                     break;
                 case SettingType.SfxVolume:
-                    GetComponentInChildren<Slider>().value = GameSettings.Settings.SfxVolume*100;
+                    slider.value = GameSettings.Settings.SfxVolume*100;
                     break;
                 case SettingType.AmbienceVolume:
-                    GetComponentInChildren<Slider>().value = GameSettings.Settings.AmbianceVolume*100;
+                    slider.value = GameSettings.Settings.AmbianceVolume*100;
+                    break;
+                case SettingType.SeekerLook:
+                    slider.value = GameSettings.Settings.SeekerLook;
+                    break;
+                case SettingType.HiderLook:
+                    slider.value = GameSettings.Settings.HiderLook;
                     break;
             }
+
+            if (slider != null)
+            {
+                if (settingType == SettingType.SeekerLook || settingType == SettingType.HiderLook)
+                {
+                    settingValue.text = slider.value.ToString("0.00");
+                }
+                else
+                    settingValue.text = $"{slider.value}";
+            }
+                
         }
 
         void UpdateSliderValue(float value)
@@ -72,9 +98,23 @@ namespace Player.Settings
                 case SettingType.AmbienceVolume:
                     GameSettings.Settings.AmbianceVolume = value/100;
                     break;
+                case SettingType.SeekerLook:
+                    GameSettings.Settings.SeekerLook = value;
+                    break;
+                case SettingType.HiderLook:
+                    GameSettings.Settings.HiderLook = value;
+                    break;
             }
-
-            settingValue.text = ((int)value * 100).ToString();
+            
+            if (slider != null)
+            {
+                if (settingType == SettingType.SeekerLook || settingType == SettingType.HiderLook)
+                {
+                    settingValue.text = slider.value.ToString("0.00");
+                }
+                else
+                    settingValue.text = $"{slider.value}";
+            }
             GameSettings.OnUpdated?.Invoke();
         }
 

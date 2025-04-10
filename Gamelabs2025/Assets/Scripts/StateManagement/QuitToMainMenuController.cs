@@ -1,14 +1,12 @@
-using System;
 using Player.Audio;
+using StateManagement.MainMenu.UI;
+using StateManagement.StateManagement;
 using UnityEngine;
 
 namespace StateManagement
 {
-    public class QuitController : MonoBehaviour
+    public class QuitToMainMenuController : MonoBehaviour
     {
-        [SerializeField]
-        MainMenuController mainMenuController;
-        
         private void OnEnable()
         {
             InputReader.Instance.OnMainMenuAccept += QuitGame;
@@ -17,14 +15,14 @@ namespace StateManagement
 
         private void BackToMain()
         {
-            AudioManager.Instance.PlaySFX(mainMenuController.selectSound);
-            mainMenuController.SwitchMenu(MainMenuController.MainMenuState.MainMenu);
+            AudioManager.Instance.PlaySFX(UINavigationSounds.Instance.selectSound);
+            PauseMenuController.ReturnToPauseMenu();
         }
 
         private void QuitGame()
         {
-            AudioManager.Instance.PlaySFX(mainMenuController.selectSound);
-            Application.Quit();
+            AudioManager.Instance.PlaySFX(UINavigationSounds.Instance.selectSound);
+            GameStateController.Instance.ClientDisconnectFromServer();
         }
 
         private void OnDisable()
