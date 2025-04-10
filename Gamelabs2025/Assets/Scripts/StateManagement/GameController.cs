@@ -424,7 +424,7 @@ namespace StateManagement
             StartCoroutine(DelayedInvoke(() =>
             {
                 houseAnimator.SetBool("Agitate", false);
-            }, 0.5f));
+            }, 2f));
         }
     }
 }
