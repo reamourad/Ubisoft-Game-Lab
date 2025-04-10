@@ -42,16 +42,14 @@ namespace Networking
         // Update is called once per frame
             void Update()
             {
-                if (isBlueprintMode && isGrabButtonHeld && grabbedObject != null)
+                switch (isBlueprintMode)
                 {
-                    //place mechanic
-                    originalTransform = grabbedObject.transform;
-                    UpdateBlueprintMode(); 
-                }
-                else if (!isBlueprintMode && grabbedObject == null)
-                {
-                    //grab mechanic
-                   UpdateLookingAtObject(); 
+                    case true when grabbedObject:
+                        UpdateBlueprintMode();
+                        break;
+                    case false when !grabbedObject:
+                        UpdateLookingAtObject();
+                        break;
                 }
             }
 
@@ -194,52 +192,37 @@ namespace Networking
             public void OnGrab()
             {
                 isGrabButtonHeld = true;
-                
-                //grab mechanic
-                if (grabbedObject == null)
-                {
-                    PickupObject(lookingAtObject);
-                    //inform server 
-                    RPC_InformServerOnGrab(grabbedObject);
-                }
-                //place mechanic
-                else if (!isBlueprintMode)
-                {
-                   EnterBlueprintMode();
-                }
+
+                if (grabbedObject != null) return;
+                PickupObject(lookingAtObject);
+                RPC_InformServerOnGrab(grabbedObject);
             }
 
-            void PickupObject(NetworkObject networkObject)
+            private void PickupObject(NetworkObject networkObject)
             {
-                //nothing happens if youre not currently looking at something
-                if (networkObject == null) { return; }
-                
-                hiderLookManager.SetActive(false); 
-                // Move to object to grab placement and parent with the player
+                if (networkObject == null) return;
+
+                hiderLookManager.SetActive(false);
                 grabbedObject = networkObject;
-                Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-                if (rb != null) 
+
+                var rb = grabbedObject.GetComponent<Rigidbody>();
+                if (rb != null)
                 {
                     rb.isKinematic = true;
                 }
 
                 grabbedObject.transform.position = grabPlacement.position;
                 grabbedObject.transform.SetParent(this.transform);
-                
-                //grab function helpers 
+
                 var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
-                if (reactionHelper != null)
-                {
-                    if(IsOwner)
-                        reactionHelper.OnGrabbed();
-                }
-                
+                if (reactionHelper != null && IsOwner)
+                    reactionHelper.OnGrabbed();
+
                 var triggerHelper = grabbedObject.GetComponent<TriggerHelper>();
-                if (triggerHelper != null)
-                {
-                    if(IsOwner)
-                        triggerHelper.OnGrabbed();
-                }
+                if (triggerHelper != null && IsOwner)
+                    triggerHelper.OnGrabbed();
+                
+                EnterBlueprintMode();
             }
 
             void EnterBlueprintMode()
