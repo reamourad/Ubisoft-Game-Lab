@@ -2536,9 +2536,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2500745438017906053, guid: 2ebefce2ca8467d4493557b891078c7e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776245434630228760, guid: 2ebefce2ca8467d4493557b891078c7e, type: 3}
+      propertyPath: vacuumSuctionRegular
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5479041248557164123, guid: 2ebefce2ca8467d4493557b891078c7e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819460003067141324, guid: 2ebefce2ca8467d4493557b891078c7e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6571392131542318907, guid: 2ebefce2ca8467d4493557b891078c7e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7246064519837442813, guid: 2ebefce2ca8467d4493557b891078c7e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.287
+      value: -0.89
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
