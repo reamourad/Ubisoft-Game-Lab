@@ -265,7 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b179f3ac7c94a0497285b2882cc2969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainMenuController: {fileID: 0}
 --- !u!1001 &5224244657689703419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -393,6 +392,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8056261726830183816}
     m_Modifications:
+    - target: {fileID: 1163948480738115174, guid: 8f5d2a86828fde64ca49747a51f5f9cf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238164510433624294, guid: 8f5d2a86828fde64ca49747a51f5f9cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2939843037456362439, guid: 8f5d2a86828fde64ca49747a51f5f9cf, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -439,6 +446,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4292537445186687540, guid: 8f5d2a86828fde64ca49747a51f5f9cf, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4872468492550986591, guid: 8f5d2a86828fde64ca49747a51f5f9cf, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7178910975491605836, guid: 8f5d2a86828fde64ca49747a51f5f9cf, type: 3}
@@ -539,6 +550,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8939608554688927572, guid: 8f5d2a86828fde64ca49747a51f5f9cf, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032094416876334444, guid: 8f5d2a86828fde64ca49747a51f5f9cf, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
