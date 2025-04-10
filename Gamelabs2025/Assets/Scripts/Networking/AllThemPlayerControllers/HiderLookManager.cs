@@ -1,6 +1,7 @@
 using System.ComponentModel.Design.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
 using FishNet.Object;
+using HighlightPlus;
 using Items.Interfaces;
 using Networking;
 using Unity.VisualScripting;
@@ -26,11 +27,30 @@ public class HiderLookManager : NetworkBehaviour
     
     private void Update()
     {
-        // Clear previous result
+        // Clear previous highlight
+        if(currentLookTarget != null)
+            HighlightObject(currentLookTarget, false);
+        
         currentLookTarget = null;
 
         // Perform the raycast
         UpdateLookingAt();
+
+        if (currentLookTarget != null && IsOwner)
+        {
+            HighlightObject(currentLookTarget, true);
+        }
+           
+    }
+
+    private void HighlightObject(GameObject obj, bool highlight)
+    {
+        var he = GhostHighlighterRegisterer.GetHighlightEffect(obj);
+        if (he != null)
+        {
+            he.highlighted = highlight;
+            Debug.Log(he.name);
+        }
     }
 
     private void UpdateLookingAt()
@@ -40,33 +60,34 @@ public class HiderLookManager : NetworkBehaviour
         Vector3 direction = transform.forward;
         Quaternion orientation = transform.rotation;
         
-        if (Physics.BoxCast(origin, boxCastHalfExtents, direction, out RaycastHit hit, orientation, lookRange, itemLayerMask))
+        if (Physics.BoxCast(origin, boxCastHalfExtents, direction, out RaycastHit hit, orientation, lookRange))
         {
             Debug.DrawLine(transform.position, hit.point, Color.red);
             currentLookTarget = hit.collider.gameObject;
         }
-        var grabable = currentLookTarget?.GetComponent<IHiderGrabableItem>();
-        var connectable = currentLookTarget?.GetComponent<IConnectable>();
+
+        if (currentLookTarget == null)
+        {
+            return;
+        }
+
+        var grabable = currentLookTarget.GetComponent<IHiderGrabableItem>();
+        var connectable = currentLookTarget.GetComponent<IConnectable>();
         
-            if (InScreenUI.Instance == null) return; 
-            InScreenUI.Instance.ClearInputPrompts();
-            // Check if the object has the IGrabbable interface
-            if (grabable != null)
-            {
-                if(InScreenUI.Instance != null)
-                {
-                    InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab, "Grab");
+        if (InScreenUI.Instance == null) return; 
+        
+        InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab);
+        InScreenUI.Instance.RemoveInputPrompt(InputReader.Instance.inputMap.Gameplay.Look);
+        
+        if (grabable != null)
+        {
+            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab, "Grab");
+        }
 
-                }
-            }
-
-            if (connectable != null)
-            {
-                if(InScreenUI.Instance != null)
-                {
-                    InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
-                }
-            }
+        if (connectable != null)
+        {
+            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
+        }    
     }           
 
 

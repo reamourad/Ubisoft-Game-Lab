@@ -5,16 +5,14 @@ public class SeekerWorldDummy : NetworkBehaviour
 {
     [SerializeField] private NetworkObject itemReference;
     [SerializeField] private Sprite icon;
-    
-    [SerializeField] private GameObject highlight;
-    
+    [SerializeField] private HighlightPlus.HighlightEffect highlightEffect;
     public Sprite Icon => icon;
     public NetworkObject ItemReference => itemReference;
 
     public void Highlight(bool show)
     {
-        if(highlight)
-            highlight.SetActive(show);
+        if(highlightEffect != null)
+            highlightEffect.highlighted = show;
     }
 
     public void OnPickedUp()
