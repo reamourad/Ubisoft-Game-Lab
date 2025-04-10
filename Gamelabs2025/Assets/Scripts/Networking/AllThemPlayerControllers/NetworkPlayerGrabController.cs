@@ -1,6 +1,7 @@
 using System;
 using FishNet.Object;
 using Items.Interfaces;
+using Player;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -214,7 +215,21 @@ namespace Networking
                 //nothing happens if youre not currently looking at something
                 if (networkObject == null) { return; }
                 
-                hiderLookManager.SetActive(false); 
+                hiderLookManager.SetActive(false);
+
+                /*if (IsOwner)
+                {
+                    var dir = (networkObject.transform.position - transform.position).normalized;
+                    if (Physics.Raycast(grabPlacement.transform.position, dir, out RaycastHit hit, 20f))
+                    {
+                        Debug.Log($"Hit Collider (Hider): {hit.collider.name}");
+                        if(hit.collider != null && hit.collider.gameObject != networkObject.gameObject)
+                            return;
+                    }
+                }
+                */
+                
+                
                 // Move to object to grab placement and parent with the player
                 grabbedObject = networkObject;
                 Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
@@ -222,7 +237,7 @@ namespace Networking
                 {
                     rb.isKinematic = true;
                 }
-
+                
                 grabbedObject.transform.position = grabPlacement.position;
                 grabbedObject.transform.SetParent(this.transform);
                 
@@ -304,7 +319,7 @@ namespace Networking
                     Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
                     if (rb != null)
                     {
-                        rb.isKinematic = false;
+                        //rb.isKinematic = false;
                     }
 
                     //Restore original material
@@ -358,7 +373,7 @@ namespace Networking
                 Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
-                    rb.isKinematic = false;
+                    //rb.isKinematic = false;
                 }
                 //update the position and rotation
                 grabbedObject.transform.position = position;

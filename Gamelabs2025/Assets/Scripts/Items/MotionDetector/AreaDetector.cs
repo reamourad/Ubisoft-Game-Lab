@@ -33,6 +33,16 @@ namespace Player.Items.MotionDetector
         {
             base.OnStartServer();
             rangeDetector.gameObject.SetActive(true);
+            rangeDetector.GetComponent<MeshRenderer>().enabled = false;
+        }
+
+        private void Update()
+        {
+            if (IsClientStarted 
+                && GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Hider)
+            {
+                rangeDetector.gameObject.SetActive(true);
+            }
         }
 
         IEnumerator Initialize()
