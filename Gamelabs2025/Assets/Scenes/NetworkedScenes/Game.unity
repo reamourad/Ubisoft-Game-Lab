@@ -8374,6 +8374,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1584035450}
     m_Modifications:
+    - target: {fileID: 1242565500812063712, guid: 2cfced3a1112ffb4aacfcf01ee01ece9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1715553045446041983, guid: 2cfced3a1112ffb4aacfcf01ee01ece9, type: 3}
       propertyPath: m_Name
       value: Vacuum_WorldItem
@@ -8553,6 +8557,14 @@ PrefabInstance:
     - target: {fileID: 4516739179589109691, guid: 2cfced3a1112ffb4aacfcf01ee01ece9, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 3615438295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5423347922361056973, guid: 2cfced3a1112ffb4aacfcf01ee01ece9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5952745159219757405, guid: 2cfced3a1112ffb4aacfcf01ee01ece9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7329515762363391905, guid: 2cfced3a1112ffb4aacfcf01ee01ece9, type: 3}
       propertyPath: m_Positions.Array.data[0].x
@@ -41044,7 +41056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3034888593266192562, guid: 14d734d80bc25e54d88896b11cf9439d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.829
+      value: 0.727
       objectReference: {fileID: 0}
     - target: {fileID: 3034888593266192562, guid: 14d734d80bc25e54d88896b11cf9439d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -45673,7 +45685,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1639403902532895124, guid: 0a13f4b554781084c9ba21234aa046fb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.802
+      value: 0.711
       objectReference: {fileID: 0}
     - target: {fileID: 1639403902532895124, guid: 0a13f4b554781084c9ba21234aa046fb, type: 3}
       propertyPath: m_LocalPosition.z
