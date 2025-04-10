@@ -10,7 +10,7 @@ public class COMP476HiderMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 120f;
     [SerializeField] private float maxSpeed = 8f;
     [SerializeField] private float verticalMoveForce = 7f;
-    [SerializeField] private float boostFactor = 1.5f;
+    [SerializeField] private float boostFactor = 4f;
 
     private float speedMultiplier = 1f;
 
@@ -117,9 +117,9 @@ public class COMP476HiderMovement : MonoBehaviour
     // Optional: Add these for easy input debugging
     private void OnGUI()
     {
-        GUI.Label(new Rect(10, 10, 300, 20), $"Horizontal Input: {_horizontalInput}");
-        GUI.Label(new Rect(10, 30, 300, 20), $"Vertical Input: {_verticalInput}");
-        GUI.Label(new Rect(10, 50, 300, 20), $"Ascend Input: {_ascendInput}");
+        //GUI.Label(new Rect(10, 10, 300, 20), $"Horizontal Input: {_horizontalInput}");
+        //GUI.Label(new Rect(10, 30, 300, 20), $"Vertical Input: {_verticalInput}");
+        //GUI.Label(new Rect(10, 50, 300, 20), $"Ascend Input: {_ascendInput}");
     }
 
     public void SetBoost(bool boost)
