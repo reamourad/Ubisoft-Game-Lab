@@ -108,8 +108,7 @@ public class MoveToNode : BTAction
         bb.Set("DebugColor", _alertPlayer ? Color.red : Color.cyan);
 
         var collider = bb.Get<Collider>("Collider");
-        if (_alertPlayer)
-            GhostColliderHelper.EnableColliderForSeconds(bb.Get<MonoBehaviour>("SelfMono"), collider, 5f);
+        //if (_alertPlayer) GhostColliderHelper.EnableColliderForSeconds(bb.Get<MonoBehaviour>("SelfMono"), collider, 3f);
 
         bb.Get<COMP476HiderMovement>("Movement").SetBoost(_alertPlayer);
 
@@ -139,9 +138,9 @@ public class PlayerDetectionNode : BTCondition
     private bool _isInCooldown;
 
     public PlayerDetectionNode(BTBlackboard bb,
-                             float minDetectionRange = 5f,
-                             float maxDetectionRange = 15f,
-                             float detectionAngle = 90f) : base(bb)
+                             float minDetectionRange = 10f,
+                             float maxDetectionRange = 30f,
+                             float detectionAngle = 140f) : base(bb)
     {
         _minDetectionRange = minDetectionRange;
         _maxDetectionRange = maxDetectionRange;
@@ -285,7 +284,7 @@ public class PanicRunNode : BTAction
         bb.Get<COMP476HiderMovement>("Movement").SetBoost(true);
 
         var collider = bb.Get<Collider>("Collider");
-        GhostColliderHelper.EnableColliderForSeconds(bb.Get<MonoBehaviour>("SelfMono"), collider, 5f);
+        //GhostColliderHelper.EnableColliderForSeconds(bb.Get<MonoBehaviour>("SelfMono"), collider, 3f);
 
         bb.Set("DebugColor", Color.magenta); // Distinct panic color
         Debug.Log("PANIC MODE ACTIVATED!");
@@ -330,12 +329,6 @@ public class TeleportToClosestNode : BTAction
 
         foreach (var node in pathfinder.graph.GetComponentsInChildren<NavigationNode>())
         {
-            if (Physics.Linecast(ghost.position, node.transform.position, pathfinder.obstructionMask))
-                continue;
-
-            if (_avoidPlayer && pathfinder.GetSafeDistance(player, node) < _dangerRadius)
-                continue;
-
             float dist = Vector3.Distance(ghost.position, node.transform.position);
             if (dist < closestDistance)
             {

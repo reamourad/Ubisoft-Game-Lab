@@ -64,7 +64,7 @@ public class GroupAIGhost : MonoBehaviour
 
         // Normalize using fuzzy logic between 0.75 and 1.25
         float t = Mathf.Clamp01(averageDistance / maxGroupRadius);
-        CohesionFactor = Mathf.Lerp(1.25f, 0.75f, t);
+        CohesionFactor = Mathf.Lerp(4f, 0.75f, t);
     }
 
     /// <summary>
