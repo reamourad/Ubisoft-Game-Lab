@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 9
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
 --- !u!1 &6284289427881447801
@@ -520,7 +520,6 @@ MonoBehaviour:
   - {fileID: 5560258610018812767}
   - {fileID: 5087237459156064016}
   - {fileID: 6203069042472803077}
-  - {fileID: 0}
   - {fileID: 6824402132047484539}
   - {fileID: 3637104021805829915}
   InitializedParentNetworkBehaviour: {fileID: 0}
@@ -549,7 +548,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 23
+  <PrefabId>k__BackingField: 24
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 14779710232724903091
   <SceneId>k__BackingField: 0
@@ -733,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f2d201028e43e49c06e2245061556f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 8
+  _componentIndexCache: 7
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
   coolDownTime: 2
@@ -998,6 +997,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3760002842364422920}
     m_Modifications:
+    - target: {fileID: 258753560957545483, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.7675226
+      objectReference: {fileID: 0}
+    - target: {fileID: 258753560957545483, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.7108178
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934752812335581269, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.32325035
+      objectReference: {fileID: 0}
+    - target: {fileID: 3588417921355202870, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.5093467
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120705251452586855, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.059675
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120705251452586855, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.1635014
+      objectReference: {fileID: 0}
     - target: {fileID: 8173115198096592838, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
       propertyPath: m_Name
       value: Ghost_graphics
@@ -1041,6 +1064,10 @@ PrefabInstance:
     - target: {fileID: 8802123107441874300, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9076439508494506144, guid: 7f6a32d3140d33643b5970be074e9b96, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.7443084
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
