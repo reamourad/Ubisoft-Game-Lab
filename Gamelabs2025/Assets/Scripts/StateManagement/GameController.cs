@@ -9,6 +9,7 @@ using FishNet.Object.Synchronizing;
 using Networking;
 using Player;
 using Player.Audio;
+using Player.NotificationSystem;
 using StateManagement.StateManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -43,6 +44,7 @@ namespace StateManagement
         [SerializeField] private AudioClip mainSeekerBGM;
         [SerializeField] private AudioClip mainHiderBGM;
         [SerializeField] private AudioClip chaseBGM;
+        [SerializeField] private AudioClip gameBeginSound;
 
         [SerializeField] private float angyDelay = 0.5f;
         [SerializeField] private int timePenalty = 30;
@@ -99,9 +101,26 @@ namespace StateManagement
 
                 PlayMainTheme();
                 InputReader.Instance.OnPauseEvent += OnPauseToggled;
+                OnStageChanged += OnGameStageChanged;
             }
         }
 
+        private void OnDestroy()
+        {
+            OnStageChanged -= OnGameStageChanged;
+            InputReader.Instance.OnPauseEvent -= OnPauseToggled;
+            GameWinner.OnChange -= GameWinnerOnOnChange;
+        }
+        
+        private void OnGameStageChanged(GameStage stage)
+        {
+            if (stage == GameStage.Game)
+            {
+                NotificationSystem.Instance.Notify("The hunt begins!");
+                AudioManager.Instance.PlaySFX(gameBeginSound);
+            }
+        }
+        
         private void OnPauseToggled()
         {
             PauseMenuController.ShowPauseMenu(!PauseMenuController.IsShowing);
@@ -142,12 +161,6 @@ namespace StateManagement
             }
         }
         
-        private void OnDestroy()
-        {
-            InputReader.Instance.OnPauseEvent -= OnPauseToggled;
-            GameWinner.OnChange -= GameWinnerOnOnChange;
-        }
-
         private void GameWinnerOnOnChange(PlayerRole.RoleType prev, PlayerRole.RoleType next, bool asserver)
         {
             Debug.Log("GameLookupMemory Winner Data Modified!!");

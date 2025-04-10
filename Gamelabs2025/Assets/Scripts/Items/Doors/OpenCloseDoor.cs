@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FishNet.Object;
 using Player;
 using Player.Audio;
+using Player.NotificationSystem;
 using StateManagement;
 using UnityEngine;
 
@@ -107,7 +108,7 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
     
     private void TriggerScareEffects()
     {
-  
+        
 
         if(shakeObj==null)
         {
@@ -119,6 +120,7 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
             isScaring = true;
             // Play global monster SFX
             AudioManager.Instance.PlayMonsterSFX(rumblingClip);
+            NotificationSystem.Instance.Notify("The house is agitated!");
 
             // Instantiate camera shake effect
             if (cameraShakePrefab != null)
