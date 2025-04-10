@@ -1350,6 +1350,7 @@ MonoBehaviour:
   tabs:
   - {fileID: 8068951982928249829}
   - {fileID: 4805754421738025911}
+  IsInsidePauseMenu: 0
 --- !u!1 &1676828668034084526
 GameObject:
   m_ObjectHideFlags: 0
@@ -9132,7 +9133,7 @@ PrefabInstance:
     - target: {fileID: 2300748065397769127, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: actionReference
       value: 
-      objectReference: {fileID: -3948198810525380672, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
+      objectReference: {fileID: 239572760972148077, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
     - target: {fileID: 2300748065397769127, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: hasPositiveNegative
       value: 1
@@ -9288,7 +9289,7 @@ PrefabInstance:
     - target: {fileID: 2300748065397769127, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: actionReference
       value: 
-      objectReference: {fileID: -3948198810525380672, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
+      objectReference: {fileID: 239572760972148077, guid: c1fa565871b331d46b65466aaaa28890, type: 3}
     - target: {fileID: 2300748065397769127, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: hasPositiveNegative
       value: 1

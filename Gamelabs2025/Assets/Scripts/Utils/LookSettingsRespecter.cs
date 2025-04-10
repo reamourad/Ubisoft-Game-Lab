@@ -43,7 +43,7 @@ namespace Utils
             else if(role == PlayerRole.RoleType.Hider)
             {
                 axisController.Controllers[0].Input.Gain = startGainX * GameSettings.Settings.HiderLook;
-                axisController.Controllers[0].Input.Gain = startGainY * GameSettings.Settings.HiderLook;
+                axisController.Controllers[1].Input.Gain = startGainY * GameSettings.Settings.HiderLook;
             }
         }
         
