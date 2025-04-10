@@ -343,7 +343,8 @@ public class TeleportToClosestNode : BTAction
             return BTStatus.Failure;
         }
 
-        ghost.position = closestNode.transform.position;
+        //ghost.position = closestNode.transform.position;
+        ghost?.GetComponent<Rigidbody>().MovePosition(closestNode.transform.position);
         bb.Set("TargetNode", closestNode);
 
         Debug.Log($"Ghost teleported to node: {closestNode.name}");
