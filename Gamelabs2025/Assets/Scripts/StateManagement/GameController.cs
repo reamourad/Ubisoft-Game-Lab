@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Timers;
 using FishNet;
-using FishNet.Component.Animating;
 using FishNet.Object;
 using FishNet.Object.Synchronizing;
-using Networking;
 using Player;
 using Player.Audio;
 using Player.NotificationSystem;
@@ -53,6 +50,8 @@ namespace StateManagement
         
         [SerializeField] private AudioClip houseAngySFX;
         [SerializeField] private GameObject cameraShakeObj;
+
+        [SerializeField] private Animator houseAnimator;
         
         
         private readonly SyncVar<GameStage> currentStage = new SyncVar<GameStage>(GameStage.None);
@@ -399,6 +398,7 @@ namespace StateManagement
         [Client]
         private IEnumerator ClientHouseAngy(float delay)
         {
+            houseAnimator.SetTrigger("SirShakesALot");
             yield return new WaitForSeconds(delay);
             AudioManager.Instance.PlayMonsterSFX(houseAngySFX);
             var go = Instantiate(cameraShakeObj);
@@ -416,6 +416,15 @@ namespace StateManagement
             }
             
             Destroy(go, houseAngySFX.length);
+        }
+
+        public void AggitateHouse()
+        {
+            houseAnimator.SetBool("Agitate", true);
+            StartCoroutine(DelayedInvoke(() =>
+            {
+                houseAnimator.SetBool("Agitate", false);
+            }, 0.5f));
         }
     }
 }

@@ -103,7 +103,11 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         targetAngle = isOpen ? 90f : 0f;
         UpdateDoor();
         if (houseAngy)
+        {
             TriggerScareEffects();
+            if(GameController.Instance != null)
+                GameController.Instance.AggitateHouse();
+        }
     }
     
     private void TriggerScareEffects()
