@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class UIManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UIManager : MonoBehaviour
     public Button quitButton;
     public TextMeshProUGUI timerText;
     public GameObject Logo;
+    [FormerlySerializedAs("scoreText")] public TextMeshProUGUI hidersRemainingText;
 
     [Header("Pause Menu")]
     public GameObject pauseMenu;
@@ -35,6 +37,8 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        int remainingGhosts = FindObjectsByType<COMP476HiderMovement>(FindObjectsSortMode.None).Length;
+        hidersRemainingText.text = $"Ghosts remaining: {remainingGhosts}";
         // Pause toggle
         if (Input.GetKeyDown(KeyCode.Escape) && timerRunning)
         {
@@ -56,7 +60,6 @@ public class UIManager : MonoBehaviour
                 timeRemaining = 0;
                 timerRunning = false;
                 UpdateTimerDisplay(timeRemaining);
-                
             }
         }
     }
