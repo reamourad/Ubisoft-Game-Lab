@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2113830492617652938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.534, z: 0}
+  m_LocalPosition: {x: 0, y: 3.534, z: 0.287}
   m_LocalScale: {x: 1.6666666, y: 1.6666666, z: 1.6666666}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -241,6 +241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotationSpeed: 200
+  cameraTransform: {fileID: 7246064519837442813}
+  isPlaying: 0
 --- !u!136 &3437844966685725328
 CapsuleCollider:
   m_ObjectHideFlags: 0

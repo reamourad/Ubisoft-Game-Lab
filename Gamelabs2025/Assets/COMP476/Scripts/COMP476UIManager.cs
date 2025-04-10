@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
                 timeRemaining = 0;
                 timerRunning = false;
                 UpdateTimerDisplay(timeRemaining);
-                // Optional: Handle end of timer
+                
             }
         }
     }
@@ -72,6 +72,9 @@ public class UIManager : MonoBehaviour
 
         Logo.SetActive(false);
         CC.isPlaying = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void QuitGame()
@@ -88,6 +91,8 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0f;
         pauseMenu.SetActive(true);
         CC.isPlaying = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void ResumeGame()
@@ -96,6 +101,8 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         CC.isPlaying = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void RestartGame()
