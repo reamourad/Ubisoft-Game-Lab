@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using Player.Audio;
 using Player.Settings;
+using StateManagement.MainMenu.UI;
+using StateManagement.StateManagement;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -14,6 +16,8 @@ namespace StateManagement
         [SerializeField] private GameObject settingsCam;
         [SerializeField] private MainMenuController mainMenuController;
         [SerializeField] private GameObject[] tabs;
+        
+        [SerializeField] private bool IsInsidePauseMenu = false;
         
         private int currSelIndx = 0;
         private Coroutine sliderUpdateRoutine;
@@ -56,18 +60,16 @@ namespace StateManagement
             
             currentTab = tabs[currSelIndx];
             currentTab.GetComponent<Toggle>().isOn = true;
-            AudioManager.Instance.PlaySFX(tabSwitchSFX);
+            AudioManager.Instance.PlaySFX(UINavigationSounds.Instance.tabSwitchSFX);
         }
 
         private void OnCancel()
         {
-            AudioManager.Instance.PlaySFX(mainMenuController.selectSound);
-            if(mainMenuController != null)
-                mainMenuController.SwitchMenu(MainMenuController.MainMenuState.MainMenu);
+            AudioManager.Instance.PlaySFX(UINavigationSounds.Instance.selectSound);
+            if (IsInsidePauseMenu)
+                PauseMenuController.ReturnToPauseMenu();
             else
-            {
-                gameObject.SetActive(false);
-            }
+                mainMenuController.SwitchMenu(MainMenuController.MainMenuState.MainMenu);
         }
         
     }

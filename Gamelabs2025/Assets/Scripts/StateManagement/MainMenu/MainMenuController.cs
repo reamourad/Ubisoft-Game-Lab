@@ -3,6 +3,7 @@ using System.Collections;
 using FishNet.Managing;
 using Networking;
 using Player.Audio;
+using StateManagement.MainMenu.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -38,9 +39,6 @@ namespace StateManagement
         [SerializeField] private Toggle[] mainMenuToggles;
         
         public AudioClip menuMusic;
-        public AudioClip navigationSound;
-        public AudioClip selectSound;
-        
         private int currSelIndex = 0;
         private bool started = false;
 
@@ -115,7 +113,7 @@ namespace StateManagement
                 return;
             
             SwitchMenu(MainMenuState.QuitMenu);
-            AudioManager.Instance.PlaySFX(selectSound);
+            AudioManager.Instance.PlaySFX(UINavigationSounds.Instance.selectSound);
         }
 
         private void OnSelectItem()
@@ -132,7 +130,7 @@ namespace StateManagement
                 case 2: SwitchMenu(MainMenuState.QuitMenu);
                     break;
             }
-            AudioManager.Instance.PlaySFX(selectSound);
+            AudioManager.Instance.PlaySFX(UINavigationSounds.Instance.selectSound);
         }
 
         private void StartOnlinePlay()
@@ -192,7 +190,7 @@ namespace StateManagement
         private void UpdateSelection()
         {
             mainMenuToggles[currSelIndex].isOn = !mainMenuToggles[currSelIndex].isOn;
-            AudioManager.Instance.PlaySFX(navigationSound);
+            AudioManager.Instance.PlaySFX(UINavigationSounds.Instance.navigateSound);
         }
         
         public void SwitchMenu(MainMenuState newMainMenuState)

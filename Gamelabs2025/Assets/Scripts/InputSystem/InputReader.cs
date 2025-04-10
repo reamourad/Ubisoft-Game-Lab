@@ -30,6 +30,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action OnToggleEquippedItemEvent;
     
     public event Action OnDropItemEvent;
+    public event Action OnPauseEvent;
     
     private static bool isGamepad = false;
 
@@ -48,8 +49,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
     public event Action OnSprintDeactivated;
 
     public event Action OnWalkToggled;
-
-
+    
     /// <summary>
     /// Main Menu Inputs
     /// </summary>
@@ -195,6 +195,12 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         if(context.phase == InputActionPhase.Performed)
             OnHiderItemScanEvent?.Invoke();
             
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            OnPauseEvent?.Invoke();
     }
 
     public static string GetCurrentBindingText(InputAction action)

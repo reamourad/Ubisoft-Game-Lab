@@ -9,6 +9,7 @@ using FishNet.Object.Synchronizing;
 using Networking;
 using Player;
 using Player.Audio;
+using StateManagement.StateManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -97,7 +98,13 @@ namespace StateManagement
                 }
 
                 PlayMainTheme();
+                InputReader.Instance.OnPauseEvent += OnPauseToggled;
             }
+        }
+
+        private void OnPauseToggled()
+        {
+            PauseMenuController.ShowPauseMenu(!PauseMenuController.IsShowing);
         }
         
         private void PlayMainTheme()
@@ -137,6 +144,7 @@ namespace StateManagement
         
         private void OnDestroy()
         {
+            InputReader.Instance.OnPauseEvent -= OnPauseToggled;
             GameWinner.OnChange -= GameWinnerOnOnChange;
         }
 

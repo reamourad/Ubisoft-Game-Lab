@@ -35,6 +35,7 @@ namespace StateManagement
 
         public void ClientDisconnectFromServer()
         {
+            Debug.Log("Client Requested Disconnection from Server");
             NetworkConnectionHelper.ClientDisconnectFromServer();
         }
         
