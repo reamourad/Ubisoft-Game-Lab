@@ -5,6 +5,7 @@ using FishNet.Object.Synchronizing;
 using GogoGaga.OptimizedRopesAndCables;
 using Player.Data;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Player.Items.HiderItems.Reaction
 {
@@ -40,13 +41,18 @@ namespace Player.Items.HiderItems.Reaction
         private void ApplySmokeEffect()
         {
             var colliders = Physics.OverlapSphere(transform.position, range, stationaryLayerMask);
+            bool chained = false;
             foreach (var col in colliders)
             {
                 if (ValidCollider(col, out StationaryObjectBase stationaryObject))
                 {
                     stationaryObject.ApplyStationaryEffect(effects);
+                    chained = true;
                 }
             }
+            
+            if(!chained)
+                NoiseManager.Instance.GenerateNoise(transform.position, UnityEngine.Random.Range(0.15f, 0.36f),1);
         }
 
         private bool ValidCollider(Collider collider, out StationaryObjectBase stationaryObject)

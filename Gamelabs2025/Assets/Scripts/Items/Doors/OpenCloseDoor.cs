@@ -20,6 +20,8 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
 
     [SerializeField] private AudioClip rumblingClip;
     [SerializeField] private GameObject cameraShakePrefab;
+    
+    [SerializeField] private bool forceClosedUntilGameStart = false;
 
     private float doorSpeed = 2f;
     private float targetAngle = 0f;
@@ -82,6 +84,12 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
                 source.PlayOneShot(lookedClip);
                 return;
             }
+
+            if (forceClosedUntilGameStart && GameController.Instance.CurrentGameStage != GameController.GameStage.Game)
+            {
+                source.PlayOneShot(lookedClip);
+                return;
+            }
             
             RPC_ToggleDoorState();
         }
@@ -102,7 +110,7 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         isOpen = state;
         targetAngle = isOpen ? 90f : 0f;
         UpdateDoor();
-        if (houseAngy)
+        if (houseAngy && GameController.Instance.CurrentGameStage == GameController.GameStage.Game)
         {
             TriggerScareEffects();
             if(GameController.Instance != null)

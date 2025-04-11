@@ -1,26 +1,35 @@
 using System;
 using System.Collections;
+using FishNet;
+using FishNet.Object;
 using Networking;
 using Player;
+using Player.Audio;
 using UnityEngine;
 using UnityEngine.Playables;
 
 namespace StateManagement
 {
-    public class GameOverController : MonoBehaviour
+    public class GameOverController : NetworkBehaviour
     {
         [SerializeField] private PlayableDirector seekerWin;
         [SerializeField] private PlayableDirector hiderWin;
 
         [SerializeField] private bool test;
         [SerializeField] PlayerRole.RoleType testWinner;
-
+        
+        [SerializeField] private GameObject replayNotifObj;
+        [SerializeField] private AudioClip replayNotif;
+        
         private bool disconnected = false;
+        private int replayRequestCount=0;
         
         private IEnumerator Start()
         {
             yield return new WaitForEndOfFrame();
-            InputReader.Instance.OnMainMenuAccept += OnContinue;
+            InputReader.Instance.OnMainMenuAccept += ReplayGame;
+            InputReader.Instance.OnMainMenuBack += ToMainMenu;
+            
             var winner = test ? testWinner : GameLookupMemory.Winner;
             yield return new WaitForEndOfFrame();
 
@@ -48,13 +57,45 @@ namespace StateManagement
             InputReader.Instance.SetToUIInputs();
         }
 
-        private void OnContinue()
+        private void ToMainMenu()
         {
-            if(disconnected)
-                return;
-            disconnected = true;
+            InputReader.Instance.OnMainMenuBack -= ToMainMenu;
+            InputReader.Instance.OnMainMenuAccept -= ReplayGame;
+            
             if (GameStateController.Instance != null)
                 GameStateController.Instance.ClientDisconnectFromServer();
         }
+        
+        private void ReplayGame()
+        {
+            InputReader.Instance.OnMainMenuBack -= ReplayGame;
+            RPC_RequestServerToReplay();
+        }
+
+        [ServerRpc(RequireOwnership = false)]
+        private void RPC_RequestServerToReplay()
+        {
+            replayRequestCount+=1;
+
+            if (replayRequestCount < InstanceFinder.ClientManager.Clients.Count)
+            {
+                RPC_ServerRecievedRequest();
+                return;
+            }
+
+            if (GameStateController.Instance != null)
+            {
+                GameController.IsReplayingGame = true;
+                GameStateController.Instance.ServerChangeState(GameStates.Game);
+            }
+        }
+
+        [ObserversRpc]
+        private void RPC_ServerRecievedRequest()
+        {
+            AudioManager.Instance.PlaySFX(replayNotif);
+            replayNotifObj.SetActive(true);
+        }
+        
     }
 }

@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1178005462107229845
 Transform:
@@ -92,7 +92,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7740891394856106987
 Transform:
@@ -170,6 +170,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1178005462107229845}
     m_Modifications:
+    - target: {fileID: 452412490688686327, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197885474526839308, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4202082188489586602, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5121257308742224147, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.024861539
@@ -210,9 +222,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5636846782834853522, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6268207739067427945, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704150457038402356, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8536420562764500454, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
       propertyPath: m_Name
       value: Ornate Candle Stand
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536420562764500454, guid: 691babb9ad3101d48b83a8d762423903, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
