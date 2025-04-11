@@ -28,6 +28,7 @@ namespace Player.Cutscene
         
         [SerializeField] private GameObject textBox;
         [SerializeField] private TMPro.TMP_Text text;
+        [SerializeField] private TMPro.TMP_Text titleText;
         [SerializeField] private ControlPromptDisplayer controlPromptDisplayer;
         [SerializeField] TextAsset dialogDataSrc;
         
@@ -39,19 +40,18 @@ namespace Player.Cutscene
         private Action onDialogEnd;
 
         private bool animatingText;
-        private void Start()
+        
+        public void StartDialogue(System.Action onDialogueFinished)
         {
             InputReader.Instance.SetToGameplayInputs();   
             foreach (var cam in GameObject.FindObjectsByType<CinemachineVirtualCameraBase>(FindObjectsInactive.Include, FindObjectsSortMode.None))
             {
+                Debug.Log(cam.name);
                 cameras[cam.name] = cam.gameObject;
             }
             
             InputReader.Instance.OnGrabActivateEvent += ContinueDialog;
-        }
-        
-        public void StartDialogue(System.Action onDialogueFinished)
-        {
+            
             onDialogEnd = onDialogueFinished;
             AudioManager.Instance.PlayBG(bgmClip);
             dialogData = JsonConvert.DeserializeObject<Dictionary<string, DialogData>>(dialogDataSrc.text);
@@ -84,6 +84,7 @@ namespace Player.Cutscene
             activeCamera = cameras[activeDialog.CamToActivate];
             activeCamera.SetActive(true);
             textBox.SetActive(true);
+            titleText.text = activeDialog.Name;
             AnimateText(activeDialog.Text);
         }
 
