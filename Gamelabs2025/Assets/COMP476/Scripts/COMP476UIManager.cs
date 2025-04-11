@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     public Button quitButton;
     public TextMeshProUGUI timerText;
     public GameObject Logo;
-    [FormerlySerializedAs("scoreText")] public TextMeshProUGUI hidersRemainingText;
+    public TextMeshProUGUI scoreText;
 
     [Header("Pause Menu")]
     public GameObject pauseMenu;
@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     private float timeRemaining = 300f;
     private bool timerRunning = false;
     private bool isPaused = false;
+
+    public int Score = 0;
 
     public COMP476CharacterController CC;
 
@@ -33,12 +35,14 @@ public class UIManager : MonoBehaviour
 
         timerText.gameObject.SetActive(false);
         pauseMenu.SetActive(false);
+
+        Score = 0;
     }
 
     private void Update()
     {
         int remainingGhosts = FindObjectsByType<COMP476HiderMovement>(FindObjectsSortMode.None).Length;
-        hidersRemainingText.text = $"Ghosts remaining: {remainingGhosts}";
+        scoreText.text = $"Score: {Score}";
         // Pause toggle
         if (Input.GetKeyDown(KeyCode.Escape) && timerRunning)
         {

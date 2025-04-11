@@ -83,7 +83,7 @@ public class MoveToNode : BTAction
              Vector3.Distance(transform.position, _currentAccessPoint.transform.position) <= _repathDistance)
             )
         {
-            Debug.Log("repath");
+            //Debug.Log("repath");
             _currentAccessPoint = pathfinder.FindOptimalAccessPoint(transform, targetNode,
                 _alertPlayer ? bb.Get<Transform>("Player") : null, 14f);
 
