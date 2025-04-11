@@ -629,6 +629,14 @@ PrefabInstance:
       propertyPath: CC
       value: 
       objectReference: {fileID: 2045557244}
+    - target: {fileID: 723564523578220722, guid: 5ef91178aba0bf047b193d3167e3b95c, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 996293182}
+    - target: {fileID: 723564523578220722, guid: 5ef91178aba0bf047b193d3167e3b95c, type: 3}
+      propertyPath: hidersRemainingText
+      value: 
+      objectReference: {fileID: 996293182}
     - target: {fileID: 2923529135557792974, guid: 5ef91178aba0bf047b193d3167e3b95c, type: 3}
       propertyPath: m_Name
       value: UIManager
@@ -1349,7 +1357,7 @@ GameObject:
   - component: {fileID: 996293183}
   - component: {fileID: 996293182}
   m_Layer: 0
-  m_Name: GhostsRemainingText
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2779,6 +2787,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4acc4ca2ca7b89b439b37a8172308e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2111769173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2111769175}
+  - component: {fileID: 2111769174}
+  m_Layer: 0
+  m_Name: GhostSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2111769174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111769173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4a42f87ef771b249b6faf1f5d5d1e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graph: {fileID: 1529869499}
+  ghostPrefab: {fileID: 8429881023617595796, guid: ec6b2ed77fd87264c9a3a83d8e83f065, type: 3}
+  spawnInterval: 10
+--- !u!4 &2111769175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2111769173}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.062675, y: 9.526152, z: -5.756256}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2143414627 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1927576078117716399, guid: 0d321f80eca9c5b4d8cc612509e0416f, type: 3}
@@ -5357,3 +5412,4 @@ SceneRoots:
   - {fileID: 1046805878}
   - {fileID: 362451517}
   - {fileID: 609583897}
+  - {fileID: 2111769175}
