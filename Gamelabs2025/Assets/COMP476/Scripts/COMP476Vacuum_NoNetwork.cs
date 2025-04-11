@@ -135,6 +135,7 @@ namespace Items
                 if (!suckedPlayer)
                 {
                     Debug.Log("Hider captured");
+                    
                     suckedPlayer = true;
                 }
                 return;
@@ -143,6 +144,7 @@ namespace Items
             var item = rb.GetComponent<IVacuumDestroyable>();
             item?.OnVacuumed();
 
+            if(FindFirstObjectByType<UIManager>() != null) FindFirstObjectByType<UIManager>().Score += 10;
             Destroy(rb.gameObject);
         }
 
