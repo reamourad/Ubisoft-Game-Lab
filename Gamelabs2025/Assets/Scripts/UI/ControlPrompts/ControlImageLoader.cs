@@ -18,8 +18,17 @@ namespace Player.UI.ControlPrompts
         private static readonly string KeybaordSearchPath = "Keyboard_Mouse/T_{0}_Key_White";
 
         private static Dictionary<string, string> retargets;
+        private static bool isGamepad = false;
         public static Sprite Load(InputAction action, bool hasPositiveNegative, bool showPositive)
         {
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                isGamepad = true;
+            }
+            else if (Keyboard.current != null && Keyboard.current.wasUpdatedThisFrame)
+            {
+                isGamepad = false;
+            }
             string strKey = "";
 
             if (!hasPositiveNegative)
@@ -38,7 +47,7 @@ namespace Player.UI.ControlPrompts
             Sprite sprite = null;
             var gamepad = Gamepad.current;
             string searchpath="";
-            if (gamepad != null && gamepad.wasUpdatedThisFrame)
+            if (isGamepad)
             {
                 if (gamepad is XInputController)
                 {
@@ -69,11 +78,6 @@ namespace Player.UI.ControlPrompts
 
         private static string GetBindingText(InputAction action, bool showPositive)
         {
-            bool isGamepad = Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame;
-            bool isKeyboard = Keyboard.current != null && Keyboard.current.wasUpdatedThisFrame;
-
-            if (!isGamepad && !isKeyboard)
-                isKeyboard = true;
             
             var str = "";
             //We are assuming, Controller is always second, in the input-bindings asset. so when we have a +/- type input
@@ -85,7 +89,7 @@ namespace Player.UI.ControlPrompts
             {
                 str = action.GetBindingDisplayString(3, InputBinding.DisplayStringOptions.DontIncludeInteractions);
             }
-            else if(isKeyboard)// Defaults to keyboard
+            else // Defaults to keyboard
             {
                 str = action.GetBindingDisplayString(0, InputBinding.DisplayStringOptions.DontUseShortDisplayNames);
             }
