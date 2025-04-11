@@ -56,12 +56,12 @@ namespace StateManagement
         
         private readonly SyncVar<GameStage> currentStage = new SyncVar<GameStage>(GameStage.None);
         public GameStage CurrentGameStage =>currentStage.Value;
-        
+        public Action<GameStage> OnStageChanged;
         
         private List<NetworkObject> players;
         private readonly SyncVar<PlayerRole.RoleType> GameWinner = new SyncVar<PlayerRole.RoleType>(PlayerRole.RoleType.None);
 
-        public Action<GameStage> OnStageChanged;
+       
         
         private static Dictionary<int, PlayerRole.RoleType> createdRoles = new Dictionary<int, PlayerRole.RoleType>();
         public static bool IsReplayingGame { get;set;}
@@ -88,6 +88,8 @@ namespace StateManagement
             
             GameWinner.OnChange += GameWinnerOnOnChange;
             NoiseManager.OnNoiseGenerated += OnServerNoiseGenerated;
+
+            currentStage.OnChange += TriggerGameStageChangedEvent;
             
             if (IsClientStarted)
             {
@@ -107,6 +109,12 @@ namespace StateManagement
             }
         }
 
+        private void TriggerGameStageChangedEvent(GameStage prev, GameStage next, bool asserver)
+        {
+            OnStageChanged?.Invoke(next);
+        }
+
+
         private void OnDestroy()
         {
             OnStageChanged -= OnGameStageChanged;
@@ -116,6 +124,11 @@ namespace StateManagement
         
         private void OnGameStageChanged(GameStage stage)
         {
+            if (stage == GameStage.Preparing)
+            {
+                InputReader.Instance.SetToGameplayInputs();
+            }
+            
             if (stage == GameStage.Game)
             {
                 NotificationSystem.Instance.Notify("The hunt begins!");
@@ -304,7 +317,6 @@ namespace StateManagement
                     break;
             }
             currentStage.Value = stage;
-            OnStageChanged?.Invoke(currentStage.Value);
             RPC_InformClientsOfGameStageChange(currentStage.Value);
             Debug.Log($"GameController:: Switched Game Stage {currentStage.Value} --> {stage}");
         }
