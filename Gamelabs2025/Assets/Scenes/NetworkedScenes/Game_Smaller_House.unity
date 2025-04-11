@@ -89193,7 +89193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8105069229547681966, guid: 288e1c65033d73a4cb3aa366ea01b0ef, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000015259
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 8159141735133728980, guid: 288e1c65033d73a4cb3aa366ea01b0ef, type: 3}
       propertyPath: <SceneId>k__BackingField
