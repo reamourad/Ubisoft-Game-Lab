@@ -6519,7 +6519,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 112170907312350784, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: _tickRate
-      value: 64
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 4393252310584637057, guid: 0b650fca685f2eb41a86538aa883e4c1, type: 3}
       propertyPath: m_IsActive
@@ -54289,7 +54289,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 439557155869546743, guid: 8123b3526a42ce749bac07cc6dc6887b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 63.999817
+      value: 63.999756
       objectReference: {fileID: 0}
     - target: {fileID: 599958489236136932, guid: 8123b3526a42ce749bac07cc6dc6887b, type: 3}
       propertyPath: m_Pivot.x

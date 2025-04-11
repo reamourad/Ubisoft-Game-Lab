@@ -104,12 +104,17 @@ namespace Networking
 
         private void FPSMove(PlayerInputData inputData, float deltaTime)
         {
-            var rotation = transform.rotation;
-            var forward = rotation * Vector3.forward;
-            var right = rotation * Vector3.right;
-            var dir = (forward * inputData.MoveInputVector.y + right * inputData.MoveInputVector.x).normalized;
-            var move = dir * (speed / 10f);
-            rb.MovePosition(rb.position + move * deltaTime);
+            Vector3 input = inputData.MoveInputVector;
+            if (input.sqrMagnitude < 0.001f)
+                return;
+
+            Quaternion rotation = transform.rotation;
+            Vector3 moveDirection = (rotation * Vector3.forward * input.y + rotation * Vector3.right * input.x).normalized;
+
+            float moveSpeed = speed * 0.1f;
+            Vector3 movement = moveDirection * (moveSpeed * deltaTime);
+
+            rb.MovePosition(rb.position + movement);
         }
 
         private void TPSMove(PlayerInputData inputData, float deltaTime)

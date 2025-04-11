@@ -10,6 +10,7 @@ using Player.NotificationSystem;
 using StateManagement.StateManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace StateManagement
@@ -25,10 +26,10 @@ namespace StateManagement
         }
         
         [SerializeField] private NetworkObject seekerPrefab;
-        [SerializeField] private Transform seekerSpawn;
+        [FormerlySerializedAs("seekerSpawn")] [SerializeField] public Transform SeekerSpawn;
         
         [SerializeField] private NetworkObject hiderPrefab;
-        [SerializeField] private Transform hiderSpawn;
+        [FormerlySerializedAs("hiderSpawn")] [SerializeField] public Transform HiderSpawn;
 
         [Header("Game Variables")] 
         [SerializeField] private int prepTimeSeconds = 30;
@@ -242,13 +243,14 @@ namespace StateManagement
                     return SelectRandomSideRegular();
                 }
                 
+                //invert roles
                 var role = createdRoles[id];
                 switch (role)
                 {
                     case PlayerRole.RoleType.Seeker:
-                        return (seekerPrefab, seekerSpawn);
+                        return (hiderPrefab, HiderSpawn);
                     case PlayerRole.RoleType.Hider:
-                        return (hiderPrefab, hiderSpawn);
+                        return (seekerPrefab, SeekerSpawn);
                     default:
                     {
                         IsReplayingGame = false;
@@ -268,12 +270,12 @@ namespace StateManagement
                 if(Random.Range(0, 100) % 2 == 0)
                 {
                     prefab = seekerPrefab;
-                    spawnPoint = seekerSpawn;
+                    spawnPoint = SeekerSpawn;
                 }
                 else
                 {
                     prefab = hiderPrefab;
-                    spawnPoint = hiderSpawn;
+                    spawnPoint = HiderSpawn;
                 }
             }
             else
@@ -282,12 +284,12 @@ namespace StateManagement
                 if(playerRole == PlayerRole.RoleType.Hider)
                 {
                     prefab = seekerPrefab;
-                    spawnPoint = seekerSpawn;
+                    spawnPoint = SeekerSpawn;
                 }
                 else
                 {
                     prefab = hiderPrefab;
-                    spawnPoint = hiderSpawn;
+                    spawnPoint = HiderSpawn;
                 }
             }
             
@@ -336,6 +338,7 @@ namespace StateManagement
                 SwitchGameStage(GameStage.Game);
             });
             InputReader.Instance.SetToGameplayInputs();
+            IsReplayingGame = false;
         }
         
         private void ServerGamePlayStage()
@@ -392,7 +395,7 @@ namespace StateManagement
             StartCoroutine(DelayedInvoke(() =>
             {
                 SwitchGameStage(GameStage.Postgame);
-            }, 3f));
+            }, 0.1f));
         }
 
         [ObserversRpc]

@@ -30,7 +30,16 @@ namespace Networking
         private CinemachineBrain cineBrain;
         
         private Vector3 startingPosition;
+
+        private bool IsLocalScriptStarted = false;
         
+        private IEnumerator Start()
+        {
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(1f);
+            IsLocalScriptStarted = true;
+        }
+
         public override void OnStartClient()
         {
             base.OnStartClient();
@@ -86,6 +95,8 @@ namespace Networking
                 playerGraphics.transform.localRotation = Quaternion.identity;
             StartCoroutine(Delayed(() =>
             {
+                transform.position = GameController.Instance.SeekerSpawn.position;
+                startingPosition = transform.position;
                 var fpsCam = GetComponentInChildren<CinemachineCamera>();
                 fpsCam.enabled = true;
                 var camTrf = Camera.main.transform;
@@ -107,6 +118,9 @@ namespace Networking
                 if(hiderCameraPrefab == null || hiderCameraTargetTransform == null)
                     return ;
             
+                transform.position = GameController.Instance.HiderSpawn.position;
+                startingPosition = transform.position;
+                
                 Debug.Log("Loading TPS Camera!!");
                 hiderPlayerCamera = Instantiate(hiderCameraPrefab, hiderCameraTargetTransform.position, Quaternion.identity);
                 hiderPlayerCamera.GetComponent<CameraObstructionHandler>().player = this.transform;
@@ -139,6 +153,7 @@ namespace Networking
         {
             yield return new WaitUntil(()=>IsClientInitialized);
             yield return new WaitWhile(() => Camera.main == null);
+            yield return new WaitWhile(() => !IsLocalScriptStarted);
             callback?.Invoke();
         }
 

@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 670395239591340869}
   m_Layer: 6
   m_Name: Tablet_WorldItem
-  m_TagString: Untagged
+  m_TagString: WorldDummyItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -425,7 +425,7 @@ MonoBehaviour:
   _spectatorInterpolation: 2
   _enableTeleport: 0
   _teleportThreshold: 1
-  <PrefabId>k__BackingField: 0
+  <PrefabId>k__BackingField: 4
   <SpawnableCollectionId>k__BackingField: 0
   <AssetPathHash>k__BackingField: 2108101988305868082
   <SceneId>k__BackingField: 0

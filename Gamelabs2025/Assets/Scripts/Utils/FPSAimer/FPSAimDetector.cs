@@ -38,7 +38,7 @@ namespace Utils
         
         private void FixedUpdate()
         {
-            if(cam == null)
+            if(!cam)
                 return;
             
             var ray = new Ray(cam.transform.position, cam.transform.forward);

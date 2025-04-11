@@ -13,10 +13,15 @@ namespace Utils
         private Vector2 originalSize;
         private bool enlarged = false;
         private Coroutine highlightRoutine;
+
+        private RectTransform rt;
+        private CanvasGroup cg;
         
         private void Start()
         {
             originalSize = recticle.GetComponent<RectTransform>().sizeDelta;
+            cg = recticle.GetComponent<CanvasGroup>();
+            rt = recticle.GetComponent<RectTransform>();
         }
 
         public void Shrink()
@@ -44,8 +49,6 @@ namespace Utils
         IEnumerator HighlightRoutine(bool enlarge)
         {
             float timeStep = 0;
-            var cg = recticle.GetComponent<CanvasGroup>();
-            var rt = recticle.GetComponent<RectTransform>();
             var currSize = rt.sizeDelta;
             var newSize = enlarge? sizeMultiplier * originalSize:originalSize;
             var alpha = enlarge ? 1 : defaultRecticleAlpha;

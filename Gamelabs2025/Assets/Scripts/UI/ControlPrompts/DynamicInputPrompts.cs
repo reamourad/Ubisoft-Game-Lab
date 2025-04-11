@@ -45,7 +45,7 @@ namespace Player.UI.ControlPrompts
         private IEnumerator RebuildLayout()
         {
             yield return new WaitForEndOfFrame();
-            LayoutRebuilder.ForceRebuildLayoutImmediate(this.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(this.transform as RectTransform);
         }
 
         public void Clear()
