@@ -154,7 +154,7 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         if (playerRole != null && playerRole.Role == GameLookupMemory.MyLocalPlayerRole)
         {
             isPlayerNear = true;
-            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Interact, isOpen ? "Close" : "Open");
+            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Interact, isOpen ? "Close Door" : "Open Door");
         }
     }
 

@@ -763,6 +763,8 @@ MonoBehaviour:
   _componentIndexCache: 8
   _addedNetworkObject: {fileID: 5408301307720291325}
   _networkObjectCache: {fileID: 5408301307720291325}
+  aimDetector: {fileID: 412776066973354489}
+  seekerInventory: {fileID: 5671276658974756904}
 --- !u!114 &8211336727126746402
 MonoBehaviour:
   m_ObjectHideFlags: 0

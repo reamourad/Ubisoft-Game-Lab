@@ -79582,9 +79582,9 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 1927739127}
   _networkObjectCache: {fileID: 0}
   seekerPrefab: {fileID: 5408301307720291325, guid: b035d9798899cc449882e67c2a224cc3, type: 3}
-  seekerSpawn: {fileID: 1658080667}
+  SeekerSpawn: {fileID: 1658080667}
   hiderPrefab: {fileID: 5584394639087159213, guid: 2fbce9b8a7baa444289093c09e0d6dc4, type: 3}
-  hiderSpawn: {fileID: 605336660}
+  HiderSpawn: {fileID: 605336660}
   prepTimeSeconds: 90
   gameTimeSeconds: 300
   vacuumedSuckedParticles: {fileID: 395031058680739610, guid: 7f8699fdacc99e84f891fc1b369ece73, type: 3}

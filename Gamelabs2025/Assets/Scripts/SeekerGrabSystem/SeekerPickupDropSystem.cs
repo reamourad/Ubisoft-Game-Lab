@@ -10,7 +10,9 @@ namespace SeekerGrabSystem
     [RequireComponent(typeof(SeekerInventory))]
     public class SeekerPickupDropSystem : NetworkBehaviour
     {
+        [SerializeField]
         private FPSAimDetector aimDetector;
+        [SerializeField]
         private SeekerInventory seekerInventory;
         private SeekerWorldDummy ctxDummy;
         
@@ -19,9 +21,6 @@ namespace SeekerGrabSystem
             base.OnStartClient();
             if (IsOwner)
             {
-                seekerInventory = GetComponent<SeekerInventory>();
-                aimDetector = GetComponent<FPSAimDetector>();
-                
                 InputReader.Instance.OnGrabActivateEvent += OnPickup;
                 InputReader.Instance.OnDropItemEvent += OnDrop;
                 
@@ -32,9 +31,9 @@ namespace SeekerGrabSystem
 
         private bool DetectionTest(Collider other)
         {
-            if (other == null)
+            if (!other)
                 return false;
-            return other.GetComponentInParent<SeekerWorldDummy>() != null;
+            return other.CompareTag("WorldDummyItem");
         }
         
         private void OnDestroy()
@@ -47,7 +46,7 @@ namespace SeekerGrabSystem
 
         private void OnLookingAtObject(Collider obj)
         {
-            if (obj == null)
+            if (!obj)
             {
                 if (ctxDummy != null)
                     ctxDummy.Highlight(false);
