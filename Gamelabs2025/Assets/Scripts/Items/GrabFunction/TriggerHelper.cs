@@ -123,7 +123,7 @@ public class TriggerHelper : NetworkBehaviour
     {
         EnableCollision(true);
         ConnectionDictionary.MakeConnection(GetComponent<ITriggerItem>(), reaction.GetComponent<IReactionItem>(), 
-            transform, reaction.transform);
+            transform, reaction.transform, true);
         RPC_OnClientConnectToTrigger(trigger, reaction);
     }
 
@@ -133,7 +133,7 @@ public class TriggerHelper : NetworkBehaviour
         
         EnableCollision(true);
         ConnectionDictionary.MakeConnection(GetComponent<ITriggerItem>(), reaction.GetComponent<IReactionItem>(), 
-            transform, reaction.transform);
+            transform, reaction.transform, false);
     }
     
     [ServerRpc(RequireOwnership = false)]
@@ -150,8 +150,6 @@ public class TriggerHelper : NetworkBehaviour
         EnableCollision(false);
         ConnectionDictionary.ClearTriggerReactionEvents(GetComponent<ITriggerItem>(), null);
     }
-    
-    
     
     //shows the area you can connect to
     public void LateUpdate()

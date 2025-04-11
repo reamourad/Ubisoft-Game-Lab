@@ -124,7 +124,7 @@ public class ReactionHelper : NetworkBehaviour
     {
         EnableCollision(true);
         ConnectionDictionary.MakeConnection(trigger.GetComponent<ITriggerItem>(), GetComponent<IReactionItem>(), 
-            trigger.transform, transform);
+            trigger.transform, transform, true);
         RPC_OnClientConnectToTrigger(trigger, reaction);
     }
 
@@ -134,7 +134,7 @@ public class ReactionHelper : NetworkBehaviour
         
         EnableCollision(true);
         ConnectionDictionary.MakeConnection(trigger.GetComponent<ITriggerItem>(), GetComponent<IReactionItem>(), 
-            trigger.transform, transform);
+            trigger.transform, transform, false);
     }
     
     [ServerRpc(RequireOwnership = false)]
