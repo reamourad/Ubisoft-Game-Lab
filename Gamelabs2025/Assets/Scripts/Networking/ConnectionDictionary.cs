@@ -81,18 +81,22 @@ public static class ConnectionDictionary
         }
     }
         
-    public static void MakeConnection(ITriggerItem trigger, IReactionItem reaction, Transform triggerTransform, Transform reactionTransform)
+    public static void MakeConnection(ITriggerItem trigger, IReactionItem reaction, Transform triggerTransform, Transform reactionTransform, bool isServer)
     {
         if (trigger != null && reaction != null)
         {
             ClearTriggerReactionEvents(trigger, reaction);
-            var prefab = Resources.Load<GameObject>("RopePrefab");
-            Debug.Log(prefab);
-            var currentRope = Rope.CreateRope(prefab, triggerTransform, reactionTransform);
-            Debug.Log(currentRope);
-            trigger.rope = currentRope;
-            reaction.rope = currentRope;
             
+            if (!isServer)
+            {
+                var prefab = Resources.Load<GameObject>("RopePrefab");
+                Debug.Log(prefab);
+                var currentRope = Rope.CreateRope(prefab, triggerTransform, reactionTransform);
+                Debug.Log(currentRope);
+                trigger.rope = currentRope;
+                reaction.rope = currentRope;
+            }
+
             AddConnections(trigger, reaction);
             trigger.OnTriggerActivated += reaction.OnTrigger;
         }
