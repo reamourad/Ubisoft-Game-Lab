@@ -2,5 +2,7 @@
     "D-Pad Left": "Dpad_Left",
     "D-Pad Right": "Dpad_Right",
     "D-Pad Up": "Dpad_Up",
-    "D-Pad Down": "Dpad_Down"
+    "D-Pad Down": "Dpad_Down",
+    "Right Stick Press": "Right_Stick_Click",
+    "Right Stick Press": "Right_Stick_Click"
 }
