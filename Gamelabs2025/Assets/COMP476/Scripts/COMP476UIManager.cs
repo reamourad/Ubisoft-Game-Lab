@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     private bool timerRunning = false;
     private bool isPaused = false;
 
+    public TextMeshProUGUI finalScoreText;
+
     public int Score = 0;
 
     public COMP476CharacterController CC;
@@ -34,6 +36,7 @@ public class UIManager : MonoBehaviour
         restartButton.onClick.AddListener(RestartGame);
 
         timerText.gameObject.SetActive(false);
+        finalScoreText.gameObject.SetActive(false);
         pauseMenu.SetActive(false);
 
         Score = 0;
@@ -64,6 +67,12 @@ public class UIManager : MonoBehaviour
                 timeRemaining = 0;
                 timerRunning = false;
                 UpdateTimerDisplay(timeRemaining);
+                PauseGame();
+                resumeButton.gameObject.SetActive(false);
+                scoreText.gameObject.SetActive(false);
+                timerText.gameObject.SetActive(false);
+                finalScoreText.gameObject.SetActive(true);
+                finalScoreText.text = $"Final Score: {Score}";
             }
         }
     }
