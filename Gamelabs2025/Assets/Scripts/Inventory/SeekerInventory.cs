@@ -48,7 +48,7 @@ namespace Player.Inventory
             guiRef = Instantiate(inventoryGuiPrefab).GetComponent<SeekerInventoryGui>();
          }
       }
-
+      
       private void ToggleEquippedItem()
       {
          
@@ -84,11 +84,14 @@ namespace Player.Inventory
       {
          yield return new WaitForSeconds(0.15f);
          Equip(id);
+         delayedToggleRoutine = null;
       }
       
       private void OnDestroy()
       {
+         OnAttachableSpawned += ClientOnAttachableSpawnedOnServer;
          InputReader.Instance.OnEquipInventoryItemEvent -= Equip;
+         InputReader.Instance.OnToggleEquippedItemEvent -= ToggleEquippedItem;
       }
       
       private bool GetEmptySlot(out int availableSlotId)

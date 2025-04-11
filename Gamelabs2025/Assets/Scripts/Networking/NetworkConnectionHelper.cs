@@ -106,7 +106,7 @@ namespace Networking
         public static void ConnectToRemoteServer(System.Action<ClientConnectionStateArgs> clientConnectionStateCallback = null)
         {
             var connections = GetConnectionInfo();
-            if (connections != null || !connections.ContainsKey(Application.version))
+            if (connections == null || !connections.ContainsKey(Application.version))
             {
                 Debug.Log("Server Version for this client is not available.");
                 return;
