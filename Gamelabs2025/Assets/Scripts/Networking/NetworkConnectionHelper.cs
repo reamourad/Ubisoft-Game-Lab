@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FishNet;
@@ -21,13 +22,24 @@ namespace Networking
         private const string SERVER_IPADDR = "127.0.0.1";
         private const ushort SERVER_PORT = 7770;
 
-        private static NetworkConnectionInfo connectionInfo;
+        private static Dictionary<string, NetworkConnectionInfo> connectionInfo;
         private static LocalConnectionState connectionState;
         
         public static bool ConnectionInfoAvailable => GetConnectionInfo() != null;
-        public static string RemoteServerVersion => GetConnectionInfo().remoteServerVersion;
+
+        public static string RemoteServerVersion
+        {
+            get
+            {
+                var connectionInfo = GetConnectionInfo();
+                if (connectionInfo == null || !connectionInfo.ContainsKey(Application.version))
+                    return "--";
+
+                return connectionInfo[Application.version].remoteServerVersion;
+            }
+        }
         
-        private static NetworkConnectionInfo GetConnectionInfo()
+        private static Dictionary<string, NetworkConnectionInfo> GetConnectionInfo()
         {
             return connectionInfo;
             
@@ -93,7 +105,14 @@ namespace Networking
         
         public static void ConnectToRemoteServer(System.Action<ClientConnectionStateArgs> clientConnectionStateCallback = null)
         {
-            var connectionInfo = GetConnectionInfo();
+            var connections = GetConnectionInfo();
+            if (connections != null || !connections.ContainsKey(Application.version))
+            {
+                Debug.Log("Server Version for this client is not available.");
+                return;
+            }
+
+            var connectionInfo = GetConnectionInfo()[Application.version];
             ConnectToServer(connectionInfo.address, (ushort)connectionInfo.port, clientConnectionStateCallback);
         }
 
@@ -130,7 +149,7 @@ namespace Networking
             if (res.IsSuccessStatusCode)
             {
                 var json = await res.Content.ReadAsStringAsync();
-                connectionInfo = JsonConvert.DeserializeObject<NetworkConnectionInfo>(json);
+                connectionInfo = JsonConvert.DeserializeObject<Dictionary<string, NetworkConnectionInfo>>(json);
             }
         } 
     }
