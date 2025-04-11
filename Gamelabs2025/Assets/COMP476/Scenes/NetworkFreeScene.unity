@@ -629,6 +629,10 @@ PrefabInstance:
       propertyPath: CC
       value: 
       objectReference: {fileID: 2045557244}
+    - target: {fileID: 723564523578220722, guid: 5ef91178aba0bf047b193d3167e3b95c, type: 3}
+      propertyPath: timeRemaining
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 2923529135557792974, guid: 5ef91178aba0bf047b193d3167e3b95c, type: 3}
       propertyPath: m_Name
       value: UIManager

@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     public Button resumeButton;
     public Button restartButton;
 
-    private float timeRemaining = 300f;
+    public float timeRemaining = 300f;
     private bool timerRunning = false;
     private bool isPaused = false;
 
@@ -83,7 +83,6 @@ public class UIManager : MonoBehaviour
         quitButton.gameObject.SetActive(false);
 
         timerText.gameObject.SetActive(true);
-        timeRemaining = 300f;
         timerRunning = true;
 
         Logo.SetActive(false);
