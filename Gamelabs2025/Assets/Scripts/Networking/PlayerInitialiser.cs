@@ -31,19 +31,16 @@ namespace Networking
         
         private Vector3 startingPosition;
 
-        private bool IsLocalScriptStarted = false;
-        
-        private IEnumerator Start()
-        {
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForSeconds(1f);
-            IsLocalScriptStarted = true;
-        }
-
         public override void OnStartClient()
         {
             base.OnStartClient();
-            startingPosition = transform.position;
+            StartCoroutine(Initialise());
+        }
+
+        private IEnumerator Initialise()
+        {
+            Debug.Log($"Initialising PlayerInitialiser");
+            yield return new WaitForEndOfFrame();
             var playerRole = GetComponent<PlayerRole>().Role;
             if (!IsOwner)
                 NonOwnerIntialisation(playerRole);
@@ -76,6 +73,7 @@ namespace Networking
         
         private void OwnerIntialisation(PlayerRole.RoleType playerRole)
         {
+            Debug.Log($"Initialising Owner");
             GameLookupMemory.LocalPlayer = this.gameObject;
             switch (playerRole)
             {
@@ -95,6 +93,10 @@ namespace Networking
                 playerGraphics.transform.localRotation = Quaternion.identity;
             StartCoroutine(Delayed(() =>
             {
+                Debug.Log(transform.position);
+                Debug.Log(GameController.Instance);
+                Debug.Log(GameController.Instance.HiderSpawn);
+                
                 transform.position = GameController.Instance.SeekerSpawn.position;
                 startingPosition = transform.position;
                 var fpsCam = GetComponentInChildren<CinemachineCamera>();
@@ -113,11 +115,15 @@ namespace Networking
 
         private void OwnerHiderInitialisation()
         {
+            Debug.Log($"Initialising Owner Hider");
             StartCoroutine(Delayed(() =>
             {
                 if(hiderCameraPrefab == null || hiderCameraTargetTransform == null)
                     return ;
-            
+                
+                Debug.Log(transform.position);
+                Debug.Log(GameController.Instance);
+                Debug.Log(GameController.Instance.HiderSpawn);
                 transform.position = GameController.Instance.HiderSpawn.position;
                 startingPosition = transform.position;
                 
@@ -151,9 +157,8 @@ namespace Networking
 
         IEnumerator Delayed(System.Action callback)
         {
-            yield return new WaitUntil(()=>IsClientInitialized);
+            yield return new WaitUntil(()=>  IsClientInitialized);
             yield return new WaitWhile(() => Camera.main == null);
-            yield return new WaitWhile(() => !IsLocalScriptStarted);
             callback?.Invoke();
         }
 

@@ -11,7 +11,7 @@ public class SeekerWorldDummy : NetworkBehaviour
 
     public void Highlight(bool show)
     {
-        if(!highlightEffect)
+        if(highlightEffect)
             highlightEffect.highlighted = show;
     }
 
