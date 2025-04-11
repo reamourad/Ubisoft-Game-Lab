@@ -18,7 +18,6 @@ namespace Items.StationaryObjects
         {
             if (isTriggered) return;
             NoiseManager.Instance?.GenerateNoise(transform.position, 1f, 0.5f);
-            isTriggered = true;
         }
 
         protected override void OnClientActivateStationaryObject()

@@ -80,6 +80,12 @@ namespace StateManagement
                 return instance;
             }
         }
+
+        private void Awake()
+        {
+            if(instance == null)
+                instance = this;
+        }
         
         private IEnumerator Start()
         {
@@ -89,7 +95,6 @@ namespace StateManagement
             
             GameWinner.OnChange += GameWinnerOnOnChange;
             NoiseManager.OnNoiseGenerated += OnServerNoiseGenerated;
-
             currentStage.OnChange += TriggerGameStageChangedEvent;
             
             if (IsClientStarted)
