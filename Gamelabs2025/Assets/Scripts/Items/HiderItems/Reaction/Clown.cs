@@ -27,6 +27,7 @@ namespace Items.HiderItems.Reaction
         private void OnServerTrigger()
         {
             if (triggered) return;
+            NoiseManager.Instance.GenerateNoise(transform.position, 0.55f,1);
             RPC_OnClientTrigger();
         }
 

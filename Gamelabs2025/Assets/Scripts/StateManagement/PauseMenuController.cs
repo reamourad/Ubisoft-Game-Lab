@@ -56,7 +56,8 @@ namespace StateManagement
             }
             else
             {
-                Destroy(instance.gameObject);
+                if(instance != null)
+                    Destroy(instance.gameObject);
             }
         }
         

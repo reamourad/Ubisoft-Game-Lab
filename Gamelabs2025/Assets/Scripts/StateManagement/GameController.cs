@@ -44,7 +44,7 @@ namespace StateManagement
         [SerializeField] private AudioClip gameBeginSound;
 
         [SerializeField] private float angyDelay = 0.5f;
-        [SerializeField] private int timePenalty = 30;
+        [SerializeField] private int maxTimePenalty = 45;
         
         [SerializeField] private AudioClip ambiance;
         
@@ -62,6 +62,9 @@ namespace StateManagement
         private readonly SyncVar<PlayerRole.RoleType> GameWinner = new SyncVar<PlayerRole.RoleType>(PlayerRole.RoleType.None);
 
         public Action<GameStage> OnStageChanged;
+        
+        private static Dictionary<int, PlayerRole.RoleType> createdRoles = new Dictionary<int, PlayerRole.RoleType>();
+        public static bool IsReplayingGame { get;set;}
 
         private int readyClients=0;
         // singleton pattern
@@ -81,7 +84,7 @@ namespace StateManagement
         {
             //we start from the next frame
             //loading is already heavy
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.1f);
             
             GameWinner.OnChange += GameWinnerOnOnChange;
             NoiseManager.OnNoiseGenerated += OnServerNoiseGenerated;
@@ -174,7 +177,7 @@ namespace StateManagement
             players = new List<NetworkObject>();
             foreach (var connection in InstanceFinder.NetworkManager.ServerManager.Clients)
             {
-                var randSel = SelectRandomSide();
+                var randSel = SelectRandomSide(connection.Key);
                 Debug.Log($"GameController:: Spawning Player: {{ connection.Value.ClientId}} ({randSel.prefab.name})");
                 
                 NetworkObject nob = networkManager.GetPooledInstantiated(randSel.prefab,randSel.spawnPoint.position, randSel.spawnPoint.rotation, true);
@@ -214,7 +217,36 @@ namespace StateManagement
         
         
         //Lets not look here, its quite shitty :p
-        private (NetworkObject prefab, Transform spawnPoint) SelectRandomSide()
+        private (NetworkObject prefab, Transform spawnPoint) SelectRandomSide(int id)
+        {
+
+            if (IsReplayingGame)
+            {
+                if (!createdRoles.ContainsKey(id))
+                {
+                    IsReplayingGame = false;
+                    createdRoles.Clear();
+                    return SelectRandomSideRegular();
+                }
+                
+                var role = createdRoles[id];
+                switch (role)
+                {
+                    case PlayerRole.RoleType.Seeker:
+                        return (seekerPrefab, seekerSpawn);
+                    case PlayerRole.RoleType.Hider:
+                        return (hiderPrefab, hiderSpawn);
+                    default:
+                    {
+                        IsReplayingGame = false;
+                        return SelectRandomSideRegular();
+                    }
+                }
+            }
+            return SelectRandomSideRegular();
+        }
+
+        private (NetworkObject prefab, Transform spawnPoint) SelectRandomSideRegular()
         {
             NetworkObject prefab;
             Transform spawnPoint;
@@ -291,6 +323,7 @@ namespace StateManagement
             {
                 SwitchGameStage(GameStage.Game);
             });
+            InputReader.Instance.SetToGameplayInputs();
         }
         
         private void ServerGamePlayStage()
@@ -379,14 +412,20 @@ namespace StateManagement
             if(!IsServerStarted)
                 return;
             
-            StartCoroutine(DelayedInvoke(ServerDoTimePenalty, angyDelay));
+            if(CurrentGameStage != GameStage.Game)
+                return;
+            
+            StartCoroutine(DelayedInvoke(() =>
+            {
+                ServerDoTimePenalty(strength);
+            }, angyDelay));
             RPC_InvokeHouseAngy(angyDelay);
         }
 
         [Server]
-        private void ServerDoTimePenalty()
+        private void ServerDoTimePenalty(float strength)
         {
-            Networking.TimeManager.Instance.ApplyPenalty(timePenalty);
+            Networking.TimeManager.Instance.ApplyPenalty((int)(maxTimePenalty * strength));
         }
         
         [ObserversRpc]

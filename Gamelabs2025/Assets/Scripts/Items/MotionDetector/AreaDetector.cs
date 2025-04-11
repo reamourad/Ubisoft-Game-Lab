@@ -33,18 +33,8 @@ namespace Player.Items.MotionDetector
         {
             base.OnStartServer();
             rangeDetector.gameObject.SetActive(true);
-            rangeDetector.GetComponent<MeshRenderer>().enabled = false;
         }
-
-        private void Update()
-        {
-            if (IsClientStarted 
-                && GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Hider)
-            {
-                rangeDetector.gameObject.SetActive(true);
-            }
-        }
-
+        
         IEnumerator Initialize()
         {
             yield return new WaitWhile(() => GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.None);
@@ -65,6 +55,11 @@ namespace Player.Items.MotionDetector
             var role = other.GetComponentInParent<PlayerRole>();
             if(role == null)
                 return;
+            
+            // no connection, no trigger
+            if(ConnectionDictionary.GetConnectedReactions(this) == null)
+                return;
+            
             if (role.Role == PlayerRole.RoleType.Seeker)
             {
                 var direction = (other.transform.position - rayCastPoint.position).normalized;

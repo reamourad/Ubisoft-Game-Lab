@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5121257308742224147
 Transform:
@@ -176,6 +176,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR Flame (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2421226186157800132, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2421226186157800133, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -188,6 +192,10 @@ PrefabInstance:
       propertyPath: animatedLights.Array.data[0].intensityStart
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 8152503899451440730, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Range
       value: 6.704809
@@ -195,6 +203,14 @@ PrefabInstance:
     - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Intensity
       value: 0.08704809
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -301,6 +317,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR Flame (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2421226186157800132, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2421226186157800133, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -313,13 +333,25 @@ PrefabInstance:
       propertyPath: animatedLights.Array.data[0].intensityStart
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 8152503899451440730, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Range
-      value: 6.704809
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Intensity
-      value: 0.08704809
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -426,6 +458,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR Flame
       objectReference: {fileID: 0}
+    - target: {fileID: 2421226186157800132, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 2421226186157800133, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -438,13 +474,25 @@ PrefabInstance:
       propertyPath: animatedLights.Array.data[0].intensityStart
       value: 0.08
       objectReference: {fileID: 0}
+    - target: {fileID: 8152503899451440730, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Range
-      value: 6.704809
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
       propertyPath: m_Intensity
-      value: 0.08704809
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891276448460042506, guid: af304c622ca86a045a1280a5154d2bb1, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
