@@ -30,6 +30,8 @@ namespace Networking
         private CinemachineBrain cineBrain;
         
         private Vector3 startingPosition;
+        private GameObject spawnedSeekerTutorial;
+        private GameObject spawnedHiderTutorial;
 
         public override void OnStartClient()
         {
@@ -109,6 +111,13 @@ namespace Networking
                 GetComponentInChildren<NetworkPlayerController>().SetCameraTransform(camTrf);
                 if (fpsGraphicsManager != null)
                     fpsGraphicsManager.SetRendererEnabled(false);
+
+                GameObject prefab = Resources.Load<GameObject>("SeekerTutorial");
+
+                spawnedSeekerTutorial = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+                spawnedSeekerTutorial.transform.SetParent(GameObject.Find("Canvas")?.transform, false);
+
+                
             }));
             
         }
@@ -143,6 +152,12 @@ namespace Networking
                 {
                     cineBrain.UpdateMethod = CinemachineBrain.UpdateMethods.ManualUpdate;
                 }
+
+                GameObject prefab = Resources.Load<GameObject>("HiderTutorial");
+
+                spawnedHiderTutorial = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+                spawnedHiderTutorial.transform.SetParent(GameObject.Find("Canvas")?.transform, false);
+
             }));
         }
 

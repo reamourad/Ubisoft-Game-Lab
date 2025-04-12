@@ -109,6 +109,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         inputMap.Gameplay.Enable();
         //disable every other maps
         inputMap.UI.Disable();
+        Debug.Log("Game Input kachow");
     }
     
     //Enable UI inputs only 
@@ -117,6 +118,7 @@ public class InputReader : ScriptableObject, InputMap.IGameplayActions, InputMap
         inputMap.UI.Enable();
         //disable every other maps
         inputMap.Gameplay.Disable();
+        Debug.Log("UI Input");
     }
     
     public void OnMove(InputAction.CallbackContext context)
