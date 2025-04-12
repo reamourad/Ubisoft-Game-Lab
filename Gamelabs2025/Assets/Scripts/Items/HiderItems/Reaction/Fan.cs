@@ -1,4 +1,4 @@
-using DG.Tweening;
+using System.Collections;
 using FishNet.Object;
 using GogoGaga.OptimizedRopesAndCables;
 using Player.Data;
@@ -31,7 +31,6 @@ namespace Items.HiderItems.Reaction
         [Server]
         private void OnServerBlow()
         {
-            //if (isTriggered) return;
             RPC_OnClientBlow();
             ApplyWindEffect();
             isTriggered = true;
@@ -46,9 +45,15 @@ namespace Items.HiderItems.Reaction
             {
                 if (ValidCollider(collider, out var stationaryObject))
                 {
-                    DOVirtual.DelayedCall(1, () => { stationaryObject.ApplyStationaryEffect(effects); });
+                    StartCoroutine(TriggerStationary(stationaryObject));
                 }
             }
+        }
+
+        private IEnumerator TriggerStationary(StationaryObjectBase stationaryObject)
+        {
+            yield return new WaitForSeconds(1f);
+            stationaryObject.ApplyStationaryEffect(effects);
         }
 
         [ObserversRpc]
@@ -60,14 +65,14 @@ namespace Items.HiderItems.Reaction
             isSpinning = true;
             PlaySound();
             Destroy(effect, 3);
-            DOVirtual.DelayedCall(3.5f, () =>
+            StartCoroutine(StopSpinning());
+            return;
+
+            IEnumerator StopSpinning()
             {
+                yield return new WaitForSeconds(3.5f);
                 isSpinning = false;
-                /*var smoke = Instantiate(smokeFx, transform.position, Quaternion.identity);
-                smoke.transform.SetParent(transform);
-                smoke.transform.forward = Vector3.up;
-                Destroy(smoke, 3);*/
-            });
+            }
         }
 
         private void PlaySound()
