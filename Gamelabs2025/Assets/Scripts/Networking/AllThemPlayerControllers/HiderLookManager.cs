@@ -15,15 +15,8 @@ public class HiderLookManager : NetworkBehaviour
     [SerializeField] private Vector3 boxCastHalfExtents = new Vector3(0.5f, 1.0f, 0.1f);
     public bool isActive = true;
     
-    private NetworkPlayerConnectionController playerConnectionController;
-
     // The current object the player is looking at
     private GameObject currentLookTarget;
-    
-    private void Start()
-    {
-        playerConnectionController = GetComponent<NetworkPlayerConnectionController>();
-    }
     
     private void Update()
     {
@@ -73,7 +66,7 @@ public class HiderLookManager : NetworkBehaviour
         }
 
         var grabable = currentLookTarget.GetComponent<IHiderGrabableItem>();
-        var connectable = currentLookTarget.GetComponent<IConnectable>();
+        // var connectable = currentLookTarget.GetComponent<IConnectable>();
         
         if (InScreenUI.Instance == null) return; 
         
@@ -85,10 +78,10 @@ public class HiderLookManager : NetworkBehaviour
             InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.Grab, "Grab");
         }
 
-        if (connectable != null)
-        {
-            InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
-        }    
+        // if (connectable != null)
+        // {
+        //     InScreenUI.Instance.ShowInputPrompt(InputReader.Instance.inputMap.Gameplay.ConnectItems, "Connect");
+        // }    
     }           
 
 

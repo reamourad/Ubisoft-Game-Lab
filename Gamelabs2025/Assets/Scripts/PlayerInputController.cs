@@ -26,7 +26,6 @@ namespace Player
         private NetworkPlayerController.PlayerInputData inputData = default;
         private NetworkPlayerController playerController;
         private NetworkPlayerGrabController _playerGrabController;
-        private NetworkPlayerConnectionController playerConnectionController;
 
         private void OnDestroy()
         {
@@ -38,7 +37,7 @@ namespace Player
             inputReader.OnLookEvent -= ClientHandleLook;
             // inputReader.OnGrabReleaseEvent -= ClientHandleGrabRelease;
             inputReader.OnGrabActivateEvent -= ClientHandleGrab;
-            inputReader.OnConnectItemsEvent -= ClientHandleConnectItems;
+            // inputReader.OnConnectItemsEvent -= ClientHandleConnectItems;
         }
 
 
@@ -57,12 +56,11 @@ namespace Player
             inputReader.OnLookEvent += ClientHandleLook;
             // inputReader.OnGrabReleaseEvent += ClientHandleGrabRelease;
             inputReader.OnGrabActivateEvent += ClientHandleGrab;
-            inputReader.OnConnectItemsEvent += ClientHandleConnectItems;
+            // inputReader.OnConnectItemsEvent += ClientHandleConnectItems;
 
 
             playerController = GetComponent<NetworkPlayerController>();
             _playerGrabController = GetComponent<NetworkPlayerGrabController>();
-            playerConnectionController = GetComponent<NetworkPlayerConnectionController>();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             //playerVisuals.SetActive(false);
@@ -108,9 +106,9 @@ namespace Player
                 _playerGrabController.OnGrab();
         }
 
-        private void ClientHandleConnectItems()
-        {
-            playerConnectionController?.OnConnectButtonPressed();
-        }
+        // private void ClientHandleConnectItems()
+        // {
+        //     playerConnectionController?.OnConnectButtonPressed();
+        // }
     }
 }
