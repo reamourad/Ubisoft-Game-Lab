@@ -2125,6 +2125,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &90793449 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+  m_PrefabInstance: {fileID: 8536983074172261937}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &92209811
 GameObject:
   m_ObjectHideFlags: 0
@@ -50294,9 +50299,9 @@ MonoBehaviour:
   _addedNetworkObject: {fileID: 1927739127}
   _networkObjectCache: {fileID: 0}
   seekerPrefab: {fileID: 5408301307720291325, guid: b035d9798899cc449882e67c2a224cc3, type: 3}
-  seekerSpawn: {fileID: 1658080667}
+  SeekerSpawn: {fileID: 1658080667}
   hiderPrefab: {fileID: 5584394639087159213, guid: 2fbce9b8a7baa444289093c09e0d6dc4, type: 3}
-  hiderSpawn: {fileID: 605336660}
+  HiderSpawn: {fileID: 605336660}
   prepTimeSeconds: 30
   gameTimeSeconds: 480
   vacuumedSuckedParticles: {fileID: 395031058680739610, guid: 7f8699fdacc99e84f891fc1b369ece73, type: 3}
@@ -50305,7 +50310,7 @@ MonoBehaviour:
   chaseBGM: {fileID: 8300000, guid: 64e5f82f4dc5ccd48a314fd0b7ed85db, type: 3}
   gameBeginSound: {fileID: 8300000, guid: 7f5bb8b56d0f8ca40ba4bb20695486fd, type: 3}
   angyDelay: 1.5
-  timePenalty: 30
+  maxTimePenalty: 45
   ambiance: {fileID: 8300000, guid: dce584c84fcfb9445b69c90bbe477261, type: 3}
   houseAngySFX: {fileID: 8300000, guid: 9d36295feb4682246b42208269c8e3e3, type: 3}
   cameraShakeObj: {fileID: 2110324343466382509, guid: db4ec2ca0bf04ca409868ba9177c9ead, type: 3}
@@ -50329,6 +50334,7 @@ Transform:
   - {fileID: 689538675}
   - {fileID: 1856287760}
   - {fileID: 1894776810}
+  - {fileID: 90793449}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1927739127
@@ -56939,6 +56945,71 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &8536983074172261937
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1927739126}
+    m_Modifications:
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 18941808633621406, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 187652020515242144, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: _addedNetworkObject
+      value: 
+      objectReference: {fileID: 1927739127}
+    - target: {fileID: 3633305875635795760, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: <SceneId>k__BackingField
+      value: 3980377983
+      objectReference: {fileID: 0}
+    - target: {fileID: 3731748611803899481, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: m_Name
+      value: TutorialManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
 --- !u!1001 &8827222980521613819
 PrefabInstance:
   m_ObjectHideFlags: 0
