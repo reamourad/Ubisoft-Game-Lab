@@ -3,7 +3,6 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Tutorial
 {
@@ -115,7 +114,7 @@ namespace Tutorial
         {
             if (counter != pageCount - 1) return;
             UnBindKeys();
-            Destroy(this);
+            DOTween.KillAll();
             Destroy(gameObject);
         }
     }
