@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 8
+  _componentIndexCache: 9
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
 --- !u!1 &6284289427881447801
@@ -522,6 +522,7 @@ MonoBehaviour:
   - {fileID: 5087237459156064016}
   - {fileID: 6203069042472803077}
   - {fileID: 6824402132047484539}
+  - {fileID: 3724570432305077370}
   - {fileID: 3637104021805829915}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects:
@@ -785,9 +786,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcb9fd44a7969d4f9cfbc130479b3ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 8
   _addedNetworkObject: {fileID: 5584394639087159213}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 5584394639087159213}
   _graphicalObject: {fileID: 3760002842364422920}
   _enableTeleport: 0
   _teleportThreshold: 3753

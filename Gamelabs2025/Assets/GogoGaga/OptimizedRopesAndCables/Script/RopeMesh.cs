@@ -151,8 +151,12 @@ namespace GogoGaga.OptimizedRopesAndCables
             for (int i = 0; i < points.Length; i++)
             {
                 Vector3 direction = i < points.Length - 1 ? points[i + 1] - points[i] : points[i] - points[i - 1];
-                Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
-
+                Quaternion rotation = Quaternion.identity;
+                if (direction.magnitude < 0.0001)
+                    rotation = Quaternion.identity;
+                else
+                    rotation = Quaternion.LookRotation(direction, Vector3.up);
+                
                 // Create vertices around a circle at this point
                 for (int j = 0; j <= segmentsPerWire; j++)
                 {
@@ -195,7 +199,14 @@ namespace GogoGaga.OptimizedRopesAndCables
             int startCapCenterIndex = vertices.Count;
             vertices.Add(transform.InverseTransformPoint(points[0]));
             uvs.Add(new Vector2(0.5f, 0)); // Center of the cap
-            Quaternion startRotation = Quaternion.LookRotation(points[1] - points[0]);
+            var startDir = points[1] - points[0];
+            Quaternion startRotation = Quaternion.identity;
+
+            if (startDir.magnitude > 0.0001f)
+            {
+                startRotation = Quaternion.LookRotation(startDir);
+            }
+            
             for (int j = 0; j <= segmentsPerWire; j++)
             {
                 float angle = j * Mathf.PI * 2f / segmentsPerWire;
@@ -216,7 +227,15 @@ namespace GogoGaga.OptimizedRopesAndCables
             int endCapCenterIndex = vertices.Count;
             vertices.Add(transform.InverseTransformPoint(points[points.Length - 1]));
             uvs.Add(new Vector2(0.5f, currentLength * tilingPerMeter)); // Center of the cap
-            Quaternion endRotation = Quaternion.LookRotation(points[points.Length - 1] - points[points.Length - 2]);
+            
+            var endDir = points[points.Length - 1] - points[points.Length - 2];
+            Quaternion endRotation = Quaternion.identity;
+
+            if (endDir.magnitude > 0.0001f)
+            {
+                endRotation = Quaternion.LookRotation(endDir);
+            }
+            
             for (int j = 0; j <= segmentsPerWire; j++)
             {
                 float angle = j * Mathf.PI * 2f / segmentsPerWire;
