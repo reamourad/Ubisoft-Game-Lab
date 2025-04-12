@@ -132,7 +132,7 @@ namespace StateManagement
         {
             if (stage == GameStage.Preparing)
             {
-                InputReader.Instance.SetToGameplayInputs();
+                //InputReader.Instance.SetToGameplayInputs();
             }
             
             if (stage == GameStage.Game)
