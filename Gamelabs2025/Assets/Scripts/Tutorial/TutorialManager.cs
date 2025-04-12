@@ -1,8 +1,11 @@
+using Player;
+using StateManagement;
 using UnityEngine;
 
 public class PlayerTutorialUI : MonoBehaviour
 {
-    [SerializeField] private GameObject tutorialCanvasPrefab;
+    [SerializeField] private GameObject SeekerTutorialPrefab;
+    [SerializeField] private GameObject HiderTutorialPrefab;
 
     private GameObject spawnedCanvas;
 
@@ -13,7 +16,21 @@ public class PlayerTutorialUI : MonoBehaviour
 
     private void SpawnTutorialUI()
     {
-        spawnedCanvas = Instantiate(tutorialCanvasPrefab, Vector3.zero, Quaternion.identity);
+        var role = GameLookupMemory.MyLocalPlayerRole;
+
+        if (role == PlayerRole.RoleType.Seeker)
+        {
+            spawnedCanvas = Instantiate(SeekerTutorialPrefab, Vector3.zero, Quaternion.identity);
+        }
+        else if (role == PlayerRole.RoleType.Hider)
+        {
+            spawnedCanvas = Instantiate(HiderTutorialPrefab, Vector3.zero, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("Player role not set or unknown.");
+            return;
+        }
         spawnedCanvas.transform.SetParent(GameObject.Find("Canvas")?.transform, false);
     }
 

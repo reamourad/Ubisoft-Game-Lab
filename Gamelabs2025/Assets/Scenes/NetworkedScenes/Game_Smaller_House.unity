@@ -70609,6 +70609,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 187652020515242144, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: HiderTutorialPrefab
+      value: 
+      objectReference: {fileID: 5089475164199094076, guid: 82a15cfc05e3e5546be336a84df2129e, type: 3}
+    - target: {fileID: 187652020515242144, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
+      propertyPath: SeekerTutorialPrefab
+      value: 
+      objectReference: {fileID: 5089475164199094076, guid: 1902df8eb2b1f2541b283f1914b3ef53, type: 3}
     - target: {fileID: 3633305875635795760, guid: 6831b6725d57db94f859b204d1bdcf3a, type: 3}
       propertyPath: <SceneId>k__BackingField
       value: 805298111
