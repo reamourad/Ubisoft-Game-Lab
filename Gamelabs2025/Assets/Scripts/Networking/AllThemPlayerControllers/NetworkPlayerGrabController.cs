@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using FishNet.Object;
 using Items.Interfaces;
 using Player;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,7 +23,7 @@ namespace Networking
         //this is variables for the placement mechanic
         public Material ghostMaterial;
         public Material invalidPlacementMaterial;
-        private Material originalMaterial;
+        private Dictionary<Renderer, Material> originalMaterial;
         private Transform originalTransform; 
         private bool isBlueprintMode = false;
         private bool isGrabButtonHeld = false;
@@ -33,17 +35,19 @@ namespace Networking
         // Define a specific layer for temporarily placing the grabbed object
         private const int IGNORE_RAYCAST_LAYER = 2;
         [SerializeField] private LayerMask itemLayerMask;
+        private Collider originalBoxCollider = null;
 
         private void Start()
         {
             playerCamera = Camera.main;
             hiderLookManager = GetComponent<HiderLookManager>();
+            originalMaterial = new Dictionary<Renderer, Material>();
         }
 
         // Update is called once per frame
             void Update()
             {
-                if (isBlueprintMode && isGrabButtonHeld && grabbedObject != null)
+                if (isBlueprintMode && grabbedObject != null)
                 {
                     //place mechanic
                     originalTransform = grabbedObject.transform;
@@ -83,12 +87,10 @@ namespace Networking
                     /*TODO: if the hit collider game object is not a valid placement, we want to send a ray from the item down until it hits something,
                      if it does check if that's a valid placement, if not then put the box there with a red outline, 
                      if you release when youre at a red outline, the object goes back to your handsGet the collider's bounds for proper placement */
-                    
-                    Collider objCollider = objectToPlace.GetComponent<Collider>();
-                    
-                    if (objCollider != null)
+
+                    if (originalBoxCollider != null)
                     {
-                        float yOffset = objCollider.bounds.extents.y + placementOffset;
+                        float yOffset = originalBoxCollider.bounds.extents.y + placementOffset;
                         placementPosition = hit.point + hit.normal * yOffset;
                     }
                     
@@ -111,11 +113,11 @@ namespace Networking
                         Renderer objectRenderer = objectToPlace.GetComponent<Renderer>();
                         float yOffset = 0f;
     
-                        if (objectRenderer != null)
+                        if (originalBoxCollider != null)
                         {
-                            Bounds bounds = objectRenderer.bounds;
-                            yOffset = bounds.extents.y;
+                            yOffset = originalBoxCollider.bounds.extents.y;
                         }
+
 
                         objectToPlace.transform.position = floorHit.point + new Vector3(0, yOffset, 0);
                         objectToPlace.transform.up = floorHit.normal; // Align with floor normal
@@ -133,11 +135,11 @@ namespace Networking
                     Renderer objectRenderer = objectToPlace.GetComponent<Renderer>();
                     float yOffset = 0f;
     
-                    if (objectRenderer != null)
+                    if (originalBoxCollider != null)
                     {
-                        Bounds bounds = objectRenderer.bounds;
-                        yOffset = bounds.extents.y;
+                        yOffset = originalBoxCollider.bounds.extents.y;
                     }
+
 
                     objectToPlace.transform.position = floorHit.point + new Vector3(0, yOffset, 0);
                     objectToPlace.transform.up = floorHit.normal; // Align with floor normal
@@ -166,7 +168,6 @@ namespace Networking
                 {
                     SetGrabbedObjectMaterial(invalidPlacementMaterial);
                 }
-                
             }
 
             void SetGrabbedObjectMaterial(Material material)
@@ -194,23 +195,36 @@ namespace Networking
             // Called when grab button is pressed
             public void OnGrab()
             {
-                isGrabButtonHeld = true;
+                //isGrabButtonHeld = true;
                 
                 //grab mechanic
                 if (grabbedObject == null)
                 {
-                    PickupObject(lookingAtObject);
-                    //inform server 
-                    RPC_InformServerOnGrab(grabbedObject);
+                    // PickupObject(lookingAtObject);
+                    // //inform server 
+                    // RPC_InformServerOnGrab(grabbedObject);
+                    grabbedObject = lookingAtObject;
+                    if (grabbedObject != null)
+                    {
+                        originalBoxCollider = grabbedObject.GetComponent<BoxCollider>();
+                        Debug.Log(originalBoxCollider);
+                        EnterBlueprintMode();
+                    }
+                        
+                }
+                else
+                {
+                    //already grabbed something
+                    OnGrabRelease();
                 }
                 //place mechanic
-                else if (!isBlueprintMode)
-                {
-                   EnterBlueprintMode();
-                }
+                // else if (!isBlueprintMode)
+                // {
+                //    EnterBlueprintMode();
+                // }
             }
 
-            void PickupObject(NetworkObject networkObject)
+            /*void PickupObject(NetworkObject networkObject)
             {
                 //nothing happens if youre not currently looking at something
                 if (networkObject == null) { return; }
@@ -227,7 +241,7 @@ namespace Networking
                             return;
                     }
                 }
-                */
+                #1#
                 
                 
                 // Move to object to grab placement and parent with the player
@@ -255,19 +269,39 @@ namespace Networking
                     if(IsOwner)
                         triggerHelper.OnGrabbed();
                 }
-            }
+            }*/
 
             void EnterBlueprintMode()
             {
+                //grab function helpers 
+                var reactionHelper = grabbedObject.GetComponent<ReactionHelper>();
+                if (reactionHelper != null)
+                {
+                    if(IsOwner)
+                        reactionHelper.OnGrabbed();
+                }
+                
+                var triggerHelper = grabbedObject.GetComponent<TriggerHelper>();
+                if (triggerHelper != null)
+                {
+                    if(IsOwner)
+                        triggerHelper.OnGrabbed();
+                }
+                
                 hiderLookManager.SetActive(true);
                 grabbedObject.transform.parent = null; 
                 // keep original data for the material + layer
-                Renderer renderer = grabbedObject.GetComponent<Renderer>();
-                if (renderer != null) 
+                originalMaterial.Clear();
+                Renderer[] renderer = grabbedObject.GetComponentsInChildren<Renderer>();
+                foreach (Renderer r in renderer)
                 {
-                    originalMaterial = renderer.material;
-                    renderer.material = ghostMaterial; // Change to blueprint material
+                    if (r != null) 
+                    {
+                        originalMaterial.Add(r, r.material);
+                        r.material = ghostMaterial; // Change to blueprint material
+                    }
                 }
+                
                 originalLayer = grabbedObject.gameObject.layer;
                     
                 // Set blueprint mode 
@@ -276,8 +310,8 @@ namespace Networking
                 InScreenUI.Instance.SetToolTipText("Release to place object");
             }
             
-            [ServerRpc]
-            private void RPC_InformServerOnGrab(NetworkObject obj)
+            /*[ServerRpc]*/
+            /*private void RPC_InformServerOnGrab(NetworkObject obj)
             {
                 Debug.Log("Received Grab Message from observer");
                 PickupObject(obj);
@@ -287,7 +321,7 @@ namespace Networking
             [ObserversRpc(ExcludeOwner = true)]
             void BroadcastPickupToClients(NetworkObject obj){
                 PickupObject(obj);
-            }
+            }*/
             
             [ServerRpc]
             private void RPC_InformServerOnPlace(Vector3 position, Quaternion rotation)
@@ -323,11 +357,15 @@ namespace Networking
                     }
 
                     //Restore original material
-                    Renderer renderer = grabbedObject.GetComponent<Renderer>();
-                    if (renderer != null && originalMaterial != null)
+                    Renderer[] renderer = grabbedObject.GetComponentsInChildren<Renderer>();
+                    foreach (Renderer r in renderer)
                     {
-                        renderer.material = originalMaterial;
+                        if (r != null && originalMaterial != null)
+                        {
+                            r.material = originalMaterial[r];
+                        }
                     }
+
                     //turn collision back on 
                     //set the collision off 
                     Collider collider = grabbedObject.GetComponent<Collider>();

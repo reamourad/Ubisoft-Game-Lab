@@ -690,7 +690,7 @@ MonoBehaviour:
   _componentIndexCache: 5
   _addedNetworkObject: {fileID: 5584394639087159213}
   _networkObjectCache: {fileID: 5584394639087159213}
-  grabRange: 20
+  grabRange: 15
   grabPlacement: {fileID: 3924656172372742504}
   ghostMaterial: {fileID: 2100000, guid: ba3d9d27760433144a14ba296ac76b31, type: 2}
   invalidPlacementMaterial: {fileID: 2100000, guid: 05c2671ae9ab6e34aaa2a62983aefd6f, type: 2}

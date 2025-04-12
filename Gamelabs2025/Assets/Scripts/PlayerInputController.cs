@@ -36,7 +36,7 @@ namespace Player
             inputReader.OnUseEvent -= ClientHandleItemUsage;
             inputReader.OnMoveEvent -= ClientHandleMove;
             inputReader.OnLookEvent -= ClientHandleLook;
-            inputReader.OnGrabReleaseEvent -= ClientHandleGrabRelease;
+            // inputReader.OnGrabReleaseEvent -= ClientHandleGrabRelease;
             inputReader.OnGrabActivateEvent -= ClientHandleGrab;
             inputReader.OnConnectItemsEvent -= ClientHandleConnectItems;
         }
@@ -55,7 +55,7 @@ namespace Player
             inputReader.OnUseEvent += ClientHandleItemUsage;
             inputReader.OnMoveEvent += ClientHandleMove;
             inputReader.OnLookEvent += ClientHandleLook;
-            inputReader.OnGrabReleaseEvent += ClientHandleGrabRelease;
+            // inputReader.OnGrabReleaseEvent += ClientHandleGrabRelease;
             inputReader.OnGrabActivateEvent += ClientHandleGrab;
             inputReader.OnConnectItemsEvent += ClientHandleConnectItems;
 
@@ -96,11 +96,11 @@ namespace Player
                 playerController.UseItem(use);
         }
 
-        private void ClientHandleGrabRelease()
-        {
-            if (_playerGrabController != null)
-                _playerGrabController.OnGrabRelease();
-        }
+        // private void ClientHandleGrabRelease()
+        // {
+        //     if (_playerGrabController != null)
+        //         _playerGrabController.OnGrabRelease();
+        // }
 
         private void ClientHandleGrab()
         {
