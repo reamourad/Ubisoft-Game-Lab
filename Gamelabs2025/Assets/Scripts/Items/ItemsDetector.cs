@@ -26,6 +26,9 @@ namespace Player.Items
         [SerializeField] private AudioClip hiderScanSFX;
         
         [SerializeField] private AnimationCurve curve;
+        
+        [SerializeField] private float yAxisOffsetThreshold = 3f;
+        
         private Coroutine routine;
         
         private List<string> createdItems;
@@ -34,6 +37,7 @@ namespace Player.Items
 
         private float nextAllowDetectionTime = 0f;
         
+        private Rigidbody rb;
 
         public override void OnStartClient()
         {
@@ -42,6 +46,7 @@ namespace Player.Items
             {
                 createdItems = new List<string>();
                 InputReader.Instance.OnHiderItemScanEvent += Detect;
+                rb = GetComponent<Rigidbody>();
             }
         }
 
@@ -116,23 +121,34 @@ namespace Player.Items
             yield return StartCoroutine(HighlightItems(range * curve.Evaluate(1f)));
             Destroy(mesh.gameObject);
         }
-
+        
         IEnumerator HighlightItems(float currentRange)
         {
             bool detected = false;
             var items = new List<Transform>();
-            foreach (var collider in colliders)
+            foreach (var id in createdItems)
             {
-                if(Vector3.Distance(collider.transform.position, originPoint.position) > currentRange)
+                WorldMarkerManager.Instance.DestroyMarker(id);
+            }
+            createdItems.Clear();
+            
+            var myY = transform.position.y + rb.centerOfMass.y;
+            foreach (var col in colliders)
+            {
+                if(Vector3.Distance(col.transform.position, originPoint.position) > currentRange)
+                    continue;
+
+                if(Mathf.Abs(transform.position.y - col.transform.position.y) > yAxisOffsetThreshold)
                     continue;
                 
-                items.Add(collider.transform);
-
-                foreach (var id in createdItems)
+                if (col.TryGetComponent<StationaryObjectBase>(out var stationaryObject))
                 {
-                    WorldMarkerManager.Instance.DestroyMarker(id);
+                    Debug.Log($"StationaryObject ({col.name}) detected AboveMe ${myY>=col.transform.position.y}))");
+                    if(myY >= col.transform.position.y) //these are below you. no need to highlight them
+                        continue;
                 }
-                createdItems.Clear();
+
+                items.Add(col.transform);
             }
             
             //sort with closest to player

@@ -44,7 +44,8 @@ namespace Items
         
         [Header("References and Other Params")]
         [SerializeField] private NetworkObject worldDummyRef;
-        [SerializeField] private SphereCollider triggerVolume;
+        [SerializeField] private Transform triggerVolumePosition;
+        [SerializeField] private float triggerVolumeRadius = 2.33f;
         [SerializeField] private Transform suctionPoint;
         [SerializeField] private float suctionCompleteDetectionRadius=0.25f;
         [SerializeField] private LayerMask layerMask;
@@ -69,12 +70,6 @@ namespace Items
         private VacuumGui vacuumGui;
         private Coroutine vacuumStartSFXCoroutine;
         
-        private void Start()
-        {
-            if(!IsServerStarted)
-                triggerVolume.gameObject.SetActive(false);
-        }
-
         private void OnDestroy()
         {
             if(vacuumGui != null)
@@ -149,7 +144,6 @@ namespace Items
             VacuumActive.Value = use;
             //clear cache
             vacuumCache.Clear();
-            triggerVolume.gameObject.SetActive(use);
             RPC_BroadcastActivationToClients(use);
         }
 
@@ -218,7 +212,7 @@ namespace Items
 
         private void ApplySuction()
         {
-            var colliders = Physics.OverlapSphere(triggerVolume.transform.position, triggerVolume.radius, layerMask);
+            var colliders = Physics.OverlapSphere(triggerVolumePosition.transform.position,triggerVolumeRadius, layerMask);
             foreach (var col in colliders)
             {
                 //multiple get-components, are very slow especially when inside an x-update loop.
@@ -343,11 +337,11 @@ namespace Items
             
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(suctionPoint.position, suctionCompleteDetectionRadius);
-            if (triggerVolume.gameObject.activeInHierarchy)
+            if (triggerVolumePosition.gameObject.activeInHierarchy)
             {
                 Gizmos.color = new Color(0f, 0f, 1f, 0.25f);
-                var scale = triggerVolume.transform.localScale;
-                Gizmos.DrawSphere(triggerVolume.center + triggerVolume.transform.position, triggerVolume.radius);
+                var scale = triggerVolumePosition.transform.localScale;
+                Gizmos.DrawSphere(triggerVolumePosition.transform.position, triggerVolumeRadius);
             }
         }
 
