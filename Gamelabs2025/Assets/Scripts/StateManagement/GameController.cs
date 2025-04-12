@@ -245,7 +245,9 @@ namespace StateManagement
                 {
                     IsReplayingGame = false;
                     createdRoles.Clear();
-                    return SelectRandomSideRegular();
+                    var rand = SelectRandomSideRegular();
+                    createdRoles[id] = rand.roleType;
+                    return (rand.prefab, rand.spawnPoint);
                 }
                 
                 //invert roles
@@ -253,21 +255,28 @@ namespace StateManagement
                 switch (role)
                 {
                     case PlayerRole.RoleType.Seeker:
+                        createdRoles[id] = PlayerRole.RoleType.Hider;
                         return (hiderPrefab, HiderSpawn);
                     case PlayerRole.RoleType.Hider:
+                        createdRoles[id] = PlayerRole.RoleType.Seeker;
                         return (seekerPrefab, SeekerSpawn);
                     default:
                     {
                         IsReplayingGame = false;
-                        return SelectRandomSideRegular();
+                        var rand = SelectRandomSideRegular();
+                        createdRoles[id] = rand.roleType;
+                        return (rand.prefab, rand.spawnPoint);
                     }
                 }
             }
-            return SelectRandomSideRegular();
+            var rand2 = SelectRandomSideRegular();
+            createdRoles[id] = rand2.roleType;
+            return (rand2.prefab, rand2.spawnPoint);
         }
 
-        private (NetworkObject prefab, Transform spawnPoint) SelectRandomSideRegular()
+        private (NetworkObject prefab, Transform spawnPoint, PlayerRole.RoleType roleType) SelectRandomSideRegular()
         {
+            PlayerRole.RoleType roleType;
             NetworkObject prefab;
             Transform spawnPoint;
             if (players.Count == 0)
@@ -276,11 +285,14 @@ namespace StateManagement
                 {
                     prefab = seekerPrefab;
                     spawnPoint = SeekerSpawn;
+                    roleType = PlayerRole.RoleType.Seeker;
+
                 }
                 else
                 {
                     prefab = hiderPrefab;
                     spawnPoint = HiderSpawn;
+                    roleType = PlayerRole.RoleType.Hider;
                 }
             }
             else
@@ -288,6 +300,7 @@ namespace StateManagement
                 var playerRole = players[0].GetComponent<PlayerRole>().Role;
                 if(playerRole == PlayerRole.RoleType.Hider)
                 {
+                    roleType = PlayerRole.RoleType.Seeker;
                     prefab = seekerPrefab;
                     spawnPoint = SeekerSpawn;
                 }
@@ -295,10 +308,11 @@ namespace StateManagement
                 {
                     prefab = hiderPrefab;
                     spawnPoint = HiderSpawn;
+                    roleType = PlayerRole.RoleType.Hider;
                 }
             }
             
-            return (prefab, spawnPoint);
+            return (prefab, spawnPoint, roleType);
         }
         
         private void SwitchGameStage(GameStage stage)
