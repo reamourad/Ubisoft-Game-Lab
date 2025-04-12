@@ -9,6 +9,8 @@ public class ShaderPrewarm : MonoBehaviour
     [SerializeField] ShaderVariantCollection collection;
     [SerializeField] private TMPro.TMP_Text stage;
     [SerializeField] Image fill;
+    [SerializeField] private string[] scenesToPreload = { "MainMenu","CutScene", "Game_Smaller_House", "GameOver" };
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     IEnumerator Start()
     {
@@ -35,9 +37,6 @@ public class ShaderPrewarm : MonoBehaviour
     IEnumerator PreloadAssets()
     {
         stage.text = "Preloading Assets...";
-    
-        string[] scenesToPreload = { "MainMenu","CutScene", "Game", "GameOver" };
-    
         // Load each scene additively with activation disabled
         List<AsyncOperation> preloadOps = new List<AsyncOperation>();
 
