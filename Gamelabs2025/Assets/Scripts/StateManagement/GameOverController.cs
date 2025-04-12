@@ -24,8 +24,15 @@ namespace StateManagement
         private bool disconnected = false;
         private bool replayRequested = false;
         private int replayRequestCount=0;
-        
-        private IEnumerator Start()
+
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+            StartCoroutine(StartOverLogic());
+        }
+
+        private IEnumerator StartOverLogic()
         {
             GameController.IsReplayingGame = false;
             yield return new WaitForEndOfFrame();
