@@ -102,6 +102,9 @@ namespace StateManagement
         {
             NetworkConnectionHelper.ResetConnections();
             Destroy(InstanceFinder.NetworkManager.gameObject);
+            Destroy(InstanceFinder.TimeManager.gameObject);
+            Destroy(InstanceFinder.ServerManager.gameObject);
+            Destroy(InstanceFinder.ClientManager.gameObject);
             UnityEngine.SceneManagement.SceneManager.LoadScene(MainMenuSceneName);
             Destroy(this.gameObject); //delete the state-manager
         }

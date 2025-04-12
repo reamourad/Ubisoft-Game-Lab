@@ -105,15 +105,25 @@ namespace Networking
         private void FPSMove(PlayerInputData inputData, float deltaTime)
         {
             Vector3 input = inputData.MoveInputVector;
-            if (input.sqrMagnitude < 0.001f)
+
+            // Don't move if input is too small
+            if (input.sqrMagnitude < 0.001f && Mathf.Abs(rb.linearVelocity.y) < 0.01f)
                 return;
 
             Quaternion rotation = transform.rotation;
+
+            // Horizontal input movement
             Vector3 moveDirection = (rotation * Vector3.forward * input.y + rotation * Vector3.right * input.x).normalized;
-
             float moveSpeed = speed * 0.1f;
-            Vector3 movement = moveDirection * (moveSpeed * deltaTime);
+            Vector3 horizontalMovement = moveDirection * (moveSpeed * deltaTime);
 
+            // Gravity (manual integration of vertical velocity)
+            Vector3 gravityMovement = Vector3.up * (rb.linearVelocity.y * deltaTime);
+
+            // Final movement
+            Vector3 movement = horizontalMovement + gravityMovement;
+
+            // Apply movement
             rb.MovePosition(rb.position + movement);
         }
 
