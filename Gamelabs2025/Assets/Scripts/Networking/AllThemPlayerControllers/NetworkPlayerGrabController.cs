@@ -207,7 +207,7 @@ namespace Networking
                     if (grabbedObject != null)
                     {
                         originalBoxCollider = grabbedObject.GetComponent<BoxCollider>();
-                        Debug.Log(originalBoxCollider);
+                        RPC_InformServerOnGrab(grabbedObject); 
                         EnterBlueprintMode();
                     }
                         
@@ -224,14 +224,14 @@ namespace Networking
                 // }
             }
 
-            /*void PickupObject(NetworkObject networkObject)
+            void PickupObject(NetworkObject networkObject)
             {
-                //nothing happens if youre not currently looking at something
+                /*//nothing happens if youre not currently looking at something
                 if (networkObject == null) { return; }
                 
                 hiderLookManager.SetActive(false);
 
-                /*if (IsOwner)
+                if (IsOwner)
                 {
                     var dir = (networkObject.transform.position - transform.position).normalized;
                     if (Physics.Raycast(grabPlacement.transform.position, dir, out RaycastHit hit, 20f))
@@ -241,7 +241,6 @@ namespace Networking
                             return;
                     }
                 }
-                #1#
                 
                 
                 // Move to object to grab placement and parent with the player
@@ -268,8 +267,10 @@ namespace Networking
                 {
                     if(IsOwner)
                         triggerHelper.OnGrabbed();
-                }
-            }*/
+                }*/
+                
+                grabbedObject = networkObject;
+            }
 
             void EnterBlueprintMode()
             {
@@ -310,8 +311,8 @@ namespace Networking
                 InScreenUI.Instance.SetToolTipText("Release to place object");
             }
             
-            /*[ServerRpc]*/
-            /*private void RPC_InformServerOnGrab(NetworkObject obj)
+            [ServerRpc]
+            private void RPC_InformServerOnGrab(NetworkObject obj)
             {
                 Debug.Log("Received Grab Message from observer");
                 PickupObject(obj);
@@ -321,7 +322,7 @@ namespace Networking
             [ObserversRpc(ExcludeOwner = true)]
             void BroadcastPickupToClients(NetworkObject obj){
                 PickupObject(obj);
-            }*/
+            }
             
             [ServerRpc]
             private void RPC_InformServerOnPlace(Vector3 position, Quaternion rotation)
@@ -348,13 +349,7 @@ namespace Networking
 
                     //Restore original layer
                     grabbedObject.gameObject.layer = originalLayer;
-
-                    //Restore physics
-                    Rigidbody rb = grabbedObject.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        //rb.isKinematic = false;
-                    }
+                    
 
                     //Restore original material
                     Renderer[] renderer = grabbedObject.GetComponentsInChildren<Renderer>();
@@ -375,6 +370,7 @@ namespace Networking
                     }
                     
                     //inform server 
+                    Debug.Log("Informing server to place object " + grabbedObject.name);
                     RPC_InformServerOnPlace(grabbedObject.transform.position, grabbedObject.transform.rotation);
                     
                     
