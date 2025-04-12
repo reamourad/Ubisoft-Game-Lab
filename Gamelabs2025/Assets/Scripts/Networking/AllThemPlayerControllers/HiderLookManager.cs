@@ -27,6 +27,7 @@ public class HiderLookManager : NetworkBehaviour
     
     private void Update()
     {
+        if (!IsOwner) return; 
         // Clear previous highlight
         if(currentLookTarget != null)
             HighlightObject(currentLookTarget, false);
