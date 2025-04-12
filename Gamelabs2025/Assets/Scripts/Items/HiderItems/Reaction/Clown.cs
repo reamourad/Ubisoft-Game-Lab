@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using FishNet.Object;
 using GogoGaga.OptimizedRopesAndCables;
 using Player.Items;
@@ -58,13 +58,22 @@ namespace Items.HiderItems.Reaction
             handle.Rotate(100 * Time.deltaTime, 0, 0);
         }
 
+        private TweenerCore<Quaternion, Vector3, QuaternionOptions> topTween;
+        private TweenerCore<Vector3, Vector3, VectorOptions> clownTween;
         private void PlayTriggerAnimation()
         {
-            door.DORotate(new Vector3(-90,0,0), 0.5f).OnComplete(() =>
+            topTween= door.DORotate(new Vector3(-90, 0, 0), 0.5f);
+            topTween.OnComplete(() =>
             {
-                // clown.DOPunchPosition(Vector3.up , 1f, 3, 10, true);
-                clown.DOMove(transform.position + Vector3.up * .3f, .25f);
+                clownTween = clown.DOMove(transform.position + Vector3.up * .3f, .25f);
             });
+        }
+
+        private void OnDestroy()
+        {
+            DOTween.Kill(topTween);
+            if(clownTween == null) return;
+            DOTween.Kill(clownTween);
         }
 
         private void PlaySound()

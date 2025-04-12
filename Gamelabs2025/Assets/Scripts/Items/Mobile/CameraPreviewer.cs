@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Networking;
 using Player.Audio;
 using Player.WorldMarker;
@@ -14,8 +15,8 @@ namespace Items
         [SerializeField] InputReader inputReader;
         [SerializeField] private TMPro.TMP_Text cameraName;
         [FormerlySerializedAs("icon")] 
+        [SerializeField] private GameObject helpGUIObject;
         [SerializeField] private Sprite worldMarkerIcon;
-        
         [SerializeField] private AudioClip markerSound;
         
         private static int id = -1;
@@ -37,7 +38,7 @@ namespace Items
             //Move this to appropriate location later
             inputReader.SetToUIInputs();
             CycleCamera(1);
-            
+            StartCoroutine(RestartGUICanvas());
             GameLookupMemory.LocalPlayer.GetComponent<SeekerGraphicsManager>().SetRendererEnabled(true);
         }
 
@@ -102,6 +103,13 @@ namespace Items
             previewCamera = CCTVCamera.CameraList[id];
             previewCamera.ActivateCamera(true);
             cameraName.text = previewCamera.CameraName;
+        }
+
+        private IEnumerator RestartGUICanvas()
+        {
+            helpGUIObject.SetActive(false);
+            yield return new WaitForSeconds(.25f);
+            helpGUIObject.SetActive(true);
         }
         
         public void Open()
