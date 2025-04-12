@@ -24,6 +24,7 @@ namespace Items
         {
             cam = GetComponent<Camera>();
             animator = GetComponentInChildren<Animator>();
+            CameraList.RemoveAll(a => a == null);   
             CameraList.Add(this);
         }
 

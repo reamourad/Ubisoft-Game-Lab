@@ -2,26 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FishNet.Object;
+using HighlightPlus;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class ReactionHelper : NetworkBehaviour
 {
-    public IReactionItem reactionItem;
     private bool isGrabbed = false;
     public float radius = 5f;
     public Vector3 detectionAreaBoxHalfExtent = new Vector3(5f, 5f, 5f);
     public LayerMask detectionLayerMask;
     public GameObject reactionArea;
-    private List<Collider> collidersCache = new List<Collider>();
     public bool isConnectedToTrigger = false;
     public TriggerHelper connectedTriggerHelper;
+    public GameObject lineRendererPrefab;
+    private LineRenderer currentLineRenderer;
+
     
     private void Start()
     {
         detectionAreaBoxHalfExtent = reactionArea.GetComponent<Renderer>().bounds.extents;
         detectionAreaBoxHalfExtent.y = 1f;
+        lineRendererPrefab = Resources.Load<GameObject>("LineRendererConnectionPrefab");
     }
     
     private void EnableCollision(bool enable)
@@ -45,21 +48,21 @@ public class ReactionHelper : NetworkBehaviour
             connectedTriggerHelper = null;
         }       
         RPC_OnServerGrab();
+        if (TryGetComponent<HighlightEffect>(out var hightlightEffect))
+        {
+            hightlightEffect.highlighted = true;
+        }
     }
     
     public void OnReleased()
     {
-        isGrabbed = false;
-        // Hide trigger areas when released
-        foreach (Collider col in collidersCache)
+        if (currentLineRenderer != null)
         {
-            var triggerHelper = col.GetComponent<TriggerHelper>();
-            if (triggerHelper != null)
-            {
-                triggerHelper.HideTriggerArea();
-            }
+            Destroy(currentLineRenderer.gameObject);
+            currentLineRenderer = null;
         }
-        collidersCache.Clear();
+
+        isGrabbed = false;
         
         //check if trigger item is around
         Collider[] colliders= Physics.OverlapBox(gameObject.transform.position, detectionAreaBoxHalfExtent, Quaternion.identity,detectionLayerMask);
@@ -77,6 +80,11 @@ public class ReactionHelper : NetworkBehaviour
             tHelper.connectedReactionHelper = this;
             RPC_OnServerConnectToTrigger(closestCollider.GetComponent<NetworkObject>(), GetComponent<NetworkObject>());
         }
+        
+        if (TryGetComponent<HighlightEffect>(out var hightlightEffect))
+        {
+            hightlightEffect.highlighted = false;
+        }
     }
 
 
@@ -88,6 +96,7 @@ public class ReactionHelper : NetworkBehaviour
         {
             if(col.gameObject == gameObject) continue;
             if(col.gameObject.GetComponent<TriggerHelper>() == null) continue;
+            if(col.gameObject.GetComponent<TriggerHelper>().isConnectedToReaction) continue;
 
             if (Mathf.Abs(transform.position.y - col.transform.position.y) > 2f) continue; 
             float currentDistance = GetPathDistance(col.gameObject.transform.position, transform.position);
@@ -154,46 +163,34 @@ public class ReactionHelper : NetworkBehaviour
     
     
     
-    //shows the area you can connect to
+    //shows the current connection with a line renderer 
     public void LateUpdate()
     {
-       
         if (!isGrabbed) return;
-        foreach (Collider col in collidersCache)
-        {
-            var triggerHelper = col.GetComponent<TriggerHelper>();
-            if (triggerHelper == null) continue; 
-            if(triggerHelper.isConnectedToReaction) continue;
-            //check if the items are still in range
-            float distance = Vector3.Distance(transform.position, col.gameObject.transform.position);
-            if (distance > radius)
-            {
-                triggerHelper.HideTriggerArea();
-            }
-        }
-
-        Collider[] colliders= Physics.OverlapSphere(gameObject.transform.position, radius, detectionLayerMask);
-        foreach (Collider col in colliders)
-        {
-            if(col.gameObject == this.gameObject ) continue;
-            var triggerHelper = col.GetComponent<TriggerHelper>();
-            //check if there is a trigger item nearby
-            if (triggerHelper != null)
-            {
-                if(triggerHelper.isConnectedToReaction) continue;
-                triggerHelper.ShowTriggerArea();
-            }
-        }
-        collidersCache = colliders.ToList();
-    }
-
-    public void ShowReactionArea()
-    {
-        reactionArea.SetActive(true);
-    }
         
-    public void HideReactionArea()
-    {
-        reactionArea.SetActive(false);
+        Collider[] colliders= Physics.OverlapBox(gameObject.transform.position, detectionAreaBoxHalfExtent, Quaternion.identity,detectionLayerMask);
+        Collider triggerCollider = FindClosestTrigger(colliders);
+        if (triggerCollider != null)
+        {
+            // Create the line renderer if it doesn't exist
+            if ( currentLineRenderer == null)
+            {
+                var lineRendererGameObject = Instantiate(lineRendererPrefab);
+                currentLineRenderer = lineRendererGameObject.GetComponent<LineRenderer>();
+            }
+        
+            // Set the positions
+            currentLineRenderer.positionCount = 2;
+            currentLineRenderer.SetPosition(0, transform.position);
+            currentLineRenderer.SetPosition(1, triggerCollider.transform.position);
+        }
+        else
+        {
+            // Destroy the line renderer if there's no trigger in range
+            if (currentLineRenderer != null)
+            {
+                currentLineRenderer.positionCount = 0;
+            }
+        }
     }
 }

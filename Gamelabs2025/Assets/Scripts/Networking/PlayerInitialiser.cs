@@ -4,6 +4,7 @@ using System.Threading;
 using FishNet.Object;
 using Player;
 using StateManagement;
+using Tutorial;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -112,12 +113,7 @@ namespace Networking
                 if (fpsGraphicsManager != null)
                     fpsGraphicsManager.SetRendererEnabled(false);
 
-                GameObject prefab = Resources.Load<GameObject>("SeekerTutorial");
-
-                spawnedSeekerTutorial = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-                spawnedSeekerTutorial.transform.SetParent(GameObject.Find("Canvas")?.transform, false);
-
-                
+                TutorialManager.Instance.SpawnTutorialUI(PlayerRole.RoleType.Seeker);
             }));
             
         }
@@ -152,12 +148,8 @@ namespace Networking
                 {
                     cineBrain.UpdateMethod = CinemachineBrain.UpdateMethods.ManualUpdate;
                 }
-
-                GameObject prefab = Resources.Load<GameObject>("HiderTutorial");
-
-                spawnedHiderTutorial = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-                spawnedHiderTutorial.transform.SetParent(GameObject.Find("Canvas")?.transform, false);
-
+                
+                TutorialManager.Instance.SpawnTutorialUI(PlayerRole.RoleType.Hider);
             }));
         }
 

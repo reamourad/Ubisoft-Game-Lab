@@ -22,10 +22,19 @@ namespace StateManagement
         [SerializeField] private AudioClip replayNotif;
         
         private bool disconnected = false;
+        private bool replayRequested = false;
         private int replayRequestCount=0;
-        
-        private IEnumerator Start()
+
+
+        public override void OnStartClient()
         {
+            base.OnStartClient();
+            StartCoroutine(StartOverLogic());
+        }
+
+        private IEnumerator StartOverLogic()
+        {
+            GameController.IsReplayingGame = false;
             yield return new WaitForEndOfFrame();
             InputReader.Instance.OnMainMenuAccept += ReplayGame;
             InputReader.Instance.OnMainMenuBack += ToMainMenu;
@@ -68,7 +77,11 @@ namespace StateManagement
         
         private void ReplayGame()
         {
-            InputReader.Instance.OnMainMenuBack -= ReplayGame;
+            if (replayRequested)
+                return;
+            
+            replayRequested = true;
+            InputReader.Instance.OnMainMenuAccept -= ReplayGame;
             RPC_RequestServerToReplay();
         }
 
@@ -79,6 +92,7 @@ namespace StateManagement
 
             if (replayRequestCount < InstanceFinder.ClientManager.Clients.Count)
             {
+                Debug.Log("Game Replay Requested waiting for 1 more.");
                 RPC_ServerRecievedRequest();
                 return;
             }
@@ -90,7 +104,7 @@ namespace StateManagement
             }
         }
 
-        [ObserversRpc]
+        [ObserversRpc(ExcludeOwner = false)]
         private void RPC_ServerRecievedRequest()
         {
             AudioManager.Instance.PlaySFX(replayNotif);

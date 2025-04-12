@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 6799519320625724234}
   - component: {fileID: -8294054222312949734}
   - component: {fileID: 1782721525129406205}
+  - component: {fileID: 5891685920684013698}
   m_Layer: 7
   m_Name: Player_Seeker
   m_TagString: Player
@@ -873,6 +874,24 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5ce9c0a9ec14dd245990948424f1d430, type: 3}
   - {fileID: 8300000, guid: cd68fd1b9447a784bbfb20374dffd7e3, type: 3}
   source: {fileID: 997874120818249232}
+--- !u!114 &5891685920684013698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7577582542216918470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcb9fd44a7969d4f9cfbc130479b3ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentIndexCache: 255
+  _addedNetworkObject: {fileID: 5408301307720291325}
+  _networkObjectCache: {fileID: 0}
+  _graphicalObject: {fileID: 6386400127822891335}
+  _enableTeleport: 0
+  _teleportThreshold: 0
 --- !u!1 &7747154828601346584
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,8 +946,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 10
-  MaxDistance: 35
+  MinDistance: 4
+  MaxDistance: 30
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
