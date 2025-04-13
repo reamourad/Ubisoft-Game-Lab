@@ -101,7 +101,7 @@ public class NetworkOpenCloseDoor : NetworkBehaviour
         isOpen = !isOpen;
         targetAngle = isOpen ? 90f : 0f;
         UpdateDoor();
-        RPC_UpdateDoorState(isOpen, Random.value <= 0.12f);
+        RPC_UpdateDoorState(isOpen, Random.value <= 0.05f);
     }
 
     [ObserversRpc]
