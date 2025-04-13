@@ -106,7 +106,7 @@ namespace Tutorial
 
         private void ChangeVideo()
         {
-            if(counter>= videoClips.Count) return;
+            if(counter >= videoClips.Count) return;
             if(skippingPages.Contains(counter + 1)) return;
             videoPlayer.ChangeSlide(videoClips[counter]);
         }
