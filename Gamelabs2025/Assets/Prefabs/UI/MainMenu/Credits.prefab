@@ -328,7 +328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 63.99951, y: 30.999933}
+  m_AnchoredPosition: {x: 63.999207, y: 30.999939}
   m_SizeDelta: {x: 350, y: 64.341}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &3591092440236724349
@@ -452,18 +452,18 @@ MonoBehaviour:
       m_Calls: []
   m_text: "<u><b>GAME DESIGN</b></u>\r\n\r\nVishnu Rajendran \r\nRea Mourad \r\nBrandon
     Todelano\r\nMohammad Darandeh \r\nDavid Perron\r\nMarie-Genevieve \r\nDorsa Zare
-    \r\nCosmin Suna\r\n\r\n<u><b>NETWORK PROGRAMMING</b></u> \r\n\r\nVishnu Rajendran\r\nMohammad
+    \r\nCosmin Suna\r\n\r\n<u><b>TEAM REPRESENTATIVE</b></u>\r\n \r\nRea Mourad \r\n\r\n<u><b>2D
+    ARTIST</b></u>\r\n \r\nDorsa Zare\r\n\r\n<u><b>3D ARTIST</b></u> \r\n\r\nDorsa
+    Zare\r\n\r\n<u><b>SOUND DESIGN</b></u>\r\n\r\nMarie-Genevieve\r\n\r\n<u><b>RIGGER</b></u>
+    \r\n\r\nDorsa Zare\r\n\r\n<u><b>NETWORK PROGRAMMING</b></u> \r\n\r\nVishnu Rajendran\r\nMohammad
     Darandeh \r\n\r\n<u><b>GAMEPLAY PROGRAMMING</b></u>\r\n\r\nVishnu Rajendran \r\nRea
     Mourad \r\nBrandon Todelano\r\nMohammad Darandeh \r\nDavid Perron\r\nCosmin Suna
-    \r\n\r\n<u><b>SOUND DESIGN</b></u>\r\n\r\nMarie-Genevieve \r\n\r\n<u><b>AUDIO
-    PROGRAMMING</b></u>\r\n \r\nVishnu Rajendran \r\n\r\n<u><b>UI/UX PROGRAMMING</b></u>\r\n
-    \r\nVishnu Rajendran\r\nMohammad Darandeh \r\nCosmin Suna \r\n\r\n<u><b>ANIMATION
-    PROGRAMMING</b></u>\r\n \r\nVishnu Rajendran\r\nMohammad Darandeh \r\n\r\n<u><b>FIRE
-    EXTINGUISHER</b></u>\r\n \r\nVishnu Rajendran\r\n\r\n<u><b>LEVEL DESIGN</b></u>\r\n
-    \r\nCosmin Suna\r\nRea Mourad\r\nVishnu Rajendran \r\n\r\n<u><b>LIGHTNING</b></u>\r\n\r\nVishnu
-    Rajendran \r\n\r\n<u><b>TEAM REPRESENTATIVE</b></u>\r\n \r\nRea Mourad \r\n\r\n<u><b>2D
-    ARTIST</b></u>\r\n \r\nDorsa Zare\r\n\r\n<u><b>3D ARTIST</b></u> \r\n\r\nDorsa
-    Zare\r\n\r\n<u><b>RIGGER</b></u> \n\r\nDorsa Zare\r\n\r\n<u><b> Third Party Assets
+    \r\n\r\n<u><b>AUDIO PROGRAMMING</b></u>\r\n \r\nVishnu Rajendran \r\n\r\n<u><b>UI/UX
+    PROGRAMMING</b></u>\r\n \r\nVishnu Rajendran\r\nMohammad Darandeh \r\nCosmin
+    Suna \r\n\r\n<u><b>ANIMATION PROGRAMMING</b></u>\r\n \r\nVishnu Rajendran\r\nMohammad
+    Darandeh \r\n\r\n<u><b>LEVEL DESIGN</b></u>\r\n \r\nCosmin Suna\r\nRea Mourad\r\nVishnu
+    Rajendran \r\n\r\n<u><b>LIGHTNING</b></u>\r\n\r\nVishnu Rajendran\r\n\r\n<u><b>FIRE
+    EXTINGUISHER</b></u>\r\n \r\nVishnu Rajendran\r\n\r\n<u><b> Third Party Assets
     </b></u>\r\n\r\nitch.io (Input prompt images)\r\nsketchfab.com (3D models - player
     items, ceiling decorations)\r\nunity asset store (outline shader, animations)\r\ncg
     trader (3D models)\r\nFreesound.org (additional sound effects)\r\nPixabay.com

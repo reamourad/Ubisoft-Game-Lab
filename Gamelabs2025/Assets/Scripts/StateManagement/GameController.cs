@@ -456,7 +456,7 @@ namespace StateManagement
             {
                 ServerDoTimePenalty(strength);
             }, angyDelay));
-            RPC_InvokeHouseAngy(angyDelay);
+            RPC_InvokeHouseAngy(angyDelay, (int)(maxTimePenalty * strength));
         }
 
         [Server]
@@ -466,9 +466,10 @@ namespace StateManagement
         }
         
         [ObserversRpc]
-        private void RPC_InvokeHouseAngy(float delay)
+        private void RPC_InvokeHouseAngy(float delay, int timePenalty)
         {
             StartCoroutine(ClientHouseAngy(delay));
+            NotificationSystem.Instance.Notify($"Time Penalty -{timePenalty}s");
         }
 
         [Client]
