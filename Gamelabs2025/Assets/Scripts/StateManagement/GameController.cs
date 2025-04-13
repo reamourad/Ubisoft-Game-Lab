@@ -41,7 +41,6 @@ namespace StateManagement
         [Header("Audio")]
         [SerializeField] private AudioClip mainSeekerBGM;
         [SerializeField] private AudioClip mainHiderBGM;
-        [SerializeField] private AudioClip gameAmbiance;
         [SerializeField] private AudioClip chaseBGM;
         [SerializeField] private AudioClip gameBeginSound;
 
@@ -157,15 +156,12 @@ namespace StateManagement
         {
             Debug.Log("GameController:: Playing Main Theme");
             yield return new WaitUntil(() => GameLookupMemory.LocalPlayer != null);
-            
-            AudioManager.Instance.PlaySFX(gameAmbiance);
-            
+            AudioManager.Instance.PlayAmbience(ambiance);
             if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Hider)
                 AudioManager.Instance.PlayBG(mainHiderBGM);
             else if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Seeker)
             {
                 AudioManager.Instance.PlayBG(mainSeekerBGM);
-                AudioManager.Instance.PlayAmbience(ambiance);
             }
         }
         

@@ -36364,15 +36364,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.175
+      value: 4.269
       objectReference: {fileID: 0}
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.244
+      value: 4.476
       objectReference: {fileID: 0}
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 54.976
+      value: 56.93
       objectReference: {fileID: 0}
     - target: {fileID: 5379419463945606807, guid: 8ed6f77f4fff3274ab549e981fa26e26, type: 3}
       propertyPath: m_LocalRotation.w
@@ -80656,15 +80656,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7508717820883553044, guid: d3f788bb893eeb74db3384699331f229, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.25677
+      value: -11.242
       objectReference: {fileID: 0}
     - target: {fileID: 7508717820883553044, guid: d3f788bb893eeb74db3384699331f229, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1821398
+      value: 0.167
       objectReference: {fileID: 0}
     - target: {fileID: 7508717820883553044, guid: d3f788bb893eeb74db3384699331f229, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 66.40309
+      value: 69.785
       objectReference: {fileID: 0}
     - target: {fileID: 7508717820883553044, guid: d3f788bb893eeb74db3384699331f229, type: 3}
       propertyPath: m_LocalRotation.w
@@ -83512,12 +83512,11 @@ MonoBehaviour:
   vacuumedSuckedParticles: {fileID: 395031058680739610, guid: 7f8699fdacc99e84f891fc1b369ece73, type: 3}
   mainSeekerBGM: {fileID: 8300000, guid: 70f0984d42a7d854ba2e790f16b40bee, type: 3}
   mainHiderBGM: {fileID: 8300000, guid: fd60cbd86d068da4bbaaf89d44f62ae9, type: 3}
-  gameAmbiance: {fileID: 0}
   chaseBGM: {fileID: 8300000, guid: 64e5f82f4dc5ccd48a314fd0b7ed85db, type: 3}
   gameBeginSound: {fileID: 8300000, guid: 7f5bb8b56d0f8ca40ba4bb20695486fd, type: 3}
   angyDelay: 1.5
   maxTimePenalty: 45
-  ambiance: {fileID: 8300000, guid: dce584c84fcfb9445b69c90bbe477261, type: 3}
+  ambiance: {fileID: 8300000, guid: 771516a15c5a98b419cf2c6dadce2283, type: 3}
   houseAngySFX: {fileID: 8300000, guid: 9d36295feb4682246b42208269c8e3e3, type: 3}
   cameraShakeObj: {fileID: 2110324343466382509, guid: db4ec2ca0bf04ca409868ba9177c9ead, type: 3}
   houseAnimator: {fileID: 3130843886701846554}
