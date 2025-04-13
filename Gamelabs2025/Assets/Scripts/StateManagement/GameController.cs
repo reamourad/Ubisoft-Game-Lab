@@ -355,7 +355,6 @@ namespace StateManagement
             {
                 SwitchGameStage(GameStage.Game);
             });
-            InputReader.Instance.SetToGameplayInputs();
             IsReplayingGame = false;
         }
         

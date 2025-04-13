@@ -110,6 +110,11 @@ namespace StateManagement
             AudioManager.Instance.PlaySFX(replayNotif);
             replayNotifObj.SetActive(true);
         }
-        
+
+        private void OnDestroy()
+        {
+            InputReader.Instance.OnMainMenuAccept -= ReplayGame;
+            InputReader.Instance.OnMainMenuBack -= ToMainMenu;
+        }
     }
 }
