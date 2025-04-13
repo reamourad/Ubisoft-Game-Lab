@@ -58,6 +58,7 @@ namespace Networking
             timer.Value -= penalty;
             if (timer.Value <= 0)
             {
+                timer.Value = 0;
                 StopActiveTimer();
                 onComplete?.Invoke();
                 isStarted = false;
