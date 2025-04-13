@@ -44,7 +44,8 @@ namespace Utils
                 while (stepTimer <= 0f)
                 {
                     stepTimer += stepInterval;
-                    var clip = footsteps[Random.Range(0, footsteps.Count)];
+                    var clip = footsteps[footStepIndex];
+                    footStepIndex = (footStepIndex + 1) % footsteps.Count;
                     source.PlayOneShot(clip);
                 }
             }
