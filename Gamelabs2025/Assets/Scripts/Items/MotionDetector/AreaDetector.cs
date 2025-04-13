@@ -23,6 +23,8 @@ namespace Player.Items.MotionDetector
         private Coroutine activationRoutine;
         private Coroutine localActivationRoutine;
 
+        private bool serverTriggered = false;
+        
         public override void OnStartClient()
         {
             base.OnStartClient();
@@ -60,6 +62,9 @@ namespace Player.Items.MotionDetector
             if(ConnectionDictionary.GetConnectedReactions(this) == null)
                 return;
             
+            if(serverTriggered)
+                return;
+            
             if (role.Role == PlayerRole.RoleType.Seeker)
             {
                 var direction = (other.transform.position - rayCastPoint.position).normalized;
@@ -76,10 +81,18 @@ namespace Player.Items.MotionDetector
                 
                 activationRoutine = StartCoroutine(DelayedActivation());
                 RPC_OnPlayerEntered();
+                serverTriggered = true;
+                StartCoroutine(AreaDetectorCooldown());
             }
 
         }
 
+        IEnumerator AreaDetectorCooldown()
+        {
+            yield return new WaitForSeconds(2);
+            serverTriggered = false;
+        }
+        
         [ObserversRpc(ExcludeOwner = false)]
         private void RPC_OnPlayerEntered()
         {
