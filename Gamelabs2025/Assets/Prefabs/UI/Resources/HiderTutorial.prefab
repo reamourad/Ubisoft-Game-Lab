@@ -2619,10 +2619,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoClips:
   - {fileID: 32900000, guid: 6147f1fab71d0324a8c900ffd5a8569d, type: 3}
+  - {fileID: 32900000, guid: f5515613e3fd6c240a09ee3afd7b5964, type: 3}
   - {fileID: 32900000, guid: 47cc44b8dbd1e0447bb0a7841ab0b201, type: 3}
   - {fileID: 32900000, guid: b4be8daa5a23abe4285689d296d4a95b, type: 3}
   - {fileID: 32900000, guid: 43797767e9f2fe14fafa9edce16bb1d6, type: 3}
-  skippingPages: 02000000
+  skippingPages: 0200000003000000
   videoPlayer: {fileID: 8934917636134993198}
   rightButton: {fileID: 6014928551234812948}
   circleParent: {fileID: 5797287330995470970}
@@ -3321,7 +3322,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Smoke bomb\n + \nsmoke detector
+  m_text: "Jack-in-the-box \n(auto noise)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3898,7 +3899,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -4292,7 +4293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7077048194667507884
 RectTransform:
   m_ObjectHideFlags: 0
