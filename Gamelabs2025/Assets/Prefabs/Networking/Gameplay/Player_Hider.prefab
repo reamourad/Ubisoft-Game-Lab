@@ -791,7 +791,7 @@ MonoBehaviour:
   _networkObjectCache: {fileID: 5584394639087159213}
   _graphicalObject: {fileID: 3760002842364422920}
   _enableTeleport: 0
-  _teleportThreshold: 3753
+  _teleportThreshold: 0
 --- !u!1 &9168650447039226737
 GameObject:
   m_ObjectHideFlags: 0
