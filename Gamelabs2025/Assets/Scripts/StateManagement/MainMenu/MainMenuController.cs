@@ -18,7 +18,8 @@ namespace StateManagement
             MenuStart,
             MainMenu,
             SettingsMenu,
-            QuitMenu
+            QuitMenu,
+            CreditsMenu,
         }
         
         [SerializeField] private MainMenuState currentMainMenuState = MainMenuState.None;
@@ -26,6 +27,7 @@ namespace StateManagement
         [SerializeField] private GameObject mainMenuObj;
         [SerializeField] private GameObject settingsObj;
         [SerializeField] private GameObject quitConfirmObj;
+        [SerializeField] private GameObject creditsObj;
         [SerializeField] private GameObject waitGuiObj;
 
         [Header("Connection")]
@@ -127,8 +129,11 @@ namespace StateManagement
                     break;
                 case 1: SwitchMenu(MainMenuState.SettingsMenu);
                     break;
-                case 2: SwitchMenu(MainMenuState.QuitMenu);
+                case 2: SwitchMenu(MainMenuState.CreditsMenu);
                     break;
+                case 3: SwitchMenu(MainMenuState.QuitMenu);
+                    break;
+                
             }
             AudioManager.Instance.PlaySFX(UINavigationSounds.Instance.selectSound);
         }
@@ -205,6 +210,7 @@ namespace StateManagement
             mainMenuObj.gameObject.SetActive(currentMainMenuState == MainMenuState.MainMenu);
             settingsObj.gameObject.SetActive(currentMainMenuState == MainMenuState.SettingsMenu);
             quitConfirmObj.gameObject.SetActive(currentMainMenuState == MainMenuState.QuitMenu);
+            creditsObj.gameObject.SetActive(currentMainMenuState == MainMenuState.CreditsMenu);
         }
         
         

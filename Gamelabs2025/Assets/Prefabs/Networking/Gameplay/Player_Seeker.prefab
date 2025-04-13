@@ -866,13 +866,8 @@ MonoBehaviour:
   stepInterval: 0.55
   minSpeed: 0.1
   footsteps:
-  - {fileID: 8300000, guid: 57932b50764991b49bd04a041c08c271, type: 3}
-  - {fileID: 8300000, guid: 100951b34ea496143b688210f6ff9572, type: 3}
-  - {fileID: 8300000, guid: a92056ad2afa4db40b3302c6522ac717, type: 3}
-  - {fileID: 8300000, guid: 0dd7899c087262840b33cf05f7f5ebfe, type: 3}
-  - {fileID: 8300000, guid: 45e8285036457b24381b899649ddacc6, type: 3}
-  - {fileID: 8300000, guid: 5ce9c0a9ec14dd245990948424f1d430, type: 3}
-  - {fileID: 8300000, guid: cd68fd1b9447a784bbfb20374dffd7e3, type: 3}
+  - {fileID: 8300000, guid: 2f97cdc8f1c774c42b5143595aa948f1, type: 3}
+  - {fileID: 8300000, guid: e08e1312c3b32124c963ccdcef32cffa, type: 3}
   source: {fileID: 997874120818249232}
 --- !u!114 &5891685920684013698
 MonoBehaviour:

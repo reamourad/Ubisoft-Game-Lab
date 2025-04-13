@@ -41,6 +41,7 @@ namespace StateManagement
         [Header("Audio")]
         [SerializeField] private AudioClip mainSeekerBGM;
         [SerializeField] private AudioClip mainHiderBGM;
+        [SerializeField] private AudioClip gameAmbiance;
         [SerializeField] private AudioClip chaseBGM;
         [SerializeField] private AudioClip gameBeginSound;
 
@@ -156,6 +157,9 @@ namespace StateManagement
         {
             Debug.Log("GameController:: Playing Main Theme");
             yield return new WaitUntil(() => GameLookupMemory.LocalPlayer != null);
+            
+            AudioManager.Instance.PlaySFX(gameAmbiance);
+            
             if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Hider)
                 AudioManager.Instance.PlayBG(mainHiderBGM);
             else if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Seeker)
@@ -233,7 +237,6 @@ namespace StateManagement
                 AudioManager.Instance.PlayBG(mainSeekerBGM);
             }
         }
-        
         
         //Lets not look here, its quite shitty :p
         private (NetworkObject prefab, Transform spawnPoint) SelectRandomSide(int id)

@@ -423,7 +423,7 @@ MonoBehaviour:
   body: {fileID: 8514848682108159585}
   animator: {fileID: 3771168013440845878}
   activationDelay: 0.25
-  pressSFX: {fileID: 8300000, guid: 99c022831cfd9cf4383a2ab4287a188e, type: 3}
+  pressSFX: {fileID: 8300000, guid: 786181fe0cebebf4b84744cc9dd61573, type: 3}
   localSFXSource: {fileID: 6277900521157453010}
 --- !u!114 &-7145403475669568214
 MonoBehaviour:
@@ -608,7 +608,7 @@ MonoBehaviour:
   triggerArea: {fileID: 5554659393042527679}
   isConnectedToReaction: 0
   connectedReactionHelper: {fileID: 0}
-  triggerAnchor: {fileID: 7798207821046535260}
+  lineRendererPrefab: {fileID: 0}
 --- !u!114 &9094402659957295124
 MonoBehaviour:
   m_ObjectHideFlags: 0
