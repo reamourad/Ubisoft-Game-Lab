@@ -273,7 +273,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   vacuumSuctionRegular: 2
-  vacuumSuctionPlayer: 75
+  vacuumSuctionPlayer: 100
   particles: {fileID: 5626728015913036742}
   audioSource: {fileID: 184528263471275869}
   startClip: {fileID: 8300000, guid: 7e89c5b645012964c8bc00a353244a94, type: 3}
