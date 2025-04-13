@@ -62,6 +62,7 @@ namespace Items
             inputReader.OnCCTVMarkedEvent -= OnCameraMarked;
             
             //Move this to appropriate location later
+            if(GameLookupMemory.LocalPlayer == null)return;
             GameLookupMemory.LocalPlayer.GetComponent<SeekerGraphicsManager>().SetRendererEnabled(false);
             inputReader.SetToGameplayInputs();
         }
