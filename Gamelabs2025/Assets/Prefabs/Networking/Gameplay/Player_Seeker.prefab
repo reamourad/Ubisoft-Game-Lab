@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6a39c46bf52104ba8efe3100bce3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 12
+  _componentIndexCache: 13
   _addedNetworkObject: {fileID: 5408301307720291325}
   _networkObjectCache: {fileID: 5408301307720291325}
 --- !u!1 &7577582542216918470
@@ -391,7 +391,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7577582542216918470}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2a11b680f1d24f04c89d3a9f4d7d97ba, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -416,7 +416,7 @@ Rigidbody:
   m_GameObject: {fileID: 7577582542216918470}
   serializedVersion: 4
   m_Mass: 3
-  m_Drag: 5
+  m_Drag: 0.1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -431,9 +431,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!114 &-8602603517789347762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +477,7 @@ MonoBehaviour:
   - {fileID: 6799519320625724234}
   - {fileID: -8294054222312949734}
   - {fileID: 1782721525129406205}
+  - {fileID: 5891685920684013698}
   - {fileID: -4829245778001307366}
   InitializedParentNetworkBehaviour: {fileID: 0}
   InitializedNestedNetworkObjects:
@@ -881,9 +882,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dcb9fd44a7969d4f9cfbc130479b3ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentIndexCache: 255
+  _componentIndexCache: 12
   _addedNetworkObject: {fileID: 5408301307720291325}
-  _networkObjectCache: {fileID: 0}
+  _networkObjectCache: {fileID: 5408301307720291325}
   _graphicalObject: {fileID: 6386400127822891335}
   _enableTeleport: 0
   _teleportThreshold: 0
