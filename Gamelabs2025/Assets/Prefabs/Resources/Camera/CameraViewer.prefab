@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: f2c7b304ce9cb984297b1f4121269065, type: 2}
   cameraName: {fileID: 3334544336756199392}
-  helpGUIObject: {fileID: 0}
+  helpGUIObject: {fileID: 7560169117071757881}
   worldMarkerIcon: {fileID: 21300000, guid: 9d6efa5ddb3bd2f4ba887fdffb800b5c, type: 3}
   markerSound: {fileID: 8300000, guid: 5a338571c3f66dc448ff50f8e06bb249, type: 3}
 --- !u!1 &2167767193216585619
@@ -1232,7 +1232,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7139322680408627472, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 146.52
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7139322680408627472, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1462,7 +1462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7139322680408627472, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 178.33
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7139322680408627472, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1706,7 +1706,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7139322680408627472, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 61.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7139322680408627472, guid: 151657cb40425f6458ec0c0e2978ec1f, type: 3}
       propertyPath: m_AnchoredPosition.x
