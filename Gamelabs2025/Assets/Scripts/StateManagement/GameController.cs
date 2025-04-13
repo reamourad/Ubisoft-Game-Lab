@@ -47,8 +47,6 @@ namespace StateManagement
         [SerializeField] private float angyDelay = 0.5f;
         [SerializeField] private int maxTimePenalty = 45;
         
-        [SerializeField] private AudioClip ambiance;
-        
         [SerializeField] private AudioClip houseAngySFX;
         [SerializeField] private GameObject cameraShakeObj;
 
@@ -156,7 +154,6 @@ namespace StateManagement
         {
             Debug.Log("GameController:: Playing Main Theme");
             yield return new WaitUntil(() => GameLookupMemory.LocalPlayer != null);
-            AudioManager.Instance.PlayAmbience(ambiance);
             if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Hider)
                 AudioManager.Instance.PlayBG(mainHiderBGM);
             else if (GameLookupMemory.MyLocalPlayerRole == PlayerRole.RoleType.Seeker)
