@@ -1089,6 +1089,7 @@ GameObject:
   - component: {fileID: 6359535891062941495}
   - component: {fileID: 8443184956944239014}
   - component: {fileID: 6332595345169530622}
+  - component: {fileID: 8095323957884511903}
   m_Layer: 5
   m_Name: PauseMenuGui
   m_TagString: Untagged
@@ -1206,6 +1207,18 @@ MonoBehaviour:
   - {fileID: 1928503771858301201}
   navigationSound: {fileID: 8300000, guid: 21748e50a93d19643ab2a71f1cf3c5e8, type: 3}
   selectSound: {fileID: 8300000, guid: 0146eb16191a06243ae82fa5e5e8f65a, type: 3}
+--- !u!225 &8095323957884511903
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8918509109065560832}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &9009041923463146370
 GameObject:
   m_ObjectHideFlags: 0
