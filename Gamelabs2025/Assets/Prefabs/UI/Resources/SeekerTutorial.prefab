@@ -2615,6 +2615,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   videoClips:
   - {fileID: 32900000, guid: 650c807ce050aaa419a490604f512504, type: 3}
+  - {fileID: 32900000, guid: 650c807ce050aaa419a490604f512504, type: 3}
+  - {fileID: 32900000, guid: 650c807ce050aaa419a490604f512504, type: 3}
   - {fileID: 32900000, guid: 2f11b3a95a061e44e8bb8d16bfbad827, type: 3}
   - {fileID: 32900000, guid: a56d648b681d4e14db59d3c111545228, type: 3}
   skippingPages: 0100000003000000
