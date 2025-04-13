@@ -720,7 +720,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   lookRange: 3
-  boxCastHalfExtents: {x: 2, y: 2, z: 2}
+  boxCastHalfExtents: {x: 0.5, y: 0.5, z: 0.5}
   isActive: 1
 --- !u!114 &6824402132047484539
 MonoBehaviour:

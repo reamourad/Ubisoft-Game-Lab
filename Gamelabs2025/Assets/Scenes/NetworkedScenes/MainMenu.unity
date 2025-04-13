@@ -55556,6 +55556,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 606180695}
     m_Modifications:
+    - target: {fileID: 747895160839805065, guid: ee1033ecc8281ee48be74bb73c3d9a38, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 63.999573
+      objectReference: {fileID: 0}
     - target: {fileID: 3666702747944766637, guid: ee1033ecc8281ee48be74bb73c3d9a38, type: 3}
       propertyPath: mainMenuController
       value: 
@@ -55679,7 +55683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 439557155869546743, guid: 8123b3526a42ce749bac07cc6dc6887b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 63.999207
+      value: 63.999573
       objectReference: {fileID: 0}
     - target: {fileID: 599958489236136932, guid: 8123b3526a42ce749bac07cc6dc6887b, type: 3}
       propertyPath: m_Pivot.x
