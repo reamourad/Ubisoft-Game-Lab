@@ -533,6 +533,7 @@ MonoBehaviour:
   playerGraphics: {fileID: 2932761123905824559}
   hiderCameraPrefab: {fileID: 0}
   hiderCameraTargetTransform: {fileID: 0}
+  enableDebugButton: 0
 --- !u!114 &6249505558912432160
 MonoBehaviour:
   m_ObjectHideFlags: 0
