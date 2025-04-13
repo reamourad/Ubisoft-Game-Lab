@@ -34,6 +34,10 @@ namespace Networking
         private GameObject spawnedSeekerTutorial;
         private GameObject spawnedHiderTutorial;
 
+#if UNITY_EDITOR
+        [SerializeField] private bool enableDebugButton = true;
+#endif
+
         public override void OnStartClient()
         {
             base.OnStartClient();
@@ -102,6 +106,7 @@ namespace Networking
                 
                 transform.position = GameController.Instance.SeekerSpawn.position;
                 startingPosition = transform.position;
+                StartCoroutine(CheckFallingBelowY(-10f)); // Adjust the threshold as needed
                 var fpsCam = GetComponentInChildren<CinemachineCamera>();
                 fpsCam.enabled = true;
                 var camTrf = Camera.main.transform;
@@ -131,7 +136,7 @@ namespace Networking
                 Debug.Log(GameController.Instance.HiderSpawn);
                 transform.position = GameController.Instance.HiderSpawn.position;
                 startingPosition = transform.position;
-                
+                StartCoroutine(CheckFallingBelowY(-10f)); // Adjust the threshold as needed
                 Debug.Log("Loading TPS Camera!!");
                 hiderPlayerCamera = Instantiate(hiderCameraPrefab, hiderCameraTargetTransform.position, Quaternion.identity);
                 hiderPlayerCamera.GetComponent<CameraObstructionHandler>().player = this.transform;
@@ -169,12 +174,55 @@ namespace Networking
             callback?.Invoke();
         }
 
-        private void OnTriggerEnter(Collider other)
+        /*private void OnTriggerEnter(Collider other)
         {
             if(!IsOwner) return;
             
             if(other.CompareTag("Respawn"))
                 transform.position = startingPosition;
+        }*/
+
+        private IEnumerator CheckFallingBelowY(float thresholdY)
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(1f);
+                if (transform.position.y < thresholdY)
+                {
+                    Debug.Log("Player fell below threshold. Respawning...");
+                    //transform.position = startingPosition;
+                    GetComponent<Rigidbody>()?.MovePosition(startingPosition);
+                }
+                else
+                {
+                    Debug.Log("Player not below threshold.");
+                }
+            }
         }
+
+#if UNITY_EDITOR
+        private void OnGUI()
+        {
+            if (!enableDebugButton || !IsOwner) return;
+
+            GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+            buttonStyle.fontSize = 18;
+            buttonStyle.normal.textColor = Color.white;
+
+            if (GUI.Button(new Rect(20, 20, 220, 40), "Teleport to Z = 1000", buttonStyle))
+            {
+                var currentPos = transform.position;
+                //transform.position = new Vector3(currentPos.x, currentPos.y, 1000f);
+                GetComponent<Rigidbody>()?.MovePosition(startingPosition);
+
+                if(GetComponent<Rigidbody>() == null)
+                {
+                    Debug.LogWarning("No rb");
+                }
+                Debug.Log("Teleported player to Z = 1000 for debugging.");
+            }
+        }
+#endif
+
     }
 }

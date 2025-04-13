@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
@@ -27,9 +28,9 @@ namespace Items.HiderItems.Reaction
         private void OnServerTrigger()
         {
             if (triggered) return;
+            triggered = true;
             NoiseManager.Instance.GenerateNoise(transform.position, 0.55f,1);
             RPC_OnClientTrigger();
-            triggered = true;
         }
 
         private void Update()
@@ -41,10 +42,10 @@ namespace Items.HiderItems.Reaction
         private void RPC_OnClientTrigger()
         {
             if(triggered) return;
+            triggered = true;
             PlayParticle();
             PlayTriggerAnimation();
             PlaySound();
-            triggered = true;
         }
 
         private void PlayParticle()
@@ -66,11 +67,44 @@ namespace Items.HiderItems.Reaction
             topTween= door.DORotate(new Vector3(-90, 0, 0), 0.5f);
             topTween.OnComplete(() =>
             {
-                clownTween = clown.DOMove(transform.position + Vector3.up * .3f, .25f);
+                clownTween = clown.DOMove(transform.position + Vector3.up * .3f, .25f).OnComplete(ServerDespawn);
             });
         }
 
+        [Server]
+        private void ServerDespawn()
+        {
+            StartCoroutine(DelayedDespawn());
+        }
+        
+        [Server]
+        private IEnumerator DelayedDespawn()
+        {
+            yield return new WaitForSeconds(0.3f);
+            Despawn();
+        }
+        
+        private void OnDisable()
+        {
+            DisableRope();
+            KillTweens();
+        }
+
         private void OnDestroy()
+        {
+            DisableRope();
+            KillTweens();
+        }
+
+        private void DisableRope()
+        {
+            if (rope != null)
+            {
+                rope.gameObject.SetActive(false);
+            }
+        }
+
+        private void KillTweens()
         {
             DOTween.Kill(topTween);
             if(clownTween == null) return;

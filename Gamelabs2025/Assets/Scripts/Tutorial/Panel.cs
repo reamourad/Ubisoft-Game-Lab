@@ -3,18 +3,20 @@ using System.Linq;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace Tutorial
 {
     public class Panel : MonoBehaviour
     {
+        [SerializeField] private List<VideoClip> videoClips;
+        [SerializeField] private VideoPlayer videoPlayer;
         [SerializeField] private GameObject rightButton;
         [SerializeField] private Transform circleParent;
         [SerializeField] private GameObject leftButton;
         [SerializeField] private Circle circlePrefab;
         [SerializeField] private TMP_Text rightText;
         [SerializeField] private Transform pages;
-
 
         private List<Circle> circles = new();
         private Vector3 basePosition;
@@ -69,6 +71,7 @@ namespace Tutorial
             if (!leftButton.activeSelf) return;
             UpdateCircles(-1);
             MovePage();
+            ChangeVideo();
             ToggleButton(rightButton, true);
             ChangeRightButtonText("Next");
             if (counter == 0)
@@ -86,16 +89,22 @@ namespace Tutorial
             {
                 UpdateCircles(1);
                 MovePage();
+                ChangeVideo();
                 ToggleButton(leftButton, true);
             }
 
-            if (counter == pageCount - 1) 
+            if (counter == pageCount - 1)
                 ChangeRightButtonText("Close");
         }
 
         private void MovePage()
         {
             pages.DOLocalMove(basePosition + Vector3.left * 1500 * counter, 1f);
+        }
+
+        private void ChangeVideo()
+        {
+            videoPlayer.ChangeSlide(videoClips[counter]);
         }
 
         private void UpdateCircles(int direction)
