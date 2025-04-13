@@ -10,6 +10,7 @@ namespace Tutorial
     public class Panel : MonoBehaviour
     {
         [SerializeField] private List<VideoClip> videoClips;
+        [SerializeField] private List<int> skippingPages = new() {2};
         [SerializeField] private VideoPlayer videoPlayer;
         [SerializeField] private GameObject rightButton;
         [SerializeField] private Transform circleParent;
@@ -29,6 +30,7 @@ namespace Tutorial
             BindKeys();
             SetPageCount();
             CreateCircles();
+            ChangeVideo();
             ToggleButton(leftButton, false);
         }
 
@@ -104,6 +106,8 @@ namespace Tutorial
 
         private void ChangeVideo()
         {
+            if(counter>= videoClips.Count) return;
+            if(skippingPages.Contains(counter)) return;
             videoPlayer.ChangeSlide(videoClips[counter]);
         }
 
