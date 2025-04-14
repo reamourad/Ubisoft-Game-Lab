@@ -67,8 +67,9 @@ namespace StateManagement
                 if (sliderUpdateRoutine != null)
                     return;
                 
-                
                 var goSettingComp = go.GetComponent<SettingDetector>();
+                if(goSettingComp == null)
+                    return;
                 sliderUpdateRoutine = StartCoroutine(SliderUpdater(go, goSettingComp.sliderChange * xVal));
             }
             else
@@ -82,6 +83,9 @@ namespace StateManagement
         IEnumerator SliderUpdater(GameObject go, float delta)
         {
             var slider = go.GetComponentInChildren<Slider>();
+            if(slider == null)
+                yield break;
+            
             while (true)
             {
                 slider.value += delta;

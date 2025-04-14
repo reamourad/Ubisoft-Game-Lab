@@ -195,7 +195,7 @@ namespace Networking
                 }
                 else
                 {
-                    Debug.Log("Player not below threshold.");
+                    //Debug.Log("Player not below threshold.");
                 }
             }
         }

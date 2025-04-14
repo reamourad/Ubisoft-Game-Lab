@@ -393,9 +393,6 @@ namespace StateManagement
                 RPC_InvokeServerHiderCapturedOnServer();
                 return;
             }
-                
-            if(currentStage.Value != GameStage.Game)
-                return;
 
             var hider = players.Find(a => a.GetComponent<PlayerRole>().Role == PlayerRole.RoleType.Hider);
             if (hider != null)
@@ -403,25 +400,49 @@ namespace StateManagement
                 RPC_SpawnDustParticles(hider.transform.position + hider.GetComponent<Rigidbody>().centerOfMass);
                 hider.Despawn();
             }
+        }
 
+        [ObserversRpc]
+        private void RPC_SpawnDustParticles(Vector3 position)
+        {
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.ResetHaptics();
+            }
+            
+            var go = Instantiate(vacuumedSuckedParticles, position, Quaternion.identity);
+            StartCoroutine(ClientDelayedGameEndReadyMessage(1.5f));
+        }
+
+        [Client]
+        IEnumerator ClientDelayedGameEndReadyMessage(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            RPC_ClientsReadyToSwitchState();
+        }
+        
+        [ServerRpc(RequireOwnership = false)]
+        private void RPC_InvokeServerHiderCapturedOnServer()
+        {
+            ServerHiderCaptured();
+        }
+        
+        private int clientsReadyForEndGame = 0;
+        [ServerRpc(RequireOwnership = false)]
+        private void RPC_ClientsReadyToSwitchState()
+        {
+            clientsReadyForEndGame++;
+            if (clientsReadyForEndGame < players.Count)
+            {
+                return;
+            }
+            
             Networking.TimeManager.Instance.StopActiveTimer();
             GameWinner.Value = PlayerRole.RoleType.Seeker;
             StartCoroutine(DelayedInvoke(() =>
             {
                 SwitchGameStage(GameStage.Postgame);
             }, 0.1f));
-        }
-
-        [ObserversRpc]
-        private void RPC_SpawnDustParticles(Vector3 position)
-        {
-            var go = Instantiate(vacuumedSuckedParticles, position, Quaternion.identity);
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        private void RPC_InvokeServerHiderCapturedOnServer()
-        {
-            ServerHiderCaptured();
         }
         
         private IEnumerator DelayedInvoke(Action action, float delay)

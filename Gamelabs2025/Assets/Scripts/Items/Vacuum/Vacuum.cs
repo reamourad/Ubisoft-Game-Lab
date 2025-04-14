@@ -163,7 +163,7 @@ namespace Items
 
             if (use)
             {
-                if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+                if (IsOwner && Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
                 {
                     Gamepad.current.SetMotorSpeeds(0.15f, 0.25f);
                 }
@@ -173,7 +173,7 @@ namespace Items
             }
             else
             {
-                if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+                if (IsOwner && Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
                 {
                     Gamepad.current.ResetHaptics();
                 }
@@ -197,19 +197,17 @@ namespace Items
         
         private void Update()
         {
-            if(vacuumGui == null) return;
-            
-            vacuumGui.SetPowerPercentage(VacuumPowerManager.Instance.PowerPercentage);
+            if (vacuumGui != null)
+            {
+                vacuumGui.SetPowerPercentage(VacuumPowerManager.Instance.PowerPercentage);
+            }
+
+            if (VacuumActive.Value)
+            {
+                ApplySuction();
+            }
         }
-
-        void FixedUpdate()
-        {
-            if(!VacuumActive.Value)
-                return;
-
-            ApplySuction();
-        }
-
+        
         private void ApplySuction()
         {
             var colliders = Physics.OverlapSphere(triggerVolumePosition.transform.position,triggerVolumeRadius, layerMask);
@@ -249,7 +247,7 @@ namespace Items
                 var rbPos = (rb.centerOfMass + rb.position);
                 // apply suction force.
                 var dir = (suctionPoint.position - rbPos).normalized;
-                rb.AddForce(dir * force, ForceMode.Force);
+                rb.AddForce(dir * (force * Time.deltaTime), ForceMode.VelocityChange);
                 
                 // distance check to if they can be considered as vacuumed.
                 var dist = Vector3.Distance(rbPos, suctionPoint.position);
@@ -350,7 +348,6 @@ namespace Items
             transform.SetParent(parentTrf);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
-            
             
             Debug.Log("Vacuum:::OnAttach");
             if(IsOwner)

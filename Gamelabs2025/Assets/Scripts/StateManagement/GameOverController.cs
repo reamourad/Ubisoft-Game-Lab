@@ -6,6 +6,7 @@ using Networking;
 using Player;
 using Player.Audio;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
 namespace StateManagement
@@ -29,6 +30,12 @@ namespace StateManagement
         public override void OnStartClient()
         {
             base.OnStartClient();
+            
+            if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+            {
+                Gamepad.current.ResetHaptics();
+            }
+            
             StartCoroutine(StartOverLogic());
         }
 
