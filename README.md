@@ -6,3 +6,9 @@ Made for Ubisoft Gamelabs 2025, Theme - Chain Reaction.
 Developed using Unity 6
 
 ![Screenshot](https://img.itch.zone/aW1hZ2UvMzQ5NzgxMS8yMDg2MTU2OS5wbmc=/original/96vMWf.png)
+
+
+# Gameplay 
+## Seeker POV
+
+## Ghost POV
