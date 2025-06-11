@@ -7,7 +7,12 @@ But the Ghost is always one step ahead, creating traps to lead the hunter astray
 Made for Ubisoft Gamelabs 2025, Theme - Chain Reaction.
 Developed using Unity 6
 
-![Screenshot](https://img.itch.zone/aW1hZ2UvMzQ5NzgxMS8yMDg2MTU2OS5wbmc=/original/96vMWf.png)
+## Gameplay 
+### Seeker POV
+![Gameplay Demo](media/BB_Gameplay_Seeker-ezgif.com-video-to-gif-converter.gif)
+
+### Ghost POV
+![Gameplay Demo](media/BB_Gameplay_Ghost-ezgif.com-video-to-gif-converter.gif)
 
 ## Key features 
 
@@ -33,11 +38,3 @@ Developed using Unity 6
     Git & GitHub for source control
 
     FishNet for networking 
-
-    
-## Gameplay 
-### Seeker POV
-![Gameplay Demo](media/BB_Gameplay_Seeker-ezgif.com-video-to-gif-converter.gif)
-
-### Ghost POV
-![Gameplay Demo](media/BB_Gameplay_Ghost-ezgif.com-video-to-gif-converter.gif)
